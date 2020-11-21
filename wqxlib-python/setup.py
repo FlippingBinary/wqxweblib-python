@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
   name="wqxlib",
-  version="0.1.1",
+  version="0.1.2",
   author="Jon Musselwhite",
   author_email="JMusselwhite@wvstateu.edu",
   description="A package for interacting with the EPA's WQX service",

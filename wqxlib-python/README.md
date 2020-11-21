@@ -43,6 +43,7 @@ Install this package using `pip`
 This module must be imported and instantiated with your `userID` and `privateKey` before any of the other functions can be used.
 
     from wqxlib import WQX
+
     wqx = WQX("my username", "my private key")
 
 # API Reference
@@ -56,27 +57,38 @@ Upload a file to the web server (to be imported).
 **Parameters:**
 
 - `filename` (required string) - A name to give the file. This does not need to match any local filename. The allowed file extensions are:
-- - txt
-- - csv
-- - xlsx
-- - xls
-- - xml
-- - zip.
+  - txt
+  - csv
+  - xlsx
+  - xls
+  - xml
+  - zip
 
 **Returns:** `fileId` - A unique identifier for the uploaded file.
 
 **Example with generated data:**
 
-    data="""
-    column1,column2
+    from wqxlib import WQX
+
+    wqx = WQX( 'username', 'private key in base64' )
+
+    data="""column1,column2
     value1,value2"""
 
-    fileID = wqx.Upload( filename="datafile.csv", content=data )
+    fileId = wqx.Upload( filename="datafile.csv", content=bytes(data,'utf-8') )
+
+    print( f"The uploaded file has been assigned fileId {fileId}." )
 
 **Example using a file from the local filesystem:**
 
+    from wqxlib import WQX
+
+    wqx = WQX( 'username', 'private key in base64' )
+
     with open( 'data.csv', 'rb' ) as f:
-        fileID = wqx.Upload( filename="datafile.csv", content=f.read() )
+        fileId = wqx.Upload( filename="datafile.csv", content=f.read() )
+
+        print( f"The uploaded file has been assigned fileId {fileId}." )
 
 ## UploadAttachment
 
@@ -85,14 +97,20 @@ Upload an attachment to the web server (to be imported).
 **Parameters:**
 
 - `filename` (required string) - A name to give the file. This does not need to match any local filename. The only allowed file extension is:
-- - zip.
+  - zip
 
 **Returns:** `fileId` - A unique identifier for the uploaded file.
 
 **Example using a file from the local filesystem:**
 
+    from wqxlib import WQX
+
+    wqx = WQX( 'username', 'private key in base64' )
+
     with open( 'attachment.zip', 'rb' ) as f:
-        fileID = wqx.Upload( filename="attach.zip", content=f.read() )
+        attachmentFileId = wqx.UploadAttachment( filename="attach.zip", content=f.read() )
+
+        print( f"The uploaded file has been assigned attachmentFileID {attachmentFileID}." )
 
 ## StartImport
 
@@ -111,18 +129,18 @@ Start importing a file and attachment that was previously uploaded.
   - `XLS`
   - `XLSX`
 - `newOrExistingData` (required enum or integer) - Declare whether the contents of your upload represents new data or replaces existing data. This must be one of the following enum members provided by the `WQX` module or their corresponding integers:
-- - `CONTAINS_NEW_OR_EXISTING` (0) - file may contain new and/or existing data.
-- - `CONTAINS_NEW_ONLY` (1) - file contains new data only.
-- - `CONTAINS_EXISTING_ONLY` (2) - file contains existing data only (to be replaced).
+  - `CONTAINS_NEW_OR_EXISTING` (0) - file may contain new and/or existing data.
+  - `CONTAINS_NEW_ONLY` (1) - file contains new data only.
+  - `CONTAINS_EXISTING_ONLY` (2) - file contains existing data only (to be replaced).
 - `uponCompletion` (required enum or integer) - Declare what to do after the upload finishes. This must be one of the following enum members provided by the `WQX` module or their corresponding integers:
-- - `DO_NOTHING` (0) - do nothing.
-- - `EXPORT_IMPORT` (1) - start export.
-- - `SUBMIT_IMPORT` (2) - start export and submit to CDX.
+  - `DO_NOTHING` (0) - do nothing.
+  - `EXPORT_IMPORT` (1) - start export.
+  - `SUBMIT_IMPORT` (2) - start export and submit to CDX.
 - `uponCompletionCondition` (optionally required enum or integer) - Declare what conditions permit auto export or auto submit. This must be one of the following enum members provided by the `WQX` module or their corresponding integers:
-- - `NOT_APPLICABLE` (0) - not applicable (`uponCompletion` is `DO_NOTHING` or not provided).
-- - `EXPORT_IF_NO_ERROR` (1) - start export only if no import errors.
-- - `EXPORT_IF_NO_WARNING` (2) - start export only if no import errors and no warnings.
-- - `EXPORT_ALWAYS` (3) - start export even when there are import errors.
+  - `NOT_APPLICABLE` (0) - not applicable (`uponCompletion` is `DO_NOTHING` or not provided).
+  - `EXPORT_IF_NO_ERROR` (1) - start export only if no import errors.
+  - `EXPORT_IF_NO_WARNING` (2) - start export only if no import errors and no warnings.
+  - `EXPORT_ALWAYS` (3) - start export even when there are import errors.
 - `worksheetsToImport` (optional string) - If provided, this must be a comma delimited list of values (1-based), e.g. "`1,3`". This parameter value will be ignored when the fileType is not `XLS` or `XLSX`. If no value is passed in (and it's applicable) then we'll use the value from the Import Configuration.
 - `ignoreFirstRowOfFile` (optional boolean) - Ignore the first row of the data file if this parameter is true. This parameter value will be ignored for Expert Mode Import Configurations.
 - `generatedElementName1` (optional string) - Must match an existing generated element name from the import configuration.
@@ -140,15 +158,33 @@ Start importing a file and attachment that was previously uploaded.
 
 **Example without auto export:**
 
+    from wqxlib import WQX
+
+    wqx = WQX( 'username', 'private key in base64' )
+
     datasetId = wqx.StartImport( importConfigurationID, fileId, wqx.CONTAINS_NEW_OR_EXISTING, wqx.DO_NOTHING, ignoreFirstRowOfFile=True )
+
+    print( f"The import of dataset {datasetId} has begun. Check it's status with a call to wqx.GetStatus(datasetId)" )
 
 **Example with auto export and without auto submit:**
 
+    from wqxlib import WQX
+
+    wqx = WQX( 'username', 'private key in base64' )
+
     datasetId = wqx.StartImport( importConfigurationID, fileId, wqx.CONTAINS_NEW_OR_EXISTING, wqx.EXPORT_IMPORT, ignoreFirstRowOfFile=True )
+
+    print( f"The import of dataset {datasetId} has begun. Check it's status with a call to wqx.GetStatus(datasetId)" )
 
 **Example with auto submit:**
 
+    from wqxlib import WQX
+
+    wqx = WQX( 'username', 'private key in base64' )
+
     datasetId = wqx.StartImport( importConfigurationID, fileId, wqx.CONTAINS_NEW_OR_EXISTING, wqx.SUBMIT_IMPORT, ignoreFirstRowOfFile=True )
+
+    print( f"The import of dataset {datasetId} has begun. Check it's status with a call to wqx.GetStatus(datasetId)" )
 
 ## StartXmlExport
 
@@ -158,18 +194,32 @@ Start created the XML submission file (for CDX).
 
 - `datasetId` (required string) - The return value of `StartImport` or `SubmitFileToCdx`.
 - `uponCompletion` (required enum or integer) - Declare what to do after the export finishes. This must be one of the following enum members provided by the `WQX` module or their corresponding integers:
-- - `DO_NOT_SUBMIT` (0) - do nothing.
-- - `SUBMIT_EXPORT` (1) - submit to CDX.
+  - `DO_NOT_SUBMIT` (0) - do nothing.
+  - `SUBMIT_EXPORT` (1) - submit to CDX.
 
 **Returns:** `status` - The initial status for the dataset.
 
 **Example using enum:**
 
+    from wqxlib import WQX
+
+    wqx = WQX( 'username', 'private key in base64' )
+
     status = wqx.StartXmlExport( datasetId, wqx.SUBMIT_EXPORT )
+
+    print( "The initial status of dataset {datasetId} is as follows:" )
+    print( status )
 
 **Example using integer:**
 
+    from wqxlib import WQX
+
+    wqx = WQX( 'username', 'private key in base64' )
+
     status = wqx.StartXmlExport( datasetId, 1 )
+
+    print( "The initial status of dataset {datasetId} is as follows:" )
+    print( status )
 
 ## SubmitDatasetToCdx
 
@@ -183,7 +233,14 @@ Submit a dataset to CDX.
 
 **Example:**
 
+    from wqxlib import WQX
+
+    wqx = WQX( 'username', 'private key in base64' )
+
     status = wqx.SubmitDatasetToCdx( datasetId )
+
+    print( "The initial status of dataset {datasetId} is as follows:" )
+    print( status )
 
 ## SubmitFileToCdx
 
@@ -197,7 +254,13 @@ Submit a previously uploaded WQX XML file to CDX.
 
 **Example:**
 
+    from wqxlib import WQX
+
+    wqx = WQX( 'username', 'private key in base64' )
+
     datasetId = wqx.SubmitFileToCdx( fileId )
+
+    print( f"The uploaded file has been assigned datasetId {datasetId}" )
 
 ## GetStatus
 
@@ -231,7 +294,13 @@ Get the status for a dataset. To avoid undue burden on the server, it is recomme
 
 **Example:**
 
+    from wqxlib import WQX
+
+    wqx = WQX( 'username', 'private key in base64' )
+
     statusMsg = wqx.GetStatus( datasetId )
+
+    print( f"Current status of datasetId {datasetId} is {statusMsg}" )
 
 ## GetDocumentList
 
@@ -250,9 +319,15 @@ Get the list of available documents for a dataset. Documents that are typically 
 
 **Example:**
 
+    from wqxlib import WQX
+
+    wqx = WQX( 'username', 'private key in base64' )
+
     urls = wqx.GetDocumentList( datasetId )
+
+    print( "The documents associated with {datasetId} are:" )
     for url in urls:
-        print( url )
+        print( f" - {url}" )
 
 ## Projects
 
@@ -272,9 +347,30 @@ Get the projects for an organization.
 
 **Example:**
 
+    from wqxlib import WQX
+
+    wqx = WQX( 'username', 'private key in base64' )
+
     projects = wqx.Projects( organizationIdentifiersCsv )
+
+    print( "The projects associated with {organizationIdentifiersCsv} are:" )
     for project in projects:
-        print( project )
+        print( f" - {project}" )
+
+**Example to list projects from the previous week:**
+
+    from wqxlib import WQX
+    from datetime import date, timedelta
+
+    wqx = WQX( 'username', 'private key in base64' )
+
+    today = date.today()
+    lastWeek = today - timedelta(weeks=1)
+    projects = wqx.Projects( organizationIdentifiersCsv, lastChangeDateMin=lastWeek )
+
+    print( "The projects associated with {organizationIdentifiersCsv} and modified since {lastWeek.strftime( "%m/%d/%Y")} are:" )
+    for project in projects:
+        print( f" - {project}" )
 
 ## MonitoringLocations
 
@@ -285,7 +381,7 @@ Get the locations for an organization.
 - `organizationIdentifiersCsv` (required string) - Comma delimited list of organization identifiers (e.g. "id1,id2,id3") NOTE: No spaces.
 - `monitoringLocationIdentifiersCsv` (optional string) - Comma delimited list of monitoring location identifiers (e.g. "id1,id2,id3") NOTE: No spaces.
 - `monitoringLocationName` (optional string) - Monitoring Location Name. Wildcards are supported (e.g. "Location%" means anything starting with "Location").
-- `monitoringLocationType` (optional string) - Monitoring Location Type. Wildcards are supported (e.g. "Location%" means anything starting with "Location"). Allowed values:
+- `monitoringLocationType` (optional string) - Monitoring Location Type. Wildcards are supported (e.g. "Location%" means anything starting with "Location"). Allowed values (enforced by the endpoint, not this library):
   - Atmosphere
   - BEACH Program Site-Channelized stream
   - BEACH Program Site-Estuary
@@ -392,7 +488,13 @@ Get the locations for an organization.
 
 **Example:**
 
+    from wqxlib import WQX
+
+    wqx = WQX( 'username', 'private key in base64' )
+
     locations = wqx.MonitoringLocations( organizationIdentifiersCsv )
+
+    print( "The locations associated with {organizationIdentifiersCsv} are: " )
     for location in locations:
-        print( location )
+        print( f" - {location}" )
 

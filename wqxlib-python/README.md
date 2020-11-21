@@ -104,20 +104,20 @@ Start importing a file and attachment that was previously uploaded.
 - `fileId` (required string) - The return value of `Upload`.
 - `attachmentFileId` (optional string) - The return value of `UploadAttachment`.
 - `fileType` (required enum or string) - The type of file you uploaded with `Upload`. This must be one of the following enum members provided by the `WQX` module or their corresponding strings:
-- - `CSV`
-- - `TAB`
-- - `TILDE`
-- - `PIPE`
-- - `XLS`
-- - `XLSX`
+  - `CSV`
+  - `TAB`
+  - `TILDE`
+  - `PIPE`
+  - `XLS`
+  - `XLSX`
 - `newOrExistingData` (required enum or integer) - Declare whether the contents of your upload represents new data or replaces existing data. This must be one of the following enum members provided by the `WQX` module or their corresponding integers:
 - - `CONTAINS_NEW_OR_EXISTING` (0) - file may contain new and/or existing data.
 - - `CONTAINS_NEW_ONLY` (1) - file contains new data only.
 - - `CONTAINS_EXISTING_ONLY` (2) - file contains existing data only (to be replaced).
 - `uponCompletion` (required enum or integer) - Declare what to do after the upload finishes. This must be one of the following enum members provided by the `WQX` module or their corresponding integers:
 - - `DO_NOTHING` (0) - do nothing.
-- - `AUTO_EXPORT` (1) - start export.
-- - `AUTO_SUBMIT` (2) - start export and submit to CDX.
+- - `EXPORT_IMPORT` (1) - start export.
+- - `SUBMIT_IMPORT` (2) - start export and submit to CDX.
 - `uponCompletionCondition` (optionally required enum or integer) - Declare what conditions permit auto export or auto submit. This must be one of the following enum members provided by the `WQX` module or their corresponding integers:
 - - `NOT_APPLICABLE` (0) - not applicable (`uponCompletion` is `DO_NOTHING` or not provided).
 - - `EXPORT_IF_NO_ERROR` (1) - start export only if no import errors.
@@ -144,11 +144,11 @@ Start importing a file and attachment that was previously uploaded.
 
 **Example with auto export and without auto submit:**
 
-    datasetId = wqx.StartImport( importConfigurationID, fileId, wqx.CONTAINS_NEW_OR_EXISTING, wqx.AUTO_EXPORT, ignoreFirstRowOfFile=True )
+    datasetId = wqx.StartImport( importConfigurationID, fileId, wqx.CONTAINS_NEW_OR_EXISTING, wqx.EXPORT_IMPORT, ignoreFirstRowOfFile=True )
 
 **Example with auto submit:**
 
-    datasetId = wqx.StartImport( importConfigurationID, fileId, wqx.CONTAINS_NEW_OR_EXISTING, wqx.AUTO_SUBMIT, ignoreFirstRowOfFile=True )
+    datasetId = wqx.StartImport( importConfigurationID, fileId, wqx.CONTAINS_NEW_OR_EXISTING, wqx.SUBMIT_IMPORT, ignoreFirstRowOfFile=True )
 
 ## StartXmlExport
 
@@ -209,25 +209,25 @@ Get the status for a dataset. To avoid undue burden on the server, it is recomme
 
 **Returns:** `statusMsg` - The status, percent complete, and position in queue for the dataset. Possible statuses:
 
- - 'Waiting to Import'
- - 'Importing'
- - 'Imported'
- - 'Import Failed'
- - 'Waiting to Export'
- - 'Waiting to Export and Submit'
- - 'Exporting'
- - 'Exported'
- - 'Export Failed'
- - 'Processing at CDX'
- - 'Completed at CDX'
- - 'Failed at CDX'
- - 'Waiting to Delete'
- - 'Deleting'
- - 'Delete Failed'
- - 'Waiting to Update WQX'
- - 'Updating WQX'
- - 'Updated WQX'
- - 'Update Failed'
+- 'Waiting to Import'
+- 'Importing'
+- 'Imported'
+- 'Import Failed'
+- 'Waiting to Export'
+- 'Waiting to Export and Submit'
+- 'Exporting'
+- 'Exported'
+- 'Export Failed'
+- 'Processing at CDX'
+- 'Completed at CDX'
+- 'Failed at CDX'
+- 'Waiting to Delete'
+- 'Deleting'
+- 'Delete Failed'
+- 'Waiting to Update WQX'
+- 'Updating WQX'
+- 'Updated WQX'
+- 'Update Failed'
 
 **Example:**
 
@@ -237,10 +237,10 @@ Get the status for a dataset. To avoid undue burden on the server, it is recomme
 
 Get the list of available documents for a dataset. Documents that are typically available for a dataset include:
 
- - the original import file
- - event logs (for the import and/or export in WQX Web)
- - validation report (for the XML submission file - from CDX)
- - processing report (for the XML submission file - from WQX)
+- the original import file
+- event logs (for the import and/or export in WQX Web)
+- validation report (for the XML submission file - from CDX)
+- processing report (for the XML submission file - from WQX)
 
 **Parameters:**
 
@@ -286,102 +286,102 @@ Get the locations for an organization.
 - `monitoringLocationIdentifiersCsv` (optional string) - Comma delimited list of monitoring location identifiers (e.g. "id1,id2,id3") NOTE: No spaces.
 - `monitoringLocationName` (optional string) - Monitoring Location Name. Wildcards are supported (e.g. "Location%" means anything starting with "Location").
 - `monitoringLocationType` (optional string) - Monitoring Location Type. Wildcards are supported (e.g. "Location%" means anything starting with "Location"). Allowed values:
-- - Atmosphere
-- - BEACH Program Site-Channelized stream
-- - BEACH Program Site-Estuary
-- - BEACH Program Site-Great Lake
-- - BEACH Program Site-Lake
-- - BEACH Program Site-Land
-- - BEACH Program Site-Land runoff
-- - BEACH Program Site-Ocean
-- - BEACH Program Site-River/Stream
-- - BEACH Program Site-Storm sewer
-- - BEACH Program Site-Waste sewer
-- - Borehole
-- - Canal Drainage
-- - Canal Irrigation
-- - Canal Transport
-- - Cave
-- - CERCLA Superfund Site
-- - Channelized Stream
-- - Combined Sewer
-- - Constructed Diversion Dam
-- - Constructed Tunnel
-- - Constructed Water Transport Structure
-- - Constructed Wetland
-- - Estuary
-- - Facility Industrial
-- - Facility Municipal Sewage (POTW)
-- - Facility Other
-- - Facility Privately Owned Non-industrial
-- - Facility Public Water Supply (PWS)
-- - Floodwater non-Urban
-- - Floodwater Urban
-- - Gallery
-- - Gas-Condensate
-- - Gas-Engine
-- - Gas-Extraction
-- - Gas-Flare
-- - Gas-Monitoring Probe
-- - Gas-Passive Vent
-- - Gas-Subslab
-- - Gas-Temporary
-- - Great Lake
-- - Lake
-- - Land
-- - Land Flood Plain
-- - Land Runoff
-- - Landfill
-- - Leachate-Extraction
-- - Leachate-Head Well
-- - Leachate-Lysimeter
-- - Leachate-SamplePoint
-- - Local Air Monitoring Station
-- - Mine Pit
-- - Mine/Mine Discharge
-- - Mine/Mine Discharge Adit (Mine Entrance)
-- - Mine/Mine Discharge Tailings Pile
-- - Mine/Mine Discharge Waste Rock Pile
-- - National Air Monitoring Station
-- - Ocean
-- - Oil and Gas Well
-- - Other-Ground Water
-- - Other-Surface Water
-- - Pipe, Unspecified Source
-- - Playa
-- - Pond-Anchialine
-- - Pond-Sediment
-- - Pond-Stock
-- - Pond-Stormwater
-- - Pond-Wastewater
-- - Reservoir
-- - River/Stream
-- - River/stream Effluent-Dominated
-- - River/Stream Ephemeral
-- - River/Stream Intermittent
-- - River/Stream Perennial
-- - Riverine Impoundment
-- - Seep
-- - Spigot / Faucet
-- - Spring
-- - State/Local Air Monitoring Station
-- - Storm Sewer
-- - Survey Monument
-- - Test Pit
-- - Waste Pit
-- - Waste Sewer
-- - Well
-- - Wetland Estuarine-Emergent
-- - Wetland Estuarine-Forested
-- - Wetland Estuarine-Scrub-Shrub
-- - Wetland Lacustrine-Emergent
-- - Wetland Palustrine Pond
-- - Wetland Palustrine-Emergent
-- - Wetland Palustrine-Forested
-- - Wetland Palustrine-Moss-Lichen
-- - Wetland Palustrine-Shrub-Scrub
-- - Wetland Riverine-Emergent
-- - Wetland Undifferentiated
+  - Atmosphere
+  - BEACH Program Site-Channelized stream
+  - BEACH Program Site-Estuary
+  - BEACH Program Site-Great Lake
+  - BEACH Program Site-Lake
+  - BEACH Program Site-Land
+  - BEACH Program Site-Land runoff
+  - BEACH Program Site-Ocean
+  - BEACH Program Site-River/Stream
+  - BEACH Program Site-Storm sewer
+  - BEACH Program Site-Waste sewer
+  - Borehole
+  - Canal Drainage
+  - Canal Irrigation
+  - Canal Transport
+  - Cave
+  - CERCLA Superfund Site
+  - Channelized Stream
+  - Combined Sewer
+  - Constructed Diversion Dam
+  - Constructed Tunnel
+  - Constructed Water Transport Structure
+  - Constructed Wetland
+  - Estuary
+  - Facility Industrial
+  - Facility Municipal Sewage (POTW)
+  - Facility Other
+  - Facility Privately Owned Non-industrial
+  - Facility Public Water Supply (PWS)
+  - Floodwater non-Urban
+  - Floodwater Urban
+  - Gallery
+  - Gas-Condensate
+  - Gas-Engine
+  - Gas-Extraction
+  - Gas-Flare
+  - Gas-Monitoring Probe
+  - Gas-Passive Vent
+  - Gas-Subslab
+  - Gas-Temporary
+  - Great Lake
+  - Lake
+  - Land
+  - Land Flood Plain
+  - Land Runoff
+  - Landfill
+  - Leachate-Extraction
+  - Leachate-Head Well
+  - Leachate-Lysimeter
+  - Leachate-SamplePoint
+  - Local Air Monitoring Station
+  - Mine Pit
+  - Mine/Mine Discharge
+  - Mine/Mine Discharge Adit (Mine Entrance)
+  - Mine/Mine Discharge Tailings Pile
+  - Mine/Mine Discharge Waste Rock Pile
+  - National Air Monitoring Station
+  - Ocean
+  - Oil and Gas Well
+  - Other-Ground Water
+  - Other-Surface Water
+  - Pipe, Unspecified Source
+  - Playa
+  - Pond-Anchialine
+  - Pond-Sediment
+  - Pond-Stock
+  - Pond-Stormwater
+  - Pond-Wastewater
+  - Reservoir
+  - River/Stream
+  - River/stream Effluent-Dominated
+  - River/Stream Ephemeral
+  - River/Stream Intermittent
+  - River/Stream Perennial
+  - Riverine Impoundment
+  - Seep
+  - Spigot / Faucet
+  - Spring
+  - State/Local Air Monitoring Station
+  - Storm Sewer
+  - Survey Monument
+  - Test Pit
+  - Waste Pit
+  - Waste Sewer
+  - Well
+  - Wetland Estuarine-Emergent
+  - Wetland Estuarine-Forested
+  - Wetland Estuarine-Scrub-Shrub
+  - Wetland Lacustrine-Emergent
+  - Wetland Palustrine Pond
+  - Wetland Palustrine-Emergent
+  - Wetland Palustrine-Forested
+  - Wetland Palustrine-Moss-Lichen
+  - Wetland Palustrine-Shrub-Scrub
+  - Wetland Riverine-Emergent
+  - Wetland Undifferentiated
 - `transactionIdentifier` (optional string) - Transaction identifier e.g. "_23090c89-c6a6-4dd1-b16f-73f8ac36fac1".
 - `lastChangeDateMin` (optional date) - Minimum last change date.
 - `lastChangeDateMax` (optional date) - Maximum last change date.

@@ -11,8 +11,8 @@ setuptools.setup(
   description="A package for interacting with the EPA's WQX service",
   long_description=long_description,
   long_description_content_type="text/markdown",
-  url="https://github.com/FlippingBinary/wqxlib",
-  packages=["enum","hashlib","base64","datetime","hmac","re","requests"],
+  url="https://github.com/FlippingBinary/wqxlib/tree/main/wqxlib-python",
+  packages=[],
   classifiers=[
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",

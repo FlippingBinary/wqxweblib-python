@@ -248,13 +248,13 @@ class WQX():
           raise TypeError( "Parameter 'generatedElementValue5' must be a string, if 'generatedElementName5' is provided." )
 
     # Test parameter values
-    if any(x for x in FileType if x.value == fileType or x == fileType):
+    if not any(x for x in FileType if x.value == fileType or x == fileType):
       raise ValueError( "Parameter: 'fileType' is not one of the allowed values.")
     if newOrExistingData not in NewOrExistingData.__members__.values():
       raise ValueError( "Parameter: 'newOrExistingData' is not one of the allowed values.")
     if uponCompletion not in UponImportCompletion.__members__.values():
       raise ValueError( "Parameter: 'uponCompletion' is not one of the allowed values.")
-    if uponCompletionCondition not in UponCompletionCondition.__members__.values():
+    if uponCompletionCondition is not None and uponCompletionCondition not in UponCompletionCondition.__members__.values():
       raise ValueError( "Parameter: 'uponCompletionCondition' is not one of the allowed values.")
     if uponCompletion == self.EXPORT_IMPORT or uponCompletion == self.SUBMIT_IMPORT:
       if uponCompletionCondition == None or uponCompletionCondition == self.NOT_APPLICABLE:
@@ -263,10 +263,22 @@ class WQX():
       raise ValueError( "Parameter: 'worksheetsToImport' must be a comma separated list of numbers." )
 
     # Prepare some intermediate values
-    fileTypeStr = fileType.value if fileType is not None else None
-    newOrExistingDataStr = str(newOrExistingData.value) if newOrExistingData is not None else None
-    uponCompletionStr = str(uponCompletion.value) if uponCompletion is not None else None
-    uponCompletionConditionStr = str(uponCompletionCondition.value) if uponCompletionCondition is not None else None
+    if isinstance(fileType, FileType):
+      fileTypeStr = fileType.value
+    else: 
+      fileTypeStr = fileType
+    if isinstance(newOrExistingData, NewOrExistingData):
+      newOrExistingDataStr = str(newOrExistingData.value) 
+    else:
+      newOrExistingDataStr = newOrExistingData
+    if isinstance(uponCompletion, UponImportCompletion):
+      uponCompletionStr = str(uponCompletion.value)
+    else:
+      uponCompletionStr = uponCompletion
+    if isinstance(uponCompletionCondition, UponCompletionCondition):
+      uponCompletionConditionStr = str(uponCompletionCondition.value)
+    else:
+      uponCompletionConditionStr = uponCompletionCondition
 
     params={
       "importConfigurationId": importConfigurationId,

@@ -63,6 +63,7 @@ Upload a file to the web server (to be imported).
   - xls
   - xml
   - zip
+- `contents` (required bytes) - The contents of the file to be uploaded provided either by converting some provided `data` string with the `bytes(data, 'utf-8')` function or by passing some `file` object's `file.read()` function.
 
 **Returns:** `fileId` - A unique identifier for the uploaded file.
 
@@ -86,7 +87,7 @@ Upload a file to the web server (to be imported).
     wqx = WQX( 'username', 'private key in base64' )
 
     with open( 'data.csv', 'rb' ) as f:
-        fileId = wqx.Upload( filename="datafile.csv", content=f.read() )
+        fileId = wqx.Upload( filename="datafile.csv", contents=f.read() )
 
         print( f"The uploaded file has been assigned fileId {fileId}." )
 
@@ -98,6 +99,7 @@ Upload an attachment to the web server (to be imported).
 
 - `filename` (required string) - A name to give the file. This does not need to match any local filename. The only allowed file extension is:
   - zip
+- `contents` (required bytes) - The contents of the file to be uploaded provided either by converting some provided `data` string with the `bytes(data, 'utf-8')` function or by passing some `file` object's `file.read()` function.
 
 **Returns:** `fileId` - A unique identifier for the uploaded file.
 
@@ -108,7 +110,7 @@ Upload an attachment to the web server (to be imported).
     wqx = WQX( 'username', 'private key in base64' )
 
     with open( 'attachment.zip', 'rb' ) as f:
-        attachmentFileId = wqx.UploadAttachment( filename="attach.zip", content=f.read() )
+        attachmentFileId = wqx.UploadAttachment( filename="attach.zip", contents=f.read() )
 
         print( f"The uploaded file has been assigned attachmentFileID {attachmentFileID}." )
 

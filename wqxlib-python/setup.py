@@ -1,18 +1,29 @@
-import setuptools
+#import setuptools
+import runpy
+from setuptools import setup, find_packages
+
+version_meta = runpy.run_path("./version.py")
+VERSION = version_meta["__version__"]
 
 with open("README.md", "r") as fh:
   long_description = fh.read()
 
-setuptools.setup(
+def parse_requirements(filename):
+        """Load requirements from a pip requirements file."""
+        lineiter = (line.strip() for line in open(filename))
+        return [line for line in lineiter if line and not line.startswith("#")]
+
+setup(
   name="wqxlib",
-  version="0.1.2",
+  version=VERSION,
   author="Jon Musselwhite",
   author_email="JMusselwhite@wvstateu.edu",
   description="A package for interacting with the EPA's WQX service",
   long_description=long_description,
   long_description_content_type="text/markdown",
   url="https://github.com/FlippingBinary/wqxlib/tree/main/wqxlib-python",
-  packages=[],
+  packages=find_packages(),
+  install_requires=parse_requirements("requirements.txt"),
   classifiers=[
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",

@@ -135,7 +135,7 @@ Start importing a file and attachment that was previously uploaded.
   - `CONTAINS_NEW_ONLY` (1) - file contains new data only.
   - `CONTAINS_EXISTING_ONLY` (2) - file contains existing data only (to be replaced).
 - `uponCompletion` (required enum or integer) - Declare what to do after the upload finishes. This must be one of the following enum members provided by the `WQX` module or their corresponding integers:
-  - `DO_NOTHING` (0) - do nothing.
+  - `DO_NOT_EXPORT` (0) - do nothing.
   - `EXPORT_IMPORT` (1) - start export.
   - `SUBMIT_IMPORT` (2) - start export and submit to CDX.
 - `uponCompletionCondition` (optionally required enum or integer) - Declare what conditions permit auto export or auto submit. This must be one of the following enum members provided by the `WQX` module or their corresponding integers:
@@ -164,7 +164,7 @@ Start importing a file and attachment that was previously uploaded.
 
     wqx = WQX( 'username', 'private key in base64' )
 
-    datasetId = wqx.StartImport( importConfigurationID, fileId, wqx.CONTAINS_NEW_OR_EXISTING, wqx.DO_NOTHING, ignoreFirstRowOfFile=True )
+    datasetId = wqx.StartImport( importConfigurationID, fileId, fileType=wqx.CSV, newOrExistingData=wqx.CONTAINS_NEW_OR_EXISTING, uponCompletion=wqx.DO_NOT_EXPORT, ignoreFirstRowOfFile=True )
 
     print( f"The import of dataset {datasetId} has begun. Check it's status with a call to wqx.GetStatus(datasetId)" )
 
@@ -174,7 +174,7 @@ Start importing a file and attachment that was previously uploaded.
 
     wqx = WQX( 'username', 'private key in base64' )
 
-    datasetId = wqx.StartImport( importConfigurationID, fileId, wqx.CONTAINS_NEW_OR_EXISTING, wqx.EXPORT_IMPORT, ignoreFirstRowOfFile=True )
+    datasetId = wqx.StartImport( importConfigurationID, fileId, fileType=wqx.CSV, newOrExistingData=wqx.CONTAINS_NEW_OR_EXISTING, uponCompletion=wqx.EXPORT_IMPORT, ignoreFirstRowOfFile=True )
 
     print( f"The import of dataset {datasetId} has begun. Check it's status with a call to wqx.GetStatus(datasetId)" )
 
@@ -184,7 +184,7 @@ Start importing a file and attachment that was previously uploaded.
 
     wqx = WQX( 'username', 'private key in base64' )
 
-    datasetId = wqx.StartImport( importConfigurationID, fileId, wqx.CONTAINS_NEW_OR_EXISTING, wqx.SUBMIT_IMPORT, ignoreFirstRowOfFile=True )
+    datasetId = wqx.StartImport( importConfigurationID, fileId, fileType=wqx.CSV, newOrExistingData=wqx.CONTAINS_NEW_OR_EXISTING, uponCompletion=wqx.SUBMIT_IMPORT, ignoreFirstRowOfFile=True )
 
     print( f"The import of dataset {datasetId} has begun. Check it's status with a call to wqx.GetStatus(datasetId)" )
 

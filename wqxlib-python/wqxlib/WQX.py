@@ -183,11 +183,11 @@ class WQX():
   def StartImport(self,
     importConfigurationId,
     fileId,
-    attachmentFileId = None,
+    attachmentFileId = "",
     fileType = None,
     newOrExistingData = None,
     uponCompletion = None,
-    uponCompletionCondition = None,
+    uponCompletionCondition = UponCompletionCondition.NOT_APPLICABLE,
     worksheetsToImport = None,
     ignoreFirstRowOfFile = None,
     generatedElementName1 = None,
@@ -207,7 +207,7 @@ class WQX():
       raise TypeError( "Parameter 'importConfigurationId' must be a string." )
     if not isinstance( fileId, str ):
       raise TypeError( "Parameter 'fileId' must be a string." )
-    if attachmentFileId is not None and not isinstance( attachmentFileId, str ):
+    if not isinstance( attachmentFileId, str ):
       raise TypeError( "Parameter 'attachmentFileId' must be a string, if provided." )
     if not isinstance( fileType, str ) and not isinstance( fileType, FileType ):
       raise TypeError( "Parameter 'fileType' must be an enum member or string." )
@@ -215,7 +215,7 @@ class WQX():
       raise TypeError( "Parameter 'newOrExistingData' must be an enum member or integer." )
     if not isinstance( uponCompletion, int ) and not isinstance( uponCompletion, UponImportCompletion ):
       raise TypeError( "Parameter 'uponCompletion' must be an enum member or integer." )
-    if uponCompletionCondition is not None and not isinstance( uponCompletionCondition, int ) and not isinstance( uponCompletionCondition, UponCompletionCondition ):
+    if not isinstance( uponCompletionCondition, int ) and not isinstance( uponCompletionCondition, UponCompletionCondition ):
       raise TypeError( "Parameter 'uponCompletionCondition' must be an enum member or integer, if provided." )
     if worksheetsToImport is not None and not isinstance( worksheetsToImport, str ):
       raise TypeError( "Parameter 'worksheetsToImport' must be a string, if provided." )

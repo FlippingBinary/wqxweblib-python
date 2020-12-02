@@ -38,6 +38,8 @@ Install this package using `pip`
 7. Submit dataset to CDX using `SubmitDatasetToCdx`.
 8. Periodically check the status using `GetStatus`.
 
+## Flowchart
+![Flowchart representing the methods described above](flowchart.jpg)
 ## Import Module
 
 This module must be imported and instantiated with your `userID` and `privateKey` before any of the other functions can be used.

@@ -248,7 +248,7 @@ class WQX():
           raise TypeError( "Parameter 'generatedElementValue5' must be a string, if 'generatedElementName5' is provided." )
 
     # Test parameter values
-    if fileType not in [v.value for v in FileType.__members__.values()]:
+    if any(x for x in FileType if x.value == fileType or x == fileType):
       raise ValueError( "Parameter: 'fileType' is not one of the allowed values.")
     if newOrExistingData not in NewOrExistingData.__members__.values():
       raise ValueError( "Parameter: 'newOrExistingData' is not one of the allowed values.")

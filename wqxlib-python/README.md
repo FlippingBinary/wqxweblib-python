@@ -2,6 +2,8 @@
 
 This is a simple Python library for interacting with the EPA's WQX data submission service. It aims to be mimick the [WQX Web API endpoints](https://www.epa.gov/sites/production/files/2018-09/documents/wqx_web_application_programming_interface_api.pdf) as much as possible, but is not yet fully implemented. If you find a bug, please submit a pull request on [Github](https://github.com/FlippingBinary/wqxlib) or open an issue there.
 
+The roadmap for this library includes generating XML files for upload without first going through the WQX Web API. That will simplify the process of adding new monitoring locations and other types of data which currently require an import configuration file before the data can be accepted.
+
 _NOTE: This module is useless without EPA credentials for WQX submission._
 
 ## Getting Started

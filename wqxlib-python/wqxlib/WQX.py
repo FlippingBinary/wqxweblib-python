@@ -279,6 +279,8 @@ class WQX():
       uponCompletionConditionStr = str(uponCompletionCondition.value)
     else:
       uponCompletionConditionStr = uponCompletionCondition
+    if worksheetsToImport is None and fileTypeStr == "CSV":
+      worksheetsToImport = "1"
 
     params={
       "importConfigurationId": importConfigurationId,

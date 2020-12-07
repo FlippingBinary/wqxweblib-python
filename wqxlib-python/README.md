@@ -194,7 +194,7 @@ Start importing a file and attachment that was previously uploaded.
 
 ## StartXmlExport
 
-Start created the XML submission file (for CDX).
+Start creating the XML submission file (for CDX).
 
 **Parameters:**
 

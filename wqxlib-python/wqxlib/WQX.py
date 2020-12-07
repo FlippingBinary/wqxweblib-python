@@ -199,7 +199,8 @@ class WQX():
     generatedElementName4 = None,
     generatedElementValue4 = None,
     generatedElementName5 = None,
-    generatedElementValue5 = None
+    generatedElementValue5 = None,
+    generatedElements = None
   ):
 
     # Test parameter types
@@ -226,26 +227,47 @@ class WQX():
           raise TypeError( "Parameter 'generatedElementName1' must be a string, if 'generatedElementValue1' is provided." )
       if not isinstance( generatedElementValue1, str ):
           raise TypeError( "Parameter 'generatedElementValue1' must be a string, if 'generatedElementName1' is provided." )
+      if generatedElements is not None:
+        raise TypeError( "Parameter 'generatedElementName1' and 'generatedElementValue1' must be None, if 'generatedElements' is provided." )
     if generatedElementName2 is not None or generatedElementValue2 is not None:
       if not isinstance( generatedElementName2, str ):
           raise TypeError( "Parameter 'generatedElementName2' must be a string, if 'generatedElementValue2' is provided." )
       if not isinstance( generatedElementValue2, str ):
           raise TypeError( "Parameter 'generatedElementValue2' must be a string, if 'generatedElementName2' is provided." )
+      if generatedElements is not None:
+        raise TypeError( "Parameter 'generatedElementName2' and 'generatedElementValue2' must be None, if 'generatedElements' is provided." )
     if generatedElementName3 is not None or generatedElementValue3 is not None:
       if not isinstance( generatedElementName3, str ):
           raise TypeError( "Parameter 'generatedElementName3' must be a string, if 'generatedElementValue3' is provided." )
       if not isinstance( generatedElementValue3, str ):
           raise TypeError( "Parameter 'generatedElementValue3' must be a string, if 'generatedElementName3' is provided." )
+      if generatedElements is not None:
+        raise TypeError( "Parameter 'generatedElementName3' and 'generatedElementValue3' must be None, if 'generatedElements' is provided." )
     if generatedElementName4 is not None or generatedElementValue4 is not None:
       if not isinstance( generatedElementName4, str ):
           raise TypeError( "Parameter 'generatedElementName4' must be a string, if 'generatedElementValue4' is provided." )
       if not isinstance( generatedElementValue4, str ):
           raise TypeError( "Parameter 'generatedElementValue4' must be a string, if 'generatedElementName4' is provided." )
+      if generatedElements is not None:
+        raise TypeError( "Parameter 'generatedElementName4' and 'generatedElementValue4' must be None, if 'generatedElements' is provided." )
     if generatedElementName5 is not None or generatedElementValue5 is not None:
       if not isinstance( generatedElementName5, str ):
           raise TypeError( "Parameter 'generatedElementName5' must be a string, if 'generatedElementValue5' is provided." )
       if not isinstance( generatedElementValue5, str ):
           raise TypeError( "Parameter 'generatedElementValue5' must be a string, if 'generatedElementName5' is provided." )
+      if generatedElements is not None:
+        raise TypeError( "Parameter 'generatedElementName5' and 'generatedElementValue5' must be None, if 'generatedElements' is provided." )
+    if generatedElements is not None:
+      if isinstance( generatedElements, dict ):
+        if len( generatedElements ) > 5:
+          raise TypeError( "Parameter 'generatedElements' must not contain more than 5 keys." )
+        for key in generatedElements:
+          if not isinstance( key, str ):
+            raise TypeError( "Parameter 'generatedElements' must not have non-string keys." )
+          if not isinstance( generatedElements[key], str ):
+            raise TypeError( "Parameter 'generatedElements' must not have non-string values." )
+      else:
+        raise TypeError( "Parameter 'generatedElements' must be a dictionary, if provided." )
 
     # Test parameter values
     if not any(x for x in FileType if x.value == fileType or x == fileType):
@@ -281,6 +303,23 @@ class WQX():
       uponCompletionConditionStr = uponCompletionCondition
     if worksheetsToImport is None and fileTypeStr == "CSV":
       worksheetsToImport = "1"
+    if isinstance( generatedElements, dict ):
+      items = generatedElements.items()
+      if len( items ) > 0:
+        generatedElementName1 = items[0][0]
+        generatedElementValue1 = items[0][1]
+      if len( items ) > 1:
+        generatedElementName2 = items[1][0]
+        generatedElementValue2 = items[1][1]
+      if len( items ) > 2:
+        generatedElementName3 = items[2][0]
+        generatedElementValue3 = items[2][1]
+      if len( items ) > 3:
+        generatedElementName4 = items[3][0]
+        generatedElementValue4 = items[3][1]
+      if len( items ) > 4:
+        generatedElementName5 = items[4][0]
+        generatedElementValue5 = items[4][1]
 
     params={
       "importConfigurationId": importConfigurationId,

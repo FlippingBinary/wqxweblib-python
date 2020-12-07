@@ -502,5 +502,4 @@ Get the locations for an organization.
 
     print( "The locations associated with {organizationIdentifiersCsv} are: " )
     for location in locations:
-        print( f" - {location}" )
-
+        print( f" - {location['MonitoringLocationName']}" )

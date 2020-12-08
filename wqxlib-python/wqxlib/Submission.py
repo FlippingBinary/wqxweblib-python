@@ -3,6 +3,16 @@ from yattag import Doc, indent
 from .MonitoringLocation import MonitoringLocation
 
 class Submission:
+  author: str
+  organization: str
+  title: str
+  creationTime: datetime
+  contactInfo: str
+  notification: str
+  payloadOperation: str
+  organizationIdentifier: str
+  organizationFormalName: str
+  monitoringLocation: MonitoringLocation
 
   def __init__(self,Id):
     if not isinstance(Id, str):
@@ -44,3 +54,7 @@ class Submission:
             if isinstance(self.monitoringLocation, MonitoringLocation):
               doc.asis( self.monitoringLocation.generateXML() )
     return indent(doc.getvalue(), indentation = ' '*2)
+
+    def generateZIP(self, fileName=None):
+      
+      pass

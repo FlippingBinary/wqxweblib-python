@@ -1,6 +1,20 @@
 from yattag import Doc, indent
 
 class MonitoringLocation:
+  monitoringLocationIdentifier: str
+  monitoringLocationName: str
+  monitoringLocationTypeName: str
+  hucEightDigitCode: str
+  hucTwelveDigitCode: str
+  tribalLandIndicator: str
+  latitudeMeasure: str
+  longitudeMeasure: str
+  sourceMapScale: str
+  horizontalCollectionMethodName: str
+  horizontalCoordinateReferenceSystemDatumName: str
+  countryCode: str
+  stateCode: str
+  countyCode: str
 
   def __init__(self):
     # Document / Payload / WQX / Organization / MonitoringLocation / MonitoringLocationIdentity

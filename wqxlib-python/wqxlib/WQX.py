@@ -13,6 +13,9 @@ from .UponImportCompletion import UponImportCompletion
 from .WQXException import WQXException
 
 class WQX():
+  userID: str
+  privateKey: str
+  session: requests.sessions.Session
 
   CSV = FileType.CSV
   TAB = FileType.TAB

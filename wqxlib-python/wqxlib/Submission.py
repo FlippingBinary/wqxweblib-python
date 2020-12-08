@@ -4,17 +4,18 @@ from .MonitoringLocation import MonitoringLocation
 
 class Submission:
   author: str
-  organization: str
-  title: str
-  creationTime: datetime
   contactInfo: str
-  notification: str
-  payloadOperation: str
-  organizationIdentifier: str
-  organizationFormalName: str
+  creationTime: datetime
+  id: str
   monitoringLocation: MonitoringLocation
+  notification: str
+  organization: str
+  organizationFormalName: str
+  organizationIdentifier: str
+  payloadOperation: str
+  title: str
 
-  def __init__(self,Id):
+  def __init__(self,Id:str) -> None:
     if not isinstance(Id, str):
       raise ValueError( "Id must be a string.")
     self.id = Id

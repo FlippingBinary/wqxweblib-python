@@ -10,6 +10,7 @@ class Submission:
   monitoringLocation: MonitoringLocation
   notification: str
   organization: str
+  organizationDescriptionText: str
   organizationFormalName: str
   organizationIdentifier: str
   payloadOperation: str

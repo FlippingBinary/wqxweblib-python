@@ -4,6 +4,7 @@ import base64
 import datetime
 import hmac
 import re
+from typing import Union
 import requests
 from .FileType import FileType
 from .NewOrExistingData import NewOrExistingData
@@ -63,11 +64,11 @@ class WQX():
     self.session = requests.Session()
 
   def queryWQX(self,
-    method,
-    endpoint,
-    data = None,
-    filename = None,
-    parameters = None
+    method:str,
+    endpoint:str,
+    data:bytes = None,
+    filename:str = None,
+    parameters:dict = None
   ):
 
     # Test parameter types
@@ -140,8 +141,8 @@ class WQX():
     return res
 
   def Upload(self,
-    filename,
-    contents
+    filename:str,
+    contents:bytes
   ):
 
     # Test parameter types
@@ -162,8 +163,8 @@ class WQX():
     return res.text.strip( '"' )
 
   def UploadAttachment(self,
-    filename,
-    contents
+    filename:str,
+    contents:bytes
   ):
 
     # Test parameter types
@@ -184,26 +185,26 @@ class WQX():
     return res.text.strip( '"' )
 
   def StartImport(self,
-    importConfigurationId,
-    fileId,
-    attachmentFileId = "",
-    fileType = None,
-    newOrExistingData = None,
-    uponCompletion = None,
-    uponCompletionCondition = UponCompletionCondition.NOT_APPLICABLE,
-    worksheetsToImport = None,
-    ignoreFirstRowOfFile = None,
-    generatedElementName1 = None,
-    generatedElementValue1 = None,
-    generatedElementName2 = None,
-    generatedElementValue2 = None,
-    generatedElementName3 = None,
-    generatedElementValue3 = None,
-    generatedElementName4 = None,
-    generatedElementValue4 = None,
-    generatedElementName5 = None,
-    generatedElementValue5 = None,
-    generatedElements = None
+    importConfigurationId:str,
+    fileId:str,
+    attachmentFileId:str = "",
+    fileType:Union[str,FileType] = None,
+    newOrExistingData:Union[int,NewOrExistingData] = None,
+    uponCompletion:Union[int,UponImportCompletion] = None,
+    uponCompletionCondition:Union[int,UponCompletionCondition] = UponCompletionCondition.NOT_APPLICABLE,
+    worksheetsToImport:str = None,
+    ignoreFirstRowOfFile:bool = None,
+    generatedElementName1:str = None,
+    generatedElementValue1:str = None,
+    generatedElementName2:str = None,
+    generatedElementValue2:str = None,
+    generatedElementName3:str = None,
+    generatedElementValue3:str = None,
+    generatedElementName4:str = None,
+    generatedElementValue4:str = None,
+    generatedElementName5:str = None,
+    generatedElementValue5:str = None,
+    generatedElements:dict = None
   ):
 
     # Test parameter types
@@ -354,8 +355,8 @@ class WQX():
     return res.text.strip( '"' )
 
   def StartXmlExport(self,
-    datasetId,
-    uponCompletion = None
+    datasetId:str,
+    uponCompletion:Union[int,UponExportCompletion] = None
   ):
 
     # Test parameter types
@@ -389,7 +390,7 @@ class WQX():
       raise WQXException( res.text )
 
   def SubmitDatasetToCdx(self,
-    datasetId
+    datasetId:str
   ):
 
     # Test parameter types
@@ -411,7 +412,7 @@ class WQX():
       raise WQXException( res.text )
 
   def SubmitFileToCdx(self,
-    fileId
+    fileId:str
   ):
 
     # Test parameter types
@@ -433,7 +434,7 @@ class WQX():
       raise WQXException( res.text )
 
   def GetStatus(self,
-    datasetId
+    datasetId:str
   ):
 
     # Test parameter types
@@ -455,7 +456,7 @@ class WQX():
       raise WQXException( res.text )
 
   def GetDocumentList(self,
-    datasetId
+    datasetId:str
   ):
 
     # Test parameter types
@@ -477,13 +478,13 @@ class WQX():
       raise WQXException( res.text )
 
   def Projects(self,
-    organizationIdentifiersCsv,
-    projectIdentifiersCsv = None,
-    transactionIdentifier = None,
-    lastChangeDateMin = None,
-    lastChangeDateMax = None,
-    startRow = 0,
-    rowsToRetrieve = 100
+    organizationIdentifiersCsv:str,
+    projectIdentifiersCsv:str = None,
+    transactionIdentifier:str = None,
+    lastChangeDateMin:datetime.date = None,
+    lastChangeDateMax:datetime.date = None,
+    startRow:int = 0,
+    rowsToRetrieve:int = 100
   ):
 
     # Test parameter types
@@ -537,15 +538,15 @@ class WQX():
       raise WQXException( res.text )
 
   def MonitoringLocations(self,
-    organizationIdentifiersCsv,
-    monitoringLocationIdentifiersCsv = None,
-    monitoringLocationName = None,
-    monitoringLocationType = None,
-    transactionIdentifier = None,
-    lastChangeDateMin = None,
-    lastChangeDateMax = None,
-    startRow = 0,
-    rowsToRetrieve = 100
+    organizationIdentifiersCsv:str,
+    monitoringLocationIdentifiersCsv:str = None,
+    monitoringLocationName:str = None,
+    monitoringLocationType:str = None,
+    transactionIdentifier:str = None,
+    lastChangeDateMin:datetime.date = None,
+    lastChangeDateMax:datetime.date = None,
+    startRow:int = 0,
+    rowsToRetrieve:int = 100
   ):
 
     # Test parameter types

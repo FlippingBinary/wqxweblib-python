@@ -60,6 +60,9 @@ class Submission:
     return indent(doc.getvalue(), indentation = ' '*2)
 
   def generateZIP(self, fileName:str=None):
+    if not isinstance(fileName, str):
+      raise TypeError("Parameter 'fileName' must be a string.")
+
     mem = BytesIO()
     zip = ZipFile(mem, mode='w')
 

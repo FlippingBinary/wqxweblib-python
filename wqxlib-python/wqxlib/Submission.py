@@ -195,7 +195,7 @@ class Submission:
 
     doc, tag, text, line = Doc().ttl()
     doc.asis('<?xml version="1.0" encoding="UTF-8"?>')
-    with tag('Document',  ('xmlns','http://www.exchangenetwork.net/schema/v1.0/ExchangeNetworkDocument.xsd'), ('xmlns:xsi','http://www.w3.org/2001/XMLSchema-instance')):
+    with tag('Document', ('Id', self.__id), ('xmlns','http://www.exchangenetwork.net/schema/v1.0/ExchangeNetworkDocument.xsd'), ('xmlns:xsi','http://www.w3.org/2001/XMLSchema-instance')):
       with tag('Header'):
         line('Author', self.__author)
         line('Organization', self.__organization)

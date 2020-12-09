@@ -1,5 +1,7 @@
 from datetime import datetime
+from io import BytesIO
 from yattag import Doc, indent
+from zipfile import ZipFile
 from .MonitoringLocation import MonitoringLocation
 
 class Submission:
@@ -57,6 +59,18 @@ class Submission:
               doc.asis( self.monitoringLocation.generateXML() )
     return indent(doc.getvalue(), indentation = ' '*2)
 
-    def generateZIP(self, fileName=None):
-      
-      pass
+  def generateZIP(self, fileName:str=None):
+    mem = BytesIO()
+    zip = ZipFile(mem, mode='w')
+
+    results = self.generateXML()
+    zip.writestr('results.xml', results)
+
+    # TODO: Add attachment files, if necessary. Example:
+    #   zip.writestr('rawdata.csv', self.data)
+
+    zip.close()
+    mem.seek(0)
+
+    with open(fileName, 'wb') as out:
+      out.write(mem.read())

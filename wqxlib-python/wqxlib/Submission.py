@@ -6,7 +6,10 @@ from .MonitoringLocation import MonitoringLocation
 from .WQXException import WQXException
 
 class Submission:
+  __activity: None
+  __activityGroup: None
   __author: str
+  __biologicalHabitatIndex: None
   __comment: str
   __contactInfo: str
   __creationTime: datetime
@@ -18,12 +21,16 @@ class Submission:
   __organizationFormalName: str
   __organizationIdentifier: str
   __payloadOperation: str
+  __project: None
   __title: str
 
   def __init__(self,Id:str) -> None:
     if not isinstance(Id, str):
       raise ValueError( "Id must be a string.")
+    self.__activity = None
+    self.__activityGroup = None
     self.__author = None
+    self.__biologicalHabitatIndex = None
     self.__comment = None
     self.__contactInfo = None
     self.__creationTime = datetime.now()
@@ -35,6 +42,7 @@ class Submission:
     self.__organizationFormalName = None
     self.__organizationIdentifier = None
     self.__payloadOperation = None
+    self.__project = None
     self.__title = 'WQX'
   
   @property
@@ -199,8 +207,12 @@ class Submission:
               line('OrganizationIdentifier', self.__organizationIdentifier)
               line('OrganizationFormalName', self.__organizationFormalName)
               line('OrganizationDescriptionText', self.__organizationDescriptionText)
+            # TODO: self.__project.generateXML()
             if isinstance(self.__monitoringLocation, MonitoringLocation):
               doc.asis( self.__monitoringLocation.generateXML() )
+            # TODO: self.__biologicalHabitatIndex.generateXML()
+            # TODO: self.__activityGroup.generateXML()
+            # TODO: self.__activity.generateXML()
     return indent(doc.getvalue(), indentation = ' '*2)
 
   def generateZIP(self, fileName:str=None):

@@ -44,7 +44,7 @@ class WQX():
   def __init__(self,
     userID,
     privateKey
-  ):
+  ) -> None:
 
     # Test parameter types
     if not isinstance( userID, str ):
@@ -69,7 +69,7 @@ class WQX():
     data:bytes = None,
     filename:str = None,
     parameters:dict = None
-  ):
+  ) -> requests.models.Response:
 
     # Test parameter types
     if not isinstance( self.userID, str ):
@@ -143,7 +143,7 @@ class WQX():
   def Upload(self,
     filename:str,
     contents:bytes
-  ):
+  ) -> str:
 
     # Test parameter types
     if not isinstance( filename, str ):
@@ -165,7 +165,7 @@ class WQX():
   def UploadAttachment(self,
     filename:str,
     contents:bytes
-  ):
+  ) -> str:
 
     # Test parameter types
     if not isinstance( filename, str ):
@@ -205,7 +205,7 @@ class WQX():
     generatedElementName5:str = None,
     generatedElementValue5:str = None,
     generatedElements:dict = None
-  ):
+  ) -> str:
 
     # Test parameter types
     if not isinstance( importConfigurationId, str ):
@@ -357,7 +357,7 @@ class WQX():
   def StartXmlExport(self,
     datasetId:str,
     uponCompletion:Union[int,UponExportCompletion] = None
-  ):
+  ) -> dict:
 
     # Test parameter types
     if not isinstance( datasetId, str ):
@@ -391,7 +391,7 @@ class WQX():
 
   def SubmitDatasetToCdx(self,
     datasetId:str
-  ):
+  ) -> dict:
 
     # Test parameter types
     if not isinstance( datasetId, str ):
@@ -413,7 +413,7 @@ class WQX():
 
   def SubmitFileToCdx(self,
     fileId:str
-  ):
+  ) -> dict:
 
     # Test parameter types
     if not isinstance( fileId, str ):
@@ -435,7 +435,7 @@ class WQX():
 
   def GetStatus(self,
     datasetId:str
-  ):
+  ) -> dict:
 
     # Test parameter types
     if not isinstance( datasetId, str ):
@@ -457,7 +457,7 @@ class WQX():
 
   def GetDocumentList(self,
     datasetId:str
-  ):
+  ) -> list:
 
     # Test parameter types
     if not isinstance( datasetId, str ):
@@ -485,7 +485,7 @@ class WQX():
     lastChangeDateMax:datetime.date = None,
     startRow:int = 0,
     rowsToRetrieve:int = 100
-  ):
+  ) -> list:
 
     # Test parameter types
     if not isinstance( organizationIdentifiersCsv, str ):
@@ -547,7 +547,7 @@ class WQX():
     lastChangeDateMax:datetime.date = None,
     startRow:int = 0,
     rowsToRetrieve:int = 100
-  ):
+  ) -> list:
 
     # Test parameter types
     if not isinstance( organizationIdentifiersCsv, str ):

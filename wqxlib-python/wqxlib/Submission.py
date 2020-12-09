@@ -2,47 +2,39 @@ from datetime import datetime
 from io import BytesIO
 from yattag import Doc, indent
 from zipfile import ZipFile
-from .MonitoringLocation import MonitoringLocation
+from .Payload import Payload
 from .WQXException import WQXException
 
 class Submission:
-  __activity: None
-  __activityGroup: None
   __author: str
-  __biologicalHabitatIndex: None
   __comment: str
   __contactInfo: str
   __creationTime: datetime
   __id: str
-  __monitoringLocation: MonitoringLocation
   __notification: str
   __organization: str
   __organizationDescriptionText: str
   __organizationFormalName: str
   __organizationIdentifier: str
+  __payload: Payload
   __payloadOperation: str
-  __project: None
   __title: str
 
   def __init__(self,Id:str) -> None:
     if not isinstance(Id, str):
       raise ValueError( "Id must be a string.")
-    self.__activity = None
-    self.__activityGroup = None
     self.__author = None
-    self.__biologicalHabitatIndex = None
     self.__comment = None
     self.__contactInfo = None
     self.__creationTime = datetime.now()
     self.__id = Id
-    self.__monitoringLocation = None
     self.__notification = None
     self.__organization = None
     self.__organizationDescriptionText = None
     self.__organizationFormalName = None
     self.__organizationIdentifier = None
+    self.__payload = Payload()
     self.__payloadOperation = None
-    self.__project = None
     self.__title = 'WQX'
   
   @property
@@ -66,6 +58,17 @@ class Submission:
     if not isinstance(val, str):
       raise TypeError("Property 'comment' must be a string.")
     self.__comment = val
+  
+  @property
+  def contactInfo(self) -> str:
+    return self.__contactInfo
+  @contactInfo.setter
+  def contactInfo(self, val:str) -> None:
+    if not isinstance(val, str):
+      raise TypeError("Property 'contactInfo' must be a string.")
+    if len(val) < 1:
+      raise TypeError("Property 'contactInfo' is required.")
+    self.__contactInfo = val
 
   @property
   def creationTime(self) -> datetime:
@@ -86,15 +89,6 @@ class Submission:
     if len(val) < 1:
       raise ValueError("Property 'id' is required.")
     self.__id = val
-
-  @property
-  def monitoringLocation(self) -> MonitoringLocation:
-    return self.__monitoringLocation
-  @monitoringLocation.setter
-  def monitoringLocation(self, val:MonitoringLocation) -> None:
-    if not isinstance(val, MonitoringLocation):
-      raise TypeError("Property 'monitoringLocation' must be a MonitoringLocation")
-    self.__monitoringLocation = val
 
   @property
   def notification(self) -> str:
@@ -152,6 +146,15 @@ class Submission:
     self.__organizationIdentifier = val
 
   @property
+  def payload(self) -> Payload:
+    return self.__payload
+  @payload.setter
+  def payload(self, val:Payload) -> None:
+    if not isinstance(val, Payload):
+      raise TypeError("Property 'payload' must be a Payload")
+    self.__payload = val
+
+  @property
   def payloadOperation(self) -> str:
     return self.__payloadOperation
   @payloadOperation.setter
@@ -207,12 +210,7 @@ class Submission:
               line('OrganizationIdentifier', self.__organizationIdentifier)
               line('OrganizationFormalName', self.__organizationFormalName)
               line('OrganizationDescriptionText', self.__organizationDescriptionText)
-            # TODO: self.__project.generateXML()
-            if isinstance(self.__monitoringLocation, MonitoringLocation):
-              doc.asis( self.__monitoringLocation.generateXML() )
-            # TODO: self.__biologicalHabitatIndex.generateXML()
-            # TODO: self.__activityGroup.generateXML()
-            # TODO: self.__activity.generateXML()
+            doc.asis(self.__payload.generateXML())
     return indent(doc.getvalue(), indentation = ' '*2)
 
   def generateZIP(self, fileName:str=None):

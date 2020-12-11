@@ -2,83 +2,36 @@ from datetime import datetime
 from io import BytesIO
 from yattag import Doc, indent
 from zipfile import ZipFile
+from .Header import Header
+from .Organization import Organization
 from .Payload import Payload
 from .WQXException import WQXException
 
 class Submission:
-  __author: str
-  __comment: str
-  __contactInfo: str
-  __creationTime: datetime
+  __header: Header
   __id: str
-  __notification: str
-  __organization: str
-  __organizationDescriptionText: str
-  __organizationFormalName: str
-  __organizationIdentifier: str
+  __organization: Organization
   __payload: Payload
   __payloadOperation: str
-  __title: str
 
   def __init__(self,Id:str) -> None:
     if not isinstance(Id, str):
       raise ValueError( "Id must be a string.")
-    self.__author = None
-    self.__comment = None
-    self.__contactInfo = None
-    self.__creationTime = datetime.now()
+    self.__header = Header()
     self.__id = Id
-    self.__notification = None
-    self.__organization = None
-    self.__organizationDescriptionText = None
-    self.__organizationFormalName = None
-    self.__organizationIdentifier = None
+    self.__organization = Organization()
     self.__payload = Payload()
     self.__payloadOperation = None
-    self.__title = 'WQX'
   
   @property
-  def author(self) -> str:
-    return self.__author
-  @author.setter
-  def author(self, val:str) -> None:
-    if not isinstance(val, str):
-      raise TypeError("Property 'author' must be a string.")
-    if len(val) < 1:
-      raise TypeError("Property 'author' is required.")
-    self.__author = val
+  def header(self) -> Header:
+    return self.__header
+  @header.setter
+  def header(self, val:Header) -> None:
+    if not isinstance(val, Header):
+      raise TypeError("Property 'header' must be a Header")
+    self.__header = val
 
-  @property
-  def comment(self) -> str:
-    return self.__comment
-  @comment.setter
-  def comment(self, val) -> None:
-    if val is None or len(val) < 1:
-      self.__comment = None
-    if not isinstance(val, str):
-      raise TypeError("Property 'comment' must be a string.")
-    self.__comment = val
-  
-  @property
-  def contactInfo(self) -> str:
-    return self.__contactInfo
-  @contactInfo.setter
-  def contactInfo(self, val:str) -> None:
-    if not isinstance(val, str):
-      raise TypeError("Property 'contactInfo' must be a string.")
-    if len(val) < 1:
-      raise TypeError("Property 'contactInfo' is required.")
-    self.__contactInfo = val
-
-  @property
-  def creationTime(self) -> datetime:
-    return self.__creationTime
-  @creationTime.setter
-  def creationTime(self, val:datetime) -> None:
-    if not isinstance(val, datetime):
-      raise TypeError("Property 'creationTime' must be a datetime.")
-    self.__creationTime = val
-  
   @property
   def id(self) -> str:
     return self.__id
@@ -91,59 +44,13 @@ class Submission:
     self.__id = val
 
   @property
-  def notification(self) -> str:
-    return self.__notification
-  @notification.setter
-  def notification(self, val) -> None:
-    if val is None or len(val) < 1:
-      self.__notification = None
-    if not isinstance(val, str):
-      raise TypeError("Property 'notification' must be a string.")
-    self.__notification = val
-
-  @property
-  def organization(self) -> str:
+  def organization(self) -> Organization:
     return self.__organization
   @organization.setter
-  def organization(self, val:str) -> None:
-    if not isinstance(val, str):
-      raise TypeError("Property 'organization' must be a string.")
-    if len(val) < 1:
-      raise ValueError("Property 'organization is required.")
+  def organization(self, val:Organization) -> None:
+    if not isinstance(val, Organization):
+      raise TypeError("Property 'organization' must be a Organization")
     self.__organization = val
-
-  @property
-  def organizationDescriptionText(self) -> str:
-    return self.__organizationDescriptionText
-  @organizationDescriptionText.setter
-  def organizationDescriptionText(self, val:str) -> None:
-    if not isinstance(val, str):
-      raise TypeError("Property 'organizationDescriptionText' must be a string")
-    if len(val) < 1:
-      raise ValueError("Property 'organizationDescriptionText' is required.")
-    self.__organizationDescriptionText = val
-
-  @property
-  def organizationFormalName(self) -> str:
-    return self.__organizationFormalName
-  @organizationFormalName.setter
-  def organizationFormalName(self, val:str) -> None:
-    if not isinstance(val, str):
-      raise TypeError("Property 'organizationFormalName' must be a string")
-    if len(val) < 1:
-      raise ValueError("Property 'organizationFormalName' is required.")
-    self.__organizationFormalName = val
-
-  @property
-  def organizationIdentifier(self) -> str:
-    return self.__organizationIdentifier
-  @organizationIdentifier.setter
-  def organizationIdentifier(self, val:str) -> None:
-    if not isinstance(val, str):
-      raise TypeError("Property 'organizationIdentifier' must be a string")
-    if len(val) < 1:
-      raise ValueError("Property 'organizationIdentifier' is required.")
-    self.__organizationIdentifier = val
 
   @property
   def payload(self) -> Payload:
@@ -165,31 +72,7 @@ class Submission:
       raise ValueError("Property 'payloadOperation' is required.")
     self.__payloadOperation = val
 
-  @property
-  def title(self) -> str:
-    return self.__title
-  @title.setter
-  def title(self, val:str) -> None:
-    if not isinstance(val, str):
-      raise TypeError("Property 'title' must be a string")
-    if len(val) < 1:
-      raise ValueError("Property 'title' is required.")
-    self.__title = val
-
-
   def generateXML(self):
-    if not self.__author:
-      raise WQXException("Property 'author' must be set before XML can be generated.")
-    if not self.__contactInfo:
-      raise WQXException("Property 'contactInfo' must be set before XML can be generated.")
-    if not self.__organization:
-      raise WQXException("Property 'organization' must be set before XML can be generated.")
-    if not self.__organizationDescriptionText:
-      raise WQXException("Property 'organizationDescriptionText' must be set before XML can be generated.")
-    if not self.__organizationFormalName:
-      raise WQXException("Property 'organizationFormalName' must be set before XML can be generated.")
-    if not self.__organizationIdentifier:
-      raise WQXException("Property 'organizationIdentifier' must be set before XML can be generated.")
     if not self.__payloadOperation:
       raise WQXException("Property 'payloadOperation' must be set before XML can be generated.")
 
@@ -197,19 +80,11 @@ class Submission:
     doc.asis('<?xml version="1.0" encoding="UTF-8"?>')
     with tag('Document', ('Id', self.__id), ('xmlns','http://www.exchangenetwork.net/schema/v1.0/ExchangeNetworkDocument.xsd'), ('xmlns:xsi','http://www.w3.org/2001/XMLSchema-instance')):
       with tag('Header'):
-        line('Author', self.__author)
-        line('Organization', self.__organization)
-        line('Title', self.__title)
-        line('CreationTime', self.__creationTime.astimezone().replace(microsecond=0).isoformat())
-        line('ContactInfo', self.__contactInfo)
-        line('Notification', self.__notification)
+        doc.asis(self.__header.generateXML())
       with tag('Payload', ('Operation', self.__payloadOperation)):
         with tag('WQX', ('xmlns', 'http://www.exchangenetwork.net/schema/wqx/3'), ('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance'), ('xsi:schemaLocation','http://www.exchangenetwork.net/schema/wqx/3 http://www.exchangenetwork.net/schema/wqx/3/index.xsd')):
           with tag('Organization'):
-            with tag('OrganizationDescription'):
-              line('OrganizationIdentifier', self.__organizationIdentifier)
-              line('OrganizationFormalName', self.__organizationFormalName)
-              line('OrganizationDescriptionText', self.__organizationDescriptionText)
+            doc.asis(self.__organization.generateXML())
             doc.asis(self.__payload.generateXML())
     return indent(doc.getvalue(), indentation = ' '*2)
 

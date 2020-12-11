@@ -75,7 +75,7 @@ class MonitoringLocationIdentity:
     return self.__contributingDrainageAreaMeasure
   @contributingDrainageAreaMeasure.setter
   def contributingDrainageAreaMeasure(self, val:Measure) -> None:
-    if not None and not isinstance(val, Measure):
+    if val is not None and not isinstance(val, Measure):
       raise TypeError("Property 'contributingDrainageAreaMeasure' must be a Measure object, if provided.")
     self.__contributingDrainageAreaMeasure = val
 
@@ -84,7 +84,7 @@ class MonitoringLocationIdentity:
     return self.__drainageAreaMeasure
   @drainageAreaMeasure.setter
   def drainageAreaMeasure(self, val:Measure) -> None:
-    if not None and not isinstance(val, Measure):
+    if val is not None and not isinstance(val, Measure):
       raise TypeError("Property 'drainageAreaMeasure' must be a Measure object, if provided.")
     self.__drainageAreaMeasure = val
 
@@ -93,7 +93,7 @@ class MonitoringLocationIdentity:
     return self.__hucEightDigitCode
   @hucEightDigitCode.setter
   def hucEightDigitCode(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'hucEightDigitCode' must be a string, if provided.")
     self.__hucEightDigitCode = val
 
@@ -102,7 +102,7 @@ class MonitoringLocationIdentity:
     return self.__hucTwelveDigitCode
   @hucTwelveDigitCode.setter
   def hucTwelveDigitCode(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'hucTwelveDigitCode' must be a string, if provided.")
     self.__hucTwelveDigitCode = val
 
@@ -111,7 +111,7 @@ class MonitoringLocationIdentity:
     return self.__monitoringLocationDescriptionText
   @monitoringLocationDescriptionText.setter
   def monitoringLocationDescriptionText(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'monitoringLocationDescriptionText' must be a string, if provided.")
     self.__monitoringLocationDescriptionText = val
 
@@ -153,7 +153,7 @@ class MonitoringLocationIdentity:
     return self.__tribalLandIndicator
   @tribalLandIndicator.setter
   def tribalLandIndicator(self, val:bool) -> None:
-    if not None and not isinstance(val, bool):
+    if val is not None and not isinstance(val, bool):
       raise TypeError("Property 'tribalLandIndicator' must be a boolean, if provided.")
     self.__tribalLandIndicator = val
 
@@ -162,7 +162,7 @@ class MonitoringLocationIdentity:
     return self.__tribalLandName
   @tribalLandName.setter
   def tribalLandName(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'tribalLandName' must be a string, if provided.")
     self.__tribalLandName = val
 
@@ -246,7 +246,7 @@ class MonitoringLocationGeospatial:
     return self.__horizontalAccuracyMeasure
   @horizontalAccuracyMeasure.setter
   def horizontalAccuracyMeasure(self, val:Measure) -> None:
-    if not None and not isinstance(val, Measure):
+    if val is not None and not isinstance(val, Measure):
       raise TypeError("Property 'horizontalAccuracyMeasure' must be a Measure object, if provided.")
     self.__horizontalAccuracyMeasure = val
 
@@ -321,7 +321,7 @@ class MonitoringLocationGeospatial:
     return self.__verticalAccuracyMeasure
   @verticalAccuracyMeasure.setter
   def verticalAccuracyMeasure(self, val:Measure) -> None:
-    if not None and not isinstance(val, Measure):
+    if val is not None and not isinstance(val, Measure):
       raise TypeError("Property 'verticalAccuracyMeasure' must be a Measure object, if provided.")
     self.__verticalAccuracyMeasure = val
 
@@ -330,7 +330,7 @@ class MonitoringLocationGeospatial:
     return self.__verticalCollectionMethodName
   @verticalCollectionMethodName.setter
   def verticalCollectionMethodName(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'verticalCollectionMethodName' must be a string, if provided.")
     self.__verticalCollectionMethodName = val
 
@@ -339,7 +339,7 @@ class MonitoringLocationGeospatial:
     return self.__verticalCoordinateReferenceSystemDatumName
   @verticalCoordinateReferenceSystemDatumName.setter
   def verticalCoordinateReferenceSystemDatumName(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'verticalCoordinateReferenceSystemDatumName' must be a string, if provided.")
     self.__verticalCoordinateReferenceSystemDatumName = val
 
@@ -348,7 +348,7 @@ class MonitoringLocationGeospatial:
     return self.__verticalMeasure
   @verticalMeasure.setter
   def verticalMeasure(self, val:Measure) -> None:
-    if not None and not isinstance(val, Measure):
+    if val is not None and not isinstance(val, Measure):
       raise TypeError("Property 'verticalMeasure' must be a Measure object, if provided.")
     self.__verticalMeasure = val
 
@@ -433,7 +433,7 @@ class AquiferInformation:
     return self.__localAquiferDescriptionText
   @localAquiferDescriptionText.setter
   def localAquiferDescriptionText(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'localAquiferDescriptionText' must be a string, if provided.")
     self.__localAquiferDescriptionText = val
 
@@ -476,7 +476,7 @@ class WellInformation:
     return self.__aquiferInformation
   @aquiferInformation.setter
   def aquiferInformation(self, val:AquiferInformation) -> None:
-    if not None and not isinstance(val, AquiferInformation):
+    if val is not None and not isinstance(val, AquiferInformation):
       raise TypeError("Property 'aquiferInformation' must be an AquiferInformation object, if provided.")
     self.__aquiferInformation = val
 
@@ -485,7 +485,7 @@ class WellInformation:
     return self.__aquiferTypeName
   @aquiferTypeName.setter
   def aquiferTypeName(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'aquiferTypeName' must be a string, if provided.")
     self.__aquiferTypeName = val
 
@@ -494,7 +494,7 @@ class WellInformation:
     return self.__constructionDate
   @constructionDate.setter
   def constructionDate(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'constructionDate' must be a string, if provided.")
     self.__constructionDate = val
 
@@ -503,7 +503,7 @@ class WellInformation:
     return self.__formationTypeText
   @formationTypeText.setter
   def formationTypeText(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'formationTypeText' must be a string, if provided.")
     self.__formationTypeText = val
 
@@ -512,7 +512,7 @@ class WellInformation:
     return self.__nationalAquiferCode
   @nationalAquiferCode.setter
   def nationalAquiferCode(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'nationalAquiferCode' must be a string, if provided.")
     self.__nationalAquiferCode = val
 
@@ -521,7 +521,7 @@ class WellInformation:
     return self.__wellDepthMeasure
   @wellDepthMeasure.setter
   def wellDepthMeasure(self, val:Measure) -> None:
-    if not None and not isinstance(val, Measure):
+    if val is not None and not isinstance(val, Measure):
       raise TypeError("Property 'wellDepthMeasure' must be a Measure object, if provided.")
     self.__wellDepthMeasure = val
 

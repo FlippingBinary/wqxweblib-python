@@ -27,7 +27,7 @@ class Payload:
     return self.__activity
   @activity.setter
   def activity(self, val:Activity) -> None:
-    if not None and not isinstance(val, Activity):
+    if val is not None and not isinstance(val, Activity):
       raise TypeError("Property 'activity' must be an Activity object, if provided.")
     self.__activity = val
 
@@ -38,7 +38,7 @@ class Payload:
     return self.__activityGroup
   @activityGroup.setter
   def activityGroup(self, val:ActivityGroup) -> None:
-    if not None and not isinstance(val, ActivityGroup):
+    if val is not None and not isinstance(val, ActivityGroup):
       raise TypeError("Property 'activityGroup' must be an ActivityGroup object, if provided.")
     self.__activityGroup = val
 
@@ -49,7 +49,7 @@ class Payload:
     return self.__biologicalHabitatIndex
   @biologicalHabitatIndex.setter
   def biologicalHabitatIndex(self, val:BiologicalHabitatIndex) -> None:
-    if not None and not isinstance(val, BiologicalHabitatIndex):
+    if val is not None and not isinstance(val, BiologicalHabitatIndex):
       raise TypeError("Property 'biologicalHabitatIndex' must be a BiologicalHabitatIndex object, if provided.")
     self.__biologicalHabitatIndex = val
 
@@ -60,7 +60,7 @@ class Payload:
     return self.__monitoringLocation
   @monitoringLocation.setter
   def monitoringLocation(self, val:MonitoringLocation) -> None:
-    if not None and not isinstance(val, MonitoringLocation):
+    if val is not None and not isinstance(val, MonitoringLocation):
       raise TypeError("Property 'monitoringLocation' must be a MonitoringLocation object, if provided.")
     self.__monitoringLocation = val
 
@@ -71,7 +71,7 @@ class Payload:
     return self.__project
   @project.setter
   def project(self, val:Project) -> None:
-    if not None and not isinstance(val, Project):
+    if val is not None and not isinstance(val, Project):
       raise TypeError("Property 'project' must be a Project object, if provided.")
     self.__project = val
 

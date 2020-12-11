@@ -39,7 +39,7 @@ class OrganizationDescription:
     return self.__organizationDescriptionText
   @organizationDescriptionText.setter
   def organizationDescriptionText(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'organizationDescriptionText' must be a string, if provided.")
     self.__organizationDescriptionText = val
 
@@ -48,7 +48,7 @@ class OrganizationDescription:
     return self.__tribalCode
   @tribalCode.setter
   def tribalCode(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'tribalCode' must be a string, if provided.")
     self.__tribalCode = val
 
@@ -79,7 +79,7 @@ class ElectronicAddress:
     return self.__electronicAddressText
   @electronicAddressText.setter
   def electronicAddressText(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'electronicAddressText' must be a string, if provided.")
     self.__electronicAddressText = val
 
@@ -88,7 +88,7 @@ class ElectronicAddress:
     return self.__electronicAddressTypeName
   @electronicAddressTypeName.setter
   def electronicAddressTypeName(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'electronicAddressTypeName' must be a string, if provided.")
     self.__electronicAddressTypeName = val
 
@@ -115,7 +115,7 @@ class Telephonic:
     return self.__telephoneNumberText
   @telephoneNumberText.setter
   def telephoneNumberText(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'telephoneNumberText' must be a string, if provided.")
     self.__telephoneNumberText = val
 
@@ -124,7 +124,7 @@ class Telephonic:
     return self.__telephoneNumberTypeName
   @telephoneNumberTypeName.setter
   def telephoneNumberTypeName(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'telephoneNumberTypeName' must be a string, if provided.")
     self.__telephoneNumberTypeName = val
 
@@ -133,7 +133,7 @@ class Telephonic:
     return self.__telephoneExtensionNumberText
   @telephoneExtensionNumberText.setter
   def telephoneExtensionNumberText(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'telephoneExtensionNumberText' must be a string, if provided.")
     self.__telephoneExtensionNumberText = val
 
@@ -172,7 +172,7 @@ class OrganizationAddress:
     return self.__addressTypeName
   @addressTypeName.setter
   def addressTypeName(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'addressTypeName' must be a string, if provided.")
     self.__addressTypeName = val
 
@@ -181,7 +181,7 @@ class OrganizationAddress:
     return self.__addressText
   @addressText.setter
   def addressText(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'addressText' must be a string, if provided.")
     self.__addressText = val
 
@@ -190,7 +190,7 @@ class OrganizationAddress:
     return self.__supplementalAddressText
   @supplementalAddressText.setter
   def supplementalAddressText(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'supplementalAddressText' must be a string, if provided.")
     self.__supplementalAddressText = val
 
@@ -199,7 +199,7 @@ class OrganizationAddress:
     return self.__localityName
   @localityName.setter
   def localityName(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'localityName' must be a string, if provided.")
     self.__localityName = val
 
@@ -208,7 +208,7 @@ class OrganizationAddress:
     return self.__stateCode
   @stateCode.setter
   def stateCode(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'stateCode' must be a string, if provided.")
     self.__stateCode = val
 
@@ -217,7 +217,7 @@ class OrganizationAddress:
     return self.__postalCode
   @postalCode.setter
   def postalCode(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'postalCode' must be a string, if provided.")
     self.__postalCode = val
 
@@ -226,7 +226,7 @@ class OrganizationAddress:
     return self.__countryCode
   @countryCode.setter
   def countryCode(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'countryCode' must be a string, if provided.")
     self.__countryCode = val
 
@@ -235,7 +235,7 @@ class OrganizationAddress:
     return self.__countyCode
   @countyCode.setter
   def countyCode(self, val:str) -> None:
-    if not None and not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'countyCode' must be a string, if provided.")
     self.__countyCode = val
 

@@ -9,14 +9,14 @@ def main(argv:list):
 
   # Hidden behavior for testing purposes
   sub = Submission('20201209ML8')
-  sub.author = "Name of Author"
-  sub.organization = "WVSU / Agricultural and Environmental Research Station"
-  sub.contactInfo = "P.O. Box 1000, Institute, WV 25112"
-  sub.notification = "nobody@nowhere.com"
+  sub.header.author = "Name of Author"
+  sub.header.organization = "WVSU / Agricultural and Environmental Research Station"
+  sub.header.contactInfo = "P.O. Box 1000, Institute, WV 25112"
+  sub.header.notification = "nobody@nowhere.com"
   sub.payloadOperation = "Update-Insert"
-  sub.organizationIdentifier = "WQXTEST"
-  sub.organizationFormalName = "WQX Test Organization"
-  sub.organizationDescriptionText = "Test organization"
+  sub.organization.organizationDescription.organizationIdentifier = "WQXTEST"
+  sub.organization.organizationDescription.organizationFormalName = "WQX Test Organization"
+  sub.organization.organizationDescription.organizationDescriptionText = "Test organization"
   sub.payload.monitoringLocation.monitoringLocationIdentity.monitoringLocationIdentifier = "GREENUP"
   sub.payload.monitoringLocation.monitoringLocationIdentity.monitoringLocationName = "Greenup Dam"
   sub.payload.monitoringLocation.monitoringLocationIdentity.monitoringLocationTypeName = "River/Stream"

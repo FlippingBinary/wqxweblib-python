@@ -8,6 +8,10 @@ class OrganizationDescription:
   __organizationDescriptionText: str # optional
   __tribalCode: str # optional, constrained
 
+  def __init__(self):
+    self.__organizationDescriptionText = None
+    self.__tribalCode = None
+
   @property
   def organizationIdentifier(self) -> str:
     return self.__organizationIdentifier

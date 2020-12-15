@@ -1,7 +1,7 @@
 from datetime import date, time
 from typing import List
 from yattag import Doc, indent
-from .BinaryObject import BinaryObject
+from .AttachedBinaryObject import BinaryObject
 from .Measure import Measure
 from .Method import Method
 from .WQXException import WQXException

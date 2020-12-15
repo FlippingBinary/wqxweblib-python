@@ -1,7 +1,7 @@
 from yattag import Doc, indent
 from .WQXException import WQXException
 
-class BinaryObject:
+class AttachedBinaryObject:
   __binaryObjectFileName: str # required
   __binaryObjectFileTypeCode: str # required
 

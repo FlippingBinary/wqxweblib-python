@@ -1,6 +1,6 @@
 from typing import List
 from yattag import Doc, indent
-from .BinaryObject import BinaryObject
+from .AttachedBinaryObject import AttachedBinaryObject
 from .Measure import Measure
 from .WQXException import WQXException
 
@@ -573,7 +573,7 @@ class WellInformation:
     return indent(doc.getvalue(), indentation = ' '*2)
 
 class MonitoringLocation:
-  __attachedBinaryObject: List[BinaryObject] # 0 or more
+  __attachedBinaryObject: List[AttachedBinaryObject] # 0 or more
   __monitoringLocationGeospatial: MonitoringLocationGeospatial # required
   __monitoringLocationIdentity: MonitoringLocationIdentity # required
   __wellInformation: WellInformation # optional
@@ -585,12 +585,12 @@ class MonitoringLocation:
     self.__wellInformation = None
 
   @property
-  def attachedBinaryObject(self) -> List[BinaryObject]:
+  def attachedBinaryObject(self) -> List[AttachedBinaryObject]:
     return self.__attachedBinaryObject
   @attachedBinaryObject.setter
-  def attachedBinaryObject(self, val:List[BinaryObject]) -> None:
+  def attachedBinaryObject(self, val:List[AttachedBinaryObject]) -> None:
     if not isinstance(val, list):
-      raise TypeError("Property 'attachedBinaryObject' must be a list of 0 or more BinaryObject objects.")
+      raise TypeError("Property 'attachedBinaryObject' must be a list of 0 or more AttachedBinaryObject objects.")
     self.__attachedBinaryObject = val
 
   @property

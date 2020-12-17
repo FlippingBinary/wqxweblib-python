@@ -1,8 +1,8 @@
 from datetime import date, time
 from typing import List
 from yattag import Doc, indent
-from .AttachedBinaryObject import BinaryObject
-from .Measure import Measure
+from .wqx_v3_0.AttachedBinaryObject import AttachedBinaryObject
+from .wqx_v3_0.Measure import Measure
 from .Method import Method
 from .WQXException import WQXException
 
@@ -489,7 +489,7 @@ class NetInformation:
 
   def generateXML(self):
     if self.__netTypeName is None:
-      raise WQXException("Property 'netTypeName' is required.")
+      raise WQXException("Attribute 'netTypeName' is required.")
       
     doc, tag, text, line = Doc().ttl()
 
@@ -885,7 +885,7 @@ class Activity:
   __activityLocation: ActivityLocation # optional
   __biologicalActivityDescription: BiologicalActivityDescription # optional
   __sampleDescription: SampleDescription # optional
-  __attachedBinaryObject: BinaryObject # optional
+  __attachedBinaryObject: AttachedBinaryObject # optional
 
   def __init__(self):
     self.__activityLocation = None

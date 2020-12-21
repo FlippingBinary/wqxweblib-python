@@ -1,0 +1,88 @@
+from yattag import Doc, indent
+from .BibliographicReference import BibliographicReference
+from .SimpleContent import *
+from ..WQXException import WQXException
+
+class ActivityMetricType:
+  """This section identifies the metric type reported as part of an activity metric."""
+
+  __metricTypeIdentifier: MetricTypeIdentifier
+  __metricTypeIdentifierContext: MetricTypeIdentifierContext
+  __metricTypeName: MetricTypeName
+  __metricTypeCitation: BibliographicReference
+  __metricTypeScaleText: MetricTypeScaleText
+  __formulaDescriptionText: FormulaDescriptionText
+
+  def __init__(self):
+    self.__metricTypeIdentifier = None
+    self.__metricTypeIdentifierContext = None
+    self.__metricTypeName = None
+    self.__metricTypeCitation = None
+    self.__metricTypeScaleText = None
+    self.__formulaDescriptionText = None
+
+  @property
+  def metricTypeIdentifier(self) -> MetricTypeIdentifier:
+    return self.__metricTypeIdentifier
+  @metricTypeIdentifier.setter
+  def metricTypeIdentifier(self, val:MetricTypeIdentifier) -> None:
+    self.__metricTypeIdentifier = MetricTypeIdentifier(val)
+
+  @property
+  def metricTypeIdentifierContext(self) -> MetricTypeIdentifierContext:
+    return self.__metricTypeIdentifierContext
+  @metricTypeIdentifierContext.setter
+  def metricTypeIdentifierContext(self, val:MetricTypeIdentifierContext) -> None:
+    self.__metricTypeIdentifierContext = MetricTypeIdentifierContext(val)
+
+  @property
+  def metricTypeName(self) -> MetricTypeName:
+    return self.__metricTypeName
+  @metricTypeName.setter
+  def metricTypeName(self, val:MetricTypeName) -> None:
+    self.__metricTypeName = None if val is None else MetricTypeName(val)
+
+  @property
+  def metricTypeCitation(self) -> BibliographicReference:
+    """Provides additional description of the source that created or defined the metric."""
+    return self.__metricTypeCitation
+  @metricTypeCitation.setter
+  def metricTypeCitation(self, val:BibliographicReference) -> None:
+    """Provides additional description of the source that created or defined the metric."""
+    self.__metricTypeCitation = val
+
+  @property
+  def metricTypeScaleText(self) -> MetricTypeScaleText:
+    return self.__metricTypeScaleText
+  @metricTypeScaleText.setter
+  def metricTypeScaleText(self, val:MetricTypeScaleText) -> None:
+    self.__metricTypeScaleText = None if val is None else MetricTypeScaleText(val)
+
+  @property
+  def formulaDescriptionText(self) -> FormulaDescriptionText:
+    return self.__formulaDescriptionText
+  @formulaDescriptionText.setter
+  def formulaDescriptionText(self, val:FormulaDescriptionText) -> None:
+    self.__formulaDescriptionText = None if val is None else FormulaDescriptionText(val)
+
+  def generateXML(self):
+    if self.__metricTypeIdentifier is None:
+      WQXException("Attribute 'metricTypeIdentifier' is required.")
+    if self.__metricTypeIdentifierContext is None:
+      WQXException("Attribute 'metricTypeIdentifierContext' is required.")
+
+    doc, tag, text, line = Doc().ttl()
+
+    line('MetricTypeIdentifier', self.__metricTypeIdentifier)
+    line('MetricTypeIdentifierContext', self.__metricTypeIdentifierContext)
+    if self.__metricTypeName is not None:
+      line('MetricTypeName', self.__metricTypeName)
+    if self.__metricTypeCitation is not None:
+      with tag('MetricTypeCitation'):
+        doc.asis(self.__metricTypeCitation.generateXML())
+    if self.__metricTypeScaleText is not None:
+      line('MetricTypeScaleText', self.__metricTypeScaleText)
+    if self.__formulaDescriptionText is not None:
+      line('FormulaDescriptionText', self.__formulaDescriptionText)
+
+    return indent(doc.getvalue(), indentation = ' '*2)

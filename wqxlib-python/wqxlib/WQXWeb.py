@@ -6,14 +6,37 @@ import hmac
 import re
 from typing import Union
 import requests
-from .FileType import FileType
-from .NewOrExistingData import NewOrExistingData
-from .UponCompletionCondition import UponCompletionCondition
-from .UponExportCompletion import UponExportCompletion
-from .UponImportCompletion import UponImportCompletion
-from .WQXException import WQXException
+from .common import WQXWebException
 
-class WQX():
+class FileType( Enum ):
+  CSV = 'CSV'
+  TAB = 'TAB'
+  TILDE = 'TILDE'
+  PIPE = 'PIPE'
+  XLS = 'XLS'
+  XLSX = 'XLSX'
+
+class NewOrExistingData( IntEnum ):
+  CONTAINS_NEW_OR_EXISTING = 0
+  CONTAINS_NEW_ONLY = 1
+  CONTAINS_EXISTING_ONLY = 2
+
+class UponImportCompletion( IntEnum ):
+  DO_NOT_EXPORT = 0
+  EXPORT_IMPORT = 1
+  SUBMIT_IMPORT = 2
+
+class UponExportCompletion( IntEnum ):
+  DO_NOT_SUBMIT = 0
+  SUBMIT_EXPORT = 1
+
+class UponCompletionCondition( IntEnum ):
+  NOT_APPLICABLE = 0
+  EXPORT_IF_NO_ERROR = 1
+  EXPORT_IF_NO_WARNING = 2
+  EXPORT_ALWAYS = 3
+
+class WQXWeb():
   privateKey: str
   session: requests.sessions.Session
   userID: str
@@ -158,7 +181,7 @@ class WQX():
     res = self.queryWQX( 'POST', 'Upload', filename=filename, data=contents )
     
     if res.text[0] != '"':
-      raise WQXException( res.text )
+      raise WQXWebException( res.text )
 
     return res.text.strip( '"' )
 
@@ -180,7 +203,7 @@ class WQX():
     res = self.queryWQX( 'POST', 'UploadAttachment', filename=filename, data=contents )
     
     if res.text[0] != '"':
-      raise WQXException( res.text )
+      raise WQXWebException( res.text )
 
     return res.text.strip( '"' )
 
@@ -350,7 +373,7 @@ class WQX():
     res = self.queryWQX( 'GET', 'StartImport', parameters=params )
     
     if res.text[0] != '"':
-      raise WQXException( res.text )
+      raise WQXWebException( res.text )
 
     return res.text.strip( '"' )
 
@@ -382,12 +405,12 @@ class WQX():
     res = self.queryWQX( 'GET', 'StartXmlExport', parameters=params )
 
     if res.text[0] != '{':
-      raise WQXException( res.text )
+      raise WQXWebException( res.text )
 
     try:
       return res.json()
     except:
-      raise WQXException( res.text )
+      raise WQXWebException( res.text )
 
   def SubmitDatasetToCdx(self,
     datasetId:str
@@ -404,12 +427,12 @@ class WQX():
     res = self.queryWQX( 'GET', 'SubmitDatasetToCdx', parameters=params )
 
     if res.text[0] != '{':
-      raise WQXException( res.text )
+      raise WQXWebException( res.text )
 
     try:
       return res.json()
     except:
-      raise WQXException( res.text )
+      raise WQXWebException( res.text )
 
   def SubmitFileToCdx(self,
     fileId:str
@@ -426,12 +449,12 @@ class WQX():
     res = self.queryWQX( 'GET', 'SubmitDatasetToCdx', parameters=params )
 
     if res.text[0] != '{':
-      raise WQXException( res.text )
+      raise WQXWebException( res.text )
 
     try:
       return res.json()
     except:
-      raise WQXException( res.text )
+      raise WQXWebException( res.text )
 
   def GetStatus(self,
     datasetId:str
@@ -448,12 +471,12 @@ class WQX():
     res = self.queryWQX( 'GET', 'GetStatus', parameters=params )
 
     if res.text[0] != '{':
-      raise WQXException( res.text )
+      raise WQXWebException( res.text )
 
     try:
       return res.json()
     except:
-      raise WQXException( res.text )
+      raise WQXWebException( res.text )
 
   def GetDocumentList(self,
     datasetId:str
@@ -470,12 +493,12 @@ class WQX():
     res = self.queryWQX( 'GET', 'GetDocumentList', parameters=params )
 
     if res.text[0] != '[':
-      raise WQXException( res.text )
+      raise WQXWebException( res.text )
 
     try:
       return res.json()
     except:
-      raise WQXException( res.text )
+      raise WQXWebException( res.text )
 
   def Projects(self,
     organizationIdentifiersCsv:str,
@@ -530,12 +553,12 @@ class WQX():
     res = self.queryWQX( 'GET', 'Projects', parameters=params )
 
     if res.text[0] != '[':
-      raise WQXException( res.text )
+      raise WQXWebException( res.text )
 
     try:
       return res.json()
     except:
-      raise WQXException( res.text )
+      raise WQXWebException( res.text )
 
   def MonitoringLocations(self,
     organizationIdentifiersCsv:str,
@@ -598,9 +621,9 @@ class WQX():
     res = self.queryWQX( 'GET', 'MonitoringLocations', parameters=params )
     
     if res.text[0] != '[':
-      raise WQXException( res.text )
+      raise WQXWebException( res.text )
 
     try:
       return res.json()
     except:
-      raise WQXException( res.text )
+      raise WQXWebException( res.text )

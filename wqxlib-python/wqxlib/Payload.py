@@ -1,90 +1,92 @@
+from enum import Enum
 from yattag import Doc, indent
-from .Activity import Activity
-from .ActivityGroup import ActivityGroup
-from .BiologicalHabitatIndex import BiologicalHabitatIndex
-from .MonitoringLocation import MonitoringLocation
-from .Project import Project
-from .WQXException import WQXException
+from .wqx_v3_0.WQX import WQX
+from .wqx_v3_0.WQX_Update_Identifiers import WQXUpdateIdentifiers
+from .wqx_v3_0.WQX_Delete import WQXDelete
+from .common import WQXException
+
+class OperationType( Enum ):
+  UPDATE_INSERT = 'Update-Insert'
+  DELETE = 'Delete'
 
 class Payload:
-  __activity: Activity # optional
-  __activityGroup: ActivityGroup # optional
-  __biologicalHabitatIndex: BiologicalHabitatIndex # optional
-  __monitoringLocation: MonitoringLocation # optional
-  __project: Project # optional
+  __operation: OperationType
+  __wqx: WQX
+  __wqxUpdateIdentifiers: WQXUpdateIdentifiers
+  __wqxDelete: WQXDelete
 
-  def __init__(self):
-    self.__activity = None
-    self.__activityGroup = None
-    self.__biologicalHabitatIndex = None
-    self.__monitoringLocation = None
-    self.__project = None
-
-  @property
-  def activity(self) -> Activity:
-    if self.__activity is None:
-      self.__activity = Activity()
-    return self.__activity
-  @activity.setter
-  def activity(self, val:Activity) -> None:
-    if val is not None and not isinstance(val, Activity):
-      raise TypeError("Property 'activity' must be an Activity object, if provided.")
-    self.__activity = val
+  def __init__(self,
+    operation = None,
+    wqx = None,
+    wqxUpdateIdentifiers = None,
+    wqxDelete = None
+  ):
+    self.__operation = operation
+    self.__wqx = wqx
+    self.__wqxUpdateIdentifiers = wqxUpdateIdentifiers
+    self.__wqxDelete = wqxDelete
 
   @property
-  def activityGroup(self) -> ActivityGroup:
-    if self.__activityGroup is None:
-      self.__activityGroup = ActivityGroup()
-    return self.__activityGroup
-  @activityGroup.setter
-  def activityGroup(self, val:ActivityGroup) -> None:
-    if val is not None and not isinstance(val, ActivityGroup):
-      raise TypeError("Property 'activityGroup' must be an ActivityGroup object, if provided.")
-    self.__activityGroup = val
+  def operation(self) -> OperationType:
+    return self.__operation
+  @operation.setter
+  def operation(self, val:OperationType) -> None:
+    self.__operation = OperationType(val)
 
   @property
-  def biologicalHabitatIndex(self) -> BiologicalHabitatIndex:
-    if self.__biologicalHabitatIndex is None:
-      self.__biologicalHabitatIndex = BiologicalHabitatIndex()
-    return self.__biologicalHabitatIndex
-  @biologicalHabitatIndex.setter
-  def biologicalHabitatIndex(self, val:BiologicalHabitatIndex) -> None:
-    if val is not None and not isinstance(val, BiologicalHabitatIndex):
-      raise TypeError("Property 'biologicalHabitatIndex' must be a BiologicalHabitatIndex object, if provided.")
-    self.__biologicalHabitatIndex = val
+  def wqx(self) -> WQX:
+    return self.__wqx
+  @wqx.setter
+  def wqx(self, val:WQX) -> None:
+    if val is not None and not isinstance(val, WQX):
+      raise WQXException("Attribute 'wqx' must be a WQX object, if provided.")
+    self.__wqx = val
 
   @property
-  def monitoringLocation(self) -> MonitoringLocation:
-    if self.__monitoringLocation is None:
-      self.__monitoringLocation = MonitoringLocation()
-    return self.__monitoringLocation
-  @monitoringLocation.setter
-  def monitoringLocation(self, val:MonitoringLocation) -> None:
-    if val is not None and not isinstance(val, MonitoringLocation):
-      raise TypeError("Property 'monitoringLocation' must be a MonitoringLocation object, if provided.")
-    self.__monitoringLocation = val
+  def wqxUpdateIdentifiers(self) -> WQXUpdateIdentifiers:
+    return self.__wqxUpdateIdentifiers
+  @wqxUpdateIdentifiers.setter
+  def wqxUpdateIdentifiers(self, val:WQXUpdateIdentifiers) -> None:
+    if val is not None and not isinstance(val, WQXUpdateIdentifiers):
+      raise WQXException("Attribute 'wqxUpdateIdentifiers' must be a WQXUpdateIdentifiers object, if provided.")
+    self.__wqxUpdateIdentifiers = val
 
   @property
-  def project(self) -> Project:
-    if self.__project is None:
-      self.__project = Project()
-    return self.__project
-  @project.setter
-  def project(self, val:Project) -> None:
-    if val is not None and not isinstance(val, Project):
-      raise TypeError("Property 'project' must be a Project object, if provided.")
-    self.__project = val
+  def wqxDelete(self) -> WQXDelete:
+    return self.__wqxDelete
+  @wqxDelete.setter
+  def wqxDelete(self, val:WQXDelete) -> None:
+    if val is not None and not isinstance(val, WQXDelete):
+      raise WQXException("Attribute 'wqxDelete' must be a WQXDelete object, if provided.")
+    self.__wqxDelete
 
-  def generateXML(self):
+  def generateXML(self, name:str = 'Payload') -> str:
+    if self.__operation is None:
+      raise WQXException("Attribute 'operation' is required.")
+    if self.__operation == OperationType.UPDATE_INSERT:
+      if self.__wqxDelete is not None:
+        raise WQXException("Attribute 'wqxDelete' must be set to None for 'Update-Insert' operation.")
+      if self.__wqx is None and self.__wqxUpdateIdentifiers is None:
+        raise WQXException("One of attributes 'wqx' or 'wqxUpdateIdentifiers' are required for 'Update-Insert' operation.")
+      if self.__wqx is not None and self.__wqxUpdateIdentifiers is not None:
+        raise WQXException("One of attributes 'wqx' or 'wqxUpdateIdentifiers' must be set to None for 'Update-Insert' operation.")
+    if self.__operation == OperationType.DELETE:
+      if self.__wqx is not None:
+        raise WQXException("Attribute 'wqx' must be set to None for 'Delete' operation.")
+      if self.__wqxUpdateIdentifiers is not None:
+        raise WQXException("Attribute 'wqxUpdateIdentifiers' must be set to None for 'Delete' operation.")
+      if self.__wqxDelete is None:
+        raise WQXException("Attribute 'wqxDelete' is required for 'Delete' operation.")
+
     doc, tag, text, line = Doc().ttl()
-    if self.__project is not None:
-      doc.asis(self.__project.generateXML())
-    if self.__monitoringLocation is not None:
-      doc.asis(self.__monitoringLocation.generateXML())
-    if self.__biologicalHabitatIndex is not None:
-      doc.asis(self.__biologicalHabitatIndex.generateXML())
-    if self.__activityGroup is not None:
-      doc.asis(self.__activityGroup.generateXML())
-    if self.__activity is not None:
-      doc.asis(self.__activity.generateXML())
-    return indent(doc.getvalue(), indentation = ' '*2)
+
+    with tag(name, ('Operation', self.__operation)):
+      if self.__operation == OperationType.UPDATE_INSERT:
+        if self.__wqx is not None:
+          doc.asis(self.__wqx.generateXML('WQX'))
+        elif self.__wqxUpdateIdentifiers is not None:
+          doc.asis(self.__wqxUpdateIdentifiers.generateXML('WQXUpdateIdentifiers'))
+      elif self.__operation == OperationType.DELETE:
+        doc.asis(self.__wqxDelete.generateXML('WQXDelete'))
+
+    return doc.getvalue()

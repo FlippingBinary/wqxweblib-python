@@ -12,7 +12,7 @@ from .SimpleContent import (
   GroupSummaryCount
 )
 from .TaxonomicDetails import TaxonomicDetails
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class BiologicalResultDescription:
   """Allows for the reporting of biological result information."""

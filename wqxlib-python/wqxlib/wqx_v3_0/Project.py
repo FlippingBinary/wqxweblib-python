@@ -3,7 +3,7 @@ from yattag import Doc, indent
 from .AttachedBinaryObject import AttachedBinaryObject
 from .ProjectMonitoringLocationWeighting import ProjectMonitoringLocationWeighting
 from .SimpleContent import *
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class Project:
   """An environmental data collection effort that has a stated purpose and puts a series of samples and results into a meaningful context."""

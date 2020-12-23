@@ -1,6 +1,6 @@
 from yattag import Doc, indent
 from .SimpleContent import *
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class AquiferInformation:
   """Identifies the procedures, processes, and references required to determine the methods used to obtain a result."""

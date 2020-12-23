@@ -1,7 +1,7 @@
 from yattag import Doc, indent
 from .BibliographicReference import BibliographicReference
 from .SimpleContent import *
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class IndexType:
   """This section identifies the index type reported as part of a biological or habitat index."""

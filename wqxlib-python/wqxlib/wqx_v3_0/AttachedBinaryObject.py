@@ -3,7 +3,7 @@ from .SimpleContent import (
   BinaryObjectFileName,
   BinaryObjectFileTypeCode
 )
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class AttachedBinaryObject:
   """Reference document, image, photo, GIS data layer, laboratory material or other electronic object attached within a data exchange, as well as information used to describe the object."""

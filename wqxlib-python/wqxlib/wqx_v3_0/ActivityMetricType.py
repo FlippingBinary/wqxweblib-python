@@ -1,7 +1,7 @@
 from yattag import Doc, indent
 from .BibliographicReference import BibliographicReference
 from .SimpleContent import *
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class ActivityMetricType:
   """This section identifies the metric type reported as part of an activity metric."""

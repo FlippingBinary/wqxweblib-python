@@ -1,6 +1,6 @@
 from yattag import Doc, indent
 from .SimpleContent import *
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class CollectionEffort:
   """The fields to describe the effort used a collection."""

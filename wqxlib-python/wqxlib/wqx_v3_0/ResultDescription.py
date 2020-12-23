@@ -19,7 +19,6 @@ from .SimpleContent import (
   ResultTimeBasisText,
   ResultTemperatureBasisText,
   ResultParticleSizeBasisText,
-  DataQuality,
   CommentText,
   DepthAltitudeReferencePointText,
   ResultSamplingPointName,

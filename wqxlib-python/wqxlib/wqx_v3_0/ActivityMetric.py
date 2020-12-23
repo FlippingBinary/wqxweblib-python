@@ -2,7 +2,7 @@ from yattag import Doc, indent
 from .ActivityMetricType import ActivityMetricType
 from .MeasureCompact import MeasureCompact
 from .SimpleContent import *
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class ActivityMetric:
   """This section allows for the reporting of metrics to support habitat or biotic integrity indices."""

@@ -4,7 +4,7 @@ from .SimpleContent import (
   MethodIdentifierContext,
   MethodModificationText,
 )
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class ComparableAnalyticalMethod:
   """Identifies the procedures, processes, and references required to determine the analytical methods used to obtain a result."""

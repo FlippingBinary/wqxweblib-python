@@ -1,7 +1,7 @@
 from yattag import Doc, indent
 from .MeasureCompact import MeasureCompact
 from .SimpleContent import *
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class ActivityLocation:
   """Geospatial description of monitoring site, if it is different from that described in the station description."""

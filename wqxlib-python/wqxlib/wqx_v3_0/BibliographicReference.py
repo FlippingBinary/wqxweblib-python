@@ -7,7 +7,7 @@ from .SimpleContent import (
   ResourceDate,
   ResourceIdentifier
 )
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class BibliographicReference:
   """The descriptors used to identify and catalog an object."""

@@ -7,7 +7,7 @@ from .LabSamplePreparation import LabSamplePreparation
 from .ResultAnalyticalMethod import ResultAnalyticalMethod
 from .ResultDescription import ResultDescription
 from .ResultLabInformation import ResultLabInformation
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class Result:
   """Describes the results of a field measurement, observation, or laboratory analysis."""

@@ -2,7 +2,7 @@ from yattag import Doc, indent
 from .BibliographicReference import BibliographicReference
 from .MeasureCompact import MeasureCompact
 from .SimpleContent import *
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class ProjectMonitoringLocationWeighting:
   """Describes the probability weighting information for a given Project / Monitoring Location Assignment."""

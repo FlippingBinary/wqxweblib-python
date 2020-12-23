@@ -1,6 +1,6 @@
 from yattag import Doc, indent
 from .SimpleContent import *
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class ActivityGroup:
   """Allows for the grouping of activities."""

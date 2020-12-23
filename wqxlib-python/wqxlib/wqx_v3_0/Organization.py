@@ -9,7 +9,7 @@ from .MonitoringLocation import MonitoringLocation
 from .Activity import Activity
 from .ActivityGroup import ActivityGroup
 from .BiologicalHabitatIndex import BiologicalHabitatIndex
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class Organization:
   """Schema used to transfer organization information."""
@@ -24,16 +24,26 @@ class Organization:
   __activity: List[Activity]
   __activityGroup: List[ActivityGroup]
 
-  def __init__(self):
-    self.__organizationDescription = None
-    self.__electronicAddress = None
-    self.__telephonic = None
-    self.__organizationAddress = None
-    self.__project = None
-    self.__monitoringLocation = None
-    self.__biologicalHabitatIndex = None
-    self.__activity = None
-    self.__activityGroup = None
+  def __init__(self,
+    organizationDescription = None,
+    electronicAddress = [],
+    telephonic = [],
+    organizationAddress = [],
+    project = [],
+    monitoringLocation = [],
+    biologicalHabitatIndex = [],
+    activity = [],
+    activityGroup = []
+  ):
+    self.__organizationDescription = organizationDescription
+    self.__electronicAddress = electronicAddress
+    self.__telephonic = telephonic
+    self.__organizationAddress = organizationAddress
+    self.__project = project
+    self.__monitoringLocation = monitoringLocation
+    self.__biologicalHabitatIndex = biologicalHabitatIndex
+    self.__activity = activity
+    self.__activityGroup = activityGroup
 
   @property
   def organizationDescription(self) -> OrganizationDescription:

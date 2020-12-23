@@ -1,6 +1,6 @@
 from yattag import Doc, indent
 from .SimpleContent import MeasureValue, MeasureUnitCode
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class MeasureCompact:
   """Identifies only the value and the associated units of measure for measuring the observation or analytical result value."""

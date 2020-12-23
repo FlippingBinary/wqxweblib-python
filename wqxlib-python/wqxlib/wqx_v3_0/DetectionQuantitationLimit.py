@@ -4,7 +4,7 @@ from .SimpleContent import (
   DetectionQuantitationLimitTypeName,
   DetectionQuantitationLimitCommentText,
 )
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class DetectionQuantitationLimit:
   """Information that describes one of a variety of detection or quantitation limits determined in a laboratory."""

@@ -1,7 +1,7 @@
 from yattag import Doc, indent
 from .MeasureCompact import MeasureCompact
 from .SimpleContent import *
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class MonitoringLocationGeospatial:
   """Monitoring location geographic location."""
@@ -20,20 +20,34 @@ class MonitoringLocationGeospatial:
   __stateCode: StateCode
   __countyCode: CountyCode
 
-  def __init__(self):
-    self.__latitudeMeasure = None
-    self.__longitudeMeasure = None
-    self.__sourceMapScale = None
-    self.__horizontalAccuracyMeasure = None
-    self.__verticalAccuracyMeasure = None
-    self.__horizontalCollectionMethodName = None
-    self.__horizontalCoordinateReferenceSystemDatumName = None
-    self.__verticalMeasure = None
-    self.__verticalCollectionMethodName = None
-    self.__verticalCoordinateReferenceSystemDatumName = None
-    self.__countryCode = None
-    self.__stateCode = None
-    self.__countyCode = None
+  def __init__(self,
+    latitudeMeasure = None,
+    longitudeMeasure = None,
+    sourceMapScale = None,
+    horizontalAccuracyMeasure = None,
+    verticalAccuracyMeasure = None,
+    horizontalCollectionMethodName = None,
+    horizontalCoordinateReferenceSystemDatumName = None,
+    verticalMeasure = None,
+    verticalCollectionMethodName = None,
+    verticalCoordinateReferenceSystemDatumName = None,
+    countryCode = None,
+    stateCode = None,
+    countyCode = None
+  ):
+    self.__latitudeMeasure = latitudeMeasure
+    self.__longitudeMeasure = longitudeMeasure
+    self.__sourceMapScale = sourceMapScale
+    self.__horizontalAccuracyMeasure = horizontalAccuracyMeasure
+    self.__verticalAccuracyMeasure = verticalAccuracyMeasure
+    self.__horizontalCollectionMethodName = horizontalCollectionMethodName
+    self.__horizontalCoordinateReferenceSystemDatumName = horizontalCoordinateReferenceSystemDatumName
+    self.__verticalMeasure = verticalMeasure
+    self.__verticalCollectionMethodName = verticalCollectionMethodName
+    self.__verticalCoordinateReferenceSystemDatumName = verticalCoordinateReferenceSystemDatumName
+    self.__countryCode = countryCode
+    self.__stateCode = stateCode
+    self.__countyCode = countyCode
 
   @property
   def latitudeMeasure(self) -> LatitudeMeasure:

@@ -5,7 +5,7 @@ from .SimpleContent import (
   LowerClassBoundValue,
   UpperClassBoundValue
 )
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class FrequencyClassInformation:
   """This section allows for the definition of a subgroup of biological communities by life stage, physical attribute, or abnormality to support frequency class studies."""

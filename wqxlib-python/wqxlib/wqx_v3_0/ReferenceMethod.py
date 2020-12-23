@@ -6,7 +6,7 @@ from .SimpleContent import (
   MethodQualifierTypeName,
   MethodDescriptionText
 )
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class ReferenceMethod:
   """Identifies the procedures, processes, and references required to determine the methods used to obtain a result."""

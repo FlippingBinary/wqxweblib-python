@@ -2,7 +2,7 @@ from yattag import Doc, indent
 from .AquiferInformation import AquiferInformation
 from .MeasureCompact import MeasureCompact
 from .SimpleContent import *
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class WellInformation:
   """Description of the attributes of a well."""

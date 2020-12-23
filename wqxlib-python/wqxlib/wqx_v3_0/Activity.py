@@ -7,7 +7,7 @@ from .SampleDescription import SampleDescription
 from .ActivityMetric import ActivityMetric
 from .AttachedBinaryObject import AttachedBinaryObject
 from .Result import Result
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class Activity:
   """Allows for the reporting of monitoring activities conducted at a Monitoring Location."""

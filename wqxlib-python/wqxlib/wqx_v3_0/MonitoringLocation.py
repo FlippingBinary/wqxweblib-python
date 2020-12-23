@@ -4,7 +4,7 @@ from .MonitoringLocationIdentity import MonitoringLocationIdentity
 from .MonitoringLocationGeospatial import MonitoringLocationGeospatial
 from .WellInformation import WellInformation
 from .AttachedBinaryObject import AttachedBinaryObject
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class MonitoringLocation:
   """An identifiable location where an environmental sample, onsite measurement, and/or observation is determined."""
@@ -14,11 +14,16 @@ class MonitoringLocation:
   __wellInformation: WellInformation
   __attachedBinaryObject: List[AttachedBinaryObject]
 
-  def __init__(self):
-    self.__monitoringLocationIdentity = None
-    self.__monitoringLocationGeospatial = None
-    self.__wellInformation = None
-    self.__attachedBinaryObject = None
+  def __init__(self,
+    monitoringLocationIdentity = None,
+    monitoringLocationGeospatial = None,
+    wellInformation = None,
+    attachedBinaryObject = []
+  ):
+    self.monitoringLocationIdentity = monitoringLocationIdentity
+    self.monitoringLocationGeospatial = monitoringLocationGeospatial
+    self.wellInformation = wellInformation
+    self.attachedBinaryObject = attachedBinaryObject
 
   @property
   def monitoringLocationIdentity(self) -> MonitoringLocationIdentity:

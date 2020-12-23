@@ -3,7 +3,7 @@ from yattag import Doc, indent
 from .AlternateMonitoringLocationIdentity import AlternateMonitoringLocationIdentity
 from .MeasureCompact import MeasureCompact
 from .SimpleContent import *
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class MonitoringLocationIdentity:
   """Basic identification information for the location/site that is monitored or used for sampling."""
@@ -20,18 +20,30 @@ class MonitoringLocationIdentity:
   __drainageAreaMeasure: MeasureCompact
   __contributingDrainageAreaMeasure: MeasureCompact
 
-  def __init__(self):
-    self.__monitoringLocationIdentifier = None
-    self.__monitoringLocationName = None
-    self.__monitoringLocationTypeName = None
-    self.__monitoringLocationDescriptionText = None
-    self.__hucEightDigitCode = None
-    self.__hucTwelveDigitCode = None
-    self.__tribalLandIndicator = None
-    self.__tribalLandName = None
-    self.__alternateMonitoringLocationIdentity = None
-    self.__drainageAreaMeasure = None
-    self.__contributingDrainageAreaMeasure = None
+  def __init__(self,
+    monitoringLocationIdentifier = None,
+    monitoringLocationName = None,
+    monitoringLocationTypeName = None,
+    monitoringLocationDescriptionText = None,
+    hucEightDigitCode = None,
+    hucTwelveDigitCode = None,
+    tribalLandIndicator = None,
+    tribalLandName = None,
+    alternateMonitoringLocationIdentity = [],
+    drainageAreaMeasure = None,
+    contributingDrainageAreaMeasure = None
+  ):
+    self.__monitoringLocationIdentifier = monitoringLocationIdentifier
+    self.__monitoringLocationName = monitoringLocationName
+    self.__monitoringLocationTypeName = monitoringLocationTypeName
+    self.__monitoringLocationDescriptionText = monitoringLocationDescriptionText
+    self.__hucEightDigitCode = hucEightDigitCode
+    self.__hucTwelveDigitCode = hucTwelveDigitCode
+    self.__tribalLandIndicator = tribalLandIndicator
+    self.__tribalLandName = tribalLandName
+    self.__alternateMonitoringLocationIdentity = alternateMonitoringLocationIdentity
+    self.__drainageAreaMeasure = drainageAreaMeasure
+    self.__contributingDrainageAreaMeasure = contributingDrainageAreaMeasure
 
   @property
   def monitoringLocationIdentifier(self) -> MonitoringLocationIdentifier:

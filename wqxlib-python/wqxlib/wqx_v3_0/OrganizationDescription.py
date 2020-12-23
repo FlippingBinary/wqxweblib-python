@@ -1,6 +1,6 @@
 from yattag import Doc, indent
 from .SimpleContent import *
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class OrganizationDescription:
   """The particular word(s) regularly connected with a unique framework of authority within which a person or persons act, or are designated to act, towards some purpose."""
@@ -10,11 +10,16 @@ class OrganizationDescription:
   __organizationDescriptionText: OrganizationDescriptionText
   __tribalCode: TribalCode
 
-  def __init__(self):
-    self.__organizationIdentifier = None
-    self.__organizationFormalName = None
-    self.__organizationDescriptionText = None
-    self.__tribalCode = None
+  def __init__(self,
+    organizationIdentifier = None,
+    organizationFormalName = None,
+    organizationDescriptionText = None,
+    tribalCode = None
+  ):
+    self.__organizationIdentifier = organizationIdentifier
+    self.__organizationFormalName = organizationFormalName
+    self.__organizationDescriptionText = organizationDescriptionText
+    self.__tribalCode = tribalCode
 
   @property
   def organizationIdentifier(self) -> OrganizationIdentifier:

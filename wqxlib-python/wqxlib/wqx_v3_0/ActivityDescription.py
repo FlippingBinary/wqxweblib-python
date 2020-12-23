@@ -2,7 +2,7 @@ from yattag import Doc, indent
 from .MeasureCompact import MeasureCompact
 from .SimpleContent import *
 from .WQXTime import WQXTime
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class ActivityDescription:
   """Basic identification information for an activity conducted within a project."""

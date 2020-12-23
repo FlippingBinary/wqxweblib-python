@@ -2,7 +2,7 @@ from yattag import Doc, indent
 from .ReferenceMethod import ReferenceMethod
 from .SamplePreparation import SamplePreparation
 from .SimpleContent import *
-from ..WQXException import WQXException
+from ..common import WQXException
 
 class SampleDescription:
   """Basic identification information for the sample collected as part of a monitoring activity."""

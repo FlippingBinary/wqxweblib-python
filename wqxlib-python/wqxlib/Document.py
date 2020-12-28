@@ -19,9 +19,9 @@ class Document:
   __payload: List[Payload]
 
   def __init__(self, id = None, header = None, payload = []):
-    self.__header = header
-    self.__id = id
-    self.__payload = payload
+    self.header = header
+    self.id = id
+    self.payload = payload
 
   @property
   def header(self) -> Header:

@@ -28,19 +28,22 @@ class Header:
     sensitivity = None,
     property = {}
   ):
-    self.__author = author
-    self.__organization = organization
-    self.__title = title
+    self.author = author
+    self.organization = organization
+    self.title = title
     if creationTime is None:
-      self.__creationTime = datetime.now()
+      self.creationTime = datetime.now()
     else:
-      self.__creationTime = creationTime
-    self.__comment = comment
-    self.__dataService = dataService
-    self.__contactInfo = contactInfo
-    self.__notification = notification
-    self.__sensitivity = sensitivity
-    self.__property = property
+      self.creationTime = creationTime
+    self.comment = comment
+    self.dataService = dataService
+    self.contactInfo = contactInfo
+    self.notification = notification
+    self.sensitivity = sensitivity
+    # self.property is tricky because Python confuses it with the decorator
+    if property is not None and not isinstance(property, dict):
+      raise TypeError("Property 'property' must be a dict of 0 or more key/value pairs.")
+    self.__property = {} if property is None else property
 
   @property
   def author(self) -> str:
@@ -89,22 +92,18 @@ class Header:
     return self.__comment
   @comment.setter
   def comment(self, val) -> None:
-    if val is None or len(val) < 1:
-      self.__comment = None
-    if not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'comment' must be a string, if provided.")
-    self.__comment = val
+    self.__comment = None if val is None or len(val) < 1 else val
 
   @property
   def dataService(self) -> str:
     return self.__dataService
   @dataService.setter
   def dataService(self, val) -> None:
-    if val is None or len(val) < 1:
-      self.__dataService = None
-    if not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'dataService' must be a string, if provided.")
-    self.__dataService = val
+    self.__dataService = None if val is None or len(val) < 1 else val
 
   @property
   def contactInfo(self) -> str:
@@ -134,18 +133,16 @@ class Header:
     return self.__sensitivity
   @sensitivity.setter
   def sensitivity(self, val) -> None:
-    if val is None or len(val) < 1:
-      self.__sensitivity = None
-    if not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'sensitivity' must be a string, if provided.")
-    self.__sensitivity = val
+    self.__sensitivity = None if val is None or len(val) < 1 else val
 
   @property
   def property(self) -> dict:
     return self.__property
   @property.setter
   def property(self, val:dict) -> None:
-    if not None and not isinstance(val, list):
+    if val is not None and not isinstance(val, dict):
       raise TypeError("Property 'property' must be a dict of 0 or more key/value pairs.")
     self.__property = {} if val is None else val
 

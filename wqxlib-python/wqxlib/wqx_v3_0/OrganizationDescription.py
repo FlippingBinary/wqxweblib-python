@@ -11,15 +11,15 @@ class OrganizationDescription:
   __tribalCode: TribalCode
 
   def __init__(self,
-    organizationIdentifier = None,
-    organizationFormalName = None,
-    organizationDescriptionText = None,
-    tribalCode = None
+    organizationIdentifier:OrganizationIdentifier = None,
+    organizationFormalName:OrganizationFormalName = None,
+    organizationDescriptionText:OrganizationDescriptionText = None,
+    tribalCode:TribalCode = None
   ):
-    self.__organizationIdentifier = organizationIdentifier
-    self.__organizationFormalName = organizationFormalName
-    self.__organizationDescriptionText = organizationDescriptionText
-    self.__tribalCode = tribalCode
+    self.organizationIdentifier = organizationIdentifier
+    self.organizationFormalName = organizationFormalName
+    self.organizationDescriptionText = organizationDescriptionText
+    self.tribalCode = tribalCode
 
   @property
   def organizationIdentifier(self) -> OrganizationIdentifier:

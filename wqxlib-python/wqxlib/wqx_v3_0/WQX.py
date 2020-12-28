@@ -8,7 +8,7 @@ class WQX:
   __organization: Organization
 
   def __init__(self,
-    organization = None
+    organization:Organization = None
   ):
     self.organization = organization
 
@@ -18,7 +18,9 @@ class WQX:
     return self.__organization
   @organization.setter
   def organization(self, val:Organization) -> None:
-    self.__organization = Organization(val)
+    if val is not None and not isinstance(val, Organization):
+      raise WQXException("Attribute 'organization' must be an Organization object.")
+    self.__organization = val
 
 
   def generateXML(self, name = 'WQX'):

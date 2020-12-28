@@ -21,10 +21,10 @@ class Payload:
     wqxUpdateIdentifiers = None,
     wqxDelete = None
   ):
-    self.__operation = operation
-    self.__wqx = wqx
-    self.__wqxUpdateIdentifiers = wqxUpdateIdentifiers
-    self.__wqxDelete = wqxDelete
+    self.operation = operation
+    self.wqx = wqx
+    self.wqxUpdateIdentifiers = wqxUpdateIdentifiers
+    self.wqxDelete = wqxDelete
 
   @property
   def operation(self) -> OperationType:
@@ -58,7 +58,7 @@ class Payload:
   def wqxDelete(self, val:WQXDelete) -> None:
     if val is not None and not isinstance(val, WQXDelete):
       raise WQXException("Attribute 'wqxDelete' must be a WQXDelete object, if provided.")
-    self.__wqxDelete
+    self.__wqxDelete = val
 
   def generateXML(self, name:str = 'Payload') -> str:
     if self.__operation is None:
@@ -68,8 +68,10 @@ class Payload:
         raise WQXException("Attribute 'wqxDelete' must be set to None for 'Update-Insert' operation.")
       if self.__wqx is None and self.__wqxUpdateIdentifiers is None:
         raise WQXException("One of attributes 'wqx' or 'wqxUpdateIdentifiers' are required for 'Update-Insert' operation.")
-      if self.__wqx is not None and self.__wqxUpdateIdentifiers is not None:
+      elif self.__wqx is not None and self.__wqxUpdateIdentifiers is not None:
         raise WQXException("One of attributes 'wqx' or 'wqxUpdateIdentifiers' must be set to None for 'Update-Insert' operation.")
+      elif self.__wqx is None and self.__wqxUpdateIdentifiers is None:
+        raise WQXException("One of attributes 'wqx' or 'wqxUpdateIdentifiers' must be set for 'Update-Insert' operation.")
     if self.__operation == OperationType.DELETE:
       if self.__wqx is not None:
         raise WQXException("Attribute 'wqx' must be set to None for 'Delete' operation.")
@@ -80,7 +82,7 @@ class Payload:
 
     doc, tag, text, line = Doc().ttl()
 
-    with tag(name, ('Operation', self.__operation)):
+    with tag(name, ('Operation', str(self.__operation))):
       if self.__operation == OperationType.UPDATE_INSERT:
         if self.__wqx is not None:
           doc.asis(self.__wqx.generateXML('WQX'))

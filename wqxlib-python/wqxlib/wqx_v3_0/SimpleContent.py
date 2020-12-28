@@ -13,7 +13,7 @@ class ActivityEndDate(date):
 
 class ActivityGroupIdentifier(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 55:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 55:
       raise ValueError("ActivityGroupIdentifier must be between 1 and 55 characters.")
 
 class ActivityGroupName(str):
@@ -23,12 +23,12 @@ class ActivityGroupName(str):
 
 class ActivityGroupTypeCode(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 50:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 50:
       raise ValueError("ActivityGroupTypeCode must be between 1 and 50 characters.")
 
 class ActivityIdentifier(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 55:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 55:
       raise ValueError("ActivityIdentifier must be between 1 and 55 characters.")
 
 class ActivityIdentifierUserSupplied(str):
@@ -43,7 +43,7 @@ class ActivityLocationDescriptionText(str):
 
 class ActivityMediaName(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 20:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 20:
       raise ValueError("ActivityMediaName must be between 1 and 20 characters.")
 
 class ActivityMediaSubdivisionName(str):
@@ -61,7 +61,7 @@ class ActivityStartDate(date):
 
 class ActivityTypeCode(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 70:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 70:
       raise ValueError("ActivityTypeCode must be between 1 and 70 characters.")
 
 class AddressTypeName(str):
@@ -127,12 +127,12 @@ class BiologicalIndividualIdentifier(str):
 
 class BinaryObjectFileName(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 255:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 255:
       raise ValueError("BinaryObjectFileName must be between 1 and 255 characters.")
 
 class BinaryObjectFileTypeCode(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 6:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 6:
       raise ValueError("BinaryObjectFileTypeCode must be between 1 and 6 characters.")
 
 class CellFormName(str):
@@ -270,12 +270,12 @@ class HabitatSelectionMethod(str):
 
 class HorizontalCollectionMethodName(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 150:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 150:
       raise ValueError("HorizontalCollectionMethodName must be between 1 and 150 characters.")
 
 class HorizontalCoordinateReferenceSystemDatumName(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 6:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 6:
       raise ValueError("HorizontalCoordinateReferenceSystemDatumName must be between 1 and 6 characters.")
 
 class HUCEightDigitCode(str):
@@ -303,7 +303,7 @@ class IndexCalculatedDate(date):
 
 class IndexIdentifier(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 55:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 55:
       raise ValueError("IndexIdentifier must be between 1 and 55 characters.")
 
 class IndexQualifierCode(str):
@@ -318,7 +318,7 @@ class IndexScore(str):
 
 class IndexTypeIdentifier(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 50:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 50:
       raise ValueError("IndexTypeIdentifier must be between 1 and 50 characters.")
 
 class IndexTypeIdentifierContext(str):
@@ -433,12 +433,12 @@ class MethodDescriptionText(str):
 
 class MethodIdentifier(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 35:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 35:
       raise ValueError("MethodIdentifier must be between 1 and 35 characters.")
 
 class MethodIdentifierContext(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 120:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 120:
       raise ValueError("MethodIdentifierContext must be between 1 and 120 characters.")
   
 class MethodModificationText(str):
@@ -448,7 +448,7 @@ class MethodModificationText(str):
 
 class MethodName(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 250:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 250:
       raise ValueError("MethodName must be between 1 and 250 characters.")
 
 class MethodQualifierTypeName(str):
@@ -498,22 +498,22 @@ class MonitoringLocationDescriptionText(str):
 
 class MonitoringLocationIdentifier(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 55:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 55:
       raise ValueError("MonitoringLocationIdentifier must be between 1 and 55 characters.")
 
 class MonitoringLocationIdentifierContext(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 120:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 120:
       raise ValueError("MonitoringLocationIdentifierContext must be between 1 and 120 characters.")
 
 class MonitoringLocationName(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 255:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 255:
       raise ValueError("MonitoringLocationName must be between 1 and 255 characters.")
 
 class MonitoringLocationTypeName(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 45:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 45:
       raise ValueError("MonitoringLocationTypeName must be between 1 and 45 characters.")
 
 class NationalAquiferCode(str):
@@ -523,17 +523,17 @@ class NationalAquiferCode(str):
 
 class NetTypeName(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 60:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 60:
       raise ValueError("NetTypeName must be between 1 and 60 characters.")
 
 class NewIdentifier(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 55:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 55:
       raise ValueError("NewIdentifier must be between 1 and 55 characters.")
 
 class OldIdentifier(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 55:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 55:
       raise ValueError("OldIdentifier must be between 1 and 55 characters.")
 
 class OrganizationDescriptionText(str):
@@ -543,12 +543,14 @@ class OrganizationDescriptionText(str):
 
 class OrganizationFormalName(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 255:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 255:
       raise ValueError("OrganizationFormalName must be between 1 and 255 characters.")
 
 class OrganizationIdentifier(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 35:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 35:
+      print("OrganizationIdentifier:")
+      print(o)
       raise ValueError("OrganizationIdentifier must be between 1 and 35 characters.")
 
 class PassCount(str):
@@ -582,12 +584,12 @@ class ProjectDescriptionText(str):
 
 class ProjectIdentifier(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 55:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 55:
       raise ValueError("ProjectIdentifier must be between 1 and 55 characters.")
 
 class ProjectName(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 512:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 512:
       raise ValueError("ProjectName must be between 1 and 512 characters.")
 
 class QAPPApprovedIndicator(object):
@@ -625,7 +627,7 @@ class ResourceDate(date):
 
 class ResourceIdentifier(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 255:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 255:
       raise ValueError("ResourceIdentifier must be between 1 and 255 characters.")
 
 class ResourcePublisherName(str):
@@ -640,7 +642,7 @@ class ResourceSubjectText(str):
 
 class ResourceTitleName(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 120:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 120:
       raise ValueError("ResourceTitleName must be between 1 and 120 characters.")
 
 class ResultDetectionConditionText(str):
@@ -715,7 +717,7 @@ class ResultWeightBasisText(str):
 
 class SampleCollectionEquipmentName(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 60:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 60:
       raise ValueError("SampleCollectionEquipmentName must be between 1 and 60 characters.")
 
 class SampleCollectionEquipmentCommentText(str):
@@ -755,7 +757,7 @@ class SamplingComponentName(str):
 
 class SamplingDesignTypeCode(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 20:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 20:
       raise ValueError("SamplingDesignTypeCode must be between 1 and 20 characters.")
 
 class SourceMapScale(str):
@@ -862,7 +864,7 @@ class Time(time):
 
 class TimeZoneCode(str):
   def __init__(self, o=None):
-    if len(o) < 1 or len(o) > 4:
+    if not isinstance(o, str) or len(o) < 1 or len(o) > 4:
       raise ValueError("TimeZoneCode must be between 1 and 4 characters.")
 
 class ToxicityTestType(str):

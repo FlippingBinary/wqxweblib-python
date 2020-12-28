@@ -101,7 +101,7 @@ class Payload:
 
     doc, tag, text, line = Doc().ttl()
 
-    with tag(name, ('Operation', str(self.__operation))):
+    with tag(name, ('Operation', self.__operation.value)):
       if self.__operation == OperationType.UPDATE_INSERT:
         if self.__wqx is not None:
           doc.asis(self.__wqx.generateXML('WQX'))

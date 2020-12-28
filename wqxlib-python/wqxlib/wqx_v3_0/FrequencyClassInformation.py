@@ -15,11 +15,30 @@ class FrequencyClassInformation:
   __lowerClassBoundValue: LowerClassBoundValue
   __upperClassBoundValue: UpperClassBoundValue
 
-  def __init__(self):
-    self.__frequencyClassDescriptorCode = None
-    self.__frequencyClassDescriptorUnitCode = None
-    self.__lowerClassBoundValue = None
-    self.__upperClassBoundValue = None
+  def __init__(self, o=None, *,
+    frequencyClassDescriptorCode:FrequencyClassDescriptorCode = None,
+    frequencyClassDescriptorUnitCode:FrequencyClassDescriptorUnitCode = None,
+    lowerClassBoundValue:LowerClassBoundValue = None,
+    upperClassBoundValue:UpperClassBoundValue = None
+  ):
+    if isinstance(o, FrequencyClassInformation):
+      # Assign attributes from object without typechecking
+      self.__frequencyClassDescriptorCode = o.frequencyClassDescriptorCode
+      self.__frequencyClassDescriptorUnitCode = o.frequencyClassDescriptorUnitCode
+      self.__lowerClassBoundValue = o.lowerClassBoundValue
+      self.__upperClassBoundValue = o.upperClassBoundValue
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.frequencyClassDescriptorCode = o.get('frequencyClassDescriptorCode', default = None)
+      self.frequencyClassDescriptorUnitCode = o.get('frequencyClassDescriptorUnitCode', default = None)
+      self.lowerClassBoundValue = o.get('lowerClassBoundValue', default = None)
+      self.upperClassBoundValue = o.get('upperClassBoundValue', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.frequencyClassDescriptorCode = frequencyClassDescriptorCode
+      self.frequencyClassDescriptorUnitCode = frequencyClassDescriptorUnitCode
+      self.lowerClassBoundValue = lowerClassBoundValue
+      self.upperClassBoundValue = upperClassBoundValue
 
 
   @property

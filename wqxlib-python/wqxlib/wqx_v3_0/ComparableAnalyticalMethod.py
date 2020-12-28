@@ -13,10 +13,26 @@ class ComparableAnalyticalMethod:
   __methodIdentifierContext: MethodIdentifierContext
   __methodModificationText: MethodModificationText
 
-  def __init__(self):
-    self.__methodIdentifier = None
-    self.__methodIdentifierContext = None
-    self.__methodModificationText = None
+  def __init__(self, o=None, *,
+    methodIdentifier:MethodIdentifier = None,
+    methodIdentifierContext:MethodIdentifierContext = None,
+    methodModificationText:MethodModificationText = None
+  ):
+    if isinstance(o, ComparableAnalyticalMethod):
+      # Assign attributes from object without typechecking
+      self.__methodIdentifier = o.methodIdentifier
+      self.__methodIdentifierContext = o.methodIdentifierContext
+      self.__methodModificationText = o.methodModificationText
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.methodIdentifier = o.get('methodIdentifier', default = None)
+      self.methodIdentifierContext = o.get('methodIdentifierContext', default = None)
+      self.methodModificationText = o.get('methodModificationText', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.methodIdentifier = methodIdentifier
+      self.methodIdentifierContext = methodIdentifierContext
+      self.methodModificationText = methodModificationText
 
   @property
   def methodIdentifier(self) -> MethodIdentifier:

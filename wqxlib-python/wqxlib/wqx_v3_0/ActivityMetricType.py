@@ -13,13 +13,38 @@ class ActivityMetricType:
   __metricTypeScaleText: MetricTypeScaleText
   __formulaDescriptionText: FormulaDescriptionText
 
-  def __init__(self):
-    self.__metricTypeIdentifier = None
-    self.__metricTypeIdentifierContext = None
-    self.__metricTypeName = None
-    self.__metricTypeCitation = None
-    self.__metricTypeScaleText = None
-    self.__formulaDescriptionText = None
+  def __init__(self, o=None, *,
+    metricTypeIdentifier:MetricTypeIdentifier,
+    metricTypeIdentifierContext:MetricTypeIdentifierContext,
+    metricTypeName:MetricTypeName,
+    metricTypeCitation:BibliographicReference,
+    metricTypeScaleText:MetricTypeScaleText,
+    formulaDescriptionText:FormulaDescriptionText
+  ):
+    if isinstance(o, ActivityMetricType):
+      # Assign attributes from object without typechecking
+      self.__metricTypeIdentifier = o.metricTypeIdentifier
+      self.__metricTypeIdentifierContext = o.metricTypeIdentifierContext
+      self.__metricTypeName = o.metricTypeName
+      self.__metricTypeCitation = o.metricTypeCitation
+      self.__metricTypeScaleText = o.metricTypeScaleText
+      self.__formulaDescriptionText = o.formulaDescriptionText
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.metricTypeIdentifier = o.get('metricTypeIdentifier', default = None)
+      self.metricTypeIdentifierContext = o.get('metricTypeIdentifierContext', default = None)
+      self.metricTypeName = o.get('metricTypeName', default = None)
+      self.metricTypeCitation = o.get('metricTypeCitation', default = None)
+      self.metricTypeScaleText = o.get('metricTypeScaleText', default = None)
+      self.formulaDescriptionText = o.get('formulaDescriptionText', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.metricTypeIdentifier = metricTypeIdentifier
+      self.metricTypeIdentifierContext = metricTypeIdentifierContext
+      self.metricTypeName = metricTypeName
+      self.metricTypeCitation = metricTypeCitation
+      self.metricTypeScaleText = metricTypeScaleText
+      self.formulaDescriptionText = formulaDescriptionText
 
   @property
   def metricTypeIdentifier(self) -> MetricTypeIdentifier:

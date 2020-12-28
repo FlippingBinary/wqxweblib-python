@@ -9,9 +9,22 @@ class ProjectIdentifierUpdate:
   __oldIdentifier: OldIdentifier
   __newIdentifier: NewIdentifier
 
-  def __init__(self, old = None, new = None):
-    self.__oldIdentifier = old
-    self.__newIdentifier = new
+  def __init__(self, o=None, *,
+    oldIdentifier:OldIdentifier = None,
+    newIdentifier:NewIdentifier = None
+  ):
+    if isinstance(o, ProjectIdentifierUpdate):
+      # Assign attributes from object without typechecking
+      self.__oldIdentifier = o.oldIdentifier
+      self.__newIdentifier = o.newIdentifier
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.oldIdentifier = o.get('oldIdentifier', default = None)
+      self.newIdentifier = o.get('newIdentifier', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.oldIdentifier = oldIdentifier
+      self.newIdentifier = newIdentifier
 
   @property
   def oldIdentifier(self) -> OldIdentifier:

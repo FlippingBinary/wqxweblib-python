@@ -19,13 +19,38 @@ class BibliographicReference:
   __resourceDate: ResourceDate
   __resourceIdentifier: ResourceIdentifier
 
-  def __init__(self):
-    self.__resourceTitleName = None
-    self.__resourceCreatorName = None
-    self.__resourceSubjectText = None
-    self.__resourcePublisherName = None
-    self.__resourceDate = None
-    self.__resourceIdentifier = None
+  def __init__(self, o=None, *,
+    resourceTitleName:ResourceTitleName = None,
+    resourceCreatorName:ResourceCreatorName = None,
+    resourceSubjectText:ResourceSubjectText = None,
+    resourcePublisherName:ResourcePublisherName = None,
+    resourceDate:ResourceDate = None,
+    resourceIdentifier:ResourceIdentifier = None
+  ):
+    if isinstance(o, BibliographicReference):
+      # Assign attributes from object without typechecking
+      self.__resourceTitleName = resourceTitleName
+      self.__resourceCreatorName = resourceCreatorName
+      self.__resourceSubjectText = resourceSubjectText
+      self.__resourcePublisherName = resourcePublisherName
+      self.__resourceDate = resourceDate
+      self.__resourceIdentifier = resourceIdentifier
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.resourceTitleName = o.get('resourceTitleName', default = None)
+      self.resourceCreatorName = o.get('resourceCreatorName', default = None)
+      self.resourceSubjectText = o.get('resourceSubjectText', default = None)
+      self.resourcePublisherName = o.get('resourcePublisherName', default = None)
+      self.resourceDate = o.get('resourceDate', default = None)
+      self.resourceIdentifier = o.get('resourceIdentifier', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.resourceTitleName = resourceTitleName
+      self.resourceCreatorName = resourceCreatorName
+      self.resourceSubjectText = resourceSubjectText
+      self.resourcePublisherName = resourcePublisherName
+      self.resourceDate = resourceDate
+      self.resourceIdentifier = resourceIdentifier
 
   @property
   def ResourceTitleName(self) -> ResourceTitleName:

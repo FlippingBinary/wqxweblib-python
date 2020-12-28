@@ -14,14 +14,32 @@ class ID(str):
       raise ValueError("Attribute of type 'ID' must be a valid XML Identifier.")
 
 class Document:
+  """The base document type used for submission to WQXWeb."""
+
   __id: ID
   __header: Header
   __payload: List[Payload]
 
-  def __init__(self, id = None, header = None, payload = []):
-    self.header = header
-    self.id = id
-    self.payload = payload
+  def __init__(self, o=None, *,
+    id:ID = None,
+    header:Header = None,
+    payload:List[Payload] = []
+  ):
+    if isinstance(o, Document):
+      # Assign attributes from object without typechecking
+      self.__id = o.id
+      self.__header = o.header
+      self.__payload = o.payload
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.id = o.get('id', default = None)
+      self.header = o.get('header', default = None)
+      self.payload = o.get('payload', default = [])
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.header = header
+      self.id = id
+      self.payload = payload
 
   @property
   def header(self) -> Header:

@@ -8,9 +8,22 @@ class ElectronicAddress:
   __electronicAddressText: ElectronicAddressText
   __electronicAddressTypeName: ElectronicAddressTypeName
 
-  def __init__(self):
-    self.__electronicAddressText = None
-    self.__electronicAddressTypeName = None
+  def __init__(self, o=None, *,
+    electronicAddressText:ElectronicAddressText = None,
+    electronicAddressTypeName:ElectronicAddressTypeName = None
+  ):
+    if isinstance(o, ElectronicAddress):
+      # Assign attributes from object without typechecking
+      self.__electronicAddressText = o.electronicAddressText
+      self.__electronicAddressTypeName = o.electronicAddressTypeName
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.electronicAddressText = o.get('electronicAddressText', default = None)
+      self.electronicAddressTypeName = o.get('electronicAddressTypeName', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.electronicAddressText = electronicAddressText
+      self.electronicAddressTypeName = electronicAddressTypeName
 
   @property
   def electronicAddressText(self) -> ElectronicAddressText:

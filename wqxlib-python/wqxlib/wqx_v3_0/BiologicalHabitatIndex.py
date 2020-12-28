@@ -14,14 +14,42 @@ class BiologicalHabitatIndex:
   __indexCalculatedDate: IndexCalculatedDate
   __monitoringLocationIdentifier: MonitoringLocationIdentifier
 
-  def __init__(self):
-    self.__indexIdentifier = None
-    self.__indexType = None
-    self.__indexScore = None
-    self.__indexQualifierCode = None
-    self.__indexCommentText = None
-    self.__indexCalculatedDate = None
-    self.__monitoringLocationIdentifier = None
+  def __init__(self, o=None, *,
+    indexIdentifier:IndexIdentifier = None,
+    indexType:IndexType = None,
+    indexScore:IndexScore = None,
+    indexQualifierCode:IndexQualifierCode = None,
+    indexCommentText:CommentText = None,
+    indexCalculatedDate:IndexCalculatedDate = None,
+    monitoringLocationIdentifier:MonitoringLocationIdentifier = None
+  ):
+    if isinstance(o, BiologicalHabitatIndex):
+      # Assign attributes from object without typechecking
+      self.__indexIdentifier = o.indexIdentifier
+      self.__indexType = o.indexType
+      self.__indexScore = o.indexScore
+      self.__indexQualifierCode = o.indexQualifierCode
+      self.__indexCommentText = o.indexCommentText
+      self.__indexCalculatedDate = o.indexCalculatedDate
+      self.__monitoringLocationIdentifier = o.monitoringLocationIdentifier
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.indexIdentifier = o.get('indexIdentifier', default = None)
+      self.indexType = o.get('indexType', default = None)
+      self.indexScore = o.get('indexScore', default = None)
+      self.indexQualifierCode = o.get('indexQualifierCode', default = None)
+      self.indexCommentText = o.get('indexCommentText', default = None)
+      self.indexCalculatedDate = o.get('indexCalculatedDate', default = None)
+      self.monitoringLocationIdentifier = o.get('monitoringLocationIdentifier', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.indexIdentifier = indexIdentifier
+      self.indexType = indexType
+      self.indexScore = indexScore
+      self.indexQualifierCode = indexQualifierCode
+      self.indexCommentText = indexCommentText
+      self.indexCalculatedDate = indexCalculatedDate
+      self.monitoringLocationIdentifier = monitoringLocationIdentifier
 
   @property
   def indexIdentifier(self) -> IndexIdentifier:

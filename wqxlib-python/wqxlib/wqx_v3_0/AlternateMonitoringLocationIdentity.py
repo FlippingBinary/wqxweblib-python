@@ -8,9 +8,22 @@ class AlternateMonitoringLocationIdentity:
   __monitoringLocationIdentifier: MonitoringLocationIdentifier
   __monitoringLocationIdentifierContext: MonitoringLocationIdentifierContext
 
-  def __init__(self):
-    self.__monitoringLocationIdentifier = None
-    self.__monitoringLocationIdentifierContext = None
+  def __init__(self, o=None, *,
+    monitoringLocationIdentifier:MonitoringLocationIdentifier = None,
+    monitoringLocationIdentifierContext:MonitoringLocationIdentifierContext = None
+  ):
+    if isinstance(o, AlternateMonitoringLocationIdentity):
+      # Assign attributes from object without typechecking
+      self.__monitoringLocationIdentifier = o.monitoringLocationIdentifier
+      self.__monitoringLocationIdentifierContext = o.monitoringLocationIdentifierContext
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.monitoringLocationIdentifier = o.get('monitoringLocationIdentifier', default = None)
+      self.monitoringLocationIdentifierContext = o.get('monitoringLocationIdentifierContext', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.monitoringLocationIdentifier = monitoringLocationIdentifier
+      self.monitoringLocationIdentifierContext = monitoringLocationIdentifierContext
 
   @property
   def monitoringLocationIdentifier(self) -> MonitoringLocationIdentifier:

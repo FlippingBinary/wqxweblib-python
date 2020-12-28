@@ -14,14 +14,42 @@ class ActivityLocation:
   __horizontalCoordinateReferenceSystemDatumName: HorizontalCoordinateReferenceSystemDatumName
   __activityLocationDescriptionText: ActivityLocationDescriptionText
 
-  def __init__(self):
-    self.__latitudeMeasure = None
-    self.__longitudeMeasure = None
-    self.__sourceMapScale = None
-    self.__horizontalAccuracyMeasure = None
-    self.__horizontalCollectionMethodName = None
-    self.__horizontalCoordinateReferenceSystemDatumName = None
-    self.__activityLocationDescriptionText = None
+  def __init__(self, o=None, *,
+    latitudeMeasure:LatitudeMeasure = None,
+    longitudeMeasure:LongitudeMeasure = None,
+    sourceMapScale:SourceMapScale = None,
+    horizontalAccuracyMeasure:MeasureCompact = None,
+    horizontalCollectionMethodName:HorizontalCollectionMethodName = None,
+    horizontalCoordinateReferenceSystemDatumName:HorizontalCoordinateReferenceSystemDatumName = None,
+    activityLocationDescriptionText:ActivityLocationDescriptionText = None
+  ):
+    if isinstance(o, ActivityLocation):
+      # Assign attributes from object without typechecking
+      self.__latitudeMeasure = o.latitudeMeasure
+      self.__longitudeMeasure = o.longitudeMeasure
+      self.__sourceMapScale = o.sourceMapScale
+      self.__horizontalAccuracyMeasure = o.horizontalAccuracyMeasure
+      self.__horizontalCollectionMethodName = o.horizontalCollectionMethodName
+      self.__horizontalCoordinateReferenceSystemDatumName = o.horizontalCoordinateReferenceSystemDatumName
+      self.__activityLocationDescriptionText = o.activityLocationDescriptionText
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.latitudeMeasure = o.get('latitudeMeasure', default = None)
+      self.longitudeMeasure = o.get('longitudeMeasure', default = None)
+      self.sourceMapScale = o.get('sourceMapScale', default = None)
+      self.horizontalAccuracyMeasure = o.get('horizontalAccuracyMeasure', default = None)
+      self.horizontalCollectionMethodName = o.get('horizontalCollectionMethodName', default = None)
+      self.horizontalCoordinateReferenceSystemDatumName = o.get('horizontalCoordinateReferenceSystemDatumName', default = None)
+      self.activityLocationDescriptionText = o.get('activityLocationDescriptionText', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.latitudeMeasure = latitudeMeasure
+      self.longitudeMeasure = longitudeMeasure
+      self.sourceMapScale = sourceMapScale
+      self.horizontalAccuracyMeasure = horizontalAccuracyMeasure
+      self.horizontalCollectionMethodName = horizontalCollectionMethodName
+      self.horizontalCoordinateReferenceSystemDatumName = horizontalCoordinateReferenceSystemDatumName
+      self.activityLocationDescriptionText = activityLocationDescriptionText
 
   @property
   def latitudeMeasure(self) -> LatitudeMeasure:

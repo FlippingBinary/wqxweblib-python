@@ -8,9 +8,22 @@ class CollectionEffort:
   __measureValue: MeasureValue
   __gearProcedureUnitCode: GearProcedureUnitCode
 
-  def __init__(self):
-    self.__measureValue = None
-    self.__gearProcedureUnitCode = None
+  def __init__(self, o=None, *,
+    measureValue:MeasureValue = None,
+    gearProcedureUnitCode:GearProcedureUnitCode = None
+  ):
+    if isinstance(o, CollectionEffort):
+      # Assign attributes from object without typechecking
+      self.__measureValue = o.measureValue
+      self.__gearProcedureUnitCode = o.gearProcedureUnitCode
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.measureValue = o.get('measureValue', default = None)
+      self.gearProcedureUnitCode = o.get('gearProcedureUnitCode', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.measureValue = measureValue
+      self.gearProcedureUnitCode = gearProcedureUnitCode
 
   @property
   def measureValue(self) -> MeasureValue:

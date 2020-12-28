@@ -27,26 +27,90 @@ class ActivityDescription:
   __samplingComponentName: SamplingComponentName
   __activityCommentText: CommentText
 
-  def __init__(self):
-    self.__activityIdentifier = None
-    self.__activityIdentifierUserSupplied = None
-    self.__activityTypeCode = None
-    self.__activityMediaName = None
-    self.__activityMediaSubdivisionName = None
-    self.__activityStartDate = None
-    self.__activityStartTime = None
-    self.__activityEndDate = None
-    self.__activityEndTime = None
-    self.__activityRelativeDepthName = None
-    self.__activityDepthHeightMeasure = None
-    self.__activityTopDepthHeightMeasure = None
-    self.__activityBottomDepthHeightMeasure = None
-    self.__activityDepthAltitudeReferencePointText = None
-    self.__projectIdentifier = None
-    self.__activityConductingOrganizationText = None
-    self.__monitoringLocationIdentifier = None
-    self.__samplingComponentName = None
-    self.__activityCommentText = None
+  def __init__(self, o=None, *,
+    activityIdentifier:ActivityIdentifier = None,
+    activityIdentifierUserSupplied:ActivityIdentifierUserSupplied = None,
+    activityTypeCode:ActivityTypeCode = None,
+    activityMediaName:ActivityMediaName = None,
+    activityMediaSubdivisionName:ActivityMediaSubdivisionName = None,
+    activityStartDate:ActivityStartDate = None,
+    activityStartTime:WQXTime = None,
+    activityEndDate:ActivityEndDate = None,
+    activityEndTime:WQXTime = None,
+    activityRelativeDepthName:ActivityRelativeDepthName = None,
+    activityDepthHeightMeasure:MeasureCompact = None,
+    activityTopDepthHeightMeasure:MeasureCompact = None,
+    activityBottomDepthHeightMeasure:MeasureCompact = None,
+    activityDepthAltitudeReferencePointText:DepthAltitudeReferencePointText = None,
+    projectIdentifier:ProjectIdentifier = None,
+    activityConductingOrganizationText:ActivityConductingOrganizationText = None,
+    monitoringLocationIdentifier:MonitoringLocationIdentifier = None,
+    samplingComponentName:SamplingComponentName = None,
+    activityCommentText:CommentText = None
+  ):
+    if isinstance(o, ActivityDescription):
+      # Assign attributes from object without typechecking
+      self.__activityIdentifier = o.activityIdentifier
+      self.__activityIdentifierUserSupplied = o.activityIdentifierUserSupplied
+      self.__activityTypeCode = o.activityTypeCode
+      self.__activityMediaName = o.activityMediaName
+      self.__activityMediaSubdivisionName = o.activityMediaSubdivisionName
+      self.__activityStartDate = o.activityStartDate
+      self.__activityStartTime = o.activityStartTime
+      self.__activityEndDate = o.activityEndDate
+      self.__activityEndTime = o.activityEndTime
+      self.__activityRelativeDepthName = o.activityRelativeDepthName
+      self.__activityDepthHeightMeasure = o.activityDepthHeightMeasure
+      self.__activityTopDepthHeightMeasure = o.activityTopDepthHeightMeasure
+      self.__activityBottomDepthHeightMeasure = o.activityBottomDepthHeightMeasure
+      self.__activityDepthAltitudeReferencePointText = o.activityDepthAltitudeReferencePointText
+      self.__projectIdentifier = o.projectIdentifier
+      self.__activityConductingOrganizationText = o.activityConductingOrganizationText
+      self.__monitoringLocationIdentifier = o.monitoringLocationIdentifier
+      self.__samplingComponentName = o.samplingComponentName
+      self.__activityCommentText = o.activityCommentText
+    elif isinstance(o, dict):
+      # Assign attributes from other ActivityDescription with typechecking
+      self.activityIdentifier = o.get('activityIdentifier', default = None)
+      self.activityIdentifierUserSupplied = o.get('activityIdentifierUserSupplied', default = None)
+      self.activityTypeCode = o.get('activityTypeCode', default = None)
+      self.activityMediaName = o.get('activityMediaName', default = None)
+      self.activityMediaSubdivisionName = o.get('activityMediaSubdivisionName', default = None)
+      self.activityStartDate = o.get('activityStartDate', default = None)
+      self.activityStartTime = o.get('activityStartTime', default = None)
+      self.activityEndDate = o.get('activityEndDate', default = None)
+      self.activityEndTime = o.get('activityEndTime', default = None)
+      self.activityRelativeDepthName = o.get('activityRelativeDepthName', default = None)
+      self.activityDepthHeightMeasure = o.get('activityDepthHeightMeasure', default = None)
+      self.activityTopDepthHeightMeasure = o.get('activityTopDepthHeightMeasure', default = None)
+      self.activityBottomDepthHeightMeasure = o.get('activityBottomDepthHeightMeasure', default = None)
+      self.activityDepthAltitudeReferencePointText = o.get('activityDepthAltitudeReferencePointText', default = None)
+      self.projectIdentifier = o.get('projectIdentifier', default = None)
+      self.activityConductingOrganizationText = o.get('activityConductingOrganizationText', default = None)
+      self.monitoringLocationIdentifier = o.get('monitoringLocationIdentifier', default = None)
+      self.samplingComponentName = o.get('samplingComponentName', default = None)
+      self.activityCommentText = o.get('activityCommentText', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.activityIdentifier = activityIdentifier
+      self.activityIdentifierUserSupplied = activityIdentifierUserSupplied
+      self.activityTypeCode = activityTypeCode
+      self.activityMediaName = activityMediaName
+      self.activityMediaSubdivisionName = activityMediaSubdivisionName
+      self.activityStartDate = activityStartDate
+      self.activityStartTime = activityStartTime
+      self.activityEndDate = activityEndDate
+      self.activityEndTime = activityEndTime
+      self.activityRelativeDepthName = activityRelativeDepthName
+      self.activityDepthHeightMeasure = activityDepthHeightMeasure
+      self.activityTopDepthHeightMeasure = activityTopDepthHeightMeasure
+      self.activityBottomDepthHeightMeasure = activityBottomDepthHeightMeasure
+      self.activityDepthAltitudeReferencePointText = activityDepthAltitudeReferencePointText
+      self.projectIdentifier = projectIdentifier
+      self.activityConductingOrganizationText = activityConductingOrganizationText
+      self.monitoringLocationIdentifier = monitoringLocationIdentifier
+      self.samplingComponentName = samplingComponentName
+      self.activityCommentText = activityCommentText
 
   @property
   def activityIdentifier(self) -> ActivityIdentifier:

@@ -10,21 +10,40 @@ class OperationType( Enum ):
   DELETE = 'Delete'
 
 class Payload:
+  """The Payload section of the document contains the WQX data."""
+
   __operation: OperationType
   __wqx: WQX
   __wqxUpdateIdentifiers: WQXUpdateIdentifiers
   __wqxDelete: WQXDelete
 
-  def __init__(self,
+  UPDATE_INSERT = OperationType.UPDATE_INSERT
+  DELETE = OperationType.DELETE
+
+  def __init__(self, o=None, *,
     operation = None,
     wqx = None,
     wqxUpdateIdentifiers = None,
     wqxDelete = None
   ):
-    self.operation = operation
-    self.wqx = wqx
-    self.wqxUpdateIdentifiers = wqxUpdateIdentifiers
-    self.wqxDelete = wqxDelete
+    if isinstance(o, Payload):
+      # Assign attributes from other Payload without typechecking
+      self.__operation = o.operation
+      self.__wqx = o.wqx
+      self.__wqxUpdateIdentifiers = o.wqxUpdateIdentifiers
+      self.__wqxDelete = o.wqxDelete
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.operation = o.get('operation', default = None)
+      self.wqx = o.get('wqx', default = None)
+      self.wqxUpdateIdentifiers = o.get('wqxUpdateIdentifiers', default = None)
+      self.wqxDelete = o.get('wqxDelete', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.operation = operation
+      self.wqx = wqx
+      self.wqxUpdateIdentifiers = wqxUpdateIdentifiers
+      self.wqxDelete = wqxDelete
 
   @property
   def operation(self) -> OperationType:

@@ -16,15 +16,46 @@ class BiologicalHabitatCollectionInformation:
   __passCount: PassCount
   __netInformation: NetInformation
 
-  def __init__(self):
-    self.__collectionDuration = None
-    self.__collectionArea = None
-    self.__collectionEffort = None
-    self.__reachLengthMeasure = None
-    self.__reachWidthMeasure = None
-    self.__collectionDescriptionText = None
-    self.__passCount = None
-    self.__netInformation = None
+  def __init__(self, o=None, *,
+    collectionDuration:MeasureCompact = None,
+    collectionArea:MeasureCompact = None,
+    collectionEffort:CollectionEffort = None,
+    reachLengthMeasure:MeasureCompact = None,
+    reachWidthMeasure:MeasureCompact = None,
+    collectionDescriptionText:CollectionDescriptionText = None,
+    passCount:PassCount = None,
+    netInformation:NetInformation = None
+  ):
+    if isinstance(o, BiologicalHabitatCollectionInformation):
+      # Assign attributes from objects without typechecking
+      self.__collectionDuration = o.collectionDuration
+      self.__collectionArea = o.collectionArea
+      self.__collectionEffort = o.collectionEffort
+      self.__reachLengthMeasure = o.reachLengthMeasure
+      self.__reachWidthMeasure = o.reachWidthMeasure
+      self.__collectionDescriptionText = o.collectionDescriptionText
+      self.__passCount = o.passCount
+      self.__netInformation = o.netInformation
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.collectionDuration = o.get('collectionDuration', default = None)
+      self.collectionArea = o.get('collectionArea', default = None)
+      self.collectionEffort = o.get('collectionEffort', default = None)
+      self.reachLengthMeasure = o.get('reachLengthMeasure', default = None)
+      self.reachWidthMeasure = o.get('reachWidthMeasure', default = None)
+      self.collectionDescriptionText = o.get('collectionDescriptionText', default = None)
+      self.passCount = o.get('passCount', default = None)
+      self.netInformation = o.get('netInformation', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.collectionDuration = collectionDuration
+      self.collectionArea = collectionArea
+      self.collectionEffort = collectionEffort
+      self.reachLengthMeasure = reachLengthMeasure
+      self.reachWidthMeasure = reachWidthMeasure
+      self.collectionDescriptionText = collectionDescriptionText
+      self.passCount = passCount
+      self.netInformation = netInformation
 
   @property
   def collectionDuration(self) -> MeasureCompact:

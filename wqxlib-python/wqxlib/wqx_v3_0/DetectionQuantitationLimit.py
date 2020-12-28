@@ -13,10 +13,26 @@ class DetectionQuantitationLimit:
   __detectionQuantitationLimitMeasure: MeasureCompact
   __detectionQuantitationLimitCommentText: DetectionQuantitationLimitCommentText
 
-  def __init__(self):
-    self.__detectionQuantitationLimitTypeName = None
-    self.__detectionQuantitationLimitMeasure = None
-    self.__detectionQuantitationLimitCommentText = None
+  def __init__(self, o=None, *,
+    detectionQuantitationLimitTypeName:DetectionQuantitationLimitTypeName = None,
+    detectionQuantitationLimitMeasure:MeasureCompact = None,
+    detectionQuantitationLimitCommentText:DetectionQuantitationLimitCommentText = None
+  ):
+    if isinstance(o, DetectionQuantitationLimit):
+      # Assign attributes from object without typechecking
+      self.__detectionQuantitationLimitTypeName = o.detectionQuantitationLimitTypeName
+      self.__detectionQuantitationLimitMeasure = o.detectionQuantitationLimitMeasure
+      self.__detectionQuantitationLimitCommentText = o.detectionQuantitationLimitCommentText
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.detectionQuantitationLimitTypeName = o.get('detectionQuantitationLimitTypeName', default = None)
+      self.detectionQuantitationLimitMeasure = o.get('detectionQuantitationLimitMeasure', default = None)
+      self.detectionQuantitationLimitCommentText = o.get('detectionQuantitationLimitCommentText', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.detectionQuantitationLimitTypeName = detectionQuantitationLimitTypeName
+      self.detectionQuantitationLimitMeasure = detectionQuantitationLimitMeasure
+      self.detectionQuantitationLimitCommentText = detectionQuantitationLimitCommentText
 
   @property
   def detectionQuantitationLimitTypeName(self) -> DetectionQuantitationLimitTypeName:

@@ -10,11 +10,30 @@ class ActivityGroup:
   __activityGroupTypeCode: ActivityGroupTypeCode
   __activityIdentifier: ActivityIdentifier
 
-  def __init__(self):
-    self.__activityGroupIdentifier = None
-    self.__activityGroupName = None
-    self.__activityGroupTypeCode = None
-    self.__activityIdentifier = None
+  def __init__(self, o=None, *,
+    activityGroupIdentifier:ActivityGroupIdentifier = None,
+    activityGroupName:ActivityGroupName = None,
+    activityGroupTypeCode:ActivityGroupTypeCode = None,
+    activityIdentifier:ActivityIdentifier = None
+  ):
+    if isinstance(o, ActivityGroup):
+      # Assign attributes from object without typechecking
+      self.__activityGroupIdentifier = o.activityGroupIdentifier
+      self.__activityGroupName = o.activityGroupName
+      self.__activityGroupTypeCode = o.activityGroupTypeCode
+      self.__activityIdentifier = o.activityIdentifier
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.activityGroupIdentifier = o.get('activityGroupIdentifier', default = None)
+      self.activityGroupName = o.get('activityGroupName', default = None)
+      self.activityGroupTypeCode = o.get('activityGroupTypeCode', default = None)
+      self.activityIdentifier = o.get('activityIdentifier', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.activityGroupIdentifier = activityGroupIdentifier
+      self.activityGroupName = activityGroupName
+      self.activityGroupTypeCode = activityGroupTypeCode
+      self.activityIdentifier = activityIdentifier
 
   @property
   def activityGroupIdentifier(self) -> ActivityGroupIdentifier:

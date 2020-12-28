@@ -20,14 +20,42 @@ class Activity:
   __attachedBinaryObject: List[AttachedBinaryObject]
   __result: List[Result]
 
-  def __init__(self):
-    self.__activityDescription = None
-    self.__activityLocation = None
-    self.__biologicalActivityDescription = None
-    self.__sampleDescription = None
-    self.__activityMetric = None
-    self.__attachedBinaryObject = None
-    self.__result = None
+  def __init__(self, o=None, *,
+    activityDescription:ActivityDescription = None,
+    activityLocation:ActivityLocation = None,
+    biologicalActivityDescription:BiologicalActivityDescription = None,
+    sampleDescription:SampleDescription = None,
+    activityMetric:List[ActivityMetric] = None,
+    attachedBinaryObject:List[AttachedBinaryObject] = None,
+    result:List[Result] = None
+  ):
+    if isinstance(o, Activity):
+      # Assign attributes from object without typechecking
+      self.__activityDescription = o.activityDescription
+      self.__activityLocation = o.activityLocation
+      self.__biologicalActivityDescription = o.biologicalActivityDescription
+      self.__sampleDescription = o.sampleDescription
+      self.__activityMetric = o.activityMetric
+      self.__attachedBinaryObject = o.attachedBinaryObject
+      self.__result = o.result
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.activityDescription = o.get('activityDescription', default = None)
+      self.activityLocation = o.get('activityLocation', default = None)
+      self.biologicalActivityDescription = o.get('biologicalActivityDescription', default = None)
+      self.sampleDescription = o.get('sampleDescription', default = None)
+      self.activityMetric = o.get(activityMetric, default = [])
+      self.attachedBinaryObject = o.get('attachedBinaryObject', default = [])
+      self.result = o.get('result', default = [])
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.activityDescription = activityDescription
+      self.activityLocation = activityLocation
+      self.biologicalActivityDescription = biologicalActivityDescription
+      self.sampleDescription = sampleDescription
+      self.activityMetric = activityMetric
+      self.attachedBinaryObject = attachedBinaryObject
+      self.result = result
 
   @property
   def activityDescription(self) -> ActivityDescription:

@@ -12,12 +12,34 @@ class IndexType:
   __indexTypeCitation: BibliographicReference
   __indexTypeScaleText: IndexTypeScaleText
 
-  def __init__(self):
-    self.__indexTypeIdentifier = None
-    self.__indexTypeIdentifierContext = None
-    self.__indexTypeName = None
-    self.__indexTypeCitation = None
-    self.__indexTypeScaleText = None
+  def __init__(self, o=None, *,
+    indexTypeIdentifier:IndexTypeIdentifier = None,
+    indexTypeIdentifierContext:IndexTypeIdentifierContext = None,
+    indexTypeName:IndexTypeName = None,
+    indexTypeCitation:BibliographicReference = None,
+    indexTypeScaleText:IndexTypeScaleText = None
+  ):
+    if isinstance(o, IndexType):
+      # Assign attributes from object without typechecking
+      self.__indexTypeIdentifier = o.indexTypeIdentifier
+      self.__indexTypeIdentifierContext = o.indexTypeIdentifierContext
+      self.__indexTypeName = o.indexTypeName
+      self.__indexTypeCitation = o.indexTypeCitation
+      self.__indexTypeScaleText = o.indexTypeScaleText
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.indexTypeIdentifier = o.get('indexTypeIdentifier', default = None)
+      self.indexTypeIdentifierContext = o.get('indexTypeIdentifierContext', default = None)
+      self.indexTypeName = o.get('indexTypeName', default = None)
+      self.indexTypeCitation = o.get('indexTypeCitation', default = None)
+      self.indexTypeScaleText = o.get('indexTypeScaleText', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.indexTypeIdentifier = indexTypeIdentifier
+      self.indexTypeIdentifierContext = indexTypeIdentifierContext
+      self.indexTypeName = indexTypeName
+      self.indexTypeCitation = indexTypeCitation
+      self.indexTypeScaleText = indexTypeScaleText
 
   @property
   def indexTypeIdentifier(self) -> IndexTypeIdentifier:

@@ -7,8 +7,26 @@ from ..common import WQXException
 
 class AttachedBinaryObject:
   """Reference document, image, photo, GIS data layer, laboratory material or other electronic object attached within a data exchange, as well as information used to describe the object."""
+
   __binaryObjectFileName: BinaryObjectFileName
   __binaryObjectFileTypeCode: BinaryObjectFileTypeCode
+
+  def __init__(self, o=None, *,
+    binaryObjectFileName:BinaryObjectFileName = None,
+    binaryObjectFileTypeCode:BinaryObjectFileTypeCode = None
+  ):
+    if isinstance(o, AttachedBinaryObject):
+      # Assign attributes from object without typechecking
+      self.__binaryObjectFileName = o.binaryObjectFileName
+      self.__binaryObjectFileTypeCode = o.binaryObjectFileTypeCode
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.binaryObjectFileName = o.get('binaryObjectFileName', default = None)
+      self.binaryObjectFileTypeCode = o.get('binaryObjectFileTypeCode', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.binaryObjectFileName = binaryObjectFileName
+      self.binaryObjectFileTypeCode = binaryObjectFileTypeCode
 
   @property
   def binaryObjectFileName(self) -> BinaryObjectFileName:

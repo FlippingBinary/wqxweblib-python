@@ -10,11 +10,30 @@ class BiologicalActivityDescription:
   __toxicityTestType: ToxicityTestType
   __habitatSelectionMethod: HabitatSelectionMethod
 
-  def __init__(self):
-    self.__assemblageSampledName = None
-    self.__biologicalHabitatCollectionInformation = None
-    self.__toxicityTestType = None
-    self.__habitatSelectionMethod = None
+  def __init__(self, o=None, *,
+    assemblageSampledName:AssemblageSampledName = None,
+    biologicalHabitatCollectionInformation:BiologicalHabitatCollectionInformation = None,
+    toxicityTestType:ToxicityTestType = None,
+    habitatSelectionMethod:HabitatSelectionMethod = None
+  ):
+    if isinstance(o, BiologicalActivityDescription):
+      # Assign attributes from object without typechecking
+      self.__assemblageSampledName = o.assemblageSampledName
+      self.__biologicalHabitatCollectionInformation = o.biologicalHabitatCollectionInformation
+      self.__toxicityTestType = o.toxicityTestType
+      self.__habitatSelectionMethod = o.habitatSelectionMethod
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.assemblageSampledName = o.get('assemblageSampledName', default = None)
+      self.biologicalHabitatCollectionInformation = o.get('biologicalHabitatCollectionInformation', default = None)
+      self.toxicityTestType = o.get('toxicityTestType', default = None)
+      self.habitatSelectionMethod = o.get('habitatSelectionMethod', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.assemblageSampledName = assemblageSampledName
+      self.biologicalHabitatCollectionInformation = biologicalHabitatCollectionInformation
+      self.toxicityTestType = toxicityTestType
+      self.habitatSelectionMethod = habitatSelectionMethod
 
   @property
   def assemblageSampledName(self) -> AssemblageSampledName:

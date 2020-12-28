@@ -10,12 +10,34 @@ class DataQuality:
   __upperConfidenceLimitValue: UpperConfidenceLimitValue # optional
   __lowerConfidenceLimitValue: LowerConfidenceLimitValue # optional
   
-  def __init__(self):
-    self.__precisionValue = None
-    self.__biasValue = None
-    self.__confidenceIntervalValue = None
-    self.__upperConfidenceLimitValue = None
-    self.__lowerConfidenceLimitValue = None
+  def __init__(self, o=None, *,
+    precisionValue:PrecisionValue = None,
+    biasValue:BiasValue = None,
+    confidenceIntervalValue:ConfidenceIntervalValue = None,
+    upperConfidenceLimitValue:UpperConfidenceLimitValue = None,
+    lowerConfidenceLimitValue:LowerConfidenceLimitValue = None
+  ):
+    if isinstance(o, DataQuality):
+      # Assign attributes from object without typechecking
+      self.__precisionValue = o.precisionValue
+      self.__biasValue = o.biasValue
+      self.__confidenceIntervalValue = o.confidenceIntervalValue
+      self.__upperConfidenceLimitValue = o.upperConfidenceLimitValue
+      self.__lowerConfidenceLimitValue = o.lowerConfidenceLimitValue
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.precisionValue = o.get('precisionValue', default = None)
+      self.biasValue = o.get('biasValue', default = None)
+      self.confidenceIntervalValue = o.get('confidenceIntervalValue', default = None)
+      self.upperConfidenceLimitValue = o.get('upperConfidenceLimitValue', default = None)
+      self.lowerConfidenceLimitValue = o.get('lowerConfidenceLimitValue', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.precisionValue = precisionValue
+      self.biasValue = biasValue
+      self.confidenceIntervalValue = confidenceIntervalValue
+      self.upperConfidenceLimitValue = upperConfidenceLimitValue
+      self.lowerConfidenceLimitValue = lowerConfidenceLimitValue
 
   @property
   def precisionValue(self) -> PrecisionValue:

@@ -10,11 +10,30 @@ class AquiferInformation:
   __localAquiferName: LocalAquiferName
   __localAquiferDescriptionText: LocalAquiferDescriptionText
 
-  def __init__(self):
-    self.__localAquiferCode = None
-    self.__localAquiferCodeContext = None
-    self.__localAquiferName = None
-    self.__localAquiferDescriptionText = None
+  def __init__(self, o=None, *,
+    localAquiferCode:LocalAquiferCode = None,
+    localAquiferCodeContext:LocalAquiferCodeContext = None,
+    localAquiferName:LocalAquiferName = None,
+    localAquiferDescriptionText:LocalAquiferDescriptionText = None
+  ):
+    if isinstance(o, AquiferInformation):
+      # Assign attributes from object without typechecking
+      self.__localAquiferCode = o.localAquiferCode
+      self.__localAquiferCodeContext = o.localAquiferCodeContext
+      self.__localAquiferName = o.localAquiferName
+      self.__localAquiferDescriptionText = o.localAquiferDescriptionText
+    elif isinstance(o, dict):
+      # Assign attribute from dictionary with typechecking
+      self.localAquiferCode = o.get('localAquiferCode', default = None)
+      self.localAquiferCodeContext = o.get('localAquiferCodeContext', default = None)
+      self.localAquiferName = o.get('localAquiferName', default = None)
+      self.localAquiferDescriptionText = o.get('localAquiferDescriptionText', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.localAquiferCode = localAquiferCode
+      self.localAquiferCodeContext = localAquiferCodeContext
+      self.localAquiferName = localAquiferName
+      self.localAquiferDescriptionText = localAquiferDescriptionText
 
   @property
   def localAquiferCode(self) -> LocalAquiferCode:

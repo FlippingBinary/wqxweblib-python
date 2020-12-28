@@ -14,13 +14,38 @@ class ActivityMetric:
   __metricCommentText: CommentText
   __indexIdentifier: IndexIdentifier
 
-  def __init__(self):
-    self.__activityMetricType = None
-    self.__metricValueMeasure = None
-    self.__metricScore = None
-    self.__metricSamplingPointPlaceInSeries = None
-    self.__metricCommentText = None
-    self.__indexIdentifier = None
+  def __init__(self, o=None, *,
+    activityMetricType:ActivityMetricType = None,
+    metricValueMeasure:MeasureCompact = None,
+    metricScore:MetricScore = None,
+    metricSamplingPointPlaceInSeries:MetricSamplingPointPlaceInSeries = None,
+    metricCommentText:CommentText = None,
+    indexIdentifier:IndexIdentifier = None
+  ):
+    if isinstance(o, ActivityMetric):
+      # Assign attributes from object without typechecking
+      self.__activityMetricType = o.activityMetricType
+      self.__metricValueMeasure = o.metricValueMeasure
+      self.__metricScore = o.metricScore
+      self.__metricSamplingPointPlaceInSeries = o.metricSamplingPointPlaceInSeries
+      self.__metricCommentText = o.metricCommentText
+      self.__indexIdentifier = o.indexIdentifier
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.activityMetricType = o.get('activityMetricType', default = None)
+      self.metricValueMeasure = o.get('metricValueMeasure', default = None)
+      self.metricScore = o.get('metricScore', default = None)
+      self.metricSamplingPointPlaceInSeries = o.get('metricSamplingPointPlaceInSeries', default = None)
+      self.metricCommentText = o.get('metricCommentText', default = None)
+      self.indexIdentifier = o.get('indexIdentifier', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.activityMetricType = activityMetricType
+      self.metricValueMeasure = metricValueMeasure
+      self.metricScore = metricScore
+      self.metricSamplingPointPlaceInSeries = metricSamplingPointPlaceInSeries
+      self.metricCommentText = metricCommentText
+      self.indexIdentifier = indexIdentifier
 
   @property
   def activityMetricType(self) -> ActivityMetricType:

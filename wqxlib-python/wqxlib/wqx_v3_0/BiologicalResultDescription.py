@@ -29,18 +29,58 @@ class BiologicalResultDescription:
   __taxonomicDetails: TaxonomicDetails
   __frequencyClassInformation: FrequencyClassInformation
 
-  def __init__(self):
-    self.__biologicalIntentName = None
-    self.__biologicalIndividualIdentifier = None
-    self.__subjectTaxonomicName = None
-    self.__subjectTaxonomicNameUserSupplied = None
-    self.__subjectTaxonomicNameUserSuppliedReferenceText = None
-    self.__unidentifiedSpeciesIdentifier = None
-    self.__sampleTissueAnatomyName = None
-    self.__groupSummaryCount = None
-    self.__groupSummaryWeightMeasure = None
-    self.__taxonomicDetails = None
-    self.__frequencyClassInformation = None
+  def __init__(self, o=None, *,
+    biologicalIntentName:BiologicalIntentName = None,
+    biologicalIndividualIdentifier:BiologicalIndividualIdentifier = None,
+    subjectTaxonomicName:SubjectTaxonomicName = None,
+    subjectTaxonomicNameUserSupplied:SubjectTaxonomicNameUserSupplied = None,
+    subjectTaxonomicNameUserSuppliedReferenceText:SubjectTaxonomicNameUserSuppliedReferenceText = None,
+    unidentifiedSpeciesIdentifier:UnidentifiedSpeciesIdentifier = None,
+    sampleTissueAnatomyName:SampleTissueAnatomyName = None,
+    groupSummaryCount:GroupSummaryCount = None,
+    groupSummaryWeightMeasure:MeasureCompact = None,
+    taxonomicDetails:TaxonomicDetails = None,
+    frequencyClassInformation:FrequencyClassInformation = None
+  ):
+    if isinstance(o, BiologicalResultDescription):
+      # Assign attributes from object without typechecking
+      self.__biologicalIntentName = o.biologicalIntentName
+      self.__biologicalIndividualIdentifier = o.biologicalIndividualIdentifier
+      self.__subjectTaxonomicName = o.subjectTaxonomicName
+      self.__subjectTaxonomicNameUserSupplied = o.subjectTaxonomicNameUserSupplied
+      self.__subjectTaxonomicNameUserSuppliedReferenceText = o.subjectTaxonomicNameUserSuppliedReferenceText
+      self.__unidentifiedSpeciesIdentifier = o.unidentifiedSpeciesIdentifier
+      self.__sampleTissueAnatomyName = o.sampleTissueAnatomyName
+      self.__groupSummaryCount = o.groupSummaryCount
+      self.__groupSummaryWeightMeasure = o.groupSummaryWeightMeasure
+      self.__taxonomicDetails = o.taxonomicDetails
+      self.__frequencyClassInformation = o.frequencyClassInformation
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.biologicalIntentName = o.get('biologicalIntentName', default = None)
+      self.biologicalIndividualIdentifier = o.get('biologicalIndividualIdentifier', default = None)
+      self.subjectTaxonomicName = o.get('subjectTaxonomicName', default = None)
+      self.subjectTaxonomicNameUserSupplied = o.get('subjectTaxonomicNameUserSupplied', default = None)
+      self.subjectTaxonomicNameUserSuppliedReferenceText = o.get('subjectTaxonomicNameUserSuppliedReferenceText', default = None)
+      self.unidentifiedSpeciesIdentifier = o.get('unidentifiedSpeciesIdentifier', default = None)
+      self.sampleTissueAnatomyName = o.get('sampleTissueAnatomyName', default = None)
+      self.groupSummaryCount = o.get('groupSummaryCount', default = None)
+      self.groupSummaryWeightMeasure = o.get('groupSummaryWeightMeasure', default = None)
+      self.taxonomicDetails = o.get('taxonomicDetails', default = None)
+      self.frequencyClassInformation = o.get('frequencyClassInformation', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.biologicalIntentName = biologicalIntentName
+      self.biologicalIndividualIdentifier = biologicalIndividualIdentifier
+      self.subjectTaxonomicName = subjectTaxonomicName
+      self.subjectTaxonomicNameUserSupplied = subjectTaxonomicNameUserSupplied
+      self.subjectTaxonomicNameUserSuppliedReferenceText = subjectTaxonomicNameUserSuppliedReferenceText
+      self.unidentifiedSpeciesIdentifier = unidentifiedSpeciesIdentifier
+      self.sampleTissueAnatomyName = sampleTissueAnatomyName
+      self.groupSummaryCount = groupSummaryCount
+      self.groupSummaryWeightMeasure = groupSummaryWeightMeasure
+      self.taxonomicDetails = taxonomicDetails
+      self.frequencyClassInformation = frequencyClassInformation
 
   @property
   def biologicalIntentName(self) -> BiologicalIntentName:

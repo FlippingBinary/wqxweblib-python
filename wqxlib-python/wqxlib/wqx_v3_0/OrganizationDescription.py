@@ -64,4 +64,4 @@ class OrganizationDescription:
     if self.__tribalCode is not None:
       line('TribalCode', self.__tribalCode)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

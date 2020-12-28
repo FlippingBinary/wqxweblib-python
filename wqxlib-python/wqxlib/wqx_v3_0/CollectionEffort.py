@@ -37,4 +37,4 @@ class CollectionEffort:
     line('MeasureValue', self.__measureValue)
     line('GearProcedureUnitCode', self.__gearProcedureUnitCode)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

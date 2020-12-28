@@ -249,4 +249,4 @@ class ActivityDescription:
     if self.__activityCommentText is not None:
       line('ActivityCommentText', self.__activityCommentText)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

@@ -28,7 +28,7 @@ class Submission:
     doc.asis('<?xml version="1.0" encoding="UTF-8"?>')
     doc.asis(self.__document.generateXML('Document'))
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()
 
   def generateZIP(self, fileName:str=None):
     if not isinstance(fileName, str):

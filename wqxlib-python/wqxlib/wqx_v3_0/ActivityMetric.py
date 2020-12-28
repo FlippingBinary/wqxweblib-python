@@ -90,4 +90,4 @@ class ActivityMetric:
     if self.__indexIdentifier is not None:
       line('IndexIdentifier', self.__indexIdentifier)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

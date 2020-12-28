@@ -125,4 +125,4 @@ class TaxonomicDetails:
     if self.__taxonomicDetailsCitation is not None:
       line('TaxonomicDetailsCitation', self.__taxonomicDetailsCitation)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

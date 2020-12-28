@@ -82,4 +82,4 @@ class NetInformation:
       with tag('CurrentSpeedMeasure'):
         doc.asis(self.__currentSpeedMeasure.generateXML())
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

@@ -66,4 +66,4 @@ class DataQuality:
     if self.__lowerConfidenceLimitValue is not None:
       line('LowerConfidenceLimitValue', self.__lowerConfidenceLimitValue)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

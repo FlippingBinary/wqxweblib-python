@@ -36,4 +36,4 @@ class MeasureCompact:
     line('MeasureValue', self.__measureValue)
     line('MeasureUnitCode', self.__measureUnitCode)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

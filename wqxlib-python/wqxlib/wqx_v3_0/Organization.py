@@ -163,4 +163,4 @@ class Organization:
         with tag('ActivityGroup'):
           doc.asis(x.generateXML())
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

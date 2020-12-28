@@ -96,4 +96,4 @@ class Result:
     for x in self.__labSamplePreparation:
       line('LabSamplePreparation', self.__labSamplePreparation)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

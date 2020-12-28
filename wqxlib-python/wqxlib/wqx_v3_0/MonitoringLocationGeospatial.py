@@ -181,4 +181,4 @@ class MonitoringLocationGeospatial:
     if self.__countyCode is not None:
       line('CountyCode', self.__countyCode)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

@@ -41,4 +41,4 @@ class Measure:
       for x in self.__measureQualifierCode:
         line('MeasureQualifierCode', x)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

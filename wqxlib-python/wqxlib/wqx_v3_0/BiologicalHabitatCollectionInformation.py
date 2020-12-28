@@ -116,4 +116,4 @@ class BiologicalHabitatCollectionInformation:
       with tag('NetInformation'):
         doc.asis(self.__netInformation.generateXML())
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

@@ -37,4 +37,4 @@ class AlternateMonitoringLocationIdentity:
     line('MonitoringLocationIdentifier', self.__monitoringLocationIdentifier)
     line('MonitoringLocationIdentifierContext', self.__monitoringLocationIdentifierContext)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

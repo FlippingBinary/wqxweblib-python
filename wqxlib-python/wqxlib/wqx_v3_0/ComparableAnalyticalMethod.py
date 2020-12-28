@@ -52,4 +52,4 @@ class ComparableAnalyticalMethod:
     if self.__methodModificationText is not None:
       line('MethodModificationText', self.__methodModificationText)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

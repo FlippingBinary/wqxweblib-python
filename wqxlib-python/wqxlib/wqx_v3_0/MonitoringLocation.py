@@ -72,4 +72,4 @@ class MonitoringLocation:
       with tag('AttachedBinaryObject'):
         doc.asis(x.generateXML())
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

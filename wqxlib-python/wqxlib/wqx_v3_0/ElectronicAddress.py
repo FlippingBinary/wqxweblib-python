@@ -32,4 +32,4 @@ class ElectronicAddress:
     line('ElectronicAddressText', self.__electronicAddressText)
     line('ElectronicAddressTypeName', self.__electronicAddressTypeName)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

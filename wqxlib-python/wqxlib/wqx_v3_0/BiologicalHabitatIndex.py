@@ -98,4 +98,4 @@ class BiologicalHabitatIndex:
       line('IndexCalculatedDate', self.__indexCalculatedDate)
     line('MonitoringLocationIdentifier', self.__monitoringLocationIdentifier)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

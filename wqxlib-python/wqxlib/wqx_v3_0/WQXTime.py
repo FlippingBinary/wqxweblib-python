@@ -40,4 +40,4 @@ class WQXTime:
     line('Time', self.__time)
     line('TimeZoneCode', self.__timeZoneCode)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

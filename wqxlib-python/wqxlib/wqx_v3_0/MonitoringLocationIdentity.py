@@ -159,4 +159,4 @@ class MonitoringLocationIdentity:
       with tag('ContributingDrainageAreaMeasure'):
         doc.asis(self.__contributingDrainageAreaMeasure.generateXML())
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

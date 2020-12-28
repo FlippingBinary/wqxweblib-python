@@ -305,4 +305,4 @@ class ResultDescription:
     if self.__recordIdentifierUserSupplied is not None:
       line('RecordIdentifierUserSupplied', self.__recordIdentifierUserSupplied)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

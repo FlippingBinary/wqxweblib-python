@@ -75,4 +75,4 @@ class IndexType:
     if self.__indexTypeScaleText is not None:
       line('IndexTypeScaleText', self.__indexTypeScaleText)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

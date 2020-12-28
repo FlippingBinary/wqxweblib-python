@@ -57,4 +57,4 @@ class BiologicalActivityDescription:
     if self.__habitatSelectionMethod is not None:
       line('HabitatSelectionMethod', self.__habitatSelectionMethod)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

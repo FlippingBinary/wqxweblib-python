@@ -102,4 +102,4 @@ class Activity:
       with tag('Result'):
         doc.asis(x.generateXML())
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

@@ -92,4 +92,4 @@ class SamplePreparation:
     if self.__sampleTransportStorageDescription is not None:
       line('SampleTransportStorageDescription', self.__sampleTransportStorageDescription)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

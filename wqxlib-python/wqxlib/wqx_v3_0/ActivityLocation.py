@@ -96,4 +96,4 @@ class ActivityLocation:
     if self.__activityLocationDescriptionText is not None:
       line('ActivityLocationDescriptionText',self.__activityLocationDescriptionText)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

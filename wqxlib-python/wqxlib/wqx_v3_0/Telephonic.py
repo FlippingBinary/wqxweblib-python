@@ -44,4 +44,4 @@ class Telephonic:
     if self.__telephoneExtensionNumberText is not None:
       line('TelephoneExtensionNumberText', self.__telephoneExtensionNumberText)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

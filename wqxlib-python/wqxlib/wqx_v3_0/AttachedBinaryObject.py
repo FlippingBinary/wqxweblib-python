@@ -35,4 +35,4 @@ class AttachedBinaryObject:
     line('BinaryObjectFileName', self.__binaryObjectFileName)
     line('BinaryObjectFileTypeCode', self.__binaryObjectFileTypeCode)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

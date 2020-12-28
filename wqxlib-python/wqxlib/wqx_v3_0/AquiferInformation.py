@@ -60,4 +60,4 @@ class AquiferInformation:
     if self.__localAquiferDescriptionText is not None:
       line('LocalAquiferDescriptionText', self.__localAquiferDescriptionText)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

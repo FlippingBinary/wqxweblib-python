@@ -85,4 +85,4 @@ class ActivityMetricType:
     if self.__formulaDescriptionText is not None:
       line('FormulaDescriptionText', self.__formulaDescriptionText)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

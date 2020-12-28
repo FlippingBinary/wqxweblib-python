@@ -53,4 +53,4 @@ class DetectionQuantitationLimit:
     if self.__detectionQuantitationLimitCommentText is not None:
       line('DetectionQuantitationLimitCommentText', self.__detectionQuantitationLimitCommentText)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

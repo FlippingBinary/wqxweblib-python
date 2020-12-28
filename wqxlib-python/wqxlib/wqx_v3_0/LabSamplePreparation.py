@@ -89,4 +89,4 @@ class LabSamplePreparation:
     if self.__substanceDilutionFactor is not None:
       line('SubstanceDilutionFactor', self.__substanceDilutionFactor)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

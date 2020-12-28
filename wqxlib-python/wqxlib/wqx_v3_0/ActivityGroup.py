@@ -59,4 +59,4 @@ class ActivityGroup:
     for x in self.__activityIdentifier:
       line('ActivityIdentifier', x)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

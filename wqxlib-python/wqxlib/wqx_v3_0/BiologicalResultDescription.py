@@ -151,4 +151,4 @@ class BiologicalResultDescription:
     for x in self.__frequencyClassInformation:
       line('FrequencyClassInformation', x)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

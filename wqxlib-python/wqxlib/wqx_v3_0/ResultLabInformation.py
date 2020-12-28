@@ -164,4 +164,4 @@ class ResultLabInformation:
     if self.__taxonomistAccreditationAuthorityName is not None:
       line('TaxonomistAccreditationAuthorityName', self.__taxonomistAccreditationAuthorityName)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

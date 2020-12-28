@@ -111,4 +111,4 @@ class WellInformation:
       with tag('WellDepthMeasure'):
         doc.asis(self.__wellDepthMeasure.generateXML())
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

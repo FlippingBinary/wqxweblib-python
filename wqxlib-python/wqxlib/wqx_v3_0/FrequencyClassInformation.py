@@ -64,4 +64,4 @@ class FrequencyClassInformation:
     if self.__upperClassBoundValue is not None:
       line('UpperClassBoundValue', self.__upperClassBoundValue)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

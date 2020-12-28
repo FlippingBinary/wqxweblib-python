@@ -77,4 +77,4 @@ class ReferenceMethod:
     if self.__methodDescriptionText is not None:
       line('MethodDescriptionText', self.__methodDescriptionText)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

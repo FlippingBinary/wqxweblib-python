@@ -86,4 +86,4 @@ class SampleDescription:
     if self.__hydrologicEvent is not None:
       line('HydrologicEvent', self.__hydrologicEvent)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

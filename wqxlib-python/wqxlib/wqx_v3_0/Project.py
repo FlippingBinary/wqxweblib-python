@@ -108,4 +108,4 @@ class Project:
       with tag('ProjectMonitoringLocationWeighting'):
         doc.asis(x.generateXML())
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

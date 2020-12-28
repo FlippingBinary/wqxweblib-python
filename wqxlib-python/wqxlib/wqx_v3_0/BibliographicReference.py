@@ -89,4 +89,4 @@ class BibliographicReference:
     line('ResourceDate', self.__resourceDate)
     line('ResourceIdentifier', self.__resourceIdentifier)
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

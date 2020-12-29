@@ -25,17 +25,17 @@ class Submission:
     return self.__document
   @document.setter
   def document(self, val:Document) -> None:
-    if not isinstance(val, Document):
+    if val is not None and not isinstance(val, Document):
       raise TypeError("Attribute 'document' must be a Document object.")
-    self.__document = val
+    self.__document = None if val is None else Document(val)
 
   def generateXML(self) -> str:
-    if not self.__document:
-      raise WQXException("Attribute 'document' is required.")
 
     doc, tag, text, line = Doc().ttl()
 
     doc.asis('<?xml version="1.0" encoding="UTF-8"?>')
+    if self.__document is None:
+      raise WQXException("Attribute 'document' is required.")
     doc.asis(self.__document.generateXML('Document'))
 
     return doc.getvalue()

@@ -71,17 +71,20 @@ class Document:
       self.__payload = [Payload(val)]
 
   def generateXML(self, name:str = 'Document') -> str:
-    if self.__header is None:
-      raise WQXException("Attribute 'header' is required.")
-    if self.__id is None:
-      raise WQXException("Attribute 'id' is required.")
-    if not isinstance(self.__payload, list) or len(self.__payload) < 1:
-      raise WQXException("Attribute 'payload' must be a list of 1 or more Payload objects.")
-
     doc, tag, text, line = Doc().ttl()
 
-    with tag(name, ('Id', self.__id), ('xmlns','http://www.exchangenetwork.net/schema/v1.0/ExchangeNetworkDocument.xsd'), ('xmlns:xsi','http://www.w3.org/2001/XMLSchema-instance')):
+    if self.__id is None:
+      raise WQXException("Attribute 'id' is required.")
+    with tag(name,
+      ('Id', self.__id),
+      ('xmlns','http://www.exchangenetwork.net/schema/v1.0/ExchangeNetworkDocument.xsd'),
+      ('xmlns:xsi','http://www.w3.org/2001/XMLSchema-instance')
+    ):
+      if self.__header is None:
+        raise WQXException("Attribute 'header' is required.")
       doc.asis(self.__header.generateXML('Header'))
+      if len(self.__payload) < 1:
+        raise WQXException("Attribute 'payload' must be a list of 1 or more Payload objects.")
       for x in self.__payload:
         doc.asis(x.generateXML('Payload'))
 

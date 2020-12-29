@@ -151,10 +151,16 @@ class Header:
     elif isinstance(val, list):
       r:List[str] = []
       for x in val:
-        r.append(uri_reference(x))
+        u = uri_reference(x)
+        if not u.is_valid():
+          raise WQXException("Attribute 'notification' must be a list of valid URIs, if provided.")
+        r.append(u)
       self.__notification = r
     else:
-      self.__notification = [uri_reference(val)]
+      u = uri_reference(val)
+      if not u.is_valid():
+        raise WQXException("Attribute 'notification' must be a list of valid URIs, if provided.")
+      self.__notification = [u]
 
   @property
   def sensitivity(self) -> str:
@@ -175,21 +181,20 @@ class Header:
     self.__property = {} if val is None else val
 
   def generateXML(self, name:str = 'Header') -> str:
-    if self.__author is None:
-      raise WQXException("Property 'author' is required.")
-    if self.__contactInfo is None:
-      raise WQXException("Property 'contactInfo' is required.")
-    if self.__organization is None:
-      raise WQXException("Property 'organization' is required.")
-    if self.__creationTime is None:
-      raise WQXException("Attribute 'creationTime' is required.")
-
     doc, tag, text, line = Doc().ttl()
 
     with tag(name):
+      if self.__author is None:
+        raise WQXException("Property 'author' is required.")
       line('Author', self.__author)
+      if self.__organization is None:
+        raise WQXException("Property 'organization' is required.")
       line('Organization', self.__organization)
+      if self.__title is None:
+        raise WQXException("Property 'title' is required.")
       line('Title', self.__title)
+      if self.__creationTime is None:
+        raise WQXException("Attribute 'creationTime' is required.")
       line('CreationTime', self.__creationTime.astimezone().replace(microsecond=0).isoformat())
       if self.__comment is not None:
         line('Comment', self.__comment)
@@ -198,8 +203,6 @@ class Header:
       if self.__contactInfo is not None:
         line('ContactInfo', self.__contactInfo)
       for x in self.__notification:
-        if not x.is_valid():
-          raise WQXException("Attribute 'notification' must be a list of valid URIs, if provided.")
         line('Notification', x.unsplit())
       if self.__sensitivity is not None:
         line('Sensitivity', self.__sensitivity)

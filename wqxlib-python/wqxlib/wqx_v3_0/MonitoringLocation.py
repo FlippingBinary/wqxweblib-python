@@ -75,23 +75,19 @@ class MonitoringLocation:
     else:
       self.__attachedBinaryObject = [AttachedBinaryObject(val)]
 
-  def generateXML(self):
-    if self.__monitoringLocationIdentity is None:
-      raise WQXException("Attribute 'MonitoringLocationIdentity' is required.")
-    if self.__monitoringLocationGeospatial is None:
-      raise WQXException("Attribute 'MonitoringLocationGeospatial' is required.")
-
+  def generateXML(self, name:str = 'MonitoringLocation') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    with tag('MonitoringLocationIdentity'):
-      doc.asis(self.__monitoringLocationIdentity.generateXML())
-    with tag('MonitoringLocationGeospatial'):
-      doc.asis(self.__monitoringLocationGeospatial.generateXML())
-    if self.__wellInformation is not None:
-      with tag('WellInformation'):
-        doc.asis(self.__wellInformation.generateXML())
-    for x in self.__attachedBinaryObject:
-      with tag('AttachedBinaryObject'):
-        doc.asis(x.generateXML())
+    with tag(name):
+      if self.__monitoringLocationIdentity is None:
+        raise WQXException("Attribute 'MonitoringLocationIdentity' is required.")
+      doc.asis(self.__monitoringLocationIdentity.generateXML('MonitoringLocationIdentity'))
+      if self.__monitoringLocationGeospatial is None:
+        raise WQXException("Attribute 'MonitoringLocationGeospatial' is required.")
+      doc.asis(self.__monitoringLocationGeospatial.generateXML('MonitoringLocationGeospatial'))
+      if self.__wellInformation is not None:
+        doc.asis(self.__wellInformation.generateXML('WellInformation'))
+      for x in self.__attachedBinaryObject:
+        doc.asis(x.generateXML('AttachedBinaryObject'))
 
     return doc.getvalue()

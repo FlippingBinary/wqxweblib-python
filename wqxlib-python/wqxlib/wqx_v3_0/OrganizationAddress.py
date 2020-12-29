@@ -110,24 +110,25 @@ class OrganizationAddress:
   def countyCode(self, val:CountyCode) -> None:
     self.__countyCode = None if val is None else CountyCode(val)
 
-  def generateXML(self):
+  def generateXML(self, name:str = 'OrganizationAddress') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    if self.__addressTypeName is not None:
-      line('AddressTypeName', self.__addressTypeName)
-    if self.__addressText is not None:
-      line('AddressText', self.__addressText)
-    if self.__supplementalAddressText is not None:
-      line('SupplementalAddressText', self.__supplementalAddressText)
-    if self.__localityName is not None:
-      line('LocalityName', self.__localityName)
-    if self.__stateCode is not None:
-      line('StateCode', self.__stateCode)
-    if self.__postalCode is not None:
-      line('PostalCode', self.__postalCode)
-    if self.__countryCode is not None:
-      line('CountryCode', self.__countryCode)
-    if self.__countyCode is not None:
-      line('CountyCode', self.__countyCode)
+    with tag(name):
+      if self.__addressTypeName is not None:
+        line('AddressTypeName', self.__addressTypeName)
+      if self.__addressText is not None:
+        line('AddressText', self.__addressText)
+      if self.__supplementalAddressText is not None:
+        line('SupplementalAddressText', self.__supplementalAddressText)
+      if self.__localityName is not None:
+        line('LocalityName', self.__localityName)
+      if self.__stateCode is not None:
+        line('StateCode', self.__stateCode)
+      if self.__postalCode is not None:
+        line('PostalCode', self.__postalCode)
+      if self.__countryCode is not None:
+        line('CountryCode', self.__countryCode)
+      if self.__countyCode is not None:
+        line('CountyCode', self.__countyCode)
 
     return doc.getvalue()

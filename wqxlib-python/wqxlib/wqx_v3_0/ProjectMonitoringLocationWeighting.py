@@ -141,31 +141,31 @@ class ProjectMonitoringLocationWeighting:
   def commentText(self, val:CommentText) -> None:
     self.__commentText = None if val is None else CommentText(val)
 
-  def generateXML(self):
-    if self.__monitoringLocationIdentifier is None:
-      raise WQXException("Attribute 'monitoringLocationIdentifier' is required.")
-    if self.__locationWeightingFactorMeasure is None:
-      raise WQXException("Attribute 'measureCompact' is required.")
-
+  def generateXML(self, name:str = 'ProjectMonitoringLocationWeighting') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('MonitoringLocationIdentifier', self.__monitoringLocationIdentifier)
-    with tag('LocationWeightingFactorMeasure'):
-      doc.asis(self.__locationWeightingFactorMeasure.generateXML())
-    if self.__statisticalStratumText is not None:
-      line('StatisticalStratumText', self.__statisticalStratumText)
-    if self.__locationCategoryName is not None:
-      line('LocationCategoryName', self.__locationCategoryName)
-    if self.__locationStatusName is not None:
-      line('LocationStatusName', self.__locationStatusName)
-    if self.__referenceLocationTypeCode is not None:
-      line('ReferenceLocationTypeCode', self.__referenceLocationTypeCode)
-    if self.__referenceLocationStartDate is not None:
-      line('ReferenceLocationStartDate', self.__referenceLocationStartDate)
-    if self.__referenceLocationEndDate is not None:
-      line('ReferenceLocationEndDate', self.__referenceLocationEndDate)
-    if self.__referenceLocationCitation is not None:
-      with tag('ReferenceLocationCitation'):
-        doc.asis(self.__referenceLocationCitation.generateXML())
-    if self.__commentText is not None:
-      line('CommentText', self.__commentText)
+    with tag(name):
+      if self.__monitoringLocationIdentifier is None:
+        raise WQXException("Attribute 'monitoringLocationIdentifier' is required.")
+      line('MonitoringLocationIdentifier', self.__monitoringLocationIdentifier)
+      if self.__locationWeightingFactorMeasure is None:
+        raise WQXException("Attribute 'measureCompact' is required.")
+      doc.asis(self.__locationWeightingFactorMeasure.generateXML('LocationWeightingFactorMeasure'))
+      if self.__statisticalStratumText is not None:
+        line('StatisticalStratumText', self.__statisticalStratumText)
+      if self.__locationCategoryName is not None:
+        line('LocationCategoryName', self.__locationCategoryName)
+      if self.__locationStatusName is not None:
+        line('LocationStatusName', self.__locationStatusName)
+      if self.__referenceLocationTypeCode is not None:
+        line('ReferenceLocationTypeCode', self.__referenceLocationTypeCode)
+      if self.__referenceLocationStartDate is not None:
+        line('ReferenceLocationStartDate', self.__referenceLocationStartDate)
+      if self.__referenceLocationEndDate is not None:
+        line('ReferenceLocationEndDate', self.__referenceLocationEndDate)
+      if self.__referenceLocationCitation is not None:
+        doc.asis(self.__referenceLocationCitation.generateXML('ReferenceLocationCitation'))
+      if self.__commentText is not None:
+        line('CommentText', self.__commentText)
+
+    return doc.getvalue()

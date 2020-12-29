@@ -100,28 +100,27 @@ class ActivityLocation:
   def activityLocationDescriptionText(self, val:ActivityLocationDescriptionText) -> None:
     self.__activityLocationDescriptionText = None if val is None else ActivityLocationDescriptionText(val)
 
-  def generateXML(self):
-    if self.__latitudeMeasure is None:
-      raise WQXException("Attribute 'latitudeMeasure' is required.")
-    if self.__longitudeMeasure is None:
-      raise WQXException("Attribute 'longitudeMeasure' is required.")
-    if self.__horizontalCollectionMethodName is None:
-      raise WQXException("Attribute 'horizontalCollectionMethodName' is required.")
-    if self.__horizontalCoordinateReferenceSystemDatumName is None:
-      raise WQXException("Attribute 'horizontalCoordinateReferenceSystemDatumName' is required.")
-
+  def generateXML(self, name:str = 'ActivityLocation') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('LatitudeMeasure', self.__latitudeMeasure)
-    line('LongitudeMeasure', self.__longitudeMeasure)
-    if self.__sourceMapScale is not None:
-      line('SourceMapScale',self.__sourceMapScale)
-    if self.__horizontalAccuracyMeasure is not None:
-      with tag('HorizontalAccuracyMeasure'):
-        doc.asis(self.__horizontalAccuracyMeasure.generateXML())
-    line('HorizontalCollectionMethodName', self.__horizontalCollectionMethodName)
-    line('HorizontalCoordinateReferenceSystemDatumName', self.__horizontalCoordinateReferenceSystemDatumName)
-    if self.__activityLocationDescriptionText is not None:
-      line('ActivityLocationDescriptionText',self.__activityLocationDescriptionText)
+    with tag(name):
+      if self.__latitudeMeasure is None:
+        raise WQXException("Attribute 'latitudeMeasure' is required.")
+      line('LatitudeMeasure', self.__latitudeMeasure)
+      if self.__longitudeMeasure is None:
+        raise WQXException("Attribute 'longitudeMeasure' is required.")
+      line('LongitudeMeasure', self.__longitudeMeasure)
+      if self.__sourceMapScale is not None:
+        line('SourceMapScale',self.__sourceMapScale)
+      if self.__horizontalAccuracyMeasure is not None:
+        doc.asis(self.__horizontalAccuracyMeasure.generateXML('HorizontalAccuracyMeasure'))
+      if self.__horizontalCollectionMethodName is None:
+        raise WQXException("Attribute 'horizontalCollectionMethodName' is required.")
+      line('HorizontalCollectionMethodName', self.__horizontalCollectionMethodName)
+      if self.__horizontalCoordinateReferenceSystemDatumName is None:
+        raise WQXException("Attribute 'horizontalCoordinateReferenceSystemDatumName' is required.")
+      line('HorizontalCoordinateReferenceSystemDatumName', self.__horizontalCoordinateReferenceSystemDatumName)
+      if self.__activityLocationDescriptionText is not None:
+        line('ActivityLocationDescriptionText',self.__activityLocationDescriptionText)
 
     return doc.getvalue()

@@ -122,23 +122,24 @@ class Result:
     else:
       self.__labSamplePreparation = [LabSamplePreparation(val)]
 
-  def generateXML(self):
-    if self.__resultDescription is None:
-      raise WQXException("Attribute 'resultDescription' is required.")
+  def generateXML(self, name:str = 'Result') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('ResultDescription', self.__resultDescription)
-    if self.__biologicalResultDescription is not None:
-      line('BiologicalResultDescription', self.__biologicalResultDescription)
-    for x in self.__attachedBinaryObject:
-      line('AttachedBinaryObject', self.__attachedBinaryObject)
-    if self.__resultAnalyticalMethod is not None:
-      line('ResultAnalyticalMethod', self.__resultAnalyticalMethod)
-    if self.__comparableAnalyticalMethod is not None:
-      line('ComparableAnalyticalMethod', self.__comparableAnalyticalMethod)
-    if self.__resultLabInformation is not None:
-      line('ResultLabInformation', self.__resultLabInformation)
-    for x in self.__labSamplePreparation:
-      line('LabSamplePreparation', self.__labSamplePreparation)
+    with tag(name):
+      if self.__resultDescription is None:
+        raise WQXException("Attribute 'resultDescription' is required.")
+      line('ResultDescription', self.__resultDescription)
+      if self.__biologicalResultDescription is not None:
+        line('BiologicalResultDescription', self.__biologicalResultDescription)
+      for x in self.__attachedBinaryObject:
+        doc.asis(x.generateXML('AttachedBinaryObject'))
+      if self.__resultAnalyticalMethod is not None:
+        line('ResultAnalyticalMethod', self.__resultAnalyticalMethod)
+      if self.__comparableAnalyticalMethod is not None:
+        line('ComparableAnalyticalMethod', self.__comparableAnalyticalMethod)
+      if self.__resultLabInformation is not None:
+        line('ResultLabInformation', self.__resultLabInformation)
+      for x in self.__labSamplePreparation:
+        doc.asis(x.generateXML('LabSamplePreparation'))
 
     return doc.getvalue()

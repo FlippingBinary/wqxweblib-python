@@ -91,24 +91,22 @@ class SampleDescription:
   def hydrologicEvent(self, val:HydrologicEvent) -> None:
     self.__hydrologicEvent = None if val is None else HydrologicEvent(val)
 
-  def generateXML(self):
-    if self.__sampleCollectionEquipmentName is None:
-      raise WQXException("Attribute 'sampleCollectionEquipmentName' is required.")
-
+  def generateXML(self, name:str = 'SampleDescription') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    if self.__sampleCollectionMethod is not None:
-      with tag('SampleCollectionMethod'):
-        doc.asis(self.__sampleCollectionMethod.generateXML())
-    line('SampleCollectionEquipmentName', self.__sampleCollectionEquipmentName)
-    if self.__sampleCollectionEquipmentCommentText is not None:
-      line('SampleCollectionEquipmentCommentText', self.__sampleCollectionEquipmentCommentText)
-    if self.__samplePreparation is not None:
-      with tag('SamplePreparation'):
-        doc.asis(self.__samplePreparation.generateXML())
-    if self.__hydrologicCondition is not None:
-      line('HydrologicCondition', self.__hydrologicCondition)
-    if self.__hydrologicEvent is not None:
-      line('HydrologicEvent', self.__hydrologicEvent)
+    with tag(name):
+      if self.__sampleCollectionMethod is not None:
+        doc.asis(self.__sampleCollectionMethod.generateXML('SampleCollectionMethod'))
+      if self.__sampleCollectionEquipmentName is None:
+        raise WQXException("Attribute 'sampleCollectionEquipmentName' is required.")
+      line('SampleCollectionEquipmentName', self.__sampleCollectionEquipmentName)
+      if self.__sampleCollectionEquipmentCommentText is not None:
+        line('SampleCollectionEquipmentCommentText', self.__sampleCollectionEquipmentCommentText)
+      if self.__samplePreparation is not None:
+        doc.asis(self.__samplePreparation.generateXML('SamplePreparation'))
+      if self.__hydrologicCondition is not None:
+        line('HydrologicCondition', self.__hydrologicCondition)
+      if self.__hydrologicEvent is not None:
+        line('HydrologicEvent', self.__hydrologicEvent)
 
     return doc.getvalue()

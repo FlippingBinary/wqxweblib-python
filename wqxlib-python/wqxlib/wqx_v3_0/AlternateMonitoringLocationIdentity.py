@@ -39,15 +39,15 @@ class AlternateMonitoringLocationIdentity:
   def monitoringLocationIdentifierContext(self, val:MonitoringLocationIdentifierContext) -> None:
     self.__monitoringLocationIdentifierContext = MonitoringLocationIdentifierContext(val)
 
-  def generateXML(self):
-    if self.__monitoringLocationIdentifier is None:
-      raise WQXException("Attribute 'MonitoringLocationIdentifier' is required.")
-    if self.__monitoringLocationIdentifierContext is None:
-      raise WQXException("Attribute 'MonitoringLocationIdentifierContext' is required.")
-
+  def generateXML(self, name:str = 'AlternateMonitoringLocationIdentity') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('MonitoringLocationIdentifier', self.__monitoringLocationIdentifier)
-    line('MonitoringLocationIdentifierContext', self.__monitoringLocationIdentifierContext)
+    with tag(name):
+      if self.__monitoringLocationIdentifier is None:
+        raise WQXException("Attribute 'MonitoringLocationIdentifier' is required.")
+      line('MonitoringLocationIdentifier', self.__monitoringLocationIdentifier)
+      if self.__monitoringLocationIdentifierContext is None:
+        raise WQXException("Attribute 'MonitoringLocationIdentifierContext' is required.")
+      line('MonitoringLocationIdentifierContext', self.__monitoringLocationIdentifierContext)
 
     return doc.getvalue()

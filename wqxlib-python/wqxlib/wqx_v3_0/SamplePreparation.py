@@ -101,23 +101,23 @@ class SamplePreparation:
   def sampleTransportStorageDescription(self, val:SampleTransportStorageDescription) -> None:
     self.__sampleTransportStorageDescription = None if val is None else SampleTransportStorageDescription(val)
 
-  def generateXML(self):
+  def generateXML(self, name:str = 'SamplePreparation') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    if self.__samplePreparationMethod is not None:
-      with tag('SamplePreparationMethod'):
-        doc.asis(self.__samplePreparationMethod.generateXML())
-    if self.__sampleContainerLabelName is not None:
-      line('SampleContainerLabelName', self.__sampleContainerLabelName)
-    if self.__sampleContainerTypeName is not None:
-      line('SampleContainerTypeName', self.__sampleContainerTypeName)
-    if self.__sampleContainerColorName is not None:
-      line('SampleContainerColorName', self.__sampleContainerColorName)
-    if self.__chemicalPreservativeUsedName is not None:
-      line('ChemicalPreservativeUsedName', self.__chemicalPreservativeUsedName)
-    if self.__thermalPreservativeUsedName is not None:
-      line('ThermalPreservativeUsedName', self.__thermalPreservativeUsedName)
-    if self.__sampleTransportStorageDescription is not None:
-      line('SampleTransportStorageDescription', self.__sampleTransportStorageDescription)
+    with tag(name):
+      if self.__samplePreparationMethod is not None:
+        doc.asis(self.__samplePreparationMethod.generateXML('SamplePreparationMethod'))
+      if self.__sampleContainerLabelName is not None:
+        line('SampleContainerLabelName', self.__sampleContainerLabelName)
+      if self.__sampleContainerTypeName is not None:
+        line('SampleContainerTypeName', self.__sampleContainerTypeName)
+      if self.__sampleContainerColorName is not None:
+        line('SampleContainerColorName', self.__sampleContainerColorName)
+      if self.__chemicalPreservativeUsedName is not None:
+        line('ChemicalPreservativeUsedName', self.__chemicalPreservativeUsedName)
+      if self.__thermalPreservativeUsedName is not None:
+        line('ThermalPreservativeUsedName', self.__thermalPreservativeUsedName)
+      if self.__sampleTransportStorageDescription is not None:
+        line('SampleTransportStorageDescription', self.__sampleTransportStorageDescription)
 
     return doc.getvalue()

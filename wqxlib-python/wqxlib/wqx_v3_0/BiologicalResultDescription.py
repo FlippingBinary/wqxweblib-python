@@ -1,3 +1,4 @@
+from typing import List
 from yattag import Doc, indent
 from .FrequencyClassInformation import FrequencyClassInformation
 from .MeasureCompact import MeasureCompact
@@ -27,7 +28,7 @@ class BiologicalResultDescription:
   __groupSummaryCount: GroupSummaryCount
   __groupSummaryWeightMeasure: MeasureCompact
   __taxonomicDetails: TaxonomicDetails
-  __frequencyClassInformation: FrequencyClassInformation
+  __frequencyClassInformation: List[FrequencyClassInformation]
 
   def __init__(self, o=None, *,
     biologicalIntentName:BiologicalIntentName = None,
@@ -159,36 +160,46 @@ class BiologicalResultDescription:
     return self.__frequencyClassInformation
   @frequencyClassInformation.setter
   def frequencyClassInformation(self, val:FrequencyClassInformation) -> None:
-    self.__frequencyClassInformation = None if val is None else FrequencyClassInformation(val)
+    if val is None:
+      self.__frequencyClassInformation = []
+    elif isinstance(val, list):
+      r:List[FrequencyClassInformation] = []
+      for x in val:
+        r.append(FrequencyClassInformation(x))
+      self.__frequencyClassInformation = r
+    else:
+      self.__frequencyClassInformation = [FrequencyClassInformation(val)]
 
 
-  def generateXML(self):
-    if self.__biologicalIntentName is None:
-      raise WQXException("Attribute 'biologicalIntentName' is required.")
-    if self.__subjectTaxonomicName is None:
-      raise WQXException("Attribute 'subjectTaxonomicName' is required.")
-
+  def generateXML(self, name:str = 'BiologicalResultDescription') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('BiologicalIntentName',self.__biologicalIntentName)
-    if self.__biologicalIndividualIdentifier is not None:
-      line('BiologicalIndividualIdentifier', self.__biologicalIndividualIdentifier)
-    line('SubjectTaxonomicName',self.__subjectTaxonomicName)
-    if self.__subjectTaxonomicNameUserSupplied is not None:
-      line('SubjectTaxonomicNameUserSupplied', self.__subjectTaxonomicNameUserSupplied)
-    if self.__subjectTaxonomicNameUserSuppliedReferenceText is not None:
-      line('SubjectTaxonomicNameUserSuppliedReferenceText', self.__subjectTaxonomicNameUserSuppliedReferenceText)
-    if self.__unidentifiedSpeciesIdentifier is not None:
-      line('UnidentifiedSpeciesIdentifier', self.__unidentifiedSpeciesIdentifier)
-    if self.__sampleTissueAnatomyName is not None:
-      line('SampleTissueAnatomyName', self.__sampleTissueAnatomyName)
-    if self.__groupSummaryCount is not None:
-      line('GroupSummaryCount', self.__groupSummaryCount)
-    if self.__groupSummaryWeightMeasure is not None:
-      line('MeasureCompact', self.__groupSummaryWeightMeasure)
-    if self.__taxonomicDetails is not None:
-      line('TaxonomicDetails', self.__taxonomicDetails)
-    for x in self.__frequencyClassInformation:
-      line('FrequencyClassInformation', x)
+    with tag(name):
+      if self.__biologicalIntentName is None:
+        raise WQXException("Attribute 'biologicalIntentName' is required.")
+      line('BiologicalIntentName',self.__biologicalIntentName)
+      if self.__biologicalIndividualIdentifier is not None:
+        line('BiologicalIndividualIdentifier', self.__biologicalIndividualIdentifier)
+      if self.__subjectTaxonomicName is None:
+        raise WQXException("Attribute 'subjectTaxonomicName' is required.")
+      line('SubjectTaxonomicName',self.__subjectTaxonomicName)
+      if self.__subjectTaxonomicNameUserSupplied is not None:
+        line('SubjectTaxonomicNameUserSupplied', self.__subjectTaxonomicNameUserSupplied)
+      if self.__subjectTaxonomicNameUserSuppliedReferenceText is not None:
+        line('SubjectTaxonomicNameUserSuppliedReferenceText', self.__subjectTaxonomicNameUserSuppliedReferenceText)
+      if self.__unidentifiedSpeciesIdentifier is not None:
+        line('UnidentifiedSpeciesIdentifier', self.__unidentifiedSpeciesIdentifier)
+      if self.__sampleTissueAnatomyName is not None:
+        line('SampleTissueAnatomyName', self.__sampleTissueAnatomyName)
+      if self.__groupSummaryCount is not None:
+        line('GroupSummaryCount', self.__groupSummaryCount)
+      if self.__groupSummaryWeightMeasure is not None:
+        line('MeasureCompact', self.__groupSummaryWeightMeasure)
+      if self.__taxonomicDetails is not None:
+        line('TaxonomicDetails', self.__taxonomicDetails)
+      if len(self.__frequencyClassInformation) < 3:
+        raise WQXException("Attribute frequencyClassInformation must be a list of 0 to 3 FrequencyClassInformation objects.")
+      for x in self.__frequencyClassInformation:
+        doc.asis(x.generateXML('FrequencyClassInformation'))
 
     return doc.getvalue()

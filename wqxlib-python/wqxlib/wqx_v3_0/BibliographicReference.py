@@ -94,24 +94,24 @@ class BibliographicReference:
   def ResourceIdentifier(self, val:ResourceIdentifier) -> None:
     self.__ResourceIdentifier = ResourceIdentifier(val)
 
-  def generateXML(self):
-    if self.__resourceTitleName is None:
-      raise WQXException("Attribute 'ResourceTitleName' is required.")
-    if self.__resourceDate is None:
-      raise WQXException("Attribute 'ResourceDate' is required.")
-    if self.__resourceIdentifier is None:
-      raise WQXException("Attribute 'ResourceIdentifier' is required.")
-
+  def generateXML(self, name:str = 'BibliographicReference') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('ResourceTitleName', self.__resourceTitleName)
-    if self.__resourceCreatorName is not None:
-      doc.asis(self.__resourceCreatorName.generateXML())
-    if self.__resourceSubjectText is not None:
-      doc.asis(self.__resourceSubjectText.generateXML())
-    if self.__resourcePublisherName is not None:
-      doc.asis(self.__resourcePublisherName.generateXML())
-    line('ResourceDate', self.__resourceDate)
-    line('ResourceIdentifier', self.__resourceIdentifier)
+    with tag(name):
+      if self.__resourceTitleName is None:
+        raise WQXException("Attribute 'ResourceTitleName' is required.")
+      line('ResourceTitleName', self.__resourceTitleName)
+      if self.__resourceCreatorName is not None:
+        doc.asis(self.__resourceCreatorName.generateXML('ResourceCreatorName'))
+      if self.__resourceSubjectText is not None:
+        doc.asis(self.__resourceSubjectText.generateXML('ResourceSubjectText'))
+      if self.__resourcePublisherName is not None:
+        doc.asis(self.__resourcePublisherName.generateXML('ResourcePublisherName'))
+      if self.__resourceDate is None:
+        raise WQXException("Attribute 'ResourceDate' is required.")
+      line('ResourceDate', self.__resourceDate)
+      if self.__resourceIdentifier is None:
+        raise WQXException("Attribute 'ResourceIdentifier' is required.")
+      line('ResourceIdentifier', self.__resourceIdentifier)
 
     return doc.getvalue()

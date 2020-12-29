@@ -162,37 +162,34 @@ class MonitoringLocationIdentity:
     """The contributing drainage area of a lake, stream, wetland, or estuary site."""
     self.__contributingDrainageAreaMeasure = val
 
-  def generateXML(self):
-    if self.__monitoringLocationIdentifier is None:
-      raise WQXException("Attribute 'MonitoringLocationIdentifier' is required.")
-    if self.__monitoringLocationName is None:
-      raise WQXException("Attribute 'MonitoringLocationName' is required.")
-    if self.__monitoringLocationTypeName is None:
-      raise WQXException("Attribute 'MonitoringLocationTypeName' is required.")
-
+  def generateXML(self, name:str = 'MonitoringLocationIdentity') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('MonitoringLocationIdentifier', self.__monitoringLocationIdentifier)
-    line('MonitoringLocationName', self.__monitoringLocationName)
-    line('MonitoringLocationTypeName', self.__monitoringLocationTypeName)
-    if self.__monitoringLocationDescriptionText is not None:
-      line('MonitoringLocationDescriptionText',self.__monitoringLocationDescriptionText)
-    if self.__hucEightDigitCode is not None:
-      line('HUCEightDigitCode',self.__hucEightDigitCode)
-    if self.__hucTwelveDigitCode is not None:
-      line('HUCTwelveDigitCode',self.__hucTwelveDigitCode)
-    if self.__tribalLandIndicator is not None:
-      line('TribalLandIndicator',self.__tribalLandIndicator)
-    if self.__tribalLandName is not None:
-      line('TribalLandName',self.__tribalLandName)
-    for x in self.__alternateMonitoringLocationIdentity:
-      with tag('AlternateMonitoringLocationIdentity'):
-        doc.asis(x.generateXML())
-    if self.__drainageAreaMeasure is not None:
-      with tag('DrainageAreaMeasure'):
-        doc.asis(self.__drainageAreaMeasure.generateXML())
-    if self.__contributingDrainageAreaMeasure is not None:
-      with tag('ContributingDrainageAreaMeasure'):
-        doc.asis(self.__contributingDrainageAreaMeasure.generateXML())
+    with tag(name):
+      if self.__monitoringLocationIdentifier is None:
+        raise WQXException("Attribute 'MonitoringLocationIdentifier' is required.")
+      line('MonitoringLocationIdentifier', self.__monitoringLocationIdentifier)
+      if self.__monitoringLocationName is None:
+        raise WQXException("Attribute 'MonitoringLocationName' is required.")
+      line('MonitoringLocationName', self.__monitoringLocationName)
+      if self.__monitoringLocationTypeName is None:
+        raise WQXException("Attribute 'MonitoringLocationTypeName' is required.")
+      line('MonitoringLocationTypeName', self.__monitoringLocationTypeName)
+      if self.__monitoringLocationDescriptionText is not None:
+        line('MonitoringLocationDescriptionText',self.__monitoringLocationDescriptionText)
+      if self.__hucEightDigitCode is not None:
+        line('HUCEightDigitCode',self.__hucEightDigitCode)
+      if self.__hucTwelveDigitCode is not None:
+        line('HUCTwelveDigitCode',self.__hucTwelveDigitCode)
+      if self.__tribalLandIndicator is not None:
+        line('TribalLandIndicator',self.__tribalLandIndicator)
+      if self.__tribalLandName is not None:
+        line('TribalLandName',self.__tribalLandName)
+      for x in self.__alternateMonitoringLocationIdentity:
+        doc.asis(x.generateXML('AlternateMonitoringLocationIdentity'))
+      if self.__drainageAreaMeasure is not None:
+        doc.asis(self.__drainageAreaMeasure.generateXML('DrainageAreaMeasure'))
+      if self.__contributingDrainageAreaMeasure is not None:
+        doc.asis(self.__contributingDrainageAreaMeasure.generateXML('ContributingDrainageAreaMeasure'))
 
     return doc.getvalue()

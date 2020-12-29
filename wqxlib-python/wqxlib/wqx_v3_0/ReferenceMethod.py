@@ -81,22 +81,22 @@ class ReferenceMethod:
   def methodDescriptionText(self, val:MethodDescriptionText) -> None:
     self.__methodDescriptionText = None if val is None else MethodDescriptionText(val)
 
-  def generateXML(self):
-    if self.__methodIdentifier is None:
-      raise WQXException("Attribute 'MethodIdentifier' is required.")
-    if self.__methodIdentifierContext is None:
-      raise WQXException("Attribute 'MethodIdentifierContext' is required.")
-    if self.__methodName is None:
-      raise WQXException("Attribute 'MethodName' is required.")
-
+  def generateXML(self, name:str = 'ReferenceMethod') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('MethodIdentifier', self.__methodIdentifier)
-    line('MethodIdentifierContext', self.__methodIdentifierContext)
-    line('MethodName', self.__methodName)
-    if self.__methodQualifierTypeName is not None:
-      line('MethodQualifierTypeName', self.__methodQualifierTypeName)
-    if self.__methodDescriptionText is not None:
-      line('MethodDescriptionText', self.__methodDescriptionText)
+    with tag(name):
+      if self.__methodIdentifier is None:
+        raise WQXException("Attribute 'MethodIdentifier' is required.")
+      line('MethodIdentifier', self.__methodIdentifier)
+      if self.__methodIdentifierContext is None:
+        raise WQXException("Attribute 'MethodIdentifierContext' is required.")
+      line('MethodIdentifierContext', self.__methodIdentifierContext)
+      if self.__methodName is None:
+        raise WQXException("Attribute 'MethodName' is required.")
+      line('MethodName', self.__methodName)
+      if self.__methodQualifierTypeName is not None:
+        line('MethodQualifierTypeName', self.__methodQualifierTypeName)
+      if self.__methodDescriptionText is not None:
+        line('MethodDescriptionText', self.__methodDescriptionText)
 
     return doc.getvalue()

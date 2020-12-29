@@ -78,23 +78,22 @@ class IndexType:
   def indexTypeScaleText(self, val:IndexTypeScaleText) -> None:
     self.__indexTypeScaleText = None if val is None else IndexTypeScaleText(val)
 
-  def generateXML(self):
-    if self.__indexTypeIdentifier is None:
-      raise WQXException("Attribute 'indexTypeIdentifier' is required.")
-    if self.__indexTypeIdentifierContext is None:
-      raise WQXException("Attribute 'indexTypeIdentifierContext' is required.")
-    if self.__indexTypeName is None:
-      raise WQXException("Attribute 'indexTypeName' is required.")
-
+  def generateXML(self, name:str = 'IndexType') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('IndexTypeIdentifier', self.__indexTypeIdentifier)
-    line('IndexTypeIdentifierContext', self.__indexTypeIdentifierContext)
-    line('IndexTypeName', self.__indexTypeName)
-    if self.__indexTypeCitation is not None:
-      with tag('IndexTypeCitation'):
-        doc.asis(self.__indexTypeCitation.generateXML())
-    if self.__indexTypeScaleText is not None:
-      line('IndexTypeScaleText', self.__indexTypeScaleText)
+    with tag(name):
+      if self.__indexTypeIdentifier is None:
+        raise WQXException("Attribute 'indexTypeIdentifier' is required.")
+      line('IndexTypeIdentifier', self.__indexTypeIdentifier)
+      if self.__indexTypeIdentifierContext is None:
+        raise WQXException("Attribute 'indexTypeIdentifierContext' is required.")
+      line('IndexTypeIdentifierContext', self.__indexTypeIdentifierContext)
+      if self.__indexTypeName is None:
+        raise WQXException("Attribute 'indexTypeName' is required.")
+      line('IndexTypeName', self.__indexTypeName)
+      if self.__indexTypeCitation is not None:
+        doc.asis(self.__indexTypeCitation.generateXML('IndexTypeCitation'))
+      if self.__indexTypeScaleText is not None:
+        line('IndexTypeScaleText', self.__indexTypeScaleText)
 
     return doc.getvalue()

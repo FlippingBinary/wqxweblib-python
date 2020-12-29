@@ -11,6 +11,7 @@ from .SimpleContent import (
   TrophicLevelName,
   FunctionalFeedingGroupName
 )
+from ..common import WQXException
 
 class TaxonomicDetails:
   """This section allows for the further definition of user-defined details for taxa."""
@@ -137,26 +138,31 @@ class TaxonomicDetails:
   def taxonomicDetailsCitation(self, val:BibliographicReference) -> None:
     self.__taxonomicDetailsCitation = None if val is None else BibliographicReference(val)
 
-  def generateXML(self):
+  def generateXML(self, name:str = 'TaxonomicDetails') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    if self.__cellFormName is not None:
-      line('CellFormName', self.__cellFormName)
-    if self.__cellShapeName is not None:
-      line('CellShapeName', self.__cellShapeName)
-    for x in self.__HabitName:
-      line('HabitName', x)
-    if self.__voltinismName is not None:
-      line('VoltinismName', self.__voltinismName)
-    if self.__taxonomicPollutionTolerance is not None:
-      line('TaxonomicPollutionTolerance', self.__taxonomicPollutionTolerance)
-    if self.__taxonomicPollutionToleranceScaleText is not None:
-      line('TaxonomicPollutionToleranceScaleText', self.__taxonomicPollutionToleranceScaleText)
-    if self.__trophicLevelName is not None:
-      line('TrophicLevelName', self.__trophicLevelName)
-    for x in self.__FunctionalFeedingGroupName:
-      line('FunctionalFeedingGroupName', x)
-    if self.__taxonomicDetailsCitation is not None:
-      line('TaxonomicDetailsCitation', self.__taxonomicDetailsCitation)
+    with tag(name):
+      if self.__cellFormName is not None:
+        line('CellFormName', self.__cellFormName)
+      if self.__cellShapeName is not None:
+        line('CellShapeName', self.__cellShapeName)
+      if len(self.__habitName) > 3:
+        raise WQXException("Attribute 'habitName' must be a list of 0 to 3 HabitName objects.")
+      for x in self.__habitName:
+        line('HabitName', x)
+      if self.__voltinismName is not None:
+        line('VoltinismName', self.__voltinismName)
+      if self.__taxonomicPollutionTolerance is not None:
+        line('TaxonomicPollutionTolerance', self.__taxonomicPollutionTolerance)
+      if self.__taxonomicPollutionToleranceScaleText is not None:
+        line('TaxonomicPollutionToleranceScaleText', self.__taxonomicPollutionToleranceScaleText)
+      if self.__trophicLevelName is not None:
+        line('TrophicLevelName', self.__trophicLevelName)
+      if len(self.__functionalFeedingGroupName) > 3:
+        raise WQXException("Attribute 'functionalFeedingGroupName' must be a list of 0 to 3 FunctionalFeedingGroupName objects.")
+      for x in self.__functionalFeedingGroupName:
+        line('FunctionalFeedingGroupName', x)
+      if self.__taxonomicDetailsCitation is not None:
+        doc.asis(self.__taxonomicDetailsCitation.generateXML('TaxonomicDetailsCitation'))
 
     return doc.getvalue()

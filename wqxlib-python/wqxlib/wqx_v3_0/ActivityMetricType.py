@@ -90,24 +90,23 @@ class ActivityMetricType:
   def formulaDescriptionText(self, val:FormulaDescriptionText) -> None:
     self.__formulaDescriptionText = None if val is None else FormulaDescriptionText(val)
 
-  def generateXML(self):
-    if self.__metricTypeIdentifier is None:
-      raise WQXException("Attribute 'metricTypeIdentifier' is required.")
-    if self.__metricTypeIdentifierContext is None:
-      raise WQXException("Attribute 'metricTypeIdentifierContext' is required.")
-
+  def generateXML(self, name:str = 'ActivityMetricType') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('MetricTypeIdentifier', self.__metricTypeIdentifier)
-    line('MetricTypeIdentifierContext', self.__metricTypeIdentifierContext)
-    if self.__metricTypeName is not None:
-      line('MetricTypeName', self.__metricTypeName)
-    if self.__metricTypeCitation is not None:
-      with tag('MetricTypeCitation'):
-        doc.asis(self.__metricTypeCitation.generateXML())
-    if self.__metricTypeScaleText is not None:
-      line('MetricTypeScaleText', self.__metricTypeScaleText)
-    if self.__formulaDescriptionText is not None:
-      line('FormulaDescriptionText', self.__formulaDescriptionText)
+    with tag(name):
+      if self.__metricTypeIdentifier is None:
+        raise WQXException("Attribute 'metricTypeIdentifier' is required.")
+      line('MetricTypeIdentifier', self.__metricTypeIdentifier)
+      if self.__metricTypeIdentifierContext is None:
+        raise WQXException("Attribute 'metricTypeIdentifierContext' is required.")
+      line('MetricTypeIdentifierContext', self.__metricTypeIdentifierContext)
+      if self.__metricTypeName is not None:
+        line('MetricTypeName', self.__metricTypeName)
+      if self.__metricTypeCitation is not None:
+        doc.asis(self.__metricTypeCitation.generateXML('MetricTypeCitation'))
+      if self.__metricTypeScaleText is not None:
+        line('MetricTypeScaleText', self.__metricTypeScaleText)
+      if self.__formulaDescriptionText is not None:
+        line('FormulaDescriptionText', self.__formulaDescriptionText)
 
     return doc.getvalue()

@@ -102,28 +102,27 @@ class BiologicalHabitatIndex:
   def monitoringLocationIdentifier(self, val:MonitoringLocationIdentifier) -> None:
     self.__monitoringLocationIdentifier = MonitoringLocationIdentifier(val)
 
-  def generateXML(self):
-    if self.__indexIdentifier is None:
-      raise WQXException("Attribute 'indexIdentifier' is required.")
-    if self.__indexType is None:
-      raise WQXException("Attribute 'indexType' is required.")
-    if self.__indexScore is None:
-      raise WQXException("Attribute 'indexScore' is required.")
-    if self.__monitoringLocationIdentifier is None:
-      raise WQXException("Attribute 'monitoringLocationIdentifier' is required.")
-
+  def generateXML(self, name:str = 'BiologicalHabitatIndex') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('IndexIdentifier', self.__indexIdentifier)
-    with tag('IndexType'):
-      doc.asis(self.__indexType.generateXML())
-    line('IndexScore', self.__indexScore)
-    if self.__indexQualifierCode is not None:
-      line('IndexQualifierCode', self.__indexQualifierCode)
-    if self.__indexCommentText is not None:
-      line('IndexCommentText', self.__indexCommentText)
-    if self.__indexCalculatedDate is not None:
-      line('IndexCalculatedDate', self.__indexCalculatedDate)
-    line('MonitoringLocationIdentifier', self.__monitoringLocationIdentifier)
+    with tag(name):
+      if self.__indexIdentifier is None:
+        raise WQXException("Attribute 'indexIdentifier' is required.")
+      line('IndexIdentifier', self.__indexIdentifier)
+      if self.__indexType is None:
+        raise WQXException("Attribute 'indexType' is required.")
+      doc.asis(self.__indexType.generateXML('IndexType'))
+      if self.__indexScore is None:
+        raise WQXException("Attribute 'indexScore' is required.")
+      line('IndexScore', self.__indexScore)
+      if self.__indexQualifierCode is not None:
+        line('IndexQualifierCode', self.__indexQualifierCode)
+      if self.__indexCommentText is not None:
+        line('IndexCommentText', self.__indexCommentText)
+      if self.__indexCalculatedDate is not None:
+        line('IndexCalculatedDate', self.__indexCalculatedDate)
+      if self.__monitoringLocationIdentifier is None:
+        raise WQXException("Attribute 'monitoringLocationIdentifier' is required.")
+      line('MonitoringLocationIdentifier', self.__monitoringLocationIdentifier)
 
     return doc.getvalue()

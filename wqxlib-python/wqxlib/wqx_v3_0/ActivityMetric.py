@@ -1,3 +1,4 @@
+from typing import List
 from yattag import Doc, indent
 from .ActivityMetricType import ActivityMetricType
 from .MeasureCompact import MeasureCompact
@@ -12,7 +13,7 @@ class ActivityMetric:
   __metricScore: MetricScore
   __metricSamplingPointPlaceInSeries: MetricSamplingPointPlaceInSeries
   __metricCommentText: CommentText
-  __indexIdentifier: IndexIdentifier
+  __indexIdentifier: List[IndexIdentifier]
 
   def __init__(self, o=None, *,
     activityMetricType:ActivityMetricType = None,
@@ -90,29 +91,34 @@ class ActivityMetric:
   def indexIdentifier(self) -> IndexIdentifier:
     return self.__indexIdentifier
   @indexIdentifier.setter
-  def indexIdentifier(self, val:IndexIdentifier) -> None:
-    self.__indexIdentifier = val
+  def indexIdentifier(self, val:Union[IndexIdentifier,List[IndexIdentifier]]) -> None:
+    if val is None:
+      self.__indexIdentifier = []
+    elif isinstance(val, list):
+      r:List[IndexIdentifier] = []
+      for x in val:
+        r.append(IndexIdentifier(x))
+      self.__indexIdentifier = r
+    else:
+      self.__indexIdentifier = [IndexIdentifier(val)]
 
-  def generateXML(self):
-    if self.__activityMetricType is None:
-      raise WQXException("Attribute 'activityMetricType' is required.")
-    if self.__metricScore is None:
-      raise WQXException("Attribute 'metricScore' is required.")
-
+  def generateXML(self, name:str = 'ActivityMetric') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    with tag('ActivityMetricType'):
-      doc.asis(self.__activityMetricType.generateXML())
-    if self.__metricValueMeasure is not None:
-      with tag('MetricValueMeasure'):
-        doc.asis(self.__metricValueMeasure.generateXML())
-    line('MetricScore', self.__metricScore)
-    if self.__metricSamplingPointPlaceInSeries is not None:
-      with tag('MetricSamplingPointPlaceInSeries'):
-        doc.asis(self.__metricSamplingPointPlaceInSeries.generateXML())
-    if self.__metricCommentText is not None:
-      line('MetricCommentText', self.__metricCommentText)
-    if self.__indexIdentifier is not None:
-      line('IndexIdentifier', self.__indexIdentifier)
+    with tag(name):
+      if self.__activityMetricType is None:
+        raise WQXException("Attribute 'activityMetricType' is required.")
+      doc.asis(self.__activityMetricType.generateXML('ActivityMetricType'))
+      if self.__metricValueMeasure is not None:
+        doc.asis(self.__metricValueMeasure.generateXML('MetricValueMeasure'))
+      if self.__metricScore is None:
+        raise WQXException("Attribute 'metricScore' is required.")
+      line('MetricScore', self.__metricScore)
+      if self.__metricSamplingPointPlaceInSeries is not None:
+        doc.asis(self.__metricSamplingPointPlaceInSeries.generateXML('MetricSamplingPointPlaceInSeries'))
+      if self.__metricCommentText is not None:
+        line('MetricCommentText', self.__metricCommentText)
+      for x in self.__indexIdentifier:
+        line('IndexIdentifier', x)
 
     return doc.getvalue()

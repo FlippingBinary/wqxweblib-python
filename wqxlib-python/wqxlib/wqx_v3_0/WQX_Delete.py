@@ -37,9 +37,6 @@ class WQXDelete:
       self.__organizationDelete = [OrganizationDelete(val)]
 
   def generateXML(self, name = 'WQXDelete'):
-    if self.__organizationDelete is None:
-      raise WQXException("Attribute 'organizationDelete' is required.")
-
     doc, tag, text, line = Doc().ttl()
 
     with tag(
@@ -48,6 +45,8 @@ class WQXDelete:
       ('xmlns:xsi','http://www.w3.org/2001/XMLSchema-instance'),
       ('xsi:schemaLocation','http://www.exchangenetwork.net/schema/wqx/3 http://www.exchangenetwork.net/schema/wqx/3/index.xsd')
     ):
+      if self.__organizationDelete is None:
+        raise WQXException("Attribute 'organizationDelete' is required.")
       for x in self.__organizationDelete:
         doc.asis(x.generateXML('OrganizationDelete'))
 

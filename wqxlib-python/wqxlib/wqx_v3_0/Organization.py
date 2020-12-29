@@ -198,47 +198,30 @@ class Organization:
     else:
       self.__activityGroup = [ActivityGroup(val)]
 
-  def generateXML(self):
-    if self.__organizationDescription is None:
-      raise WQXException("Attribute 'organizationDescription' is required.")
-    if len(self.__organizationAddress) > 3:
-      raise WQXException("Attribute 'organizationAddress' must contain 0 to 3 OrganizationAddress objects.")
-    
+  def generateXML(self, name:str = 'Organization') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    with tag('OrganizationDescription'):
-      doc.asis(self.__organizationDescription.generateXML())
-    if self.__electronicAddress is not None:
+    with tag(name):
+      if self.__organizationDescription is None:
+        raise WQXException("Attribute 'organizationDescription' is required.")
+      doc.asis(self.__organizationDescription.generateXML('OrganizationDescription'))
       for x in self.__electronicAddress:
-        with tag('ElectronicAddress'):
-          doc.asis(x.generateXML())
-    if self.__telephonic is not None:
+        doc.asis(x.generateXML('ElectronicAddress'))
       for x in self.__telephonic:
-        with tag('Telephonic'):
-          doc.asis(x.generateXML())
-    if self.__organizationAddress is not None:
+        doc.asis(x.generateXML('Telephonic'))
+      if len(self.__organizationAddress) > 3:
+        raise WQXException("Attribute 'organizationAddress' must contain 0 to 3 OrganizationAddress objects.")
       for x in self.__organizationAddress:
-        with tag('OrganizationAddress'):
-          doc.asis(x.generateXML())
-    if self.__project is not None:
+        doc.asis(x.generateXML('OrganizationAddress'))
       for x in self.__project:
-        with tag('Project'):
-          doc.asis(x.generateXML())
-    if self.__monitoringLocation is not None:
+        doc.asis(x.generateXML('Project'))
       for x in self.__monitoringLocation:
-        with tag('MonitoringLocation'):
-          doc.asis(x.generateXML())
-    if self.__biologicalHabitatIndex is not None:
+        doc.asis(x.generateXML('MonitoringLocation'))
       for x in self.__biologicalHabitatIndex:
-        with tag('BiologicalHabitatIndex'):
-          doc.asis(x.generateXML())
-    if self.__activity is not None:
+        doc.asis(x.generateXML('BiologicalHabitatIndex'))
       for x in self.__activity:
-        with tag('Activity'):
-          doc.asis(x.generateXML())
-    if self.__activityGroup is not None:
+        doc.asis(x.generateXML('Activity'))
       for x in self.__activityGroup:
-        with tag('ActivityGroup'):
-          doc.asis(x.generateXML())
+        doc.asis(x.generateXML('ActivityGroup'))
 
     return doc.getvalue()

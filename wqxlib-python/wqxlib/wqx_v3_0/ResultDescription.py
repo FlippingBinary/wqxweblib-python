@@ -361,60 +361,61 @@ class ResultDescription:
   def recordIdentifierUserSupplied(self, val:RecordIdentifierUserSupplied) -> None:
     self.__recordIdentifierUserSupplied = None if val is None else RecordIdentifierUserSupplied(val)
 
-  def generateXML(self):
+  def generateXML(self, name:str = 'ResultDescription') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    if self.__dataLoggerLineName is not None:
-      line('DataLoggerLineName', self.__dataLoggerLineName)
-    if self.__resultDetectionConditionText is not None:
-      line('ResultDetectionConditionText', self.__resultDetectionConditionText)
-    if self.__characteristicName is not None:
-      line('CharacteristicName', self.__characteristicName)
-    if self.__characteristicNameUserSupplied is not None:
-      line('CharacteristicNameUserSupplied', self.__characteristicNameUserSupplied)
-    if self.__methodSpeciationName is not None:
-      line('MethodSpeciationName', self.__methodSpeciationName)
-    if self.__resultSampleFractionText is not None:
-      line('ResultSampleFractionText', self.__resultSampleFractionText)
-    if self.__resultMeasure is not None:
-      line('ResultMeasure', self.__resultMeasure)
-    if self.__targetCount is not None:
-      line('TargetCount', self.__targetCount)
-    if self.__proportionSampleProcessedNumeric is not None:
-      line('ProportionSampleProcessedNumeric', self.__proportionSampleProcessedNumeric)
-    if self.__resultStatusIdentifier is not None:
-      line('ResultStatusIdentifier', self.__resultStatusIdentifier)
-    if self.__statisticalBaseCode is not None:
-      line('StatisticalBaseCode', self.__statisticalBaseCode)
-    if self.__statisticalNValueNumeric is not None:
-      line('StatisticalNValueNumeric', self.__statisticalNValueNumeric)
-    if self.__resultValueTypeName is not None:
-      line('ResultValueTypeName', self.__resultValueTypeName)
-    if self.__resultWeightBasisText is not None:
-      line('ResultWeightBasisText', self.__resultWeightBasisText)
-    if self.__resultTimeBasisText is not None:
-      line('ResultTimeBasisText', self.__resultTimeBasisText)
-    if self.__resultTemperatureBasisText is not None:
-      line('ResultTemperatureBasisText', self.__resultTemperatureBasisText)
-    if self.__resultParticleSizeBasisText is not None:
-      line('ResultParticleSizeBasisText', self.__resultParticleSizeBasisText)
-    if self.__dataQuality is not None:
-      line('DataQuality', self.__dataQuality)
-    if self.__resultCommentText is not None:
-      line('ResultCommentText', self.__resultCommentText)
-    if self.__resultDepthHeightMeasure is not None:
-      line('ResultDepthHeightMeasure', self.__resultDepthHeightMeasure)
-    if self.__resultDepthAltitudeReferencePointText is not None:
-      line('ResultDepthAltitudeReferencePointText', self.__resultDepthAltitudeReferencePointText)
-    if self.__resultSamplingPointName is not None:
-      line('ResultSamplingPointName', self.__resultSamplingPointName)
-    if self.__resultSamplingPointType is not None:
-      line('ResultSamplingPointType', self.__resultSamplingPointType)
-    if self.__resultSamplingPointPlaceInSeries is not None:
-      line('ResultSamplingPointPlaceInSeries', self.__resultSamplingPointPlaceInSeries)
-    if self.__resultSamplingPointCommentText is not None:
-      line('ResultSamplingPointCommentText', self.__resultSamplingPointCommentText)
-    if self.__recordIdentifierUserSupplied is not None:
-      line('RecordIdentifierUserSupplied', self.__recordIdentifierUserSupplied)
+    with tag(name):
+      if self.__dataLoggerLineName is not None:
+        line('DataLoggerLineName', self.__dataLoggerLineName)
+      if self.__resultDetectionConditionText is not None:
+        line('ResultDetectionConditionText', self.__resultDetectionConditionText)
+      if self.__characteristicName is not None:
+        line('CharacteristicName', self.__characteristicName)
+      if self.__characteristicNameUserSupplied is not None:
+        line('CharacteristicNameUserSupplied', self.__characteristicNameUserSupplied)
+      if self.__methodSpeciationName is not None:
+        line('MethodSpeciationName', self.__methodSpeciationName)
+      if self.__resultSampleFractionText is not None:
+        line('ResultSampleFractionText', self.__resultSampleFractionText)
+      if self.__resultMeasure is not None:
+        doc.asis(self.__resultMeasure.generateXML('ResultMeasure'))
+      if self.__targetCount is not None:
+        line('TargetCount', self.__targetCount)
+      if self.__proportionSampleProcessedNumeric is not None:
+        line('ProportionSampleProcessedNumeric', self.__proportionSampleProcessedNumeric)
+      if self.__resultStatusIdentifier is not None:
+        line('ResultStatusIdentifier', self.__resultStatusIdentifier)
+      if self.__statisticalBaseCode is not None:
+        line('StatisticalBaseCode', self.__statisticalBaseCode)
+      if self.__statisticalNValueNumeric is not None:
+        line('StatisticalNValueNumeric', self.__statisticalNValueNumeric)
+      if self.__resultValueTypeName is not None:
+        line('ResultValueTypeName', self.__resultValueTypeName)
+      if self.__resultWeightBasisText is not None:
+        line('ResultWeightBasisText', self.__resultWeightBasisText)
+      if self.__resultTimeBasisText is not None:
+        line('ResultTimeBasisText', self.__resultTimeBasisText)
+      if self.__resultTemperatureBasisText is not None:
+        line('ResultTemperatureBasisText', self.__resultTemperatureBasisText)
+      if self.__resultParticleSizeBasisText is not None:
+        line('ResultParticleSizeBasisText', self.__resultParticleSizeBasisText)
+      if self.__dataQuality is not None:
+        doc.asis(self.__dataQuality.generateXML('DataQuality'))
+      if self.__resultCommentText is not None:
+        line('ResultCommentText', self.__resultCommentText)
+      if self.__resultDepthHeightMeasure is not None:
+        doc.asis(self.__resultDepthHeightMeasure.generateXML('ResultDepthHeightMeasure'))
+      if self.__resultDepthAltitudeReferencePointText is not None:
+        line('ResultDepthAltitudeReferencePointText', self.__resultDepthAltitudeReferencePointText)
+      if self.__resultSamplingPointName is not None:
+        line('ResultSamplingPointName', self.__resultSamplingPointName)
+      if self.__resultSamplingPointType is not None:
+        line('ResultSamplingPointType', self.__resultSamplingPointType)
+      if self.__resultSamplingPointPlaceInSeries is not None:
+        line('ResultSamplingPointPlaceInSeries', self.__resultSamplingPointPlaceInSeries)
+      if self.__resultSamplingPointCommentText is not None:
+        line('ResultSamplingPointCommentText', self.__resultSamplingPointCommentText)
+      if self.__recordIdentifierUserSupplied is not None:
+        line('RecordIdentifierUserSupplied', self.__recordIdentifierUserSupplied)
 
     return doc.getvalue()

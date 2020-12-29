@@ -63,19 +63,19 @@ class OrganizationDescription:
   def tribalCode(self, val:TribalCode) -> None:
     self.__tribalCode = None if val is None else TribalCode(val)
 
-  def generateXML(self):
-    if self.organizationIdentifier is None:
-      raise WQXException("Attribute 'organizationIdentifier' is required.")
-    if self.organizationFormalName is None:
-      raise WQXException("Attribute 'organizationFormalName' is required.")
-
+  def generateXML(self, name:str = 'OrganizationDescription') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('OrganizationIdentifier', self.__organizationIdentifier)
-    line('OrganizationFormalName', self.__organizationFormalName)
-    if self.__organizationDescriptionText is not None:
-      line('OrganizationDescriptionText', self.__organizationDescriptionText)
-    if self.__tribalCode is not None:
-      line('TribalCode', self.__tribalCode)
+    with tag(name):
+      if self.organizationIdentifier is None:
+        raise WQXException("Attribute 'organizationIdentifier' is required.")
+      line('OrganizationIdentifier', self.__organizationIdentifier)
+      if self.organizationFormalName is None:
+        raise WQXException("Attribute 'organizationFormalName' is required.")
+      line('OrganizationFormalName', self.__organizationFormalName)
+      if self.__organizationDescriptionText is not None:
+        line('OrganizationDescriptionText', self.__organizationDescriptionText)
+      if self.__tribalCode is not None:
+        line('TribalCode', self.__tribalCode)
 
     return doc.getvalue()

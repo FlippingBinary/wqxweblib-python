@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 from yattag import Doc, indent
 from .DetectionQuantitationLimit import DetectionQuantitationLimit
 from .SimpleContent import (
@@ -23,7 +23,7 @@ class ResultLabInformation:
   __analysisEndDate: AnalysisEndDate
   __analysisEndTime: WQXTime
   __laboratoryCommentText: LaboratoryCommentText
-  __resultDetectionQuantitationLimit: DetectionQuantitationLimit
+  __resultDetectionQuantitationLimit: List[DetectionQuantitationLimit]
   __laboratorySampleSplitRatio: LaboratorySampleSplitRatio
   __laboratoryAccreditationIndicator: LaboratoryAccreditationIndicator
   __laboratoryAccreditationAuthorityName: LaboratoryAccreditationAuthorityName
@@ -138,11 +138,17 @@ class ResultLabInformation:
     """Information that describes one of a variety of detection or quantitation limits determined in a laboratory."""
     return self.__resultDetectionQuantitationLimit
   @resultDetectionQuantitationLimit.setter
-  def resultDetectionQuantitationLimit(self, val:List[DetectionQuantitationLimit]) -> None:
+  def resultDetectionQuantitationLimit(self, val:Union[DetectionQuantitationLimit,List[DetectionQuantitationLimit]]) -> None:
     """Information that describes one of a variety of detection or quantitation limits determined in a laboratory."""
-    if not isinstance(val, list):
-      raise TypeError("Attribute resultDetectionQuantitationLimit must be a list of 0 or more values.")
-    self.__resultDetectionQuantitationLimit = val
+    if val is None:
+      self.__resultDetectionQuantitationLimit = []
+    elif isinstance(val, list):
+      r:List[DetectionQuantitationLimit] = []
+      for x in val:
+        r.append(DetectionQuantitationLimit(x))
+      self.__resultDetectionQuantitationLimit = r
+    else:
+      self.__resultDetectionQuantitationLimit = [DetectionQuantitationLimit(val)]
 
   @property
   def laboratorySampleSplitRatio(self) -> LaboratorySampleSplitRatio:
@@ -179,32 +185,33 @@ class ResultLabInformation:
   def taxonomistAccreditationAuthorityName(self, val:TaxonomistAccreditationAuthorityName) -> None:
     self.__taxonomistAccreditationAuthorityName = None if val is None else TaxonomistAccreditationAuthorityName(val)
 
-  def generateXML(self):
+  def generateXML(self, name:str = 'ResultLabInformation') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    if self.__laboratoryName is not None:
-      line('LaboratoryName', self.__laboratoryName)
-    if self.__analysisStartDate is not None:
-      line('AnalysisStartDate', self.__analysisStartDate)
-    if self.__analysisStartTime is not None:
-      line('WQXTime', self.__analysisStartTime)
-    if self.__analysisEndDate is not None:
-      line('AnalysisEndDate', self.__analysisEndDate)
-    if self.__analysisEndTime is not None:
-      line('WQXTime', self.__analysisEndTime)
-    if self.__laboratoryCommentText is not None:
-      line('LaboratoryCommentText', self.__laboratoryCommentText)
-    for x in self.__resultDetectionQuantitationLimit:
-      line('DetectionQuantitationLimit', x)
-    if self.__laboratorySampleSplitRatio is not None:
-      line('LaboratorySampleSplitRatio', self.__laboratorySampleSplitRatio)
-    if self.__laboratoryAccreditationIndicator is not None:
-      line('LaboratoryAccreditationIndicator', self.__laboratoryAccreditationIndicator)
-    if self.__laboratoryAccreditationAuthorityName is not None:
-      line('LaboratoryAccreditationAuthorityName', self.__laboratoryAccreditationAuthorityName)
-    if self.__taxonomistAccreditationIndicator is not None:
-      line('TaxonomistAccreditationIndicator', self.__taxonomistAccreditationIndicator)
-    if self.__taxonomistAccreditationAuthorityName is not None:
-      line('TaxonomistAccreditationAuthorityName', self.__taxonomistAccreditationAuthorityName)
+    with tag(name):
+      if self.__laboratoryName is not None:
+        line('LaboratoryName', self.__laboratoryName)
+      if self.__analysisStartDate is not None:
+        line('AnalysisStartDate', self.__analysisStartDate)
+      if self.__analysisStartTime is not None:
+        doc.asis(self.__analysisStartTime.generateXML('AnalysisStartTime'))
+      if self.__analysisEndDate is not None:
+        line('AnalysisEndDate', self.__analysisEndDate)
+      if self.__analysisEndTime is not None:
+        doc.asis(self.__analysisEndTime.generateXML('AnalysisEndTime'))
+      if self.__laboratoryCommentText is not None:
+        line('LaboratoryCommentText', self.__laboratoryCommentText)
+      for x in self.__resultDetectionQuantitationLimit:
+        doc.asis(x.generateXML('ResultDetectionQuantitationLimit'))
+      if self.__laboratorySampleSplitRatio is not None:
+        line('LaboratorySampleSplitRatio', self.__laboratorySampleSplitRatio)
+      if self.__laboratoryAccreditationIndicator is not None:
+        line('LaboratoryAccreditationIndicator', self.__laboratoryAccreditationIndicator)
+      if self.__laboratoryAccreditationAuthorityName is not None:
+        line('LaboratoryAccreditationAuthorityName', self.__laboratoryAccreditationAuthorityName)
+      if self.__taxonomistAccreditationIndicator is not None:
+        line('TaxonomistAccreditationIndicator', self.__taxonomistAccreditationIndicator)
+      if self.__taxonomistAccreditationAuthorityName is not None:
+        line('TaxonomistAccreditationAuthorityName', self.__taxonomistAccreditationAuthorityName)
 
     return doc.getvalue()

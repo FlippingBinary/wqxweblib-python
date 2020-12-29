@@ -98,20 +98,21 @@ class LabSamplePreparation:
   def substanceDilutionFactor(self, val:SubstanceDilutionFactor) -> None:
     self.__substanceDilutionFactor = None if val is None else SubstanceDilutionFactor(val)
 
-  def generateXML(self):
+  def generateXML(self, name:str = 'LabSamplePreparation') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    if self.__labSamplePreparationMethod is not None:
-      line('ReferenceMethod', self.__labSamplePreparationMethod)
-    if self.__preparationStartDate is not None:
-      line('PreparationStartDate', self.__preparationStartDate)
-    if self.__preparationStartTime is not None:
-      line('WQXTime', self.__preparationStartTime)
-    if self.__preparationEndDate is not None:
-      line('PreparationEndDate', self.__preparationEndDate)
-    if self.__preparationEndTime is not None:
-      line('WQXTime', self.__preparationEndTime)
-    if self.__substanceDilutionFactor is not None:
-      line('SubstanceDilutionFactor', self.__substanceDilutionFactor)
+    with tag(name):
+      if self.__labSamplePreparationMethod is not None:
+        line('ReferenceMethod', self.__labSamplePreparationMethod)
+      if self.__preparationStartDate is not None:
+        line('PreparationStartDate', self.__preparationStartDate)
+      if self.__preparationStartTime is not None:
+        line('WQXTime', self.__preparationStartTime)
+      if self.__preparationEndDate is not None:
+        line('PreparationEndDate', self.__preparationEndDate)
+      if self.__preparationEndTime is not None:
+        line('WQXTime', self.__preparationEndTime)
+      if self.__substanceDilutionFactor is not None:
+        line('SubstanceDilutionFactor', self.__substanceDilutionFactor)
 
     return doc.getvalue()

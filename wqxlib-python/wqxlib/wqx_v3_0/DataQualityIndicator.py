@@ -74,18 +74,19 @@ class DataQuality:
   def lowerConfidenceLimitValue(self, val:LowerConfidenceLimitValue) -> None:
     self.__lowerConfidenceLimitValue = None if val is None else LowerConfidenceLimitValue(val)
 
-  def generateXML(self):
+  def generateXML(self, name:str = 'DataQuality') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    if self.__precisionValue is not None:
-      line('PrecisionValue', self.__precisionValue)
-    if self.__biasValue is not None:
-      line('BiasValue', self.__biasValue)
-    if self.__confidenceIntervalValue is not None:
-      line('ConfidenceIntervalValue', self.__confidenceIntervalValue)
-    if self.__upperConfidenceLimitValue is not None:
-      line('UpperConfidenceLimitValue', self.__upperConfidenceLimitValue)
-    if self.__lowerConfidenceLimitValue is not None:
-      line('LowerConfidenceLimitValue', self.__lowerConfidenceLimitValue)
+    with tag(name):
+      if self.__precisionValue is not None:
+        line('PrecisionValue', self.__precisionValue)
+      if self.__biasValue is not None:
+        line('BiasValue', self.__biasValue)
+      if self.__confidenceIntervalValue is not None:
+        line('ConfidenceIntervalValue', self.__confidenceIntervalValue)
+      if self.__upperConfidenceLimitValue is not None:
+        line('UpperConfidenceLimitValue', self.__upperConfidenceLimitValue)
+      if self.__lowerConfidenceLimitValue is not None:
+        line('LowerConfidenceLimitValue', self.__lowerConfidenceLimitValue)
 
     return doc.getvalue()

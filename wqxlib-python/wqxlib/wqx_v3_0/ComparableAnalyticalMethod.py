@@ -55,17 +55,17 @@ class ComparableAnalyticalMethod:
   def methodModificationText(self, val:MethodModificationText) -> None:
     self.__methodModificationText = None if val is None else MethodModificationText(val)
 
-  def generateXML(self):
-    if self.__methodIdentifier is None:
-      raise WQXException("Attribute 'methodIdentifier' is required.")
-    if self.__methodIdentifierContext is None:
-      raise WQXException("Attribute 'methodIdentifierContext' is required.")
-
+  def generateXML(self, name:str = 'ComparableAnalyticalMethod') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('MethodIdentifier', self.__methodIdentifier)
-    line('MethodIdentifierContext', self.__methodIdentifierContext)
-    if self.__methodModificationText is not None:
-      line('MethodModificationText', self.__methodModificationText)
+    with tag(name):
+      if self.__methodIdentifier is None:
+        raise WQXException("Attribute 'methodIdentifier' is required.")
+      line('MethodIdentifier', self.__methodIdentifier)
+      if self.__methodIdentifierContext is None:
+        raise WQXException("Attribute 'methodIdentifierContext' is required.")
+      line('MethodIdentifierContext', self.__methodIdentifierContext)
+      if self.__methodModificationText is not None:
+        line('MethodModificationText', self.__methodModificationText)
 
     return doc.getvalue()

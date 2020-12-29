@@ -121,30 +121,25 @@ class BiologicalHabitatCollectionInformation:
   def netInformation(self, val:NetInformation) -> None:
     self.__netInformation = val
 
-  def generateXML(self):
+  def generateXML(self, name:str = 'BiologicalHabitatCollectionInformation') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    if self.__collectionDuration is not None:
-      with tag('CollectionDuration'):
-        doc.asis(self.__collectionDuration.generateXML())
-    if self.__collectionArea is not None:
-      with tag('CollectionArea'):
-        doc.asis(self.__collectionArea.generateXML())
-    if self.__collectionEffort is not None:
-      with tag('CollectionEffort'):
-        doc.asis(self.__collectionEffort.generateXML())
-    if self.__reachLengthMeasure is not None:
-      with tag('ReachLengthMeasure'):
-        doc.asis(self.__reachLengthMeasure.generateXML())
-    if self.__reachWidthMeasure is not None:
-      with tag('ReachWidthMeasure'):
-        doc.asis(self.__reachWidthMeasure.generateXML())
-    if self.__collectionDescriptionText is not None:
-      line('CollectionDescriptionText', self.__collectionDescriptionText)
-    if self.__passCount is not None:
-      line('PassCount', self.__passCount)
-    if self.__netInformation is not None:
-      with tag('NetInformation'):
-        doc.asis(self.__netInformation.generateXML())
+    with tag(name):
+      if self.__collectionDuration is not None:
+        doc.asis(self.__collectionDuration.generateXML('CollectionDuration'))
+      if self.__collectionArea is not None:
+        doc.asis(self.__collectionArea.generateXML('CollectionArea'))
+      if self.__collectionEffort is not None:
+        doc.asis(self.__collectionEffort.generateXML('CollectionEffort'))
+      if self.__reachLengthMeasure is not None:
+        doc.asis(self.__reachLengthMeasure.generateXML('ReachLengthMeasure'))
+      if self.__reachWidthMeasure is not None:
+        doc.asis(self.__reachWidthMeasure.generateXML('ReachWidthMeasure'))
+      if self.__collectionDescriptionText is not None:
+        line('CollectionDescriptionText', self.__collectionDescriptionText)
+      if self.__passCount is not None:
+        line('PassCount', self.__passCount)
+      if self.__netInformation is not None:
+        doc.asis(self.__netInformation.generateXML('NetInformation'))
 
     return doc.getvalue()

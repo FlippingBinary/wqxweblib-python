@@ -178,39 +178,39 @@ class MonitoringLocationGeospatial:
   def countyCode(self, val:CountyCode) -> None:
     self.__countyCode = None if val is None else CountyCode(val)
 
-  def generateXML(self):
-    if self.__latitudeMeasure is None:
-      raise WQXException("Attribute 'LatitudeMeasure' is required.")
-    if self.__longitudeMeasure is None:
-      raise WQXException("Attribute 'LongitudeMeasure' is required.")
-    if self.__horizontalCollectionMethodName is None:
-      raise WQXException("Attribute 'HorizontalCollectionMethodName' is required.")
-    if self.__horizontalCoordinateReferenceSystemDatumName is None:
-      raise WQXException("Attribute 'HorizontalCoordinateReferenceSystemDatumName' is required.")
-
+  def generateXML(self, name:str = 'MonitoringLocationGeospatial') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('LatitudeMeasure', self.__latitudeMeasure)
-    line('LongitudeMeasure', self.__longitudeMeasure)
-    if self.__sourceMapScale is not None:
-      line('SourceMapScale', self.__sourceMapScale)
-    if self.__horizontalAccuracyMeasure is not None:
-      line('HorizontalAccuracyMeasure', self.__horizontalAccuracyMeasure)
-    if self.__verticalAccuracyMeasure is not None:
-      line('VerticalAccuracyMeasure', self.__verticalAccuracyMeasure)
-    line('HorizontalCollectionMethodName', self.__horizontalCollectionMethodName)
-    line('HorizontalCoordinateReferenceSystemDatumName', self.__horizontalCoordinateReferenceSystemDatumName)
-    if self.__verticalMeasure is not None:
-      line('VerticalMeasure', self.__verticalMeasure)
-    if self.__verticalCollectionMethodName is not None:
-      line('VerticalCollectionMethodName', self.__verticalCollectionMethodName)
-    if self.__verticalCoordinateReferenceSystemDatumName is not None:
-      line('VerticalCoordinateReferenceSystemDatumName', self.__verticalCoordinateReferenceSystemDatumName)
-    if self.__countryCode is not None:
-      line('CountryCode', self.__countryCode)
-    if self.__stateCode is not None:
-      line('StateCode', self.__stateCode)
-    if self.__countyCode is not None:
-      line('CountyCode', self.__countyCode)
+    with tag(name):
+      if self.__latitudeMeasure is None:
+        raise WQXException("Attribute 'LatitudeMeasure' is required.")
+      line('LatitudeMeasure', self.__latitudeMeasure)
+      if self.__longitudeMeasure is None:
+        raise WQXException("Attribute 'LongitudeMeasure' is required.")
+      line('LongitudeMeasure', self.__longitudeMeasure)
+      if self.__sourceMapScale is not None:
+        line('SourceMapScale', self.__sourceMapScale)
+      if self.__horizontalAccuracyMeasure is not None:
+        line('HorizontalAccuracyMeasure', self.__horizontalAccuracyMeasure)
+      if self.__verticalAccuracyMeasure is not None:
+        line('VerticalAccuracyMeasure', self.__verticalAccuracyMeasure)
+      if self.__horizontalCollectionMethodName is None:
+        raise WQXException("Attribute 'HorizontalCollectionMethodName' is required.")
+      line('HorizontalCollectionMethodName', self.__horizontalCollectionMethodName)
+      if self.__horizontalCoordinateReferenceSystemDatumName is None:
+        raise WQXException("Attribute 'HorizontalCoordinateReferenceSystemDatumName' is required.")
+      line('HorizontalCoordinateReferenceSystemDatumName', self.__horizontalCoordinateReferenceSystemDatumName)
+      if self.__verticalMeasure is not None:
+        line('VerticalMeasure', self.__verticalMeasure)
+      if self.__verticalCollectionMethodName is not None:
+        line('VerticalCollectionMethodName', self.__verticalCollectionMethodName)
+      if self.__verticalCoordinateReferenceSystemDatumName is not None:
+        line('VerticalCoordinateReferenceSystemDatumName', self.__verticalCoordinateReferenceSystemDatumName)
+      if self.__countryCode is not None:
+        line('CountryCode', self.__countryCode)
+      if self.__stateCode is not None:
+        line('StateCode', self.__stateCode)
+      if self.__countyCode is not None:
+        line('CountyCode', self.__countyCode)
 
     return doc.getvalue()

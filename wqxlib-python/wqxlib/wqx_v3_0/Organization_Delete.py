@@ -129,12 +129,11 @@ class OrganizationDelete:
       self.__indexIdentifier = [IndexIdentifier(val)]
 
   def generateXML(self, name = 'OrganizationDelete'):
-    if self.__organizationIdentifier is None:
-      raise WQXException("Attribute 'organizationIdentifier' is required.")
-
     doc, tag, text, line = Doc().ttl()
 
     with tag(name):
+      if self.__organizationIdentifier is None:
+        raise WQXException("Attribute 'organizationIdentifier' is required.")
       line('OrganizationIdentifier', self.__organizationIdentifier)
       for x in self.__projectIdentifier:
         line('ProjectIdentifier', x)

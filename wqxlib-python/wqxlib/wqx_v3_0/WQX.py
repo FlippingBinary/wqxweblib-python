@@ -32,9 +32,6 @@ class WQX:
 
 
   def generateXML(self, name = 'WQX'):
-    if self.__organization is None:
-      raise WQXException("Attribute 'organization' is required.")
-
     doc, tag, text, line = Doc().ttl()
 
     with tag(
@@ -43,7 +40,8 @@ class WQX:
       ('xmlns:xsi','http://www.w3.org/2001/XMLSchema-instance'),
       ('xsi:schemaLocation','http://www.exchangenetwork.net/schema/wqx/3 http://www.exchangenetwork.net/schema/wqx/3/index.xsd')
     ):
-      with tag('Organization'):
-        doc.asis(self.__organization.generateXML())
+      if self.__organization is None:
+        raise WQXException("Attribute 'organization' is required.")
+      doc.asis(self.__organization.generateXML('Organization'))
 
     return doc.getvalue()

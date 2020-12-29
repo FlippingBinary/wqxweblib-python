@@ -39,10 +39,13 @@ class ElectronicAddress:
   def electronicAddressTypeName(self, val:ElectronicAddressTypeName) -> None:
     self.__electronicAddressTypeName = None if val is None else ElectronicAddressTypeName(val)
 
-  def generateXML(self):
+  def generateXML(self, name:str = 'ElectronicAddress') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('ElectronicAddressText', self.__electronicAddressText)
-    line('ElectronicAddressTypeName', self.__electronicAddressTypeName)
+    with tag(name):
+      if self.__electronicAddressText is not None:
+        line('ElectronicAddressText', self.__electronicAddressText)
+      if self.__electronicAddressTypeName is not None:
+        line('ElectronicAddressTypeName', self.__electronicAddressTypeName)
 
     return doc.getvalue()

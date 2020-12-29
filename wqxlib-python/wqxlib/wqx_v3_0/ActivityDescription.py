@@ -259,57 +259,53 @@ class ActivityDescription:
     """General comments concerning the activity."""
     self.__activityCommentText = None if val is None else CommentText(val)
 
-  def generateXML(self):
+  def generateXML(self, name:str = 'ActivityDescription') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    if self.__activityIdentifier is None:
-      raise WQXException("Attribute 'activityIdentifier' is required.")
-    line('ActivityIdentifier', self.__activityIdentifier)
-    if self.__activityIdentifierUserSupplied is not None:
-      line('ActivityIdentifierUserSupplied', self.__activityIdentifierUserSupplied)
-    if self.__activityTypeCode is None:
-      raise WQXException("Attribute 'activityTypeCode' is required.")
-    line('ActivityTypeCode', self.__activityTypeCode)
-    if self.__activityMediaName is None:
-      raise WQXException("Attribute 'activityMediaName' is required.")
-    line('ActivityMediaName', self.__activityMediaName)
-    if self.__activityMediaSubdivisionName is not None:
-      line('ActivityMediaSubdivisionName', self.__activityMediaSubdivisionName)
-    if self.__activityStartDate is None:
-      raise WQXException("Attribute 'activityStartDate' is required.")
-    line('ActivityStartDate', self.__activityStartDate)
-    if self.__activityStartTime is not None:
-      with tag('ActivityStartTime'):
-        doc.asis(self.__activityStartTime.generateXML())
-    if self.__activityEndDate is not None:
-      line('ActivityEndDate', self.__activityEndDate)
-    if self.__activityEndTime is not None:
-      with tag('ActivityEndTime'):
-        doc.asis(self.__activityEndTime.generateXML())
-    if self.__activityRelativeDepthName is not None:
-      line('ActivityRelativeDepthName', self.__activityRelativeDepthName)
-    if self.__activityDepthHeightMeasure is not None:
-      with tag('ActivityDepthHeightMeasure'):
-        doc.asis(self.__activityDepthHeightMeasure.generateXML())
-    if self.__activityTopDepthHeightMeasure is not None:
-      with tag('ActivityTopDepthHeightMeasure'):
-        doc.asis(self.__activityTopDepthHeightMeasure.generateXML())
-    if self.__activityBottomDepthHeightMeasure is not None:
-      with tag('ActivityBottomDepthHeightMeasure'):
-        doc.asis(self.__activityBottomDepthHeightMeasure.generateXML())
-    if self.__activityDepthAltitudeReferencePointText is not None:
-      line('ActivityDepthAltitudeReferencePointText', self.__activityDepthAltitudeReferencePointText)
-    if len(self.__projectIdentifier) < 1:
-      raise WQXException("Attribute 'projectIdentifier' must be a list of 1 or more ProjectIdentifier objects.")
-    for x in self.__projectIdentifier:
-      line('ProjectIdentifier', x)
-    for x in self.__activityConductingOrganizationText:
-      line('ActivityConductingOrganizationText', x)
-    if self.__monitoringLocationIdentifier is not None:
-      line('MonitoringLocationIdentifier', self.__monitoringLocationIdentifier)
-    if self.__samplingComponentName is not None:
-      line('SamplingComponentName', self.__samplingComponentName)
-    if self.__activityCommentText is not None:
-      line('ActivityCommentText', self.__activityCommentText)
+    with tag(name):
+      if self.__activityIdentifier is None:
+        raise WQXException("Attribute 'activityIdentifier' is required.")
+      line('ActivityIdentifier', self.__activityIdentifier)
+      if self.__activityIdentifierUserSupplied is not None:
+        line('ActivityIdentifierUserSupplied', self.__activityIdentifierUserSupplied)
+      if self.__activityTypeCode is None:
+        raise WQXException("Attribute 'activityTypeCode' is required.")
+      line('ActivityTypeCode', self.__activityTypeCode)
+      if self.__activityMediaName is None:
+        raise WQXException("Attribute 'activityMediaName' is required.")
+      line('ActivityMediaName', self.__activityMediaName)
+      if self.__activityMediaSubdivisionName is not None:
+        line('ActivityMediaSubdivisionName', self.__activityMediaSubdivisionName)
+      if self.__activityStartDate is None:
+        raise WQXException("Attribute 'activityStartDate' is required.")
+      line('ActivityStartDate', self.__activityStartDate)
+      if self.__activityStartTime is not None:
+        doc.asis(self.__activityStartTime.generateXML('ActivityStartTime'))
+      if self.__activityEndDate is not None:
+        line('ActivityEndDate', self.__activityEndDate)
+      if self.__activityEndTime is not None:
+        doc.asis(self.__activityEndTime.generateXML('ActivityEndTime'))
+      if self.__activityRelativeDepthName is not None:
+        line('ActivityRelativeDepthName', self.__activityRelativeDepthName)
+      if self.__activityDepthHeightMeasure is not None:
+        doc.asis(self.__activityDepthHeightMeasure.generateXML('ActivityDepthHeightMeasure'))
+      if self.__activityTopDepthHeightMeasure is not None:
+        doc.asis(self.__activityTopDepthHeightMeasure.generateXML('ActivityTopDepthHeightMeasure'))
+      if self.__activityBottomDepthHeightMeasure is not None:
+        doc.asis(self.__activityBottomDepthHeightMeasure.generateXML('ActivityBottomDepthHeightMeasure'))
+      if self.__activityDepthAltitudeReferencePointText is not None:
+        line('ActivityDepthAltitudeReferencePointText', self.__activityDepthAltitudeReferencePointText)
+      if len(self.__projectIdentifier) < 1:
+        raise WQXException("Attribute 'projectIdentifier' must be a list of 1 or more ProjectIdentifier objects.")
+      for x in self.__projectIdentifier:
+        line('ProjectIdentifier', x)
+      for x in self.__activityConductingOrganizationText:
+        line('ActivityConductingOrganizationText', x)
+      if self.__monitoringLocationIdentifier is not None:
+        line('MonitoringLocationIdentifier', self.__monitoringLocationIdentifier)
+      if self.__samplingComponentName is not None:
+        line('SamplingComponentName', self.__samplingComponentName)
+      if self.__activityCommentText is not None:
+        line('ActivityCommentText', self.__activityCommentText)
 
     return doc.getvalue()

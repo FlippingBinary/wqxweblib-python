@@ -84,24 +84,20 @@ class NetInformation:
     """A measurement of the current during biological monitoring sample collection."""
     self.__currentSpeedMeasure = val
 
-  def generateXML(self):
-    if self.__netTypeName is None:
-      raise WQXException("Attribute 'netTypeName' is required.")
-
+  def generateXML(self, name:str = 'NetInformation') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('NetTypeName', self.__netTypeName)
-    if self.__netSurfaceAreaMeasure is not None:
-      with tag('NetSurfaceAreaMeasure'):
-        doc.asis(self.__netSurfaceAreaMeasure.generateXML())
-    if self.__netMeshSizeMeasure is not None:
-      with tag('NetMeshSizeMeasure'):
-        doc.asis(self.__netMeshSizeMeasure.generateXML())
-    if self.__boatSpeedMeasure is not None:
-      with tag('BoatSpeedMeasure'):
-        doc.asis(self.__boatSpeedMeasure.generateXML())
-    if self.__currentSpeedMeasure is not None:
-      with tag('CurrentSpeedMeasure'):
-        doc.asis(self.__currentSpeedMeasure.generateXML())
+    with tag(name):
+      if self.__netTypeName is None:
+        raise WQXException("Attribute 'netTypeName' is required.")
+      line('NetTypeName', self.__netTypeName)
+      if self.__netSurfaceAreaMeasure is not None:
+        doc.asis(self.__netSurfaceAreaMeasure.generateXML('NetSurfaceAreaMeasure'))
+      if self.__netMeshSizeMeasure is not None:
+        doc.asis(self.__netMeshSizeMeasure.generateXML('NetMeshSizeMeasure'))
+      if self.__boatSpeedMeasure is not None:
+        doc.asis(self.__boatSpeedMeasure.generateXML('BoatSpeedMeasure'))
+      if self.__currentSpeedMeasure is not None:
+        doc.asis(self.__currentSpeedMeasure.generateXML('CurrentSpeedMeasure'))
 
     return doc.getvalue()

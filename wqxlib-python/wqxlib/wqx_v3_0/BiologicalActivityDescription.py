@@ -63,17 +63,17 @@ class BiologicalActivityDescription:
   def habitatSelectionMethod(self, val:HabitatSelectionMethod) -> None:
     self.__habitatSelectionMethod = None if val is None else HabitatSelectionMethod(val)
 
-  def generateXML(self):
+  def generateXML(self, name:str = 'BiologicalActivityDescription') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    if self.__assemblageSampledName is not None:
-      line('AssemblageSampledName', self.__assemblageSampledName)
-    if self.__biologicalHabitatCollectionInformation is not None:
-      with tag('BiologicalHabitatCollectionInformation'):
-        doc.asis(self.__biologicalHabitatCollectionInformation.generateXML())
-    if self.__toxicityTestType is not None:
-      line('ToxicityTestType', self.__toxicityTestType)
-    if self.__habitatSelectionMethod is not None:
-      line('HabitatSelectionMethod', self.__habitatSelectionMethod)
+    with tag(name):
+      if self.__assemblageSampledName is not None:
+        line('AssemblageSampledName', self.__assemblageSampledName)
+      if self.__biologicalHabitatCollectionInformation is not None:
+        doc.asis(self.__biologicalHabitatCollectionInformation.generateXML('BiologicalHabitatCollectionInformation'))
+      if self.__toxicityTestType is not None:
+        line('ToxicityTestType', self.__toxicityTestType)
+      if self.__habitatSelectionMethod is not None:
+        line('HabitatSelectionMethod', self.__habitatSelectionMethod)
 
     return doc.getvalue()

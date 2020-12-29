@@ -63,20 +63,20 @@ class AquiferInformation:
   def localAquiferDescriptionText(self, val:LocalAquiferDescriptionText) -> None:
     self.__localAquiferDescriptionText = None if val is None else LocalAquiferDescriptionText(val)
 
-  def generateXML(self):
-    if self.__localAquiferCode is None:
-      raise WQXException("Attribute 'localAquiferCode' is required.")
-    if self.__localAquiferCodeContext is None:
-      raise WQXException("Attribute 'localAquiferCodeContext' is required.")
-    if self.__localAquiferName is None:
-      raise WQXException("Attribute 'localAquiferName' is required.")
-
+  def generateXML(self, name:str = 'AquiferInformation') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('LocalAquiferCode', self.__localAquiferCode)
-    line('LocalAquiferCodeContext', self.__localAquiferCodeContext)
-    line('LocalAquiferName', self.__localAquiferName)
-    if self.__localAquiferDescriptionText is not None:
-      line('LocalAquiferDescriptionText', self.__localAquiferDescriptionText)
+    with tag(name):
+      if self.__localAquiferCode is None:
+        raise WQXException("Attribute 'localAquiferCode' is required.")
+      line('LocalAquiferCode', self.__localAquiferCode)
+      if self.__localAquiferCodeContext is None:
+        raise WQXException("Attribute 'localAquiferCodeContext' is required.")
+      line('LocalAquiferCodeContext', self.__localAquiferCodeContext)
+      if self.__localAquiferName is None:
+        raise WQXException("Attribute 'localAquiferName' is required.")
+      line('LocalAquiferName', self.__localAquiferName)
+      if self.__localAquiferDescriptionText is not None:
+        line('LocalAquiferDescriptionText', self.__localAquiferDescriptionText)
 
     return doc.getvalue()

@@ -55,18 +55,17 @@ class DetectionQuantitationLimit:
   def detectionQuantitationLimitCommentText(self, val:DetectionQuantitationLimitCommentText) -> None:
     self.__detectionQuantitationLimitCommentText = None if val is None else DetectionQuantitationLimitCommentText(val)
 
-  def generateXML(self):
-    if self.__detectionQuantitationLimitTypeName is None:
-      raise WQXException("Attribute 'detectionQuantitationLimitTypeName' is required.")
-    if self.__detectionQuantitationLimitMeasure is None:
-      raise WQXException("Attribute 'detectionQuantitationLimitMeasure' is required.")
-
+  def generateXML(self, name:str = 'DetectionQuantitationLimit') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('DetectionQuantitationLimitTypeName', self.__detectionQuantitationLimitTypeName)
-    with tag('MeasureCompact'):
-      doc.asis(self.__detectionQuantitationLimitMeasure.generateXML())
-    if self.__detectionQuantitationLimitCommentText is not None:
-      line('DetectionQuantitationLimitCommentText', self.__detectionQuantitationLimitCommentText)
+    with tag(name):
+      if self.__detectionQuantitationLimitTypeName is None:
+        raise WQXException("Attribute 'detectionQuantitationLimitTypeName' is required.")
+      line('DetectionQuantitationLimitTypeName', self.__detectionQuantitationLimitTypeName)
+      if self.__detectionQuantitationLimitMeasure is None:
+        raise WQXException("Attribute 'detectionQuantitationLimitMeasure' is required.")
+      doc.asis(self.__detectionQuantitationLimitMeasure.generateXML('DetectionQuantitationLimitMeasure'))
+      if self.__detectionQuantitationLimitCommentText is not None:
+        line('DetectionQuantitationLimitCommentText', self.__detectionQuantitationLimitCommentText)
 
     return doc.getvalue()

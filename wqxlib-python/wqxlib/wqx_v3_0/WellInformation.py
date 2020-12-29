@@ -117,29 +117,26 @@ class WellInformation:
     """Depth below land surface datum (LSD) to the bottom of the hole on completion of drilling. ie. completion depth"""
     self.__wellDepthMeasure = None if val is None else MeasureCompact(val)
 
-  def generateXML(self):
-    if self.__wellTypeText is None:
-      raise WQXException("Attribute 'WellTypeText' is required.")
-
+  def generateXML(self, name:str = 'WellInformation') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('WellTypeText', self.__wellTypeText)
-    if self.__aquiferTypeName is not None:
-      line('AquiferTypeName', self.__aquiferTypeName)
-    if self.__nationalAquiferCode is not None:
-      line('NationalAquiferCode', self.__nationalAquiferCode)
-    if self.__aquiferInformation is not None:
-      with tag('AquiferInformation'):
-        doc.asis(self.__aquiferInformation.generateXML())
-    if self.__formationTypeText is not None:
-      line('FormationTypeText', self.__formationTypeText)
-    if self.__wellHoleDepthMeasure is not None:
-      with tag('WellHoleDepthMeasure'):
-        doc.asis(self.__wellHoleDepthMeasure.generateXML())
-    if self.__constructionDate is not None:
-      line('ConstructionDate', self.__constructionDate)
-    if self.__wellDepthMeasure is not None:
-      with tag('WellDepthMeasure'):
-        doc.asis(self.__wellDepthMeasure.generateXML())
+    with tag(name):
+      if self.__wellTypeText is None:
+        raise WQXException("Attribute 'wellTypeText' is required.")
+      line('WellTypeText', self.__wellTypeText)
+      if self.__aquiferTypeName is not None:
+        line('AquiferTypeName', self.__aquiferTypeName)
+      if self.__nationalAquiferCode is not None:
+        line('NationalAquiferCode', self.__nationalAquiferCode)
+      if self.__aquiferInformation is not None:
+        doc.asis(self.__aquiferInformation.generateXML('AquiferInformation'))
+      if self.__formationTypeText is not None:
+        line('FormationTypeText', self.__formationTypeText)
+      if self.__wellHoleDepthMeasure is not None:
+        doc.asis(self.__wellHoleDepthMeasure.generateXML('WellHoleDepthMeasure'))
+      if self.__constructionDate is not None:
+        line('ConstructionDate', self.__constructionDate)
+      if self.__wellDepthMeasure is not None:
+        doc.asis(self.__wellDepthMeasure.generateXML('WellDepthMeasure'))
 
     return doc.getvalue()

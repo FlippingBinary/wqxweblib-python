@@ -40,7 +40,6 @@ class FrequencyClassInformation:
       self.lowerClassBoundValue = lowerClassBoundValue
       self.upperClassBoundValue = upperClassBoundValue
 
-
   @property
   def frequencyClassDescriptorCode(self) -> FrequencyClassDescriptorCode:
     return self.__frequencyClassDescriptorCode
@@ -69,18 +68,18 @@ class FrequencyClassInformation:
   def upperClassBoundValue(self, val:UpperClassBoundValue) -> None:
     self.__upperClassBoundValue = None if val is None else UpperClassBoundValue(val)
 
-  def generateXML(self):
-    if self.__frequencyClassDescriptorCode is None:
-      raise WQXException("Attribute 'frequencyClassDescriptorCode' is required.")
-
+  def generateXML(self, name:str = 'FrequencyClassInformation') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line( 'FrequencyClassDescriptorCode', self.__frequencyClassDescriptorCode)
-    if self.__frequencyClassDescriptorUnitCode is not None:
-      line('FrequencyClassDescriptorUnitCode', self.__frequencyClassDescriptorUnitCode)
-    if self.__lowerClassBoundValue is not None:
-      line('LowerClassBoundValue', self.__lowerClassBoundValue)
-    if self.__upperClassBoundValue is not None:
-      line('UpperClassBoundValue', self.__upperClassBoundValue)
+    with tag(name):
+      if self.__frequencyClassDescriptorCode is None:
+        raise WQXException("Attribute 'frequencyClassDescriptorCode' is required.")
+      line( 'FrequencyClassDescriptorCode', self.__frequencyClassDescriptorCode)
+      if self.__frequencyClassDescriptorUnitCode is not None:
+        line('FrequencyClassDescriptorUnitCode', self.__frequencyClassDescriptorUnitCode)
+      if self.__lowerClassBoundValue is not None:
+        line('LowerClassBoundValue', self.__lowerClassBoundValue)
+      if self.__upperClassBoundValue is not None:
+        line('UpperClassBoundValue', self.__upperClassBoundValue)
 
     return doc.getvalue()

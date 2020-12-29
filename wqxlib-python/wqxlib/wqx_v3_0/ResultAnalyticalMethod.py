@@ -6,6 +6,7 @@ from .SimpleContent import (
   MethodQualifierTypeName,
   MethodDescriptionText
 )
+from ..common import WQXException
 
 class ResultAnalyticalMethod:
   """Identifies the procedures, processes, and references required to determine the analytical methods used to obtain a result."""
@@ -81,16 +82,21 @@ class ResultAnalyticalMethod:
     self.__methodDescriptionText = None if val is None else MethodDescriptionText(val)
 
 
-  def generateXML(self):
+  def generateXML(self, name:str = 'ResultAnalyticalMethod') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('MethodIdentifier', self.__methodIdentifier)
-    line('MethodIdentifierContext', self.__methodIdentifierContext)
-    if self.__methodName is not None:
-      line('MethodName', self.__methodName)
-    if self.__methodQualifierTypeName is not None:
-      line('MethodQualifierTypeName', self.__methodQualifierTypeName)
-    if self.__methodDescriptionText is not None:
-      line('MethodDescriptionText', self.__methodDescriptionText)
+    with tag(name):
+      if self.__methodIdentifier is None:
+        raise WQXException("Attribute 'methodIdentifier' is required.")
+      line('MethodIdentifier', self.__methodIdentifier)
+      if self.__methodIdentifierContext is None:
+        raise WQXException("Attribute 'methodIdentifierContext' is required.")
+      line('MethodIdentifierContext', self.__methodIdentifierContext)
+      if self.__methodName is not None:
+        line('MethodName', self.__methodName)
+      if self.__methodQualifierTypeName is not None:
+        line('MethodQualifierTypeName', self.__methodQualifierTypeName)
+      if self.__methodDescriptionText is not None:
+        line('MethodDescriptionText', self.__methodDescriptionText)
 
     return doc.getvalue()

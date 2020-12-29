@@ -50,14 +50,15 @@ class Telephonic:
   def telephoneExtensionNumberText(self, val:TelephoneExtensionNumberText) -> None:
     self.__telephoneExtensionNumberText = None if val is None else TelephoneExtensionNumberText(val)
 
-  def generateXML(self):
+  def generateXML(self, name:str = 'Telephonic') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    if self.__telephoneNumberText is not None:
-      line('TelephoneNumberText', self.__telephoneNumberText)
-    if self.__telephoneNumberTypeName is not None:
-      line('TelephoneNumberTypeName', self.__telephoneNumberTypeName)
-    if self.__telephoneExtensionNumberText is not None:
-      line('TelephoneExtensionNumberText', self.__telephoneExtensionNumberText)
+    with tag(name):
+      if self.__telephoneNumberText is not None:
+        line('TelephoneNumberText', self.__telephoneNumberText)
+      if self.__telephoneNumberTypeName is not None:
+        line('TelephoneNumberTypeName', self.__telephoneNumberTypeName)
+      if self.__telephoneExtensionNumberText is not None:
+        line('TelephoneExtensionNumberText', self.__telephoneExtensionNumberText)
 
     return doc.getvalue()

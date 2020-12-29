@@ -42,15 +42,15 @@ class WQXTime:
   def timeZoneCode(self, val:TimeZoneCode) -> None:
     self.__timeZoneCode = TimeZoneCode(val)
 
-  def generateXML(self):
-    if self.__time is None:
-      raise WQXException("Attribute 'time' is required.")
-    if self.__timeZoneCode is None:
-      raise WQXException("Attribute 'timeZoneCode' is required.")
-
+  def generateXML(self, name:str = 'WQXTime') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('Time', self.__time)
-    line('TimeZoneCode', self.__timeZoneCode)
+    with tag(name):
+      if self.__time is None:
+        raise WQXException("Attribute 'time' is required.")
+      line('Time', self.__time)
+      if self.__timeZoneCode is None:
+        raise WQXException("Attribute 'timeZoneCode' is required.")
+      line('TimeZoneCode', self.__timeZoneCode)
 
     return doc.getvalue()

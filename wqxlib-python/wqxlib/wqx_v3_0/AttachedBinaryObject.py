@@ -42,15 +42,15 @@ class AttachedBinaryObject:
   def binaryObjectFileTypeCode(self, val:BinaryObjectFileTypeCode) -> None:
     self.__binaryObjectFileTypeCode = BinaryObjectFileTypeCode(val)
 
-  def generateXML(self):
-    if self.__binaryObjectFileName is None:
-      raise WQXException("Attribute 'binaryObjectFileName' is required.")
-    if self.__binaryObjectFileTypeCode is None:
-      raise WQXException("Attribute 'binaryObjectFileTypeCode' is required.")
-
+  def generateXML(self, name:str = 'AttachedBinaryObject') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('BinaryObjectFileName', self.__binaryObjectFileName)
-    line('BinaryObjectFileTypeCode', self.__binaryObjectFileTypeCode)
+    with tag(name):
+      if self.__binaryObjectFileName is None:
+        raise WQXException("Attribute 'binaryObjectFileName' is required.")
+      line('BinaryObjectFileName', self.__binaryObjectFileName)
+      if self.__binaryObjectFileTypeCode is None:
+        raise WQXException("Attribute 'binaryObjectFileTypeCode' is required.")
+      line('BinaryObjectFileTypeCode', self.__binaryObjectFileTypeCode)
 
     return doc.getvalue()

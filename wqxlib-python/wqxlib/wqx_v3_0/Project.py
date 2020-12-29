@@ -130,29 +130,27 @@ class Project:
     else:
       self.__projectMonitoringLocationWeighting = [ProjectMonitoringLocationWeighting(val)]
 
-  def generateXML(self):
-    if self.__projectIdentifier is None:
-      raise WQXException("Attribute 'projectIdentifier' is required.")
-    if self.__projectName is None:
-      raise WQXException("Attribute 'projectName' is required.")
-
+  def generateXML(self, name:str = 'Project') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('ProjectIdentifier', self.__projectIdentifier)
-    line('ProjectName', self.__projectName)
-    if self.__projectDescriptionText is not None:
-      line('ProjectDescriptionText', self.__projectDescriptionText)
-    if self.__samplingDesignTypeCode is not None:
-      line('SamplingDesignTypeCode', self.__samplingDesignTypeCode)
-    if self.__qAPPApprovedIndicator is not None:
-      line('QAPPApprovedIndicator', self.__qAPPApprovedIndicator)
-    if self.__qAPPApprovalAgencyName is not None:
-      line('QAPPApprovalAgencyName', self.__qAPPApprovalAgencyName)
-    for x in self.__attachedBinaryObject:
-      with tag('AttachedBinaryObject'):
-        doc.asis(x.generateXML())
-    for x in self.__projectMonitoringLocationWeighting:
-      with tag('ProjectMonitoringLocationWeighting'):
-        doc.asis(x.generateXML())
+    with tag(name):
+      if self.__projectIdentifier is None:
+        raise WQXException("Attribute 'projectIdentifier' is required.")
+      line('ProjectIdentifier', self.__projectIdentifier)
+      if self.__projectName is None:
+        raise WQXException("Attribute 'projectName' is required.")
+      line('ProjectName', self.__projectName)
+      if self.__projectDescriptionText is not None:
+        line('ProjectDescriptionText', self.__projectDescriptionText)
+      if self.__samplingDesignTypeCode is not None:
+        line('SamplingDesignTypeCode', self.__samplingDesignTypeCode)
+      if self.__qAPPApprovedIndicator is not None:
+        line('QAPPApprovedIndicator', self.__qAPPApprovedIndicator)
+      if self.__qAPPApprovalAgencyName is not None:
+        line('QAPPApprovalAgencyName', self.__qAPPApprovalAgencyName)
+      for x in self.__attachedBinaryObject:
+        doc.asis(x.generateXML('AttachedBinaryObject'))
+      for x in self.__projectMonitoringLocationWeighting:
+        doc.asis(x.generateXML('ProjectMonitoringLocationWeighting'))
 
     return doc.getvalue()

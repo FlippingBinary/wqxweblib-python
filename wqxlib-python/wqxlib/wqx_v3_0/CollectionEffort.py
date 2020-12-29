@@ -39,15 +39,15 @@ class CollectionEffort:
   def gearProcedureUnitCode(self, val:GearProcedureUnitCode) -> None:
     self.__gearProcedureUnitCode = GearProcedureUnitCode(val)
 
-  def generateXML(self):
-    if self.__measureValue is None:
-      raise WQXException("Attribute 'measureValue' is required.")
-    if self.__gearProcedureUnitCode is None:
-      raise WQXException("Attribute 'gearProcedureUnitCode' is required.")
-
+  def generateXML(self, name:str = 'CollectionEffort') -> str:
     doc, tag, text, line = Doc().ttl()
 
-    line('MeasureValue', self.__measureValue)
-    line('GearProcedureUnitCode', self.__gearProcedureUnitCode)
+    with tag(name):
+      if self.__measureValue is None:
+        raise WQXException("Attribute 'measureValue' is required.")
+      line('MeasureValue', self.__measureValue)
+      if self.__gearProcedureUnitCode is None:
+        raise WQXException("Attribute 'gearProcedureUnitCode' is required.")
+      line('GearProcedureUnitCode', self.__gearProcedureUnitCode)
 
     return doc.getvalue()

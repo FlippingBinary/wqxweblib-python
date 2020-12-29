@@ -130,28 +130,22 @@ class Activity:
     else:
       self.__result = [Result(val)]
 
-  def generateXML(self):
+  def generateXML(self, name:str = 'Activity') -> str:
 
     doc, tag, text, line = Doc().ttl()
 
-    with tag('ActivityDescription'):
+    with tag(name):
       if self.__activityDescription is None:
         raise WQXException("Attribute 'activityDescription' is required.")
-      doc.asis(self.__activityDescription.generateXML())
-    with tag('ActivityLocation'):
-      doc.asis(self.__activityLocation.generateXML())
-    with tag('BiologicalActivityDescription'):
-      doc.asis(self.__biologicalActivityDescription.generateXML())
-    with tag('SampleDescription'):
-      doc.asis(self.__sampleDescription.generateXML())
-    for x in self.__activityMetric:
-      with tag('ActivityMetric'):
-        doc.asis(x.generateXML())
-    for x in self.__attachedBinaryObject:
-      with tag('AttachedBinaryObject'):
-        doc.asis(x.generateXML())
-    for x in self.__result:
-      with tag('Result'):
-        doc.asis(x.generateXML())
+      doc.asis(self.__activityDescription.generateXML('ActivityDescription'))
+      doc.asis(self.__activityLocation.generateXML('ActivityLocation'))
+      doc.asis(self.__biologicalActivityDescription.generateXML('BiologicalActivityDescription'))
+      doc.asis(self.__sampleDescription.generateXML('SampleDescription'))
+      for x in self.__activityMetric:
+        doc.asis(x.generateXML('ActivityMetric'))
+      for x in self.__attachedBinaryObject:
+        doc.asis(x.generateXML('AttachedBinaryObject'))
+      for x in self.__result:
+        doc.asis(x.generateXML('Result'))
 
     return doc.getvalue()

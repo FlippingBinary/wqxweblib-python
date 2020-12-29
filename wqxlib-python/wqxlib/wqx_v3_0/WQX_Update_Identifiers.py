@@ -37,9 +37,6 @@ class WQXUpdateIdentifiers:
       self.__updateIdentifiers = [UpdateIdentifiers(val)]
 
   def generateXML(self, name = 'UpdateIdentifiers') -> str:
-    if self.__updateIdentifiers is None:
-      raise WQXException("Attribute 'updateIdentifiers' is required.")
-
     doc, tag, text, line = Doc().ttl()
 
     with tag(
@@ -48,6 +45,8 @@ class WQXUpdateIdentifiers:
       ('xmlns:xsi','http://www.w3.org/2001/XMLSchema-instance'),
       ('xsi:schemaLocation','http://www.exchangenetwork.net/schema/wqx/3 http://www.exchangenetwork.net/schema/wqx/3/index.xsd')
     ):
+      if len(self.__updateIdentifiers) < 1:
+        raise WQXException("Attribute 'updateIdentifiers' must be a list of 1 or more UpdateIdentifiers objects.")
       for x in self.__updateIdentifiers:
         doc.asis(x.generateXML('UpdateIdentifiers'))
 

@@ -197,7 +197,7 @@ class BiologicalResultDescription:
         line('MeasureCompact', self.__groupSummaryWeightMeasure)
       if self.__taxonomicDetails is not None:
         line('TaxonomicDetails', self.__taxonomicDetails)
-      if len(self.__frequencyClassInformation) < 3:
+      if len(self.__frequencyClassInformation) > 3:
         raise WQXException("Attribute frequencyClassInformation must be a list of 0 to 3 FrequencyClassInformation objects.")
       for x in self.__frequencyClassInformation:
         doc.asis(x.generateXML('FrequencyClassInformation'))

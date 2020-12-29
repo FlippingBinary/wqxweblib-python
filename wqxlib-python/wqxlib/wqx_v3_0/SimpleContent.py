@@ -1,4 +1,5 @@
 from datetime import date, time
+from decimal import Decimal
 from typing import Union
 
 # TODO: Add docstrings from XSD annotations.
@@ -361,13 +362,13 @@ class LaboratoryName(str):
     if len(o) > 60:
       raise ValueError("LaboratoryName must be between 0 and 60 characters.")
 
-class LatitudeMeasure(float):
-  def __str__(self):
-    s = str(float(self)).split('.')
+class LatitudeMeasure(Decimal):
+  def __new__(self, o):
+    s = str(o).split('.')
     totalDigits = 12
     fractionDigits = 10
     s[1] = s[1][0:min(len(s[1]),fractionDigits,max(totalDigits-len(s[0]),0))]
-    return '.'.join(s)
+    return super().__new__(self,'.'.join(s))
 
 class LocalityName(str):
   def __init__(self, o=''):
@@ -385,12 +386,12 @@ class LocationStatusName(str):
       raise ValueError("LocationStatusName must be between 0 and 15 characters.")
 
 class LongitudeMeasure(float):
-  def __str__(self):
-    s = str(float(self)).split('.')
+  def __new__(self,o):
+    s = str(o).split('.')
     totalDigits = 14
     fractionDigits = 11
     s[1] = s[1][0:min(len(s[1]),fractionDigits,max(totalDigits-len(s[0]),0))]
-    return '.'.join(s)
+    return super().__new__(self,'.'.join(s))
 
 class LowerConfidenceLimitValue(str):
   def __init__(self, o=''):

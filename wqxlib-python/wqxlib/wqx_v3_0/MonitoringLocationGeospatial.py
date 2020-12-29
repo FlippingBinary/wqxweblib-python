@@ -195,10 +195,10 @@ class MonitoringLocationGeospatial:
     with tag(name):
       if self.__latitudeMeasure is None:
         raise WQXException("Attribute 'LatitudeMeasure' is required.")
-      line('LatitudeMeasure', self.__latitudeMeasure)
+      line('LatitudeMeasure', str(self.__latitudeMeasure))
       if self.__longitudeMeasure is None:
         raise WQXException("Attribute 'LongitudeMeasure' is required.")
-      line('LongitudeMeasure', self.__longitudeMeasure)
+      line('LongitudeMeasure', str(self.__longitudeMeasure))
       if self.__sourceMapScale is not None:
         line('SourceMapScale', self.__sourceMapScale)
       if self.__horizontalAccuracyMeasure is not None:

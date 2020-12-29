@@ -1,13 +1,13 @@
-from yattag import Doc, indent
-from .SimpleContent import (
-  ResourceTitleName,
-  ResourceCreatorName,
-  ResourceSubjectText,
-  ResourcePublisherName,
-  ResourceDate,
-  ResourceIdentifier
-)
 from ..common import WQXException
+from .SimpleContent import (
+  ResourceCreatorName,
+  ResourceDate,
+  ResourceIdentifier,
+  ResourcePublisherName,
+  ResourceSubjectText,
+  ResourceTitleName
+)
+from yattag import Doc
 
 class BibliographicReference:
   """The descriptors used to identify and catalog an object."""

@@ -1,5 +1,4 @@
-from typing import List, Union
-from yattag import Doc, indent
+from ..common import WQXException
 from .AttachedBinaryObject import AttachedBinaryObject
 from .BiologicalResultDescription import BiologicalResultDescription
 from .ComparableAnalyticalMethod import ComparableAnalyticalMethod
@@ -7,7 +6,8 @@ from .LabSamplePreparation import LabSamplePreparation
 from .ResultAnalyticalMethod import ResultAnalyticalMethod
 from .ResultDescription import ResultDescription
 from .ResultLabInformation import ResultLabInformation
-from ..common import WQXException
+from typing import List, Union
+from yattag import Doc
 
 class Result:
   """Describes the results of a field measurement, observation, or laboratory analysis."""

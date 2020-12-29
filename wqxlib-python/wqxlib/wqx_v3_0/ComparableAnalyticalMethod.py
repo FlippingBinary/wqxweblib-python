@@ -1,10 +1,10 @@
-from yattag import Doc, indent
+from ..common import WQXException
 from .SimpleContent import (
   MethodIdentifier,
   MethodIdentifierContext,
-  MethodModificationText,
+  MethodModificationText
 )
-from ..common import WQXException
+from yattag import Doc
 
 class ComparableAnalyticalMethod:
   """Identifies the procedures, processes, and references required to determine the analytical methods used to obtain a result."""

@@ -1,32 +1,32 @@
-from yattag import Doc, indent
 from .DataQualityIndicator import DataQuality
 from .Measure import Measure
 from .MeasureCompact import MeasureCompact
 from .SimpleContent import (
-  DataLoggerLineName,
-  ResultDetectionConditionText,
   CharacteristicName,
   CharacteristicNameUserSupplied,
+  CommentText,
+  DataLoggerLineName,
+  DepthAltitudeReferencePointText,
   MethodSpeciationName,
-  ResultSampleFractionText,
-  TargetCount,
   ProportionSampleProcessedNumeric,
+  RecordIdentifierUserSupplied,
+  ResultDetectionConditionText,
+  ResultParticleSizeBasisText,
+  ResultSampleFractionText,
+  ResultSamplingPointCommentText,
+  ResultSamplingPointName,
+  ResultSamplingPointPlaceInSeries,
+  ResultSamplingPointType,
   ResultStatusIdentifier,
-  StatisticalBaseCode,
-  StatisticalNValueNumeric,
+  ResultTemperatureBasisText,
+  ResultTimeBasisText,
   ResultValueTypeName,
   ResultWeightBasisText,
-  ResultTimeBasisText,
-  ResultTemperatureBasisText,
-  ResultParticleSizeBasisText,
-  CommentText,
-  DepthAltitudeReferencePointText,
-  ResultSamplingPointName,
-  ResultSamplingPointType,
-  ResultSamplingPointPlaceInSeries,
-  ResultSamplingPointCommentText,
-  RecordIdentifierUserSupplied
+  StatisticalBaseCode,
+  StatisticalNValueNumeric,
+  TargetCount
 )
+from yattag import Doc
 
 class ResultDescription:
   """Describes the results of a field measurement, observation, or laboratory analysis."""

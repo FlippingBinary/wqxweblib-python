@@ -1,6 +1,9 @@
-from yattag import Doc, indent
-from .SimpleContent import *
 from ..common import WQXException
+from .SimpleContent import (
+  MonitoringLocationIdentifier,
+  MonitoringLocationIdentifierContext
+)
+from yattag import Doc
 
 class AlternateMonitoringLocationIdentity:
   """Alternate identifications of a monitoring location."""

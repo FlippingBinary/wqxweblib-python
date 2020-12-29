@@ -1,7 +1,13 @@
-from yattag import Doc, indent
-from .BibliographicReference import BibliographicReference
-from .SimpleContent import *
 from ..common import WQXException
+from .BibliographicReference import BibliographicReference
+from .SimpleContent import (
+  BibliographicReference,
+  IndexTypeIdentifier,
+  IndexTypeIdentifierContext,
+  IndexTypeName,
+  IndexTypeScaleText
+)
+from yattag import Doc
 
 class IndexType:
   """This section identifies the index type reported as part of a biological or habitat index."""

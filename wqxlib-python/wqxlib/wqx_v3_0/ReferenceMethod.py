@@ -1,12 +1,12 @@
-from yattag import Doc, indent
+from ..common import WQXException
 from .SimpleContent import (
+  MethodDescriptionText,
   MethodIdentifier,
   MethodIdentifierContext,
   MethodName,
-  MethodQualifierTypeName,
-  MethodDescriptionText
+  MethodQualifierTypeName
 )
-from ..common import WQXException
+from yattag import Doc
 
 class ReferenceMethod:
   """Identifies the procedures, processes, and references required to determine the methods used to obtain a result."""

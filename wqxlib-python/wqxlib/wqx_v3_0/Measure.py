@@ -1,7 +1,11 @@
-from typing import List, Union
-from yattag import Doc, indent
-from .SimpleContent import MeasureQualifierCode, MeasureUnitCode, ResultMeasureValue
 from ..common import WQXException
+from .SimpleContent import (
+  MeasureQualifierCode,
+  MeasureUnitCode,
+  ResultMeasureValue
+)
+from typing import List, Union
+from yattag import Doc
 
 class Measure:
   """Identifies the value, associated units of measure, and qualifier for measuring the observation or analytical result value."""

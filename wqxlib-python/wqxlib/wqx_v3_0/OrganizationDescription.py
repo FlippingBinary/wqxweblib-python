@@ -1,6 +1,11 @@
-from yattag import Doc, indent
-from .SimpleContent import *
 from ..common import WQXException
+from .SimpleContent import (
+  OrganizationDescriptionText,
+  OrganizationFormalName,
+  OrganizationIdentifier,
+  TribalCode
+)
+from yattag import Doc
 
 class OrganizationDescription:
   """The particular word(s) regularly connected with a unique framework of authority within which a person or persons act, or are designated to act, towards some purpose."""

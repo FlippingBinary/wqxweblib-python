@@ -1,7 +1,7 @@
-from typing import List, Union
-from yattag import Doc, indent
-from .Organization_Delete import OrganizationDelete
 from ..common import WQXException
+from .Organization_Delete import OrganizationDelete
+from typing import List, Union
+from yattag import Doc
 
 class WQXDelete:
   """Main Schema used to delete a portion of water monitoring results from EPA Office of Water system."""

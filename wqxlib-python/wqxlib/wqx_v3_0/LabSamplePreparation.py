@@ -1,11 +1,11 @@
-from yattag import Doc, indent
 from .ReferenceMethod import ReferenceMethod
 from .SimpleContent import (
-  PreparationStartDate,
   PreparationEndDate,
+  PreparationStartDate,
   SubstanceDilutionFactor
 )
 from .WQXTime import WQXTime
+from yattag import Doc
 
 class LabSamplePreparation:
   """Describes Lab Sample Preparation procedures which may alter the original state of the Sample and produce Lab subsamples.  These Lab Subsamples are analyized and reported by the Lab as Sample results."""
@@ -103,15 +103,15 @@ class LabSamplePreparation:
 
     with tag(name):
       if self.__labSamplePreparationMethod is not None:
-        line('ReferenceMethod', self.__labSamplePreparationMethod)
+        doc.asis(self.__labSamplePreparationMethod.generateXML('LabSamplePreparationMethod'))
       if self.__preparationStartDate is not None:
         line('PreparationStartDate', self.__preparationStartDate)
       if self.__preparationStartTime is not None:
-        line('WQXTime', self.__preparationStartTime)
+        doc.asis(self.__preparationStartTime.generateXML('PreparationStartTime'))
       if self.__preparationEndDate is not None:
         line('PreparationEndDate', self.__preparationEndDate)
       if self.__preparationEndTime is not None:
-        line('WQXTime', self.__preparationEndTime)
+        doc.asis(self.__preparationEndTime.generateXML('PreparationEndTime'))
       if self.__substanceDilutionFactor is not None:
         line('SubstanceDilutionFactor', self.__substanceDilutionFactor)
 

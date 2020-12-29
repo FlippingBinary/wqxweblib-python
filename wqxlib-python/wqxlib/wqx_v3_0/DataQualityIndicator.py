@@ -1,5 +1,11 @@
-from yattag import Doc, indent
-from .SimpleContent import BiasValue, ConfidenceIntervalValue, LowerConfidenceLimitValue, PrecisionValue, UpperConfidenceLimitValue
+from .SimpleContent import (
+  BiasValue,
+  ConfidenceIntervalValue,
+  LowerConfidenceLimitValue,
+  PrecisionValue,
+  UpperConfidenceLimitValue
+)
+from yattag import Doc
 
 class DataQuality:
   """The quantitative statistics and qualitative descriptors that are used to interpret the degree of acceptability or utility of data to the user."""

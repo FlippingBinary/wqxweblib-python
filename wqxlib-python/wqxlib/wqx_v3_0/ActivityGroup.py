@@ -1,6 +1,11 @@
-from yattag import Doc, indent
-from .SimpleContent import *
 from ..common import WQXException
+from .SimpleContent import (
+  ActivityGroupIdentifier,
+  ActivityGroupName,
+  ActivityGroupTypeCode,
+  ActivityIdentifier
+)
+from yattag import Doc
 
 class ActivityGroup:
   """Allows for the grouping of activities."""

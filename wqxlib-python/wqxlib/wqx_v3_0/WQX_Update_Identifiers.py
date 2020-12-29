@@ -1,7 +1,7 @@
-from typing import List, Union
-from yattag import Doc, indent
-from .Entity_Update_Identifiers import UpdateIdentifiers
 from ..common import WQXException
+from .Entity_Update_Identifiers import UpdateIdentifiers
+from typing import List, Union
+from yattag import Doc
 
 class WQXUpdateIdentifiers:
   """Main Schema used to update identifiers for major entities (projects, monitoring locations, activity, activity groups, and indexes)."""

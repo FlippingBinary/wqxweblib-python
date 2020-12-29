@@ -1,7 +1,14 @@
-from yattag import Doc, indent
-from .MeasureCompact import MeasureCompact
-from .SimpleContent import *
 from ..common import WQXException
+from .MeasureCompact import MeasureCompact
+from .SimpleContent import (
+  ActivityLocationDescriptionText,
+  HorizontalCollectionMethodName,
+  HorizontalCoordinateReferenceSystemDatumName,
+  LatitudeMeasure,
+  LongitudeMeasure,
+  SourceMapScale
+)
+from yattag import Doc
 
 class ActivityLocation:
   """Geospatial description of monitoring site, if it is different from that described in the station description."""

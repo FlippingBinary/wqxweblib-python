@@ -1,19 +1,19 @@
-from typing import List
-from yattag import Doc, indent
+from ..common import WQXException
 from .FrequencyClassInformation import FrequencyClassInformation
 from .MeasureCompact import MeasureCompact
 from .SimpleContent import (
-  BiologicalIntentName,
   BiologicalIndividualIdentifier,
+  BiologicalIntentName,
+  GroupSummaryCount,
+  SampleTissueAnatomyName,
   SubjectTaxonomicName,
   SubjectTaxonomicNameUserSupplied,
   SubjectTaxonomicNameUserSuppliedReferenceText,
-  UnidentifiedSpeciesIdentifier,
-  SampleTissueAnatomyName,
-  GroupSummaryCount
+  UnidentifiedSpeciesIdentifier
 )
 from .TaxonomicDetails import TaxonomicDetails
-from ..common import WQXException
+from typing import List
+from yattag import Doc
 
 class BiologicalResultDescription:
   """Allows for the reporting of biological result information."""
@@ -194,9 +194,9 @@ class BiologicalResultDescription:
       if self.__groupSummaryCount is not None:
         line('GroupSummaryCount', self.__groupSummaryCount)
       if self.__groupSummaryWeightMeasure is not None:
-        line('MeasureCompact', self.__groupSummaryWeightMeasure)
+        doc.asis(self.__groupSummaryWeightMeasure.generateXML('GroupSummaryWeightMeasure'))
       if self.__taxonomicDetails is not None:
-        line('TaxonomicDetails', self.__taxonomicDetails)
+        doc.asis(self.__taxonomicDetails.generateXML('TaxonomicDetails'))
       if len(self.__frequencyClassInformation) > 3:
         raise WQXException("Attribute frequencyClassInformation must be a list of 0 to 3 FrequencyClassInformation objects.")
       for x in self.__frequencyClassInformation:

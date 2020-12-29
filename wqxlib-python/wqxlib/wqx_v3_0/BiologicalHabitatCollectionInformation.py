@@ -1,8 +1,11 @@
-from yattag import Doc, indent
 from .CollectionEffort import CollectionEffort
 from .MeasureCompact import MeasureCompact
 from .NetInformation import NetInformation
-from .SimpleContent import *
+from .SimpleContent import (
+  CollectionDescriptionText,
+  PassCount
+)
+from yattag import Doc
 
 class BiologicalHabitatCollectionInformation:
   """Allows for the reporting of biological habitat sample collection information."""

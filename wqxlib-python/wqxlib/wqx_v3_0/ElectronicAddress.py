@@ -1,6 +1,8 @@
-from yattag import Doc, indent
-from .SimpleContent import *
-from ..common import WQXException
+from .SimpleContent import (
+  ElectronicAddressText,
+  ElectronicAddressTypeName
+)
+from yattag import Doc
 
 class ElectronicAddress:
   """A location within a system of worldwide electronic communication where a computer user can access information or receive electronic mail."""

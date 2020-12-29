@@ -1,18 +1,18 @@
-from typing import List, Union
-from yattag import Doc, indent
 from .DetectionQuantitationLimit import DetectionQuantitationLimit
 from .SimpleContent import (
-  LaboratoryName,
-  AnalysisStartDate,
   AnalysisEndDate,
-  LaboratoryCommentText,
-  LaboratorySampleSplitRatio,
-  LaboratoryAccreditationIndicator,
+  AnalysisStartDate,
   LaboratoryAccreditationAuthorityName,
-  TaxonomistAccreditationIndicator,
-  TaxonomistAccreditationAuthorityName
+  LaboratoryAccreditationIndicator,
+  LaboratoryCommentText,
+  LaboratoryName,
+  LaboratorySampleSplitRatio,
+  TaxonomistAccreditationAuthorityName,
+  TaxonomistAccreditationIndicator
 )
 from .WQXTime import WQXTime
+from typing import List, Union
+from yattag import Doc
 
 class ResultLabInformation:
   """Describes information obtained by a laboratory related to a specific laboratory analysis."""

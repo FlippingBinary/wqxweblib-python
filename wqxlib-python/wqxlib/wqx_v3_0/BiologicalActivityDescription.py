@@ -1,6 +1,10 @@
-from yattag import Doc, indent
 from .BiologicalHabitatCollectionInformation import BiologicalHabitatCollectionInformation
-from .SimpleContent import *
+from .SimpleContent import (
+  AssemblageSampledName,
+  HabitatSelectionMethod,
+  ToxicityTestType
+)
+from yattag import Doc
 
 class BiologicalActivityDescription:
   """Allows for the reporting of biological monitoring activities conducted at a Monitoring Location."""

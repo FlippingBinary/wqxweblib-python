@@ -1,7 +1,11 @@
-from typing import List
-from yattag import Doc, indent
-from .SimpleContent import *
 from ..common import WQXException
+from .SimpleContent import (
+  NewIdentifier,
+  OldIdentifier,
+  OrganizationIdentifier
+)
+from typing import List
+from yattag import Doc
 
 class IdentifierUpdate:
   """Allows a Project Identifier to be changed."""

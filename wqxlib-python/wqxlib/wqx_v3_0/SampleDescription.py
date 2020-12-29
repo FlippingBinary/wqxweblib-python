@@ -1,8 +1,13 @@
-from yattag import Doc, indent
+from ..common import WQXException
 from .ReferenceMethod import ReferenceMethod
 from .SamplePreparation import SamplePreparation
-from .SimpleContent import *
-from ..common import WQXException
+from .SimpleContent import (
+  HydrologicCondition,
+  HydrologicEvent,
+  SampleCollectionEquipmentCommentText,
+  SampleCollectionEquipmentName
+)
+from yattag import Doc
 
 class SampleDescription:
   """Basic identification information for the sample collected as part of a monitoring activity."""

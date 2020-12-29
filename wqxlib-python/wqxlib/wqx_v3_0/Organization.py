@@ -1,15 +1,15 @@
-from typing import List, Union
-from yattag import Doc, indent
-from .OrganizationDescription import OrganizationDescription
-from .ElectronicAddress import ElectronicAddress
-from .Telephonic import Telephonic
-from .OrganizationAddress import OrganizationAddress
-from .Project import Project
-from .MonitoringLocation import MonitoringLocation
+from ..common import WQXException
 from .Activity import Activity
 from .ActivityGroup import ActivityGroup
 from .BiologicalHabitatIndex import BiologicalHabitatIndex
-from ..common import WQXException
+from .ElectronicAddress import ElectronicAddress
+from .MonitoringLocation import MonitoringLocation
+from .OrganizationAddress import OrganizationAddress
+from .OrganizationDescription import OrganizationDescription
+from .Project import Project
+from .Telephonic import Telephonic
+from typing import List, Union
+from yattag import Doc
 
 class Organization:
   """Schema used to transfer organization information."""

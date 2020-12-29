@@ -1,7 +1,14 @@
-from typing import List, Union
-from yattag import Doc, indent
-from .SimpleContent import *
 from ..common import WQXException
+from .SimpleContent import (
+  ActivityGroupIdentifier,
+  ActivityIdentifier,
+  IndexIdentifier,
+  MonitoringLocationIdentifier,
+  OrganizationIdentifier,
+  ProjectIdentifier
+)
+from typing import List, Union
+from yattag import Doc
 
 class OrganizationDelete:
   """Schema used to delete organization information"""

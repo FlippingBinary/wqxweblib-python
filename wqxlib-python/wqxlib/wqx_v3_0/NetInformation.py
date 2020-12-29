@@ -1,7 +1,9 @@
-from yattag import Doc, indent, indentation
-from .MeasureCompact import MeasureCompact
-from .SimpleContent import *
 from ..common import WQXException
+from .MeasureCompact import MeasureCompact
+from .SimpleContent import (
+  NetTypeName
+)
+from yattag import Doc
 
 class NetInformation:
   """Allows for the reporting of net sample collection information."""

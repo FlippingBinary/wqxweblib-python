@@ -1,10 +1,10 @@
-from yattag import Doc, indent
+from ..common import WQXException
 from .MeasureCompact import MeasureCompact
 from .SimpleContent import (
-  DetectionQuantitationLimitTypeName,
   DetectionQuantitationLimitCommentText,
+  DetectionQuantitationLimitTypeName
 )
-from ..common import WQXException
+from yattag import Doc
 
 class DetectionQuantitationLimit:
   """Information that describes one of a variety of detection or quantitation limits determined in a laboratory."""

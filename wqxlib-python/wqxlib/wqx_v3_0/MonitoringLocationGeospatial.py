@@ -1,7 +1,18 @@
-from yattag import Doc, indent
-from .MeasureCompact import MeasureCompact
-from .SimpleContent import *
 from ..common import WQXException
+from .MeasureCompact import MeasureCompact
+from .SimpleContent import (
+  CountryCode,
+  CountyCode,
+  HorizontalCollectionMethodName,
+  HorizontalCoordinateReferenceSystemDatumName,
+  LatitudeMeasure,
+  LongitudeMeasure,
+  SourceMapScale,
+  StateCode,
+  VerticalCollectionMethodName,
+  VerticalCoordinateReferenceSystemDatumName
+)
+from yattag import Doc
 
 class MonitoringLocationGeospatial:
   """Monitoring location geographic location."""
@@ -191,9 +202,9 @@ class MonitoringLocationGeospatial:
       if self.__sourceMapScale is not None:
         line('SourceMapScale', self.__sourceMapScale)
       if self.__horizontalAccuracyMeasure is not None:
-        line('HorizontalAccuracyMeasure', self.__horizontalAccuracyMeasure)
+        doc.asis(self.__horizontalAccuracyMeasure.generateXML('HorizontalAccuracyMeasure'))
       if self.__verticalAccuracyMeasure is not None:
-        line('VerticalAccuracyMeasure', self.__verticalAccuracyMeasure)
+        doc.asis(self.__verticalAccuracyMeasure.generateXML('VerticalAccuracyMeasure'))
       if self.__horizontalCollectionMethodName is None:
         raise WQXException("Attribute 'HorizontalCollectionMethodName' is required.")
       line('HorizontalCollectionMethodName', self.__horizontalCollectionMethodName)
@@ -201,7 +212,7 @@ class MonitoringLocationGeospatial:
         raise WQXException("Attribute 'HorizontalCoordinateReferenceSystemDatumName' is required.")
       line('HorizontalCoordinateReferenceSystemDatumName', self.__horizontalCoordinateReferenceSystemDatumName)
       if self.__verticalMeasure is not None:
-        line('VerticalMeasure', self.__verticalMeasure)
+        doc.asis(self.__verticalMeasure.generateXML('VerticalMeasure'))
       if self.__verticalCollectionMethodName is not None:
         line('VerticalCollectionMethodName', self.__verticalCollectionMethodName)
       if self.__verticalCoordinateReferenceSystemDatumName is not None:

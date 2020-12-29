@@ -1,7 +1,14 @@
-from yattag import Doc, indent
-from .IndexType import IndexType
-from .SimpleContent import *
 from ..common import WQXException
+from .IndexType import IndexType
+from .SimpleContent import (
+  CommentText,
+  IndexCalculatedDate,
+  IndexIdentifier,
+  IndexQualifierCode,
+  IndexScore,
+  MonitoringLocationIdentifier
+)
+from yattag import Doc
 
 class BiologicalHabitatIndex:
   """This section allows for the reporting of habitat and biotic integrity indices as a representation of water quality conditions."""

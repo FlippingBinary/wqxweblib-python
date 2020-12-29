@@ -1,8 +1,17 @@
-from yattag import Doc, indent
+from ..common import WQXException
 from .BibliographicReference import BibliographicReference
 from .MeasureCompact import MeasureCompact
-from .SimpleContent import *
-from ..common import WQXException
+from .SimpleContent import (
+  CommentText,
+  LocationCategoryName,
+  LocationStatusName,
+  MonitoringLocationIdentifier,
+  ReferenceLocationEndDate,
+  ReferenceLocationStartDate,
+  ReferenceLocationTypeCode,
+  StatisticalStratumText
+)
+from yattag import Doc
 
 class ProjectMonitoringLocationWeighting:
   """Describes the probability weighting information for a given Project / Monitoring Location Assignment."""

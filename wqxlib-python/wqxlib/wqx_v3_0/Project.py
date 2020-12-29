@@ -1,9 +1,16 @@
-from typing import List, Union
-from yattag import Doc, indent
+from ..common import WQXException
 from .AttachedBinaryObject import AttachedBinaryObject
 from .ProjectMonitoringLocationWeighting import ProjectMonitoringLocationWeighting
-from .SimpleContent import *
-from ..common import WQXException
+from .SimpleContent import (
+  ProjectDescriptionText,
+  ProjectIdentifier,
+  ProjectName,
+  QAPPApprovalAgencyName,
+  QAPPApprovedIndicator,
+  SamplingDesignTypeCode
+)
+from typing import List, Union
+from yattag import Doc
 
 class Project:
   """An environmental data collection effort that has a stated purpose and puts a series of samples and results into a meaningful context."""

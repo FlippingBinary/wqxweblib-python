@@ -1,9 +1,14 @@
-from typing import List
-from yattag import Doc, indent
+from ..common import WQXException
 from .ActivityMetricType import ActivityMetricType
 from .MeasureCompact import MeasureCompact
-from .SimpleContent import *
-from ..common import WQXException
+from .SimpleContent import (
+  CommentText,
+  IndexIdentifier,
+  MetricSamplingPointPlaceInSeries,
+  MetricScore
+)
+from typing import List, Union
+from yattag import Doc
 
 class ActivityMetric:
   """This section allows for the reporting of metrics to support habitat or biotic integrity indices."""

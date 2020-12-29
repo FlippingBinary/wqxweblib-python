@@ -1,4 +1,5 @@
 from datetime import date, time
+from typing import Union
 
 # TODO: Add docstrings from XSD annotations.
 
@@ -877,14 +878,22 @@ class TribalCode(str):
     if len(o) > 3:
       raise ValueError("TribalCode must be between 0 and 3 characters.")
 
-class TribalLandIndicator(object):
-  __o: bool
-  def __init__(self, o=False):
-    self.__o = bool(o)
-  def __str__(self):
-    return "True" if self.__o else "False"
+class TribalLandIndicator(str):
+  def __new__(self, o:Union[str,bool]):
+    if isinstance(o, str):
+      if o.lower() in ['true', 't', 'yes', 'y', '1']:
+        self = str.__new__(self, 'True')
+      else:
+        self = str.__new__(self, 'False')
+    elif isinstance(o, bool):
+      self = str.__new__(self, o)
+    else:
+      raise ValueError("TribalLandIndicator must be boolean.")
   def __bool__(self):
-    return self.__o
+    if self == 'True':
+      return True
+    else:
+      return False
 
 class TribalLandName(str):
   def __init__(self, o=''):

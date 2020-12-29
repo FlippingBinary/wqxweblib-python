@@ -34,7 +34,7 @@ class Document:
       # Assign attributes from dictionary with typechecking
       self.id = o.get('id', default = None)
       self.header = o.get('header', default = None)
-      self.payload = o.get('payload', default = [])
+      self.payload = o.get('payload', default = None)
     else:
       # Assign attributes from named keywords with typechecking
       self.header = header

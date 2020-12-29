@@ -38,7 +38,7 @@ class Submission:
       raise WQXException("Attribute 'document' is required.")
     doc.asis(self.__document.generateXML('Document'))
 
-    return doc.getvalue()
+    return indent(doc.getvalue(), indentation=' '*2)
 
   def generateZIP(self, fileName:str=None):
     if not isinstance(fileName, str):

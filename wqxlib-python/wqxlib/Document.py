@@ -88,4 +88,4 @@ class Document:
       for x in self.__payload:
         doc.asis(x.generateXML('Payload'))
 
-    return indent(doc.getvalue(), indentation = ' '*2)
+    return doc.getvalue()

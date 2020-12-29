@@ -1,7 +1,6 @@
 from ..common import WQXException
 from .BibliographicReference import BibliographicReference
 from .SimpleContent import (
-  BibliographicReference,
   IndexTypeIdentifier,
   IndexTypeIdentifierContext,
   IndexTypeName,

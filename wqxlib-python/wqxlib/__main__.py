@@ -23,9 +23,9 @@ def main(argv:list):
       author = "Name of Author",
       organization = "WVSU / Agricultural and Environmental Research Station",
       contactInfo = "P.O. Box 1000, Institute, WV 25112",
-      notification = ["nobody@nowhere.com"]
+      notification = "nobody@nowhere.com"
     ),
-    payload=[Payload(
+    payload=Payload(
       operation='Update-Insert',
       wqx=WQX(
         organization=Organization(
@@ -56,7 +56,7 @@ def main(argv:list):
           )
         )
       )
-    )]
+    )
   )
 
   print(document.generateXML())

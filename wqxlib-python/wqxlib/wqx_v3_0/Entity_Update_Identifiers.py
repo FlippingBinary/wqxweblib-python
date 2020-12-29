@@ -4,7 +4,7 @@ from .SimpleContent import (
   OldIdentifier,
   OrganizationIdentifier
 )
-from typing import List
+from typing import List, Union
 from yattag import Doc
 
 class IdentifierUpdate:
@@ -86,7 +86,7 @@ class UpdateIdentifiers:
   def projectIdentifierUpdate(self) -> List[IdentifierUpdate]:
     return self.__projectIdentifierUpdate
   @projectIdentifierUpdate.setter
-  def projectIdentifierUpdate(self, val: List[IdentifierUpdate]) -> None:
+  def projectIdentifierUpdate(self, val:Union[IdentifierUpdate,List[IdentifierUpdate]]) -> None:
     if val is None:
       self.__projectIdentifierUpdate = []
     elif isinstance(val, list):
@@ -101,7 +101,7 @@ class UpdateIdentifiers:
   def monitoringLocationIdentifierUpdate(self) -> List[IdentifierUpdate]:
     return self.__monitoringLocationIdentifierUpdate
   @monitoringLocationIdentifierUpdate.setter
-  def monitoringLocationIdentifierUpdate(self, val: List[IdentifierUpdate]) -> None:
+  def monitoringLocationIdentifierUpdate(self, val:Union[IdentifierUpdate,List[IdentifierUpdate]]) -> None:
     if val is None:
       self.__monitoringLocationIdentifierUpdate = []
     elif isinstance(val, list):
@@ -116,7 +116,7 @@ class UpdateIdentifiers:
   def indexIdentifierUpdate(self) -> List[IdentifierUpdate]:
     return self.__indexIdentifierUpdate
   @indexIdentifierUpdate.setter
-  def indexIdentifierUpdate(self, val: List[IdentifierUpdate]) -> None:
+  def indexIdentifierUpdate(self, val:Union[IdentifierUpdate,List[IdentifierUpdate]]) -> None:
     if val is None:
       self.__indexIdentifierUpdate = []
     elif isinstance(val, list):
@@ -131,7 +131,7 @@ class UpdateIdentifiers:
   def activityIdentifierUpdate(self) -> List[IdentifierUpdate]:
     return self.__activityIdentifierUpdate
   @activityIdentifierUpdate.setter
-  def activityIdentifierUpdate(self, val: List[IdentifierUpdate]) -> None:
+  def activityIdentifierUpdate(self, val:Union[IdentifierUpdate,List[IdentifierUpdate]]) -> None:
     if val is None:
       self.__activityIdentifierUpdate = []
     elif isinstance(val, list):
@@ -146,7 +146,7 @@ class UpdateIdentifiers:
   def activityGroupIdentifierUpdate(self) -> List[IdentifierUpdate]:
     return self.__activityGroupIdentifierUpdate
   @activityGroupIdentifierUpdate.setter
-  def activityGroupIdentifierUpdate(self, val: List[IdentifierUpdate]) -> None:
+  def activityGroupIdentifierUpdate(self, val:Union[IdentifierUpdate,List[IdentifierUpdate]]) -> None:
     if val is None:
       self.__activityGroupIdentifierUpdate = []
     elif isinstance(val, list):

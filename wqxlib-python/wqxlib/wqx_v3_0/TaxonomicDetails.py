@@ -10,7 +10,7 @@ from .SimpleContent import (
   TrophicLevelName,
   VoltinismName
 )
-from typing import List
+from typing import List, Union
 from yattag import Doc
 
 class TaxonomicDetails:
@@ -89,7 +89,7 @@ class TaxonomicDetails:
   def habitName(self) -> HabitName:
     return self.__habitName
   @habitName.setter
-  def habitName(self, val:List[HabitName]) -> None:
+  def habitName(self, val:Union[HabitName,List[HabitName]]) -> None:
     if val is None:
       self.__habitName = []
     elif isinstance(val, list):
@@ -132,7 +132,7 @@ class TaxonomicDetails:
   def functionalFeedingGroupName(self) -> FunctionalFeedingGroupName:
     return self.__functionalFeedingGroupName
   @functionalFeedingGroupName.setter
-  def functionalFeedingGroupName(self, val:List[FunctionalFeedingGroupName]) -> None:
+  def functionalFeedingGroupName(self, val:Union[FunctionalFeedingGroupName,List[FunctionalFeedingGroupName]]) -> None:
     if val is None:
       self.__functionalFeedingGroupName = []
     elif isinstance(val, list):

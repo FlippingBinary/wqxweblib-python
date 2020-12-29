@@ -12,7 +12,7 @@ from .SimpleContent import (
   UnidentifiedSpeciesIdentifier
 )
 from .TaxonomicDetails import TaxonomicDetails
-from typing import List
+from typing import List, Union
 from yattag import Doc
 
 class BiologicalResultDescription:
@@ -159,7 +159,7 @@ class BiologicalResultDescription:
   def frequencyClassInformation(self) -> FrequencyClassInformation:
     return self.__frequencyClassInformation
   @frequencyClassInformation.setter
-  def frequencyClassInformation(self, val:FrequencyClassInformation) -> None:
+  def frequencyClassInformation(self, val:Union[FrequencyClassInformation,List[FrequencyClassInformation]]) -> None:
     if val is None:
       self.__frequencyClassInformation = []
     elif isinstance(val, list):

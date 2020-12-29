@@ -40,7 +40,7 @@ class ActivityGroup:
     return self.__activityGroupIdentifier
   @activityGroupIdentifier.setter
   def activityGroupIdentifier(self, val:ActivityGroupIdentifier) -> None:
-    self.__activityGroupIdentifier = ActivityGroupIdentifier(val)
+    self.__activityGroupIdentifier = None if val is None else ActivityGroupIdentifier(val)
 
   @property
   def activityGroupName(self) -> ActivityGroupName:
@@ -54,7 +54,7 @@ class ActivityGroup:
     return self.__activityGroupTypeCode
   @activityGroupTypeCode.setter
   def activityGroupTypeCode(self, val:ActivityGroupTypeCode) -> None:
-    self.__activityGroupTypeCode = ActivityGroupTypeCode(val)
+    self.__activityGroupTypeCode = None if val is None else ActivityGroupTypeCode(val)
 
   @property
   def activityIdentifier(self) -> ActivityIdentifier:
@@ -64,17 +64,18 @@ class ActivityGroup:
     self.__activityIdentifier = None if val is None else ActivityIdentifier(val)
 
   def generateXML(self):
-    if self.__activityGroupIdentifier is None:
-      WQXException("Attribute 'activityGroupIdentifier' is required.")
-    if self.__activityGroupTypeCode is None:
-      WQXException("Attribute 'activityGroupTypeCode' is required.")
-
     doc, tag, text, line = Doc().ttl()
 
+    if self.__activityGroupIdentifier is None:
+      raise WQXException("Attribute 'activityGroupIdentifier' is required.")
     line('ActivityGroupIdentifier', self.__activityGroupIdentifier)
     if self.__activityGroupName is not None:
       line('ActivityGroupName', self.__activityGroupName)
+    if self.__activityGroupTypeCode is None:
+      raise WQXException("Attribute 'activityGroupTypeCode' is required.")
     line('ActivityGroupTypeCode', self.__activityGroupTypeCode)
+    if len(self.__activityIdentifier) < 2:
+      raise WQXException("Attribute 'activityIdentifier' must be a list of 2 or more ActivityIdentifier objects.")
     for x in self.__activityIdentifier:
       line('ActivityIdentifier', x)
 

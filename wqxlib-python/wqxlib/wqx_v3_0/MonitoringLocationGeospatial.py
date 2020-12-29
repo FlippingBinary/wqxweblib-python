@@ -180,13 +180,13 @@ class MonitoringLocationGeospatial:
 
   def generateXML(self):
     if self.__latitudeMeasure is None:
-      WQXException("Attribute 'LatitudeMeasure' is required.")
+      raise WQXException("Attribute 'LatitudeMeasure' is required.")
     if self.__longitudeMeasure is None:
-      WQXException("Attribute 'LongitudeMeasure' is required.")
+      raise WQXException("Attribute 'LongitudeMeasure' is required.")
     if self.__horizontalCollectionMethodName is None:
-      WQXException("Attribute 'HorizontalCollectionMethodName' is required.")
+      raise WQXException("Attribute 'HorizontalCollectionMethodName' is required.")
     if self.__horizontalCoordinateReferenceSystemDatumName is None:
-      WQXException("Attribute 'HorizontalCoordinateReferenceSystemDatumName' is required.")
+      raise WQXException("Attribute 'HorizontalCoordinateReferenceSystemDatumName' is required.")
 
     doc, tag, text, line = Doc().ttl()
 

@@ -119,7 +119,7 @@ class WellInformation:
 
   def generateXML(self):
     if self.__wellTypeText is None:
-      WQXException("Attribute 'WellTypeText' is required.")
+      raise WQXException("Attribute 'WellTypeText' is required.")
 
     doc, tag, text, line = Doc().ttl()
 

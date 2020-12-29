@@ -132,9 +132,9 @@ class Project:
 
   def generateXML(self):
     if self.__projectIdentifier is None:
-      WQXException("Attribute 'projectIdentifier' is required.")
+      raise WQXException("Attribute 'projectIdentifier' is required.")
     if self.__projectName is None:
-      WQXException("Attribute 'projectName' is required.")
+      raise WQXException("Attribute 'projectName' is required.")
 
     doc, tag, text, line = Doc().ttl()
 

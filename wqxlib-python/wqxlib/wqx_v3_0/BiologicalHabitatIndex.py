@@ -104,13 +104,13 @@ class BiologicalHabitatIndex:
 
   def generateXML(self):
     if self.__indexIdentifier is None:
-      WQXException("Attribute 'indexIdentifier' is required.")
+      raise WQXException("Attribute 'indexIdentifier' is required.")
     if self.__indexType is None:
-      WQXException("Attribute 'indexType' is required.")
+      raise WQXException("Attribute 'indexType' is required.")
     if self.__indexScore is None:
-      WQXException("Attribute 'indexScore' is required.")
+      raise WQXException("Attribute 'indexScore' is required.")
     if self.__monitoringLocationIdentifier is None:
-      WQXException("Attribute 'monitoringLocationIdentifier' is required.")
+      raise WQXException("Attribute 'monitoringLocationIdentifier' is required.")
 
     doc, tag, text, line = Doc().ttl()
 

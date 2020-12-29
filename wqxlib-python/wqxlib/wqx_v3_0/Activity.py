@@ -62,7 +62,7 @@ class Activity:
     return self.__activityDescription
   @activityDescription.setter
   def activityDescription(self, val:ActivityDescription) -> None:
-    self.__activityDescription = val
+    self.__activityDescription = None if val is None else ActivityDescription(val)
 
   @property
   def activityLocation(self) -> ActivityLocation:
@@ -131,12 +131,12 @@ class Activity:
       self.__result = [Result(val)]
 
   def generateXML(self):
-    if self.__activityDescription is None:
-      WQXException("Attribute 'activityDescription' is required.")
 
     doc, tag, text, line = Doc().ttl()
 
     with tag('ActivityDescription'):
+      if self.__activityDescription is None:
+        raise WQXException("Attribute 'activityDescription' is required.")
       doc.asis(self.__activityDescription.generateXML())
     with tag('ActivityLocation'):
       doc.asis(self.__activityLocation.generateXML())

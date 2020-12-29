@@ -92,9 +92,9 @@ class ActivityMetricType:
 
   def generateXML(self):
     if self.__metricTypeIdentifier is None:
-      WQXException("Attribute 'metricTypeIdentifier' is required.")
+      raise WQXException("Attribute 'metricTypeIdentifier' is required.")
     if self.__metricTypeIdentifierContext is None:
-      WQXException("Attribute 'metricTypeIdentifierContext' is required.")
+      raise WQXException("Attribute 'metricTypeIdentifierContext' is required.")
 
     doc, tag, text, line = Doc().ttl()
 

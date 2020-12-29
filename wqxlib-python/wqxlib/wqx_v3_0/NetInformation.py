@@ -86,7 +86,7 @@ class NetInformation:
 
   def generateXML(self):
     if self.__netTypeName is None:
-      WQXException("Attribute 'netTypeName' is required.")
+      raise WQXException("Attribute 'netTypeName' is required.")
 
     doc, tag, text, line = Doc().ttl()
 

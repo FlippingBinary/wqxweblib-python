@@ -41,9 +41,9 @@ class CollectionEffort:
 
   def generateXML(self):
     if self.__measureValue is None:
-      WQXException("Attribute 'measureValue' is required.")
+      raise WQXException("Attribute 'measureValue' is required.")
     if self.__gearProcedureUnitCode is None:
-      WQXException("Attribute 'gearProcedureUnitCode' is required.")
+      raise WQXException("Attribute 'gearProcedureUnitCode' is required.")
 
     doc, tag, text, line = Doc().ttl()
 

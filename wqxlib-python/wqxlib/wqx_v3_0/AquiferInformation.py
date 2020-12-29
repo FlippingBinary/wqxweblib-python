@@ -65,11 +65,11 @@ class AquiferInformation:
 
   def generateXML(self):
     if self.__localAquiferCode is None:
-      WQXException("Attribute 'localAquiferCode' is required.")
+      raise WQXException("Attribute 'localAquiferCode' is required.")
     if self.__localAquiferCodeContext is None:
-      WQXException("Attribute 'localAquiferCodeContext' is required.")
+      raise WQXException("Attribute 'localAquiferCodeContext' is required.")
     if self.__localAquiferName is None:
-      WQXException("Attribute 'localAquiferName' is required.")
+      raise WQXException("Attribute 'localAquiferName' is required.")
 
     doc, tag, text, line = Doc().ttl()
 

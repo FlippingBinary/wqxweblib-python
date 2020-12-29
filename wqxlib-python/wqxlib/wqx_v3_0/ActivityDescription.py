@@ -117,7 +117,7 @@ class ActivityDescription:
     return self.__activityIdentifier
   @activityIdentifier.setter
   def activityIdentifier(self, val:ActivityIdentifier) -> None:
-    self.__activityIdentifier = ActivityIdentifier(val)
+    self.__activityIdentifier = None if val is None else ActivityIdentifier(val)
 
   @property
   def activityIdentifierUserSupplied(self) -> ActivityIdentifierUserSupplied:
@@ -131,14 +131,14 @@ class ActivityDescription:
     return self.__activityTypeCode
   @activityTypeCode.setter
   def activityTypeCode(self, val:ActivityTypeCode) -> None:
-    self.__activityTypeCode = ActivityTypeCode(val)
+    self.__activityTypeCode = None if val is None else ActivityTypeCode(val)
 
   @property
   def activityMediaName(self) -> ActivityMediaName:
     return self.__activityMediaName
   @activityMediaName.setter
   def activityMediaName(self, val:ActivityMediaName) -> None:
-    self.__activityMediaName = ActivityMediaName(val)
+    self.__activityMediaName = None if val is None else ActivityMediaName(val)
 
   @property
   def activityMediaSubdivisionName(self) -> ActivityMediaSubdivisionName:
@@ -152,7 +152,7 @@ class ActivityDescription:
     return self.__activityStartDate
   @activityStartDate.setter
   def activityStartDate(self, val:ActivityStartDate) -> None:
-    self.__activityStartDate = ActivityStartDate(val)
+    self.__activityStartDate = None if val is None else ActivityStartDate(val)
 
   @property
   def activityStartTime(self) -> WQXTime:
@@ -161,7 +161,7 @@ class ActivityDescription:
   @activityStartTime.setter
   def activityStartTime(self, val:WQXTime) -> None:
     """The measure of clock time when the field activity began."""
-    self.__activityStartTime = val
+    self.__activityStartTime = None if val is None else WQXTime(val)
 
   @property
   def activityEndDate(self) -> ActivityEndDate:
@@ -177,7 +177,7 @@ class ActivityDescription:
   @activityEndTime.setter
   def activityEndTime(self, val:WQXTime) -> None:
     """The measure of clock time when the field activity ended."""
-    self.__activityEndTime = val
+    self.__activityEndTime = None if val is None else WQXTime(val)
 
   @property
   def activityRelativeDepthName(self) -> ActivityRelativeDepthName:
@@ -193,7 +193,7 @@ class ActivityDescription:
   @activityDepthHeightMeasure.setter
   def activityDepthHeightMeasure(self, val:MeasureCompact) -> None:
     """A measurement of the vertical location (measured from a reference point) at which an activity occurred."""
-    self.__activityDepthHeightMeasure = val
+    self.__activityDepthHeightMeasure = None if val is None else MeasureCompact(val)
 
   @property
   def activityTopDepthHeightMeasure(self) -> MeasureCompact:
@@ -202,7 +202,7 @@ class ActivityDescription:
   @activityTopDepthHeightMeasure.setter
   def activityTopDepthHeightMeasure(self, val:MeasureCompact) -> None:
     """A measurement of the upper vertical location of a vertical location range (measured from a reference point) at which an activity occurred."""
-    self.__activityTopDepthHeightMeasure = val
+    self.__activityTopDepthHeightMeasure = None if val is None else MeasureCompact(val)
 
   @property
   def activityBottomDepthHeightMeasure(self) -> MeasureCompact:
@@ -211,7 +211,7 @@ class ActivityDescription:
   @activityBottomDepthHeightMeasure.setter
   def activityBottomDepthHeightMeasure(self, val:MeasureCompact) -> None:
     """A measurement of the lower vertical location of a vertical location range (measured from a reference point) at which an activity occurred."""
-    self.__activityBottomDepthHeightMeasure = val
+    self.__activityBottomDepthHeightMeasure = None if val is None else MeasureCompact(val)
 
   @property
   def activityDepthAltitudeReferencePointText(self) -> DepthAltitudeReferencePointText:
@@ -234,7 +234,7 @@ class ActivityDescription:
     return self.__activityConductingOrganizationText
   @activityConductingOrganizationText.setter
   def activityConductingOrganizationText(self, val:ActivityConductingOrganizationText) -> None:
-    self.__activityConductingOrganizationText = val
+    self.__activityConductingOrganizationText = None if val is None else ActivityConductingOrganizationText(val)
 
   @property
   def monitoringLocationIdentifier(self) -> MonitoringLocationIdentifier:
@@ -260,26 +260,23 @@ class ActivityDescription:
     self.__activityCommentText = None if val is None else CommentText(val)
 
   def generateXML(self):
-    if self.__activityIdentifier is None:
-      WQXException("Attribute 'activityIdentifier' is required.")
-    if self.__activityTypeCode is None:
-      WQXException("Attribute 'activityTypeCode' is required.")
-    if self.__activityMediaName is None:
-      WQXException("Attribute 'activityMediaName' is required.")
-    if self.__activityStartDate is None:
-      WQXException("Attribute 'activityStartDate' is required.")
-    if self.__projectIdentifier is None:
-      WQXException("Attribute 'projectIdentifier' is required.")
-
     doc, tag, text, line = Doc().ttl()
 
+    if self.__activityIdentifier is None:
+      raise WQXException("Attribute 'activityIdentifier' is required.")
     line('ActivityIdentifier', self.__activityIdentifier)
     if self.__activityIdentifierUserSupplied is not None:
       line('ActivityIdentifierUserSupplied', self.__activityIdentifierUserSupplied)
+    if self.__activityTypeCode is None:
+      raise WQXException("Attribute 'activityTypeCode' is required.")
     line('ActivityTypeCode', self.__activityTypeCode)
+    if self.__activityMediaName is None:
+      raise WQXException("Attribute 'activityMediaName' is required.")
     line('ActivityMediaName', self.__activityMediaName)
     if self.__activityMediaSubdivisionName is not None:
       line('ActivityMediaSubdivisionName', self.__activityMediaSubdivisionName)
+    if self.__activityStartDate is None:
+      raise WQXException("Attribute 'activityStartDate' is required.")
     line('ActivityStartDate', self.__activityStartDate)
     if self.__activityStartTime is not None:
       with tag('ActivityStartTime'):
@@ -302,6 +299,8 @@ class ActivityDescription:
         doc.asis(self.__activityBottomDepthHeightMeasure.generateXML())
     if self.__activityDepthAltitudeReferencePointText is not None:
       line('ActivityDepthAltitudeReferencePointText', self.__activityDepthAltitudeReferencePointText)
+    if len(self.__projectIdentifier) < 1:
+      raise WQXException("Attribute 'projectIdentifier' must be a list of 1 or more ProjectIdentifier objects.")
     for x in self.__projectIdentifier:
       line('ProjectIdentifier', x)
     for x in self.__activityConductingOrganizationText:

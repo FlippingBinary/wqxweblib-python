@@ -80,11 +80,11 @@ class IndexType:
 
   def generateXML(self):
     if self.__indexTypeIdentifier is None:
-      WQXException("Attribute 'indexTypeIdentifier' is required.")
+      raise WQXException("Attribute 'indexTypeIdentifier' is required.")
     if self.__indexTypeIdentifierContext is None:
-      WQXException("Attribute 'indexTypeIdentifierContext' is required.")
+      raise WQXException("Attribute 'indexTypeIdentifierContext' is required.")
     if self.__indexTypeName is None:
-      WQXException("Attribute 'indexTypeName' is required.")
+      raise WQXException("Attribute 'indexTypeName' is required.")
 
     doc, tag, text, line = Doc().ttl()
 

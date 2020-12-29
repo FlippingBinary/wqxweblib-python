@@ -41,9 +41,9 @@ class AlternateMonitoringLocationIdentity:
 
   def generateXML(self):
     if self.__monitoringLocationIdentifier is None:
-      WQXException("Attribute 'MonitoringLocationIdentifier' is required.")
+      raise WQXException("Attribute 'MonitoringLocationIdentifier' is required.")
     if self.__monitoringLocationIdentifierContext is None:
-      WQXException("Attribute 'MonitoringLocationIdentifierContext' is required.")
+      raise WQXException("Attribute 'MonitoringLocationIdentifierContext' is required.")
 
     doc, tag, text, line = Doc().ttl()
 

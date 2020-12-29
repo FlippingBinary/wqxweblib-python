@@ -102,13 +102,13 @@ class ActivityLocation:
 
   def generateXML(self):
     if self.__latitudeMeasure is None:
-      WQXException("Attribute 'latitudeMeasure' is required.")
+      raise WQXException("Attribute 'latitudeMeasure' is required.")
     if self.__longitudeMeasure is None:
-      WQXException("Attribute 'longitudeMeasure' is required.")
+      raise WQXException("Attribute 'longitudeMeasure' is required.")
     if self.__horizontalCollectionMethodName is None:
-      WQXException("Attribute 'horizontalCollectionMethodName' is required.")
+      raise WQXException("Attribute 'horizontalCollectionMethodName' is required.")
     if self.__horizontalCoordinateReferenceSystemDatumName is None:
-      WQXException("Attribute 'horizontalCoordinateReferenceSystemDatumName' is required.")
+      raise WQXException("Attribute 'horizontalCoordinateReferenceSystemDatumName' is required.")
 
     doc, tag, text, line = Doc().ttl()
 

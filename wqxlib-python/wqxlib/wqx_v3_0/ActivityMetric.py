@@ -95,9 +95,9 @@ class ActivityMetric:
 
   def generateXML(self):
     if self.__activityMetricType is None:
-      WQXException("Attribute 'activityMetricType' is required.")
+      raise WQXException("Attribute 'activityMetricType' is required.")
     if self.__metricScore is None:
-      WQXException("Attribute 'metricScore' is required.")
+      raise WQXException("Attribute 'metricScore' is required.")
 
     doc, tag, text, line = Doc().ttl()
 

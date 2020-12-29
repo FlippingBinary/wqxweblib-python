@@ -93,7 +93,7 @@ class SampleDescription:
 
   def generateXML(self):
     if self.__sampleCollectionEquipmentName is None:
-      WQXException("Attribute 'sampleCollectionEquipmentName' is required.")
+      raise WQXException("Attribute 'sampleCollectionEquipmentName' is required.")
 
     doc, tag, text, line = Doc().ttl()
 

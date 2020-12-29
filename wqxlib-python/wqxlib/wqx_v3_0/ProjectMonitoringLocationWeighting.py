@@ -143,9 +143,9 @@ class ProjectMonitoringLocationWeighting:
 
   def generateXML(self):
     if self.__monitoringLocationIdentifier is None:
-      WQXException("Attribute 'monitoringLocationIdentifier' is required.")
+      raise WQXException("Attribute 'monitoringLocationIdentifier' is required.")
     if self.__locationWeightingFactorMeasure is None:
-      WQXException("Attribute 'measureCompact' is required.")
+      raise WQXException("Attribute 'measureCompact' is required.")
 
     doc, tag, text, line = Doc().ttl()
 

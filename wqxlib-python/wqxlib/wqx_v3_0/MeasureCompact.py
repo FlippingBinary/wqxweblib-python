@@ -37,7 +37,7 @@ class MeasureCompact:
     return self.__measureValue
   @measureValue.setter
   def measureValue(self, val:MeasureValue) -> None:
-    self.__measureValue = MeasureValue(val)
+    self.__measureValue = None if val is None else MeasureValue(val)
 
   def generateXML(self):
     if self.__measureUnitCode is None:

@@ -86,21 +86,21 @@ class MonitoringLocationGeospatial:
     return self.__latitudeMeasure
   @latitudeMeasure.setter
   def latitudeMeasure(self, val:LatitudeMeasure) -> None:
-    self.__latitudeMeasure = LatitudeMeasure(val)
+    self.__latitudeMeasure = None if val is None else LatitudeMeasure(val)
 
   @property
   def longitudeMeasure(self) -> LongitudeMeasure:
     return self.__longitudeMeasure
   @longitudeMeasure.setter
   def longitudeMeasure(self, val:LongitudeMeasure) -> None:
-    self.__longitudeMeasure = LongitudeMeasure(val)
+    self.__longitudeMeasure = None if val is None else LongitudeMeasure(val)
 
   @property
   def sourceMapScale(self) -> SourceMapScale:
     return self.__sourceMapScale
   @sourceMapScale.setter
   def sourceMapScale(self, val:SourceMapScale) -> None:
-    self.__sourceMapScale = SourceMapScale(val)
+    self.__sourceMapScale = None if val is None else SourceMapScale(val)
 
   @property
   def horizontalAccuracyMeasure(self) -> MeasureCompact:
@@ -109,7 +109,7 @@ class MonitoringLocationGeospatial:
   @horizontalAccuracyMeasure.setter
   def horizontalAccuracyMeasure(self, val:MeasureCompact) -> None:
     """The horizontal measure of the relative accuracy of the latitude and longitude coordinates."""
-    self.__horizontalAccuracyMeasure = MeasureCompact(val)
+    self.__horizontalAccuracyMeasure = None if val is None else MeasureCompact(val)
 
   @property
   def verticalAccuracyMeasure(self) -> MeasureCompact:
@@ -118,21 +118,21 @@ class MonitoringLocationGeospatial:
   @verticalAccuracyMeasure.setter
   def verticalAccuracyMeasure(self, val:MeasureCompact) -> None:
     """Depth below land surface datum (LSD) to the bottom of the hole on completion of drilling."""
-    self.__verticalAccuracyMeasure = MeasureCompact(val)
+    self.__verticalAccuracyMeasure = None if val is None else MeasureCompact(val)
 
   @property
   def horizontalCollectionMethodName(self) -> HorizontalCollectionMethodName:
     return self.__horizontalCollectionMethodName
   @horizontalCollectionMethodName.setter
   def horizontalCollectionMethodName(self, val:HorizontalCollectionMethodName) -> None:
-    self.__horizontalCollectionMethodName = HorizontalCollectionMethodName(val)
+    self.__horizontalCollectionMethodName = None if val is None else HorizontalCollectionMethodName(val)
 
   @property
   def horizontalCoordinateReferenceSystemDatumName(self) -> HorizontalCoordinateReferenceSystemDatumName:
     return self.__horizontalCoordinateReferenceSystemDatumName
   @horizontalCoordinateReferenceSystemDatumName.setter
   def horizontalCoordinateReferenceSystemDatumName(self, val:HorizontalCoordinateReferenceSystemDatumName) -> None:
-    self.__horizontalCoordinateReferenceSystemDatumName = HorizontalCoordinateReferenceSystemDatumName(val)
+    self.__horizontalCoordinateReferenceSystemDatumName = None if val is None else HorizontalCoordinateReferenceSystemDatumName(val)
 
   @property
   def verticalMeasure(self) -> MeasureCompact:
@@ -141,42 +141,42 @@ class MonitoringLocationGeospatial:
   @verticalMeasure.setter
   def verticalMeasure(self, val:MeasureCompact) -> None:
     """The measure of elevation (i.e., the altitude), above or below a reference datum."""
-    self.__verticalMeasure = MeasureCompact(val)
+    self.__verticalMeasure = None if val is None else MeasureCompact(val)
 
   @property
   def verticalCollectionMethodName(self) -> VerticalCollectionMethodName:
     return self.__verticalCollectionMethodName
   @verticalCollectionMethodName.setter
   def verticalCollectionMethodName(self, val:VerticalCollectionMethodName) -> None:
-    self.__verticalCollectionMethodName = VerticalCollectionMethodName(val)
+    self.__verticalCollectionMethodName = None if val is None else VerticalCollectionMethodName(val)
 
   @property
   def verticalCoordinateReferenceSystemDatumName(self) -> VerticalCoordinateReferenceSystemDatumName:
     return self.__verticalCoordinateReferenceSystemDatumName
   @verticalCoordinateReferenceSystemDatumName.setter
   def verticalCoordinateReferenceSystemDatumName(self, val:VerticalCoordinateReferenceSystemDatumName) -> None:
-    self.__verticalCoordinateReferenceSystemDatumName = VerticalCoordinateReferenceSystemDatumName(val)
+    self.__verticalCoordinateReferenceSystemDatumName = None if val is None else VerticalCoordinateReferenceSystemDatumName(val)
 
   @property
   def countryCode(self) -> CountryCode:
     return self.__countryCode
   @countryCode.setter
   def countryCode(self, val:CountryCode) -> None:
-    self.__countryCode = CountryCode(val)
+    self.__countryCode = None if val is None else CountryCode(val)
 
   @property
   def stateCode(self) -> StateCode:
     return self.__stateCode
   @stateCode.setter
   def stateCode(self, val:StateCode) -> None:
-    self.__stateCode = StateCode(val)
+    self.__stateCode = None if val is None else StateCode(val)
 
   @property
   def countyCode(self) -> CountyCode:
     return self.__countyCode
   @countyCode.setter
   def countyCode(self, val:CountyCode) -> None:
-    self.__countyCode = CountyCode(val)
+    self.__countyCode = None if val is None else CountyCode(val)
 
   def generateXML(self):
     if self.__latitudeMeasure is None:

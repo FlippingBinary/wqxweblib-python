@@ -59,7 +59,7 @@ class SampleDescription:
   @property
   def sampleCollectionMethod(self, val:ReferenceMethod) -> None:
     """Identifies sample collection or measurement method procedures. Where a documented sample collection method has been employed, this enables the data provider to indicate the documented method that was employed during the field sample collection. Otherwise, the sample collection procedure will best be described in a freeform text."""
-    self.__sampleCollectionMethod = val
+    self.__sampleCollectionMethod = None if val is None else ReferenceMethod(val)
 
   @property
   def sampleCollectionEquipmentName(self) -> SampleCollectionEquipmentName:
@@ -80,7 +80,7 @@ class SampleDescription:
     return self.__samplePreparation
   @property
   def samplePreparation(self, val:SamplePreparation) -> None:
-    self.__samplePreparation = val
+    self.__samplePreparation = None if val is None else SamplePreparation(val)
 
   @property
   def hydrologicCondition(self) -> HydrologicCondition:

@@ -67,7 +67,7 @@ class BiologicalHabitatCollectionInformation:
   @collectionDuration.setter
   def collectionDuration(self, val:MeasureCompact) -> None:
     """The length of time a collection procedure or protocol was performed (e.g. total energized time for electrofishing, or total time kick net used)."""
-    self.__collectionDuration = val
+    self.__collectionDuration = None if val is None else MeasureCompact(val)
 
   @property
   def collectionArea(self) -> MeasureCompact:
@@ -76,14 +76,14 @@ class BiologicalHabitatCollectionInformation:
   @collectionArea.setter
   def collectionArea(self, val:MeasureCompact) -> None:
     """The area of a collection procedure or protocol was performed (e.g. total area coverage for electrofishing, or total area  kick net used)."""
-    self.__collectionArea = val
+    self.__collectionArea = None if val is None else MeasureCompact(val)
 
   @property
   def collectionEffort(self) -> CollectionEffort:
     return self.__collectionEffort
   @collectionEffort.setter
   def collectionEffort(self, val:CollectionEffort) -> None:
-    self.__collectionEffort = val
+    self.__collectionEffort = None if val is None else CollectionEffort(val)
 
   @property
   def reachLengthMeasure(self) -> MeasureCompact:
@@ -92,7 +92,7 @@ class BiologicalHabitatCollectionInformation:
   @reachLengthMeasure.setter
   def reachLengthMeasure(self, val:MeasureCompact) -> None:
     """A measurement of the water body length distance in which the procedure or protocol was performed."""
-    self.__reachLengthMeasure = val
+    self.__reachLengthMeasure = None if val is None else MeasureCompact(val)
 
   @property
   def reachWidthMeasure(self) -> MeasureCompact:
@@ -101,7 +101,7 @@ class BiologicalHabitatCollectionInformation:
   @reachWidthMeasure.setter
   def reachWidthMeasure(self, val:MeasureCompact) -> None:
     """A measurement of the reach width during collection procedures."""
-    self.__reachWidthMeasure = val
+    self.__reachWidthMeasure = None if val is None else MeasureCompact(val)
 
   @property
   def collectionDescriptionText(self) -> CollectionDescriptionText:
@@ -122,7 +122,7 @@ class BiologicalHabitatCollectionInformation:
     return self.__netInformation
   @netInformation.setter
   def netInformation(self, val:NetInformation) -> None:
-    self.__netInformation = val
+    self.__netInformation = None if val is None else NetInformation(val)
 
   def generateXML(self, name:str = 'BiologicalHabitatCollectionInformation') -> str:
     doc, tag, text, line = Doc().ttl()

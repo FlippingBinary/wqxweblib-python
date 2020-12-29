@@ -84,7 +84,7 @@ class ActivityLocation:
     return self.__horizontalAccuracyMeasure
   @horizontalAccuracyMeasure.setter
   def horizontalAccuracyMeasure(self, val:MeasureCompact) -> None:
-    self.__horizontalAccuracyMeasure = val
+    self.__horizontalAccuracyMeasure = None if val is None else MeasureCompact(val)
 
   @property
   def horizontalCollectionMethodName(self) -> HorizontalCollectionMethodName:

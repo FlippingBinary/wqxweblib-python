@@ -58,7 +58,7 @@ class OrganizationDelete:
     return self.__organizationIdentifier
   @organizationIdentifier.setter
   def organizationIdentifier(self, val: OrganizationIdentifier) -> None:
-    self.__organizationIdentifier = val
+    self.__organizationIdentifier = None if val is None else OrganizationIdentifier(val)
 
   @property
   def projectIdentifier(self) -> List[ProjectIdentifier]:

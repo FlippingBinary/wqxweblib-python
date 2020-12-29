@@ -44,21 +44,21 @@ class MonitoringLocation:
     return self.__monitoringLocationIdentity
   @monitoringLocationIdentity.setter
   def monitoringLocationIdentity(self, val:MonitoringLocationIdentity) -> None:
-    self.__monitoringLocationIdentity = val
+    self.__monitoringLocationIdentity = None if val is None else MonitoringLocationIdentity(val)
 
   @property
   def monitoringLocationGeospatial(self) -> MonitoringLocationGeospatial:
     return self.__monitoringLocationGeospatial
   @monitoringLocationGeospatial.setter
   def monitoringLocationGeospatial(self, val:MonitoringLocationGeospatial) -> None:
-    self.__monitoringLocationGeospatial = val
+    self.__monitoringLocationGeospatial = None if val is None else MonitoringLocationGeospatial(val)
 
   @property
   def wellInformation(self) -> WellInformation:
     return self.__wellInformation
   @wellInformation.setter
   def wellInformation(self, val:WellInformation) -> None:
-    self.__wellInformation = val
+    self.__wellInformation = None if val is None else WellInformation(val)
 
   @property
   def attachedBinaryObject(self) -> List[AttachedBinaryObject]:

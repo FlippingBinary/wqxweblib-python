@@ -70,7 +70,7 @@ class BiologicalHabitatIndex:
     return self.__indexType
   @indexType.setter
   def indexType(self, val:IndexType) -> None:
-    self.__indexType = val
+    self.__indexType = None if val is None else IndexType(val)
 
   @property
   def indexScore(self) -> IndexScore:
@@ -93,7 +93,7 @@ class BiologicalHabitatIndex:
   @indexCommentText.setter
   def indexCommentText(self, val:CommentText) -> None:
     """Free text with general comments concerning the index."""
-    self.__indexCommentText = val
+    self.__indexCommentText = None if val is None else CommentText(val)
 
   @property
   def indexCalculatedDate(self) -> IndexCalculatedDate:

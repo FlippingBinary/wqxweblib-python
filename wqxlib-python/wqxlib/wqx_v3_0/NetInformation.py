@@ -57,7 +57,7 @@ class NetInformation:
   @netSurfaceAreaMeasure.setter
   def netSurfaceAreaMeasure(self, val:MeasureCompact) -> None:
     """A measurement of the effective surface area of the net used during biological monitoring sample collection."""
-    self.__netSurfaceAreaMeasure = val
+    self.__netSurfaceAreaMeasure = None if val is None else MeasureCompact(val)
 
   @property
   def netMeshSizeMeasure(self) -> MeasureCompact:
@@ -66,7 +66,7 @@ class NetInformation:
   @netMeshSizeMeasure.setter
   def netMeshSizeMeasure(self, val:MeasureCompact) -> None:
     """A measurement of the mesh size of the net used during biological monitoring sample collection."""
-    self.__netMeshSizeMeasure = val
+    self.__netMeshSizeMeasure = None if val is None else MeasureCompact(val)
 
   @property
   def boatSpeedMeasure(self) -> MeasureCompact:
@@ -75,7 +75,7 @@ class NetInformation:
   @boatSpeedMeasure.setter
   def boatSpeedMeasure(self, val:MeasureCompact) -> None:
     """A measurement of the boat speed during biological monitoring sample collection."""
-    self.__boatSpeedMeasure = val
+    self.__boatSpeedMeasure = None if val is None else MeasureCompact(val)
 
   @property
   def currentSpeedMeasure(self) -> MeasureCompact:
@@ -84,7 +84,7 @@ class NetInformation:
   @currentSpeedMeasure.setter
   def currentSpeedMeasure(self, val:MeasureCompact) -> None:
     """A measurement of the current during biological monitoring sample collection."""
-    self.__currentSpeedMeasure = val
+    self.__currentSpeedMeasure = None if val is None else MeasureCompact(val)
 
   def generateXML(self, name:str = 'NetInformation') -> str:
     doc, tag, text, line = Doc().ttl()

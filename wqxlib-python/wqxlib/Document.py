@@ -46,7 +46,7 @@ class Document:
     return self.__header
   @header.setter
   def header(self, val:Header) -> None:
-    self.__header = val
+    self.__header = None if val is None else Header(val)
 
   @property
   def id(self) -> ID:

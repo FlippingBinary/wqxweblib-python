@@ -74,7 +74,7 @@ class IndexType:
   @indexTypeCitation.setter
   def indexTypeCitation(self, val:BibliographicReference) -> None:
     """Provides additional description of the source that created or defined the index."""
-    self.__indexTypeCitation = val
+    self.__indexTypeCitation = None if val is None else BibliographicReference(val)
 
   @property
   def indexTypeScaleText(self) -> IndexTypeScaleText:

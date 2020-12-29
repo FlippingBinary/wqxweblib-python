@@ -64,7 +64,7 @@ class SamplePreparation:
   @samplePreparationMethod.setter
   def samplePreparationMethod(self, val:ReferenceMethod) -> None:
     """Identifying information about the method(s) followed to prepare a sample for analysis."""
-    self.__samplePreparationMethod = val
+    self.__samplePreparationMethod = None if val is None else ReferenceMethod(val)
 
   @property
   def sampleContainerLabelName(self) -> SampleContainerLabelName:

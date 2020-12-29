@@ -87,21 +87,21 @@ class MonitoringLocationIdentity:
     return self.__monitoringLocationIdentifier
   @monitoringLocationIdentifier.setter
   def monitoringLocationIdentifier(self, val:MonitoringLocationIdentifier) -> None:
-    self.__monitoringLocationIdentifier = val
+    self.__monitoringLocationIdentifier = None if val is None else MonitoringLocationIdentifier(val)
 
   @property
   def monitoringLocationName(self) -> MonitoringLocationName:
     return self.__monitoringLocationName
   @monitoringLocationName.setter
   def monitoringLocationName(self, val:MonitoringLocationName) -> None:
-    self.__monitoringLocationName = val
+    self.__monitoringLocationName = None if val is None else MonitoringLocationName(val)
 
   @property
   def monitoringLocationTypeName(self) -> MonitoringLocationTypeName:
     return self.__monitoringLocationTypeName
   @monitoringLocationTypeName.setter
   def monitoringLocationTypeName(self, val:MonitoringLocationTypeName) -> None:
-    self.__monitoringLocationTypeName = val
+    self.__monitoringLocationTypeName = None if val is None else MonitoringLocationTypeName(val)
 
   @property
   def monitoringLocationDescriptionText(self) -> MonitoringLocationDescriptionText:
@@ -160,7 +160,7 @@ class MonitoringLocationIdentity:
   @drainageAreaMeasure.setter
   def drainageAreaMeasure(self, val:MeasureCompact) -> None:
     """The drainage basin of a lake, stream, wetland, or estuary site."""
-    self.__drainageAreaMeasure = val
+    self.__drainageAreaMeasure = None if val is None else MeasureCompact(val)
 
   @property
   def contributingDrainageAreaMeasure(self) -> MeasureCompact:
@@ -169,7 +169,7 @@ class MonitoringLocationIdentity:
   @contributingDrainageAreaMeasure.setter
   def contributingDrainageAreaMeasure(self, val:MeasureCompact) -> None:
     """The contributing drainage area of a lake, stream, wetland, or estuary site."""
-    self.__contributingDrainageAreaMeasure = val
+    self.__contributingDrainageAreaMeasure = None if val is None else MeasureCompact(val)
 
   def generateXML(self, name:str = 'MonitoringLocationIdentity') -> str:
     doc, tag, text, line = Doc().ttl()

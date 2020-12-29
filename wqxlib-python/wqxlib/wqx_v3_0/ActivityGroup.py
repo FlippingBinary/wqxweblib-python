@@ -78,9 +78,7 @@ class ActivityGroup:
     return self.__replaceActivities
   @replaceActivities.setter
   def replaceActivities(self, val:bool) -> None:
-    if not isinstance(val, bool):
-      raise WQXException("Attribute 'replaceActivities' must be a boolean.")
-    self.__replaceActivities = val
+    self.__replaceActivities = bool(val)
 
   def generateXML(self, name:str = 'ActivityGroup') -> str:
     doc, tag, text, line = Doc().ttl()

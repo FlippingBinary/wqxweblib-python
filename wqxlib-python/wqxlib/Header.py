@@ -77,11 +77,7 @@ class Header:
     return self.__author
   @author.setter
   def author(self, val:str) -> None:
-    if not isinstance(val, str):
-      raise TypeError("Property 'author' must be a string.")
-    if len(val) < 1:
-      raise TypeError("Property 'author' is required.")
-    self.__author = val
+    self.__author = None if val is None else str(val)
 
   @property
   def organization(self) -> str:
@@ -92,7 +88,7 @@ class Header:
       raise TypeError("Property 'organization' must be a string.")
     if len(val) < 1:
       raise ValueError("Property 'organization is required.")
-    self.__organization = val
+    self.__organization = None if val is None else str(val)
 
   @property
   def title(self) -> str:
@@ -135,11 +131,7 @@ class Header:
     return self.__contactInfo
   @contactInfo.setter
   def contactInfo(self, val:str) -> None:
-    if not isinstance(val, str):
-      raise TypeError("Property 'contactInfo' must be a string.")
-    if len(val) < 1:
-      raise TypeError("Property 'contactInfo' is required.")
-    self.__contactInfo = val
+    self.__contactInfo = None if val is None else str(val)
 
   @property
   def notification(self) -> List[uri_reference]:

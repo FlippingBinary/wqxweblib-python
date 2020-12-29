@@ -58,7 +58,7 @@ class ActivityMetric:
     return self.__activityMetricType
   @activityMetricType.setter
   def activityMetricType(self, val:ActivityMetricType) -> None:
-    self.__activityMetricType = val
+    self.__activityMetricType = None if val is None else ActivityMetricType(val)
 
   @property
   def metricValueMeasure(self) -> MeasureCompact:
@@ -67,14 +67,14 @@ class ActivityMetric:
   @metricValueMeasure.setter
   def metricValueMeasure(self, val:MeasureCompact) -> None:
     """A non-scaled value calculated from raw results that may be scaled into a metric score."""
-    self.__metricValueMeasure = val
+    self.__metricValueMeasure = None if val is None else MeasureCompact(val)
 
   @property
   def metricScore(self) -> MetricScore:
     return self.__metricScore
   @metricScore.setter
   def metricScore(self, val:MetricScore) -> None:
-    self.__metricScore = val
+    self.__metricScore = None if val is None else MetricScore(val)
 
   @property
   def metricSamplingPointPlaceInSeries(self) -> MetricSamplingPointPlaceInSeries:
@@ -90,7 +90,7 @@ class ActivityMetric:
   @metricCommentText.setter
   def metricCommentText(self, val:CommentText) -> None:
     """Free text with general comments concerning the metric."""
-    self.__metricCommentText = val
+    self.__metricCommentText = None if val is None else CommentText(val)
 
   @property
   def indexIdentifier(self) -> IndexIdentifier:

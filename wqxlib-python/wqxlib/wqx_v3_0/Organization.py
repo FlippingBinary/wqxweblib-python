@@ -76,7 +76,7 @@ class Organization:
   def organizationDescription(self, val:OrganizationDescription) -> None:
     if val is not None and not isinstance(val, OrganizationDescription):
       raise WQXException("Property 'organizationDescription' must be an OrganizationDescription object.")
-    self.__organizationDescription = val
+    self.__organizationDescription = None if val is None else OrganizationDescription(val)
 
   @property
   def electronicAddress(self) -> List[ElectronicAddress]:

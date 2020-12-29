@@ -80,7 +80,7 @@ class ActivityMetricType:
   @metricTypeCitation.setter
   def metricTypeCitation(self, val:BibliographicReference) -> None:
     """Provides additional description of the source that created or defined the metric."""
-    self.__metricTypeCitation = val
+    self.__metricTypeCitation = None if val is None else BibliographicReference(val)
 
   @property
   def metricTypeScaleText(self) -> MetricTypeScaleText:

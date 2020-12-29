@@ -59,7 +59,7 @@ class Payload:
   def wqx(self, val:WQX) -> None:
     if val is not None and not isinstance(val, WQX):
       raise WQXException("Attribute 'wqx' must be a WQX object, if provided.")
-    self.__wqx = val
+    self.__wqx = None if val is None else WQX(val)
 
   @property
   def wqxUpdateIdentifiers(self) -> WQXUpdateIdentifiers:
@@ -68,7 +68,7 @@ class Payload:
   def wqxUpdateIdentifiers(self, val:WQXUpdateIdentifiers) -> None:
     if val is not None and not isinstance(val, WQXUpdateIdentifiers):
       raise WQXException("Attribute 'wqxUpdateIdentifiers' must be a WQXUpdateIdentifiers object, if provided.")
-    self.__wqxUpdateIdentifiers = val
+    self.__wqxUpdateIdentifiers = None if val is None else WQXUpdateIdentifiers(val)
 
   @property
   def wqxDelete(self) -> WQXDelete:
@@ -77,7 +77,7 @@ class Payload:
   def wqxDelete(self, val:WQXDelete) -> None:
     if val is not None and not isinstance(val, WQXDelete):
       raise WQXException("Attribute 'wqxDelete' must be a WQXDelete object, if provided.")
-    self.__wqxDelete = val
+    self.__wqxDelete = None if val is None else WQXDelete(val)
 
   def generateXML(self, name:str = 'Payload') -> str:
     doc, tag, text, line = Doc().ttl()

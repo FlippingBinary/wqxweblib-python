@@ -90,9 +90,15 @@ class TaxonomicDetails:
     return self.__habitName
   @habitName.setter
   def habitName(self, val:List[HabitName]) -> None:
-    if not isinstance(val, list) or val.length > 3:
-      raise ValueError("Attribute habitName must be a list with 0 to 3 values.")
-    self.__habitName = val
+    if val is None:
+      self.__habitName = []
+    elif isinstance(val, list):
+      r:List[HabitName] = []
+      for x in val:
+        r.append(HabitName(x))
+      self.__habitName = r
+    else:
+      self.__habitName = [HabitName(val)]
 
   @property
   def voltinismName(self) -> VoltinismName:
@@ -127,9 +133,15 @@ class TaxonomicDetails:
     return self.__functionalFeedingGroupName
   @functionalFeedingGroupName.setter
   def functionalFeedingGroupName(self, val:List[FunctionalFeedingGroupName]) -> None:
-    if not isinstance(val, list) or val.length > 3:
-      ValueError("Attribute functionalFeedingGroupName must be a list with 0 to 3 values.")
-    self.__functionalFeedingGroupName = val
+    if val is None:
+      self.__functionalFeedingGroupName = []
+    elif isinstance(val, list):
+      r:List[FunctionalFeedingGroupName] = []
+      for x in val:
+        r.append(FunctionalFeedingGroupName(x))
+      self.__functionalFeedingGroupName = r
+    else:
+      self.__functionalFeedingGroupName = [FunctionalFeedingGroupName(val)]
 
   @property
   def taxonomicDetailsCitation(self) -> BibliographicReference:

@@ -28,7 +28,7 @@ class WQX:
   def organization(self, val:Organization) -> None:
     if val is not None and not isinstance(val, Organization):
       raise WQXException("Attribute 'organization' must be an Organization object.")
-    self.__organization = val
+    self.__organization = None if val is None else Organization(val)
 
 
   def generateXML(self, name = 'WQX'):

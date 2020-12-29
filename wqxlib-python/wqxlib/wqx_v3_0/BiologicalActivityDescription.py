@@ -51,7 +51,7 @@ class BiologicalActivityDescription:
     return self.__biologicalHabitatCollectionInformation
   @biologicalHabitatCollectionInformation.setter
   def biologicalHabitatCollectionInformation(self, val:BiologicalHabitatCollectionInformation) -> None:
-    self.__biologicalHabitatCollectionInformation = val
+    self.__biologicalHabitatCollectionInformation = None if val is None else BiologicalHabitatCollectionInformation(val)
 
   @property
   def toxicityTestType(self) -> ToxicityTestType:

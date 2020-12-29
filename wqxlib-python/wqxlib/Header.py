@@ -198,7 +198,9 @@ class Header:
       if self.__contactInfo is not None:
         line('ContactInfo', self.__contactInfo)
       for x in self.__notification:
-        line('Notification', x)
+        if not x.is_valid():
+          raise WQXException("Attribute 'notification' must be a list of valid URIs, if provided.")
+        line('Notification', x.unsplit())
       if self.__sensitivity is not None:
         line('Sensitivity', self.__sensitivity)
       for key in self.__property:

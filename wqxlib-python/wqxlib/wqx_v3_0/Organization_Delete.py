@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 from yattag import Doc, indent
 from .SimpleContent import *
 from ..common import WQXException
@@ -57,7 +57,7 @@ class OrganizationDelete:
   def projectIdentifier(self) -> List[ProjectIdentifier]:
     return self.__projectIdentifier
   @projectIdentifier.setter
-  def projectIdentifier(self, val:List[ProjectIdentifier]) -> None:
+  def projectIdentifier(self, val:Union[ProjectIdentifier,List[ProjectIdentifier]]) -> None:
     if val is None:
       self.__projectIdentifier = []
     elif isinstance(val, list):
@@ -72,7 +72,7 @@ class OrganizationDelete:
   def monitoringLocationIdentifier(self) -> List[MonitoringLocationIdentifier]:
     return self.__monitoringLocationIdentifier
   @monitoringLocationIdentifier.setter
-  def monitoringLocationIdentifier(self, val:List[MonitoringLocationIdentifier]) -> None:
+  def monitoringLocationIdentifier(self, val:Union[MonitoringLocationIdentifier,List[MonitoringLocationIdentifier]]) -> None:
     if val is None:
       self.__monitoringLocationIdentifier = []
     elif isinstance(val, list):
@@ -87,7 +87,7 @@ class OrganizationDelete:
   def activityIdentifier(self) -> List[ActivityIdentifier]:
     return self.__activityIdentifier
   @activityIdentifier.setter
-  def activityIdentifier(self, val:List[ActivityIdentifier]) -> None:
+  def activityIdentifier(self, val:Union[ActivityIdentifier,List[ActivityIdentifier]]) -> None:
     if val is None:
       self.__activityIdentifier = []
     elif isinstance(val, list):
@@ -102,7 +102,7 @@ class OrganizationDelete:
   def activityGroupIdentifier(self) -> List[ActivityGroupIdentifier]:
     return self.__activityGroupIdentifier
   @activityGroupIdentifier.setter
-  def activityGroupIdentifier(self, val:List[ActivityGroupIdentifier]) -> None:
+  def activityGroupIdentifier(self, val:Union[ActivityGroupIdentifier,List[ActivityGroupIdentifier]]) -> None:
     if val is None:
       self.__activityGroupIdentifier = []
     elif isinstance(val, list):
@@ -117,7 +117,7 @@ class OrganizationDelete:
   def indexIdentifier(self) -> List[IndexIdentifier]:
     return self.__indexIdentifier
   @indexIdentifier.setter
-  def indexIdentifier(self, val:List[IndexIdentifier]) -> None:
+  def indexIdentifier(self, val:Union[IndexIdentifier,List[IndexIdentifier]]) -> None:
     if val is None:
       self.__indexIdentifier = []
     elif isinstance(val, list):

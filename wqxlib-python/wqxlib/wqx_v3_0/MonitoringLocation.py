@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 from yattag import Doc, indent
 from .MonitoringLocationIdentity import MonitoringLocationIdentity
 from .MonitoringLocationGeospatial import MonitoringLocationGeospatial
@@ -64,7 +64,7 @@ class MonitoringLocation:
   def attachedBinaryObject(self) -> List[AttachedBinaryObject]:
     return self.__attachedBinaryObject
   @attachedBinaryObject.setter
-  def attachedBinaryObject(self, val:List[AttachedBinaryObject]) -> None:
+  def attachedBinaryObject(self, val:Union[AttachedBinaryObject,List[AttachedBinaryObject]]) -> None:
     if val is None:
       self.__attachedBinaryObject = []
     elif isinstance(val, list):

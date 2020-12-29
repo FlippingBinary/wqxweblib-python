@@ -1,5 +1,5 @@
 import re
-from typing import List
+from typing import List, Union
 from yattag import Doc, indent
 from .Header import Header
 from .Payload import Payload
@@ -23,7 +23,7 @@ class Document:
   def __init__(self, o=None, *,
     id:ID = None,
     header:Header = None,
-    payload:List[Payload] = []
+    payload:List[Payload] = None
   ):
     if isinstance(o, Document):
       # Assign attributes from object without typechecking
@@ -59,21 +59,24 @@ class Document:
   def payload(self) -> List[Payload]:
     return self.__payload
   @payload.setter
-  def payload(self, val:List[Payload]) -> None:
-    if not isinstance(val, list) or len(val) < 1:
-      raise TypeError("Property 'payload' must be a list of 1 or more Payload objects.")
-    for x in val:
-      if not isinstance(x, Payload):
-        raise TypeError("Property 'payload' must be a list of 1 or more Payload objects.")
-    self.__payload = val
+  def payload(self, val:Union[Payload,List[Payload]]) -> None:
+    if val is None:
+      self.__payload = []
+    elif isinstance(val, list):
+      r:List[Payload] = []
+      for x in val:
+        r.append(Payload(x))
+      self.__payload = r
+    else:
+      self.__payload = [Payload(val)]
 
   def generateXML(self, name:str = 'Document') -> str:
     if self.__header is None:
       raise WQXException("Attribute 'header' is required.")
     if self.__id is None:
       raise WQXException("Attribute 'id' is required.")
-    if self.__payload is None:
-      raise WQXException("Attribute 'payload' is required.")
+    if not isinstance(self.__payload, list) or len(self.__payload) < 1:
+      raise WQXException("Attribute 'payload' must be a list of 1 or more Payload objects.")
 
     doc, tag, text, line = Doc().ttl()
 

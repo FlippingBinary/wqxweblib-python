@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 from yattag import Doc, indent
 from .SimpleContent import MeasureQualifierCode, MeasureUnitCode, ResultMeasureValue
 from ..common import WQXException
@@ -36,7 +36,7 @@ class Measure:
   def measureQualifierCode(self) -> List[MeasureQualifierCode]:
     return self.__measureQualifierCode
   @measureQualifierCode.setter
-  def measureQualifierCode(self, val:List[MeasureQualifierCode]) -> None:
+  def measureQualifierCode(self, val:Union[MeasureQualifierCode,List[MeasureQualifierCode]]) -> None:
     if val is None:
       self.__measureQualifierCode = []
     elif isinstance(val, list):

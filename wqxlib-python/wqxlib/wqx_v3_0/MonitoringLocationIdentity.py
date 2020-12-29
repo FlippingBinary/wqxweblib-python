@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 from yattag import Doc, indent
 from .AlternateMonitoringLocationIdentity import AlternateMonitoringLocationIdentity
 from .MeasureCompact import MeasureCompact
@@ -133,7 +133,7 @@ class MonitoringLocationIdentity:
   def alternateMonitoringLocationIdentity(self) -> List[AlternateMonitoringLocationIdentity]:
     return self.__alternateMonitoringLocationIdentity
   @alternateMonitoringLocationIdentity.setter
-  def alternateMonitoringLocationIdentity(self, val:List[AlternateMonitoringLocationIdentity]) -> None:
+  def alternateMonitoringLocationIdentity(self, val:Union[AlternateMonitoringLocationIdentity,List[AlternateMonitoringLocationIdentity]]) -> None:
     if val is None:
       self.__alternateMonitoringLocationIdentity = []
     elif isinstance(val, list):

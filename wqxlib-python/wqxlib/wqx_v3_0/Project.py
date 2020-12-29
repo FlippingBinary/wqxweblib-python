@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 from yattag import Doc, indent
 from .AttachedBinaryObject import AttachedBinaryObject
 from .ProjectMonitoringLocationWeighting import ProjectMonitoringLocationWeighting
@@ -104,14 +104,22 @@ class Project:
   def attachedBinaryObject(self) -> List[AttachedBinaryObject]:
     return self.__attachedBinaryObject
   @attachedBinaryObject.setter
-  def attachedBinaryObject(self, val:List[AttachedBinaryObject]) -> None:
-    self.__attachedBinaryObject = val
+  def attachedBinaryObject(self, val:Union[AttachedBinaryObject,List[AttachedBinaryObject]]) -> None:
+    if val is None:
+      self.__attachedBinaryObject = []
+    elif isinstance(val, list):
+      r:List[AttachedBinaryObject] = []
+      for x in val:
+        r.append(AttachedBinaryObject(x))
+      self.__attachedBinaryObject = r
+    else:
+      self.__attachedBinaryObject = [AttachedBinaryObject(val)]
 
   @property
   def projectMonitoringLocationWeighting(self) -> List[ProjectMonitoringLocationWeighting]:
     return self.__projectMonitoringLocationWeighting
   @projectMonitoringLocationWeighting.setter
-  def projectMonitoringLocationWeighting(self, val:List[ProjectMonitoringLocationWeighting]) -> None:
+  def projectMonitoringLocationWeighting(self, val:Union[ProjectMonitoringLocationWeighting,List[ProjectMonitoringLocationWeighting]]) -> None:
     if val is None:
       self.__projectMonitoringLocationWeighting = []
     elif isinstance(val, list):

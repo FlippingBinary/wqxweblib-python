@@ -7,8 +7,18 @@ from .common import WQXException
 class Submission:
   __document: Document
 
-  def __init__(self):
-    self.__document = None
+  def __init__(self, o=None, *,
+    document:Document = None
+  ):
+    if isinstance(o, Document):
+      # Assign attributes from object without typechecking
+      self.__document = o.document
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.document = o.get('document', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.document = document
   
   @property
   def document(self) -> Document:

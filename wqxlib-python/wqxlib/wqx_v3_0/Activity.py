@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 from yattag import Doc, indent
 from .ActivityDescription import ActivityDescription
 from .ActivityLocation import ActivityLocation
@@ -89,22 +89,46 @@ class Activity:
   def activityMetric(self) -> List[ActivityMetric]:
     return self.__activityMetric
   @activityMetric.setter
-  def activityMetric(self, val:List[ActivityMetric]) -> None:
-    self.__activityMetric = val
+  def activityMetric(self, val:Union[ActivityMetric,List[ActivityMetric]]) -> None:
+    if val is None:
+      self.__activityMetric = []
+    elif isinstance(val, list):
+      r:List[ActivityMetric] = []
+      for x in val:
+        r.append(ActivityMetric(x))
+      self.__activityMetric = r
+    else:
+      self.__activityMetric = [ActivityMetric(val)]
 
   @property
   def attachedBinaryObject(self) -> List[AttachedBinaryObject]:
     return self.__attachedBinaryObject
   @attachedBinaryObject.setter
-  def attachedBinaryObject(self, val:List[AttachedBinaryObject]) -> None:
-    self.__attachedBinaryObject = val
+  def attachedBinaryObject(self, val:Union[AttachedBinaryObject,List[AttachedBinaryObject]]) -> None:
+    if val is None:
+      self.__attachedBinaryObject = []
+    elif isinstance(val, list):
+      r:List[AttachedBinaryObject] = []
+      for x in val:
+        r.append(AttachedBinaryObject(x))
+      self.__attachedBinaryObject = r
+    else:
+      self.__attachedBinaryObject = [AttachedBinaryObject(val)]
 
   @property
   def result(self) -> List[Result]:
     return self.__result
   @result.setter
-  def result(self, val:List[Result]) -> None:
-    self.__result = val
+  def result(self, val:Union[Result,List[Result]]) -> None:
+    if val is None:
+      self.__result = []
+    elif isinstance(val, list):
+      r:List[Result] = []
+      for x in val:
+        r.append(Result(x))
+      self.__result = r
+    else:
+      self.__result = [Result(val)]
 
   def generateXML(self):
     if self.__activityDescription is None:

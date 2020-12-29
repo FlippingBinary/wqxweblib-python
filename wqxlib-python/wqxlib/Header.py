@@ -1,6 +1,6 @@
 from datetime import datetime
 from rfc3986 import uri_reference
-from typing import List
+from typing import List, Union
 from yattag import Doc, indent
 from .common import WQXException
 
@@ -16,34 +16,61 @@ class Header:
   __sensitivity: str
   __property: dict
 
-  def __init__(self,
+  def __init__(self, o=None, *,
     author = None,
     organization = None,
-    title = 'WQX',
+    title = None,
     creationTime = None,
     comment = None,
     dataService = None,
     contactInfo = None,
-    notification = [],
+    notification = None,
     sensitivity = None,
-    property = {}
+    property = None
   ):
-    self.author = author
-    self.organization = organization
-    self.title = title
-    if creationTime is None:
-      self.creationTime = datetime.now()
+    if isinstance(o, Header):
+      # Assign attributes from object without typechecking
+      self.__author = o.author
+      self.__organization = o.organization
+      self.__title = o.title
+      self.__creationTime = o.creationTime
+      self.__comment = o.comment
+      self.__dataService = o.dataService
+      self.__contactInfo = o.contactInfo
+      self.__notification = o.notification
+      self.__sensitivity = o.sensitivity
+      self.__property = o.property
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.author = o.get('author', default = None)
+      self.organization = o.get('organization', default = None)
+      self.title = o.get('title', default = None)
+      self.creationTime = o.get('creationTime', default = None)
+      self.comment = o.get('comment', default = None)
+      self.dataService = o.get('dataService', default = None)
+      self.contactInfo = o.get('contactInfo', default = None)
+      self.notification = o.get('notification', default = None)
+      self.sensitivity = o.get('sensitivity', default = None)
+      # self.property is tricky because Python confuses it with the decorator
+      property = o.get('property', default = None)
+      if property is not None and not isinstance(property, dict):
+        raise TypeError("Property 'property' must be a dict of 0 or more key/value pairs.")
+      self.__property = {} if property is None else property
     else:
+      # Assign attributes from named keywords with typechecking
+      self.author = author
+      self.organization = organization
+      self.title = title
       self.creationTime = creationTime
-    self.comment = comment
-    self.dataService = dataService
-    self.contactInfo = contactInfo
-    self.notification = notification
-    self.sensitivity = sensitivity
-    # self.property is tricky because Python confuses it with the decorator
-    if property is not None and not isinstance(property, dict):
-      raise TypeError("Property 'property' must be a dict of 0 or more key/value pairs.")
-    self.__property = {} if property is None else property
+      self.comment = comment
+      self.dataService = dataService
+      self.contactInfo = contactInfo
+      self.notification = notification
+      self.sensitivity = sensitivity
+      # self.property is tricky because Python confuses it with the decorator
+      if property is not None and not isinstance(property, dict):
+        raise TypeError("Property 'property' must be a dict of 0 or more key/value pairs.")
+      self.__property = {} if property is None else property
 
   @property
   def author(self) -> str:
@@ -72,20 +99,18 @@ class Header:
     return self.__title
   @title.setter
   def title(self, val:str) -> None:
-    if not isinstance(val, str):
+    if val is not None and not isinstance(val, str):
       raise TypeError("Property 'title' must be a string")
-    if len(val) < 1:
-      raise ValueError("Property 'title' is required.")
-    self.__title = val
+    self.__title = 'WQX' if val is None or len(val) < 1 else val
 
   @property
   def creationTime(self) -> datetime:
     return self.__creationTime
   @creationTime.setter
   def creationTime(self, val:datetime) -> None:
-    if not isinstance(val, datetime):
+    if val is not None and not isinstance(val, datetime):
       raise TypeError("Property 'creationTime' must be a datetime.")
-    self.__creationTime = val
+    self.__creationTime = datetime.now() if val is None else val
 
   @property
   def comment(self) -> str:
@@ -117,16 +142,19 @@ class Header:
     self.__contactInfo = val
 
   @property
-  def notification(self) -> List[str]:
+  def notification(self) -> List[uri_reference]:
     return self.__notification
   @notification.setter
-  def notification(self, val:List[str]) -> None:
-    if not isinstance(val, list):
-      raise TypeError("Property 'notification' must be a list of 0 or more URIs.")
-    for x in val:
-      if not isinstance(x, str) or not uri_reference(x).is_valid():
-        raise TypeError("Property 'notification' must be a list of 0 or more URIs.")
-    self.__notification = val
+  def notification(self, val:Union[uri_reference,List[uri_reference]]) -> None:
+    if val is None:
+      self.__notification = []
+    elif isinstance(val, list):
+      r:List[str] = []
+      for x in val:
+        r.append(uri_reference(x))
+      self.__notification = r
+    else:
+      self.__notification = [uri_reference(val)]
 
   @property
   def sensitivity(self) -> str:
@@ -142,7 +170,7 @@ class Header:
     return self.__property
   @property.setter
   def property(self, val:dict) -> None:
-    if val is not None and not isinstance(val, dict):
+    if val is not None and not isinstance(val, dict[str,str]):
       raise TypeError("Property 'property' must be a dict of 0 or more key/value pairs.")
     self.__property = {} if val is None else val
 

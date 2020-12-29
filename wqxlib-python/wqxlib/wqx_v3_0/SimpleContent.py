@@ -882,15 +882,13 @@ class TribalLandIndicator(str):
   def __new__(self, o:Union[str,bool]):
     if isinstance(o, str):
       if o.lower() in ['true', 't', 'yes', 'y', '1']:
-        self = str.__new__(self, 'True')
+        return super().__new__(self, 'true')
       else:
-        self = str.__new__(self, 'False')
-    elif isinstance(o, bool):
-      self = str.__new__(self, o)
+        return super().__new__(self, 'false')
     else:
-      raise ValueError("TribalLandIndicator must be boolean.")
+      return super().__new__(self, 'true' if bool(o) else 'false')
   def __bool__(self):
-    if self == 'True':
+    if self == 'true':
       return True
     else:
       return False

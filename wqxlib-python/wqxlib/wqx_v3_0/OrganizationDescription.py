@@ -10,16 +10,30 @@ class OrganizationDescription:
   __organizationDescriptionText: OrganizationDescriptionText
   __tribalCode: TribalCode
 
-  def __init__(self,
+  def __init__(self, o=None, *,
     organizationIdentifier:OrganizationIdentifier = None,
     organizationFormalName:OrganizationFormalName = None,
     organizationDescriptionText:OrganizationDescriptionText = None,
     tribalCode:TribalCode = None
   ):
-    self.organizationIdentifier = organizationIdentifier
-    self.organizationFormalName = organizationFormalName
-    self.organizationDescriptionText = organizationDescriptionText
-    self.tribalCode = tribalCode
+    if isinstance(o, OrganizationDescription):
+      # Assign attributes from object without typechecking
+      self.__organizationIdentifier = o.organizationIdentifier
+      self.__organizationFormalName = o.organizationFormalName
+      self.__organizationDescriptionText = o.organizationDescriptionText
+      self.__tribalCode = o.tribalCode
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.organizationIdentifier = o.get('organizationIdentifier', default = None)
+      self.organizationFormalName = o.get('organizationFormalName', default = None)
+      self.organizationDescriptionText = o.get('organizationDescriptionText', default = None)
+      self.tribalCode = o.get('tribalCode', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.organizationIdentifier = organizationIdentifier
+      self.organizationFormalName = organizationFormalName
+      self.organizationDescriptionText = organizationDescriptionText
+      self.tribalCode = tribalCode
 
   @property
   def organizationIdentifier(self) -> OrganizationIdentifier:

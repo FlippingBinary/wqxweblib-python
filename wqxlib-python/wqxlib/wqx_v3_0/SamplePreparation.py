@@ -13,14 +13,42 @@ class SamplePreparation:
   __thermalPreservativeUsedName: ThermalPreservativeUsedName
   __sampleTransportStorageDescription: SampleTransportStorageDescription
 
-  def __init__(self):
-    self.__samplePreparationMethod = None
-    self.__sampleContainerLabelName = None
-    self.__sampleContainerTypeName = None
-    self.__sampleContainerColorName = None
-    self.__chemicalPreservativeUsedName = None
-    self.__thermalPreservativeUsedName = None
-    self.__sampleTransportStorageDescription = None
+  def __init__(self, o=None, *,
+    samplePreparationMethod:ReferenceMethod = None,
+    sampleContainerLabelName:SampleContainerLabelName = None,
+    sampleContainerTypeName:SampleContainerTypeName = None,
+    sampleContainerColorName:SampleContainerColorName = None,
+    chemicalPreservativeUsedName:ChemicalPreservativeUsedName = None,
+    thermalPreservativeUsedName:ThermalPreservativeUsedName = None,
+    sampleTransportStorageDescription:SampleTransportStorageDescription = None
+  ):
+    if isinstance(o, SamplePreparation):
+      # Assign attributes from object without typechecking
+      self.__samplePreparationMethod = o.samplePreparationMethod
+      self.__sampleContainerLabelName = o.sampleContainerLabelName
+      self.__sampleContainerTypeName = o.sampleContainerTypeName
+      self.__sampleContainerColorName = o.sampleContainerColorName
+      self.__chemicalPreservativeUsedName = o.chemicalPreservativeUsedName
+      self.__thermalPreservativeUsedName = o.thermalPreservativeUsedName
+      self.__sampleTransportStorageDescription = o.sampleTransportStorageDescription
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.samplePreparationMethod = o.get('samplePreparationMethod', default = None)
+      self.sampleContainerLabelName = o.get('sampleContainerLabelName', default = None)
+      self.sampleContainerTypeName = o.get('sampleContainerTypeName', default = None)
+      self.sampleContainerColorName = o.get('sampleContainerColorName', default = None)
+      self.chemicalPreservativeUsedName = o.get('chemicalPreservativeUsedName', default = None)
+      self.thermalPreservativeUsedName = o.get('thermalPreservativeUsedName', default = None)
+      self.sampleTransportStorageDescription = o.get('sampleTransportStorageDescription', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.samplePreparationMethod = samplePreparationMethod
+      self.sampleContainerLabelName = sampleContainerLabelName
+      self.sampleContainerTypeName = sampleContainerTypeName
+      self.sampleContainerColorName = sampleContainerColorName
+      self.chemicalPreservativeUsedName = chemicalPreservativeUsedName
+      self.thermalPreservativeUsedName = thermalPreservativeUsedName
+      self.sampleTransportStorageDescription = sampleTransportStorageDescription
 
   @property
   def samplePreparationMethod(self) -> ReferenceMethod:

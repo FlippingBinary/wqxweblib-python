@@ -11,9 +11,22 @@ class WQXTime:
   __time: Time
   __timeZoneCode: TimeZoneCode
 
-  def __init__(self):
-    self.__time = None
-    self.__timeZoneCode = None
+  def __init__(self, o=None, *,
+    time:Time = None,
+    timeZoneCode:TimeZoneCode = None
+  ):
+    if isinstance(o, WQXTime):
+      # Assign attributes from object without typechecking
+      self.__time = o.time
+      self.__timeZoneCode = o.timeZoneCode
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.time = o.get('time', default = None)
+      self.timeZoneCode = o.get('timeZoneCode', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.time = time
+      self.timeZoneCode = timeZoneCode
 
   @property
   def time(self) -> Time:

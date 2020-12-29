@@ -24,26 +24,50 @@ class Organization:
   __activity: List[Activity]
   __activityGroup: List[ActivityGroup]
 
-  def __init__(self,
+  def __init__(self, o=None, *,
     organizationDescription:OrganizationDescription = None,
-    electronicAddress:ElectronicAddress = [],
-    telephonic:Telephonic = [],
-    organizationAddress:OrganizationAddress = [],
-    project:Project = [],
-    monitoringLocation:MonitoringLocation = [],
-    biologicalHabitatIndex:BiologicalHabitatIndex = [],
-    activity:Activity = [],
-    activityGroup:ActivityGroup = []
+    electronicAddress:List[ElectronicAddress] = None,
+    telephonic:List[Telephonic] = None,
+    organizationAddress:List[OrganizationAddress] = None,
+    project:List[Project] = None,
+    monitoringLocation:List[MonitoringLocation] = None,
+    biologicalHabitatIndex:List[BiologicalHabitatIndex] = None,
+    activity:List[Activity] = None,
+    activityGroup:List[ActivityGroup] = None
   ):
-    self.organizationDescription = organizationDescription
-    self.electronicAddress = electronicAddress
-    self.telephonic = telephonic
-    self.organizationAddress = organizationAddress
-    self.project = project
-    self.monitoringLocation = monitoringLocation
-    self.biologicalHabitatIndex = biologicalHabitatIndex
-    self.activity = activity
-    self.activityGroup = activityGroup
+    if isinstance(o, Organization):
+      # Assign attributes from object without typechecking
+      self.__organizationDescription = o.organizationDescription
+      self.__electronicAddress = o.electronicAddress
+      self.__telephonic = o.telephonic
+      self.__organizationAddress = o.organizationAddress
+      self.__project = o.project
+      self.__monitoringLocation = o.monitoringLocation
+      self.__biologicalHabitatIndex = o.biologicalHabitatIndex
+      self.__activity = o.activity
+      self.__activityGroup = o.activityGroup
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.organizationDescription = o.get('organizationDescription', default = None)
+      self.electronicAddress = o.get('electronicAddress', default = None)
+      self.telephonic = o.get('telephonic', default = None)
+      self.organizationAddress = o.get('organizationAddress', default = None)
+      self.project = o.get('project', default = None)
+      self.monitoringLocation = o.get('monitoringLocation', default = None)
+      self.biologicalHabitatIndex = o.get('biologicalHabitatIndex', default = None)
+      self.activity = o.get('activity', default = None)
+      self.activityGroup = o.get('activityGroup', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.organizationDescription = organizationDescription
+      self.electronicAddress = electronicAddress
+      self.telephonic = telephonic
+      self.organizationAddress = organizationAddress
+      self.project = project
+      self.monitoringLocation = monitoringLocation
+      self.biologicalHabitatIndex = biologicalHabitatIndex
+      self.activity = activity
+      self.activityGroup = activityGroup
 
   @property
   def organizationDescription(self) -> OrganizationDescription:
@@ -58,73 +82,127 @@ class Organization:
   def electronicAddress(self) -> List[ElectronicAddress]:
     return self.__electronicAddress
   @electronicAddress.setter
-  def electronicAddress(self, val:List[ElectronicAddress]) -> None:
-    self.__electronicAddress = val
+  def electronicAddress(self, val:Union[ElectronicAddress,List[ElectronicAddress]]) -> None:
+    if val is None:
+      self.__electronicAddress = []
+    elif isinstance(val, list):
+      r:List[ElectronicAddress] = []
+      for x in val:
+        r.append(ElectronicAddress(x))
+      self.__electronicAddress = r
+    else:
+      self.__electronicAddress = [ElectronicAddress(val)]
 
   @property
   def telephonic(self) -> List[Telephonic]:
     return self.__telephonic
   @telephonic.setter
-  def telephonic(self, val:List[Telephonic]) -> None:
-    self.__telephonic = val
+  def telephonic(self, val:Union[Telephonic,List[Telephonic]]) -> None:
+    if val is None:
+      self.__telephonic = []
+    elif isinstance(val, list):
+      r:List[Telephonic] = []
+      for x in val:
+        r.append(Telephonic(x))
+      self.__telephonic = r
+    else:
+      self.__telephonic = [Telephonic(val)]
 
   @property
   def organizationAddress(self) -> List[OrganizationAddress]:
     return self.__organizationAddress
   @organizationAddress.setter
-  def organizationAddress(self, val:List[OrganizationAddress]) -> None:
-    if val is not None and (not isinstance(val, list) or len(val) > 3):
-      raise ValueError("Attribute 'organizationAddress' must be a list with 0 to 3 values.")
-    self.__organizationAddress = [] if val is None else val
+  def organizationAddress(self, val:Union[OrganizationAddress,List[OrganizationAddress]]) -> None:
+    if val is None:
+      self.__organizationAddress = []
+    elif isinstance(val, list):
+      r:List[OrganizationAddress] = []
+      for x in val:
+        r.append(OrganizationAddress(x))
+      self.__organizationAddress = r
+    else:
+      self.__organizationAddress = [OrganizationAddress(val)]
 
   @property
   def project(self) -> List[Project]:
     return self.__project
   @project.setter
   def project(self, val:Union[Project,List[Project]]) -> None:
-    if val is not None and not isinstance(val, list) and not isinstance(val, Project):
-      raise WQXException("Attribute 'project' must be a list of Project objects.")
-    self.__project = [] if val is None else val if isinstance(val, list) else [val]
+    if val is None:
+      self.__project = []
+    elif isinstance(val, list):
+      r:List[Project] = []
+      for x in val:
+        r.append(Project(x))
+      self.__project = r
+    else:
+      self.__project = [Project(val)]
 
   @property
   def monitoringLocation(self) -> List[MonitoringLocation]:
     return self.__monitoringLocation
   @monitoringLocation.setter
   def monitoringLocation(self, val:Union[MonitoringLocation,List[MonitoringLocation]]) -> None:
-    if val is not None and not isinstance(val, list) and not isinstance(val, MonitoringLocation):
-      raise WQXException("Attribute 'monitoringLocation' must be a list of MonitoringLocation objects.")
-    self.__monitoringLocation = [] if val is None else val if isinstance(val, list) else [val]
+    if val is None:
+      self.__monitoringLocation = []
+    elif isinstance(val, list):
+      r:List[MonitoringLocation] = []
+      for x in val:
+        r.append(MonitoringLocation(x))
+      self.__monitoringLocation = r
+    else:
+      self.__monitoringLocation = [MonitoringLocation(val)]
 
   @property
   def biologicalHabitatIndex(self) -> List[BiologicalHabitatIndex]:
     return self.__biologicalHabitatIndex
   @biologicalHabitatIndex.setter
   def biologicalHabitatIndex(self, val:Union[BiologicalHabitatIndex,List[BiologicalHabitatIndex]]) -> None:
-    if val is not None and not isinstance(val, list) and not isinstance(val, BiologicalHabitatIndex):
-      raise WQXException("Attribute 'biologicalHabitatIndex' must be a list of BiologicalHabitatIndex objects.")
-    self.__biologicalHabitatIndex = [] if val is None else val if isinstance(val, list) else [val]
+    if val is None:
+      self.__biologicalHabitatIndex = []
+    elif isinstance(val, list):
+      r:List[BiologicalHabitatIndex] = []
+      for x in val:
+        r.append(BiologicalHabitatIndex(x))
+      self.__biologicalHabitatIndex = r
+    else:
+      self.__biologicalHabitatIndex = [BiologicalHabitatIndex(val)]
 
   @property
   def activity(self) -> List[Activity]:
     return self.__activity
   @activity.setter
   def activity(self, val:Union[Activity,List[Activity]]) -> None:
-    if val is not None and not isinstance(val, list) and not isinstance(val, Activity):
-      raise WQXException("Attribute 'activity' must be a list of Activity objects.")
-    self.__activity = [] if val is None else val if isinstance(val, list) else [val]
+    if val is None:
+      self.__activity = []
+    elif isinstance(val, list):
+      r:List[Activity] = []
+      for x in val:
+        r.append(Activity(x))
+      self.__activity = r
+    else:
+      self.__activity = [Activity(val)]
 
   @property
   def activityGroup(self) -> List[ActivityGroup]:
     return self.__activityGroup
   @activityGroup.setter
   def activityGroup(self, val:Union[ActivityGroup,List[ActivityGroup]]) -> None:
-    if val is not None and not isinstance(val, list) and not isinstance(val, ActivityGroup):
-      raise WQXException("Attribute 'activityGroup' must be a list of ActivityGroup objects.")
-    self.__activityGroup = [] if val is None else val if isinstance(val, list) else [val]
+    if val is None:
+      self.__activityGroup = []
+    elif isinstance(val, list):
+      r:List[ActivityGroup] = []
+      for x in val:
+        r.append(ActivityGroup(x))
+      self.__activityGroup = r
+    else:
+      self.__activityGroup = [ActivityGroup(val)]
 
   def generateXML(self):
     if self.__organizationDescription is None:
       raise WQXException("Attribute 'organizationDescription' is required.")
+    if len(self.__organizationAddress) > 3:
+      raise WQXException("Attribute 'organizationAddress' must contain 0 to 3 OrganizationAddress objects.")
     
     doc, tag, text, line = Doc().ttl()
 

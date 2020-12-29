@@ -4,12 +4,26 @@ from ..common import WQXException
 
 class MeasureCompact:
   """Identifies only the value and the associated units of measure for measuring the observation or analytical result value."""
+
   __measureUnitCode: MeasureUnitCode
   __measureValue: MeasureValue
 
-  def __init__(self):
-    self.__measureUnitCode = None
-    self.__measureValue = None
+  def __init__(self, o=None, *,
+    measureUnitCode:MeasureUnitCode = None,
+    measureValue:MeasureValue = None
+  ):
+    if isinstance(o, MeasureCompact):
+      # Assign attributes from object without typechecking
+      self.__measureUnitCode = o.measureUnitCode
+      self.__measureValue = o.measureValue
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.measureUnitCode = o.get('measureUnitCode', default = None)
+      self.measureValue = o.get('measureValue', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.measureUnitCode = measureUnitCode
+      self.measureValue = measureValue
 
   @property
   def measureUnitCode(self) -> MeasureUnitCode:

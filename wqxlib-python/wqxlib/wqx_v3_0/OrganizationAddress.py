@@ -13,15 +13,46 @@ class OrganizationAddress:
   __countryCode: CountryCode
   __countyCode: CountyCode
 
-  def __init__(self):
-    self.__addressTypeName = None
-    self.__addressText = None
-    self.__supplementalAddressText = None
-    self.__localityName = None
-    self.__stateCode = None
-    self.__postalCode = None
-    self.__countryCode = None
-    self.__countyCode = None
+  def __init__(self, o=None, *,
+    addressTypeName:AddressTypeName = None,
+    addressText:AddressText = None,
+    supplementalAddressText:SupplementalAddressText = None,
+    localityName:LocalityName = None,
+    stateCode:StateCode = None,
+    postalCode:PostalCode = None,
+    countryCode:CountryCode = None,
+    countyCode:CountyCode = None
+  ):
+    if isinstance(o, OrganizationAddress):
+      # Assign attributes from object without typechecking
+      self.__addressTypeName = o.addressTypeName
+      self.__addressText = o.addressText
+      self.__supplementalAddressText = o.supplementalAddressText
+      self.__localityName = o.localityName
+      self.__stateCode = o.stateCode
+      self.__postalCode = o.postalCode
+      self.__countryCode = o.countryCode
+      self.__countyCode = o.countyCode
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.addressTypeName = o.get('addressTypeName', default = None)
+      self.addressText = o.get('addressText', default = None)
+      self.supplementalAddressText = o.get('supplementalAddressText', default = None)
+      self.localityName = o.get('localityName', default = None)
+      self.stateCode = o.get('stateCode', default = None)
+      self.postalCode = o.get('postalCode', default = None)
+      self.countryCode = o.get('countryCode', default = None)
+      self.countyCode = o.get('countyCode', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.addressTypeName = addressTypeName
+      self.addressText = addressText
+      self.supplementalAddressText = supplementalAddressText
+      self.localityName = localityName
+      self.stateCode = stateCode
+      self.postalCode = postalCode
+      self.countryCode = countryCode
+      self.countyCode = countyCode
 
   @property
   def addressTypeName(self) -> AddressTypeName:

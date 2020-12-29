@@ -1,20 +1,51 @@
 from typing import List
 from yattag import Doc, indent
 from .SimpleContent import MeasureQualifierCode, MeasureUnitCode, ResultMeasureValue
+from ..common import WQXException
 
 class Measure:
   """Identifies the value, associated units of measure, and qualifier for measuring the observation or analytical result value."""
 
   __measureQualifierCode: List[MeasureQualifierCode]
-  __measureUnitCode: MeasureUnitCode # required, constrained
-  __resultMeasureValue: ResultMeasureValue # required
+  __measureUnitCode: MeasureUnitCode
+  __resultMeasureValue: ResultMeasureValue
+
+  def __init__(self, o=None, *,
+    measureQualifierCode:List[MeasureQualifierCode] = None,
+    measureUnitCode:MeasureUnitCode = None,
+    resultMeasureValue:ResultMeasureValue = None,
+  ):
+    if isinstance(o, Measure):
+      # Assign attributes from object without typechecking
+      self.__measureQualifierCode = o.measureQualifierCode
+      self.__measureUnitCode = o.measureUnitCode
+      self.__resultMeasureValue = o.resultMeasureValue
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.__measureQualifierCode = o.get('measureQualifierCode', default = None)
+      self.__measureUnitCode = o.get('measureUnitCode', default = None)
+      self.__resultMeasureValue = o.get('resultMeasureValue', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.__measureQualifierCode = measureQualifierCode
+      self.__measureUnitCode = measureUnitCode
+      self.__resultMeasureValue = resultMeasureValue
+
 
   @property
   def measureQualifierCode(self) -> List[MeasureQualifierCode]:
     return self.__measureQualifierCode
   @measureQualifierCode.setter
   def measureQualifierCode(self, val:List[MeasureQualifierCode]) -> None:
-    self.__measureQualifierCode = None if val is None else List[MeasureQualifierCode](val)
+    if val is None:
+      self.__measureQualifierCode = []
+    elif isinstance(val, list):
+      r:List[MeasureQualifierCode] = []
+      for x in val:
+        r.append(MeasureQualifierCode(x))
+      self.__measureQualifierCode = r
+    else:
+      self.__measureQualifierCode = [MeasureQualifierCode(val)]
 
   @property
   def measureUnitCode(self) -> MeasureUnitCode:

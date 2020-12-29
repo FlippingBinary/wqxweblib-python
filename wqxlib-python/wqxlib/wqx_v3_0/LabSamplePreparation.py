@@ -17,13 +17,38 @@ class LabSamplePreparation:
   __preparationEndTime: WQXTime
   __substanceDilutionFactor: SubstanceDilutionFactor
 
-  def __init__(self):
-    self.__labSamplePreparationMethod = None
-    self.__preparationStartDate = None
-    self.__preparationStartTime = None
-    self.__preparationEndDate = None
-    self.__preparationEndTime = None
-    self.__substanceDilutionFactor = None
+  def __init__(self, o=None, *,
+    labSamplePreparationMethod:ReferenceMethod = None,
+    preparationStartDate:PreparationStartDate = None,
+    preparationStartTime:WQXTime = None,
+    preparationEndDate:PreparationEndDate = None,
+    preparationEndTime:WQXTime = None,
+    substanceDilutionFactor:SubstanceDilutionFactor = None
+  ):
+    if isinstance(o, LabSamplePreparation):
+      # Assign attributes from object without typechecking
+      self.__labSamplePreparationMethod = o.labSamplePreparationMethod
+      self.__preparationStartDate = o.preparationStartDate
+      self.__preparationStartTime = o.preparationStartTime
+      self.__preparationEndDate = o.preparationEndDate
+      self.__preparationEndTime = o.preparationEndTime
+      self.__substanceDilutionFactor = o.substanceDilutionFactor
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.labSamplePreparationMethod = o.get('labSamplePreparationMethod', default = None)
+      self.preparationStartDate = o.get('preparationStartDate', default = None)
+      self.preparationStartTime = o.get('preparationStartTime', default = None)
+      self.preparationEndDate = o.get('preparationEndDate', default = None)
+      self.preparationEndTime = o.get('preparationEndTime', default = None)
+      self.substanceDilutionFactor = o.get('substanceDilutionFactor', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.labSamplePreparationMethod = labSamplePreparationMethod
+      self.preparationStartDate = preparationStartDate
+      self.preparationStartTime = preparationStartTime
+      self.preparationEndDate = preparationEndDate
+      self.preparationEndTime = preparationEndTime
+      self.substanceDilutionFactor = substanceDilutionFactor
 
   @property
   def labSamplePreparationMethod(self) -> ReferenceMethod:

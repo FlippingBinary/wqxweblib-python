@@ -30,19 +30,62 @@ class ResultLabInformation:
   __taxonomistAccreditationIndicator: TaxonomistAccreditationIndicator
   __taxonomistAccreditationAuthorityName: TaxonomistAccreditationAuthorityName
 
-  def __init__(self):
-    self.__laboratoryName = None
-    self.__analysisStartDate = None
-    self.__analysisStartTime = None
-    self.__analysisEndDate = None
-    self.__analysisEndTime = None
-    self.__laboratoryCommentText = None
-    self.__resultDetectionQuantitationLimit = None
-    self.__laboratorySampleSplitRatio = None
-    self.__laboratoryAccreditationIndicator = None
-    self.__laboratoryAccreditationAuthorityName = None
-    self.__taxonomistAccreditationIndicator = None
-    self.__taxonomistAccreditationAuthorityName = None
+  def __init__(self, o=None, *,
+    laboratoryName:LaboratoryName = None,
+    analysisStartDate:AnalysisStartDate = None,
+    analysisStartTime:WQXTime = None,
+    analysisEndDate:AnalysisEndDate = None,
+    analysisEndTime:WQXTime = None,
+    laboratoryCommentText:LaboratoryCommentText = None,
+    resultDetectionQuantitationLimit:DetectionQuantitationLimit = None,
+    laboratorySampleSplitRatio:LaboratorySampleSplitRatio = None,
+    laboratoryAccreditationIndicator:LaboratoryAccreditationIndicator = None,
+    laboratoryAccreditationAuthorityName:LaboratoryAccreditationAuthorityName = None,
+    taxonomistAccreditationIndicator:TaxonomistAccreditationIndicator = None,
+    taxonomistAccreditationAuthorityName:TaxonomistAccreditationAuthorityName = None
+  ):
+    if isinstance(o, ResultLabInformation):
+      # Assign attributes from object without typechecking
+      self.__laboratoryName = o.laboratoryName
+      self.__analysisStartDate = o.analysisStartDate
+      self.__analysisStartTime = o.analysisStartTime
+      self.__analysisEndDate = o.analysisEndDate
+      self.__analysisEndTime = o.analysisEndTime
+      self.__laboratoryCommentText = o.laboratoryCommentText
+      self.__resultDetectionQuantitationLimit = o.resultDetectionQuantitationLimit
+      self.__laboratorySampleSplitRatio = o.laboratorySampleSplitRatio
+      self.__laboratoryAccreditationIndicator = o.laboratoryAccreditationIndicator
+      self.__laboratoryAccreditationAuthorityName = o.laboratoryAccreditationAuthorityName
+      self.__taxonomistAccreditationIndicator = o.taxonomistAccreditationIndicator
+      self.__taxonomistAccreditationAuthorityName = o.taxonomistAccreditationAuthorityName
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.laboratoryName = o.get('laboratoryName', default = None)
+      self.analysisStartDate = o.get('analysisStartDate', default = None)
+      self.analysisStartTime = o.get('analysisStartTime', default = None)
+      self.analysisEndDate = o.get('analysisEndDate', default = None)
+      self.analysisEndTime = o.get('analysisEndTime', default = None)
+      self.laboratoryCommentText = o.get('laboratoryCommentText', default = None)
+      self.resultDetectionQuantitationLimit = o.get('resultDetectionQuantitationLimit', default = None)
+      self.laboratorySampleSplitRatio = o.get('laboratorySampleSplitRatio', default = None)
+      self.laboratoryAccreditationIndicator = o.get('laboratoryAccreditationIndicator', default = None)
+      self.laboratoryAccreditationAuthorityName = o.get('laboratoryAccreditationAuthorityName', default = None)
+      self.taxonomistAccreditationIndicator = o.get('taxonomistAccreditationIndicator', default = None)
+      self.taxonomistAccreditationAuthorityName = o.get('taxonomistAccreditationAuthorityName', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.laboratoryName = laboratoryName
+      self.analysisStartDate = analysisStartDate
+      self.analysisStartTime = analysisStartTime
+      self.analysisEndDate = analysisEndDate
+      self.analysisEndTime = analysisEndTime
+      self.laboratoryCommentText = laboratoryCommentText
+      self.resultDetectionQuantitationLimit = resultDetectionQuantitationLimit
+      self.laboratorySampleSplitRatio = laboratorySampleSplitRatio
+      self.laboratoryAccreditationIndicator = laboratoryAccreditationIndicator
+      self.laboratoryAccreditationAuthorityName = laboratoryAccreditationAuthorityName
+      self.taxonomistAccreditationIndicator = taxonomistAccreditationIndicator
+      self.taxonomistAccreditationAuthorityName = taxonomistAccreditationAuthorityName
 
   @property
   def laboratoryName(self) -> LaboratoryName:

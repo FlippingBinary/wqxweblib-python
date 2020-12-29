@@ -20,34 +20,66 @@ class MonitoringLocationGeospatial:
   __stateCode: StateCode
   __countyCode: CountyCode
 
-  def __init__(self,
-    latitudeMeasure = None,
-    longitudeMeasure = None,
-    sourceMapScale = None,
-    horizontalAccuracyMeasure = None,
-    verticalAccuracyMeasure = None,
-    horizontalCollectionMethodName = None,
-    horizontalCoordinateReferenceSystemDatumName = None,
-    verticalMeasure = None,
-    verticalCollectionMethodName = None,
-    verticalCoordinateReferenceSystemDatumName = None,
-    countryCode = None,
-    stateCode = None,
-    countyCode = None
+  def __init__(self, o=None, *,
+    latitudeMeasure:LatitudeMeasure = None,
+    longitudeMeasure:LongitudeMeasure = None,
+    sourceMapScale:SourceMapScale = None,
+    horizontalAccuracyMeasure:MeasureCompact = None,
+    verticalAccuracyMeasure:MeasureCompact = None,
+    horizontalCollectionMethodName:HorizontalCollectionMethodName = None,
+    horizontalCoordinateReferenceSystemDatumName:HorizontalCoordinateReferenceSystemDatumName = None,
+    verticalMeasure:MeasureCompact = None,
+    verticalCollectionMethodName:VerticalCollectionMethodName = None,
+    verticalCoordinateReferenceSystemDatumName:VerticalCoordinateReferenceSystemDatumName = None,
+    countryCode:CountryCode = None,
+    stateCode:StateCode = None,
+    countyCode:CountyCode = None
   ):
-    self.__latitudeMeasure = latitudeMeasure
-    self.__longitudeMeasure = longitudeMeasure
-    self.__sourceMapScale = sourceMapScale
-    self.__horizontalAccuracyMeasure = horizontalAccuracyMeasure
-    self.__verticalAccuracyMeasure = verticalAccuracyMeasure
-    self.__horizontalCollectionMethodName = horizontalCollectionMethodName
-    self.__horizontalCoordinateReferenceSystemDatumName = horizontalCoordinateReferenceSystemDatumName
-    self.__verticalMeasure = verticalMeasure
-    self.__verticalCollectionMethodName = verticalCollectionMethodName
-    self.__verticalCoordinateReferenceSystemDatumName = verticalCoordinateReferenceSystemDatumName
-    self.__countryCode = countryCode
-    self.__stateCode = stateCode
-    self.__countyCode = countyCode
+    if isinstance(o, MonitoringLocationGeospatial):
+      # Assign attributes from object without typechecking
+      self.__latitudeMeasure = o.latitudeMeasure
+      self.__longitudeMeasure = o.longitudeMeasure
+      self.__sourceMapScale = o.sourceMapScale
+      self.__horizontalAccuracyMeasure = o.horizontalAccuracyMeasure
+      self.__verticalAccuracyMeasure = o.verticalAccuracyMeasure
+      self.__horizontalCollectionMethodName = o.horizontalCollectionMethodName
+      self.__horizontalCoordinateReferenceSystemDatumName = o.horizontalCoordinateReferenceSystemDatumName
+      self.__verticalMeasure = o.verticalMeasure
+      self.__verticalCollectionMethodName = o.verticalCollectionMethodName
+      self.__verticalCoordinateReferenceSystemDatumName = o.verticalCoordinateReferenceSystemDatumName
+      self.__countryCode = o.countryCode
+      self.__stateCode = o.stateCode
+      self.__countyCode = o.countyCode
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.latitudeMeasure = o.get('latitudeMeasure', default = None)
+      self.longitudeMeasure = o.get('longitudeMeasure', default = None)
+      self.sourceMapScale = o.get('sourceMapScale', default = None)
+      self.horizontalAccuracyMeasure = o.get('horizontalAccuracyMeasure', default = None)
+      self.verticalAccuracyMeasure = o.get('verticalAccuracyMeasure', default = None)
+      self.horizontalCollectionMethodName = o.get('horizontalCollectionMethodName', default = None)
+      self.horizontalCoordinateReferenceSystemDatumName = o.get('horizontalCoordinateReferenceSystemDatumName', default = None)
+      self.verticalMeasure = o.get('verticalMeasure', default = None)
+      self.verticalCollectionMethodName = o.get('verticalCollectionMethodName', default = None)
+      self.verticalCoordinateReferenceSystemDatumName = o.get('verticalCoordinateReferenceSystemDatumName', default = None)
+      self.countryCode = o.get('countryCode', default = None)
+      self.stateCode = o.get('stateCode', default = None)
+      self.countyCode = o.get('countyCode', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.latitudeMeasure = latitudeMeasure
+      self.longitudeMeasure = longitudeMeasure
+      self.sourceMapScale = sourceMapScale
+      self.horizontalAccuracyMeasure = horizontalAccuracyMeasure
+      self.verticalAccuracyMeasure = verticalAccuracyMeasure
+      self.horizontalCollectionMethodName = horizontalCollectionMethodName
+      self.horizontalCoordinateReferenceSystemDatumName = horizontalCoordinateReferenceSystemDatumName
+      self.verticalMeasure = verticalMeasure
+      self.verticalCollectionMethodName = verticalCollectionMethodName
+      self.verticalCoordinateReferenceSystemDatumName = verticalCoordinateReferenceSystemDatumName
+      self.countryCode = countryCode
+      self.stateCode = stateCode
+      self.countyCode = countyCode
 
   @property
   def latitudeMeasure(self) -> LatitudeMeasure:

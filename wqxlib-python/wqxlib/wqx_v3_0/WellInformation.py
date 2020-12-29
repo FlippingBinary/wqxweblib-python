@@ -16,15 +16,46 @@ class WellInformation:
   __constructionDate: ConstructionDate
   __wellDepthMeasure: MeasureCompact
 
-  def __init__(self):
-    self.__wellTypeText = None
-    self.__aquiferTypeName = None
-    self.__nationalAquiferCode = None
-    self.__aquiferInformation = None
-    self.__formationTypeText = None
-    self.__wellHoleDepthMeasure = None
-    self.__constructionDate = None
-    self.__wellDepthMeasure = None
+  def __init__(self, o=None, *,
+    wellTypeText:WellTypeText = None,
+    aquiferTypeName:AquiferTypeName = None,
+    nationalAquiferCode:NationalAquiferCode = None,
+    aquiferInformation:AquiferInformation = None,
+    formationTypeText:FormationTypeText = None,
+    wellHoleDepthMeasure:MeasureCompact = None,
+    constructionDate:ConstructionDate = None,
+    wellDepthMeasure:MeasureCompact = None
+  ):
+    if isinstance(o, WellInformation):
+      # Assign attributes from object without typechecking
+      self.__wellTypeText = o.wellTypeText
+      self.__aquiferTypeName = o.aquiferTypeName
+      self.__nationalAquiferCode = o.nationalAquiferCode
+      self.__aquiferInformation = o.aquiferInformation
+      self.__formationTypeText = o.formationTypeText
+      self.__wellHoleDepthMeasure = o.wellHoleDepthMeasure
+      self.__constructionDate = o.constructionDate
+      self.__wellDepthMeasure = o.wellDepthMeasure
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.wellTypeText = o.get('wellTypeText', default = None)
+      self.aquiferTypeName = o.get('aquiferTypeName', default = None)
+      self.nationalAquiferCode = o.get('nationalAquiferCode', default = None)
+      self.aquiferInformation = o.get('aquiferInformation', default = None)
+      self.formationTypeText = o.get('formationTypeText', default = None)
+      self.wellHoleDepthMeasure = o.get('wellHoleDepthMeasure', default = None)
+      self.constructionDate = o.get('constructionDate', default = None)
+      self.wellDepthMeasure = o.get('wellDepthMeasure', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.wellTypeText = wellTypeText
+      self.aquiferTypeName = aquiferTypeName
+      self.nationalAquiferCode = nationalAquiferCode
+      self.aquiferInformation = aquiferInformation
+      self.formationTypeText = formationTypeText
+      self.wellHoleDepthMeasure = wellHoleDepthMeasure
+      self.constructionDate = constructionDate
+      self.wellDepthMeasure = wellDepthMeasure
 
   @property
   def wellTypeText(self) -> WellTypeText:

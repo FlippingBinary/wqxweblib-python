@@ -14,13 +14,38 @@ class SampleDescription:
   __hydrologicCondition: HydrologicCondition
   __hydrologicEvent: HydrologicEvent
 
-  def __init__(self):
-    self.__sampleCollectionMethod = None
-    self.__sampleCollectionEquipmentName = None
-    self.__sampleCollectionEquipmentCommentText = None
-    self.__samplePreparation = None
-    self.__hydrologicCondition = None
-    self.__hydrologicEvent = None
+  def __init__(self, o=None, *,
+    sampleCollectionMethod:ReferenceMethod = None,
+    sampleCollectionEquipmentName:SampleCollectionEquipmentName = None,
+    sampleCollectionEquipmentCommentText:SampleCollectionEquipmentCommentText = None,
+    samplePreparation:SamplePreparation = None,
+    hydrologicCondition:HydrologicCondition = None,
+    hydrologicEvent:HydrologicEvent = None
+  ):
+    if isinstance(o, SampleDescription):
+      # Assign attributes from object without typechecking
+      self.__sampleCollectionMethod = o.sampleCollectionMethod
+      self.__sampleCollectionEquipmentName = o.sampleCollectionEquipmentName
+      self.__sampleCollectionEquipmentCommentText = o.sampleCollectionEquipmentCommentText
+      self.__samplePreparation = o.samplePreparation
+      self.__hydrologicCondition = o.hydrologicCondition
+      self.__hydrologicEvent = o.hydrologicEvent
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.sampleCollectionMethod = o.get('sampleCollectionMethod', default = None)
+      self.sampleCollectionEquipmentName = o.get('sampleCollectionEquipmentName', default = None)
+      self.sampleCollectionEquipmentCommentText = o.get('sampleCollectionEquipmentCommentText', default = None)
+      self.samplePreparation = o.get('samplePreparation', default = None)
+      self.hydrologicCondition = o.get('hydrologicCondition', default = None)
+      self.hydrologicEvent = o.get('hydrologicEvent', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.sampleCollectionMethod = sampleCollectionMethod
+      self.sampleCollectionEquipmentName = sampleCollectionEquipmentName
+      self.sampleCollectionEquipmentCommentText = sampleCollectionEquipmentCommentText
+      self.samplePreparation = samplePreparation
+      self.hydrologicCondition = hydrologicCondition
+      self.hydrologicEvent = hydrologicEvent
 
   @property
   def sampleCollectionMethod(self) -> ReferenceMethod:

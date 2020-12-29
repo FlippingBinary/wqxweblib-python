@@ -12,12 +12,34 @@ class NetInformation:
   __boatSpeedMeasure: MeasureCompact
   __currentSpeedMeasure: MeasureCompact
 
-  def __init__(self):
-    self.__netTypeName = None
-    self.__netSurfaceAreaMeasure = None
-    self.__netMeshSizeMeasure = None
-    self.__boatSpeedMeasure = None
-    self.__currentSpeedMeasure = None
+  def __init__(self, o=None, *,
+    netTypeName:NetTypeName = None,
+    netSurfaceAreaMeasure:MeasureCompact = None,
+    netMeshSizeMeasure:MeasureCompact = None,
+    boatSpeedMeasure:MeasureCompact = None,
+    currentSpeedMeasure:MeasureCompact = None
+  ):
+    if isinstance(o, NetInformation):
+      # Assign attributes from object without typechecking
+      self.__netTypeName = o.netTypeName
+      self.__netSurfaceAreaMeasure = o.netSurfaceAreaMeasure
+      self.__netMeshSizeMeasure = o.netMeshSizeMeasure
+      self.__boatSpeedMeasure = o.boatSpeedMeasure
+      self.__currentSpeedMeasure = o.currentSpeedMeasure
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.netTypeName = o.get('netTypeName', default = None)
+      self.netSurfaceAreaMeasure = o.get('netSurfaceAreaMeasure', default = None)
+      self.netMeshSizeMeasure = o.get('netMeshSizeMeasure', default = None)
+      self.boatSpeedMeasure = o.get('boatSpeedMeasure', default = None)
+      self.currentSpeedMeasure = o.get('currentSpeedMeasure', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.netTypeName = netTypeName
+      self.netSurfaceAreaMeasure = netSurfaceAreaMeasure
+      self.netMeshSizeMeasure = netMeshSizeMeasure
+      self.boatSpeedMeasure = boatSpeedMeasure
+      self.currentSpeedMeasure = currentSpeedMeasure
 
   @property
   def netTypeName(self) -> NetTypeName:

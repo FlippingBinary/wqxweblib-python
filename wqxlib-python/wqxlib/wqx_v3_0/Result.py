@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 from yattag import Doc, indent
 from .AttachedBinaryObject import AttachedBinaryObject
 from .BiologicalResultDescription import BiologicalResultDescription
@@ -11,6 +11,7 @@ from ..common import WQXException
 
 class Result:
   """Describes the results of a field measurement, observation, or laboratory analysis."""
+
   __resultDescription: ResultDescription
   __biologicalResultDescription: BiologicalResultDescription
   __attachedBinaryObject: List[AttachedBinaryObject]
@@ -19,14 +20,42 @@ class Result:
   __resultLabInformation: ResultLabInformation
   __labSamplePreparation: List[LabSamplePreparation]
 
-  def __init__(self):
-    self.__resultDescription = None
-    self.__biologicalResultDescription = None
-    self.__attachedBinaryObject = None
-    self.__resultAnalyticalMethod = None
-    self.__comparableAnalyticalMethod = None
-    self.__resultLabInformation = None
-    self.__labSamplePreparation = None
+  def __init__(self, o=None, *,
+    resultDescription:ResultDescription = None,
+    biologicalResultDescription:BiologicalResultDescription = None,
+    attachedBinaryObject:List[AttachedBinaryObject] = None,
+    resultAnalyticalMethod:ResultAnalyticalMethod = None,
+    comparableAnalyticalMethod:ComparableAnalyticalMethod = None,
+    resultLabInformation:ResultLabInformation = None,
+    labSamplePreparation:List[LabSamplePreparation] = None
+  ):
+    if isinstance(o, Result):
+      # Assign attributes from object without typechecking
+      self.__resultDescription = o.resultDescription
+      self.__biologicalResultDescription = o.biologicalResultDescription
+      self.__attachedBinaryObject = o.attachedBinaryObject
+      self.__resultAnalyticalMethod = o.resultAnalyticalMethod
+      self.__comparableAnalyticalMethod = o.comparableAnalyticalMethod
+      self.__resultLabInformation = o.resultLabInformation
+      self.__labSamplePreparation = o.labSamplePreparation
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.resultDescription = o.get('resultDescription', default = None)
+      self.biologicalResultDescription = o.get('biologicalResultDescription', default = None)
+      self.attachedBinaryObject = o.get('attachedBinaryObject', default = None)
+      self.resultAnalyticalMethod = o.get('resultAnalyticalMethod', default = None)
+      self.comparableAnalyticalMethod = o.get('comparableAnalyticalMethod', default = None)
+      self.resultLabInformation = o.get('resultLabInformation', default = None)
+      self.labSamplePreparation = o.get('labSamplePreparation', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.resultDescription = resultDescription
+      self.biologicalResultDescription = biologicalResultDescription
+      self.attachedBinaryObject = attachedBinaryObject
+      self.resultAnalyticalMethod = resultAnalyticalMethod
+      self.comparableAnalyticalMethod = comparableAnalyticalMethod
+      self.resultLabInformation = resultLabInformation
+      self.labSamplePreparation = labSamplePreparation
 
   @property
   def resultDescription(self) -> ResultDescription:
@@ -46,8 +75,16 @@ class Result:
   def attachedBinaryObject(self) -> List[AttachedBinaryObject]:
     return self.__attachedBinaryObject
   @attachedBinaryObject.setter
-  def attachedBinaryObject(self, val:List[AttachedBinaryObject]) -> None:
-    self.__attachedBinaryObject = val
+  def attachedBinaryObject(self, val:Union[AttachedBinaryObject,List[AttachedBinaryObject]]) -> None:
+    if val is None:
+      self.__attachedBinaryObject = []
+    elif isinstance(val, list):
+      r:List[AttachedBinaryObject] = []
+      for x in val:
+        r.append(AttachedBinaryObject(x))
+      self.__attachedBinaryObject = r
+    else:
+      self.__attachedBinaryObject = [AttachedBinaryObject(val)]
 
   @property
   def resultAnalyticalMethod(self) -> ResultAnalyticalMethod:
@@ -74,8 +111,16 @@ class Result:
   def labSamplePreparation(self) -> List[LabSamplePreparation]:
     return self.__labSamplePreparation
   @labSamplePreparation.setter
-  def labSamplePreparation(self, val:List[LabSamplePreparation]) -> None:
-    self.__labSamplePreparation = val
+  def labSamplePreparation(self, val:Union[LabSamplePreparation,List[LabSamplePreparation]]) -> None:
+    if val is None:
+      self.__labSamplePreparation = []
+    elif isinstance(val, list):
+      r:List[LabSamplePreparation] = []
+      for x in val:
+        r.append(LabSamplePreparation(x))
+      self.__labSamplePreparation = r
+    else:
+      self.__labSamplePreparation = [LabSamplePreparation(val)]
 
   def generateXML(self):
     if self.__resultDescription is None:

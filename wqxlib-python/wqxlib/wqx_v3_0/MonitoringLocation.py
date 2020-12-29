@@ -14,16 +14,30 @@ class MonitoringLocation:
   __wellInformation: WellInformation
   __attachedBinaryObject: List[AttachedBinaryObject]
 
-  def __init__(self,
-    monitoringLocationIdentity = None,
-    monitoringLocationGeospatial = None,
-    wellInformation = None,
-    attachedBinaryObject = []
+  def __init__(self, o=None, *,
+    monitoringLocationIdentity:MonitoringLocationIdentity = None,
+    monitoringLocationGeospatial:MonitoringLocationGeospatial = None,
+    wellInformation:WellInformation = None,
+    attachedBinaryObject:List[AttachedBinaryObject] = None
   ):
-    self.monitoringLocationIdentity = monitoringLocationIdentity
-    self.monitoringLocationGeospatial = monitoringLocationGeospatial
-    self.wellInformation = wellInformation
-    self.attachedBinaryObject = attachedBinaryObject
+    if isinstance(o, MonitoringLocation):
+      # Assign attributes from object without typechecking
+      self.__monitoringLocationIdentity = o.monitoringLocationIdentity
+      self.__monitoringLocationGeospatial = o.monitoringLocationGeospatial
+      self.__wellInformation = o.wellInformation
+      self.__attachedBinaryObject = o.attachedBinaryObject
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.monitoringLocationIdentity = o.get('monitoringLocationIdentity', default = None)
+      self.monitoringLocationGeospatial = o.get('monitoringLocationGeospatial', default = None)
+      self.wellInformation = o.get('wellInformation', default = None)
+      self.attachedBinaryObject = o.get('attachedBinaryObject', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.monitoringLocationIdentity = monitoringLocationIdentity
+      self.monitoringLocationGeospatial = monitoringLocationGeospatial
+      self.wellInformation = wellInformation
+      self.attachedBinaryObject = attachedBinaryObject
 
   @property
   def monitoringLocationIdentity(self) -> MonitoringLocationIdentity:
@@ -51,7 +65,15 @@ class MonitoringLocation:
     return self.__attachedBinaryObject
   @attachedBinaryObject.setter
   def attachedBinaryObject(self, val:List[AttachedBinaryObject]) -> None:
-    self.__attachedBinaryObject = val
+    if val is None:
+      self.__attachedBinaryObject = []
+    elif isinstance(val, list):
+      r:List[AttachedBinaryObject] = []
+      for x in val:
+        r.append(AttachedBinaryObject(x))
+      self.__attachedBinaryObject = r
+    else:
+      self.__attachedBinaryObject = [AttachedBinaryObject(val)]
 
   def generateXML(self):
     if self.__monitoringLocationIdentity is None:

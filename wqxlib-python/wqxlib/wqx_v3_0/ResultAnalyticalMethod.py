@@ -16,12 +16,34 @@ class ResultAnalyticalMethod:
   __methodQualifierTypeName: MethodQualifierTypeName
   __methodDescriptionText: MethodDescriptionText
 
-  def __init__(self):
-    self.__methodIdentifier = None
-    self.__methodIdentifierContext = None
-    self.__methodName = None
-    self.__methodQualifierTypeName = None
-    self.__methodDescriptionText = None
+  def __init__(self, o=None, *,
+    methodIdentifier:MethodIdentifier = None,
+    methodIdentifierContext:MethodIdentifierContext = None,
+    methodName:MethodName = None,
+    methodQualifierTypeName:MethodQualifierTypeName = None,
+    methodDescriptionText:MethodDescriptionText = None
+  ):
+    if isinstance(o, ResultAnalyticalMethod):
+      # Assign attributes from object without typechecking
+      self.__methodIdentifier = o.methodIdentifier
+      self.__methodIdentifierContext = o.methodIdentifierContext
+      self.__methodName = o.methodName
+      self.__methodQualifierTypeName = o.methodQualifierTypeName
+      self.__methodDescriptionText = o.methodDescriptionText
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.methodIdentifier = o.get('methodIdentifier', default = None)
+      self.methodIdentifierContext = o.get('methodIdentifierContext', default = None)
+      self.methodName = o.get('methodName', default = None)
+      self.methodQualifierTypeName = o.get('methodQualifierTypeName', default = None)
+      self.methodDescriptionText = o.get('methodDescriptionText', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.methodIdentifier = methodIdentifier
+      self.methodIdentifierContext = methodIdentifierContext
+      self.methodName = methodName
+      self.methodQualifierTypeName = methodQualifierTypeName
+      self.methodDescriptionText = methodDescriptionText
 
   @property
   def methodIdentifier(self) -> MethodIdentifier:

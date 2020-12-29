@@ -58,6 +58,118 @@ class ResultDescription:
   __resultSamplingPointCommentText: ResultSamplingPointCommentText
   __recordIdentifierUserSupplied: RecordIdentifierUserSupplied
 
+  def __init__(self, o=None, *,
+    dataLoggerLineName:DataLoggerLineName = None,
+    resultDetectionConditionText:ResultDetectionConditionText = None,
+    characteristicName:CharacteristicName = None,
+    characteristicNameUserSupplied:CharacteristicNameUserSupplied = None,
+    methodSpeciationName:MethodSpeciationName = None,
+    resultSampleFractionText:ResultSampleFractionText = None,
+    resultMeasure:Measure = None,
+    targetCount:TargetCount = None,
+    proportionSampleProcessedNumeric:ProportionSampleProcessedNumeric = None,
+    resultStatusIdentifier:ResultStatusIdentifier = None,
+    statisticalBaseCode:StatisticalBaseCode = None,
+    statisticalNValueNumeric:StatisticalNValueNumeric = None,
+    resultValueTypeName:ResultValueTypeName = None,
+    resultWeightBasisText:ResultWeightBasisText = None,
+    resultTimeBasisText:ResultTimeBasisText = None,
+    resultTemperatureBasisText:ResultTemperatureBasisText = None,
+    resultParticleSizeBasisText:ResultParticleSizeBasisText = None,
+    dataQuality:DataQuality = None,
+    resultCommentText:CommentText = None,
+    resultDepthHeightMeasure:MeasureCompact = None,
+    resultDepthAltitudeReferencePointText:DepthAltitudeReferencePointText = None,
+    resultSamplingPointName:ResultSamplingPointName = None,
+    resultSamplingPointType:ResultSamplingPointType = None,
+    resultSamplingPointPlaceInSeries:ResultSamplingPointPlaceInSeries = None,
+    resultSamplingPointCommentText:ResultSamplingPointCommentText = None,
+    recordIdentifierUserSupplied:RecordIdentifierUserSupplied = None
+  ):
+    if isinstance(o, ResultDescription):
+      # Assign attributes from object without typechecking
+      self.__dataLoggerLineName = o.dataLoggerLineName
+      self.__resultDetectionConditionText = o.resultDetectionConditionText
+      self.__characteristicName = o.characteristicName
+      self.__characteristicNameUserSupplied = o.characteristicNameUserSupplied
+      self.__methodSpeciationName = o.methodSpeciationName
+      self.__resultSampleFractionText = o.resultSampleFractionText
+      self.__resultMeasure = o.resultMeasure
+      self.__targetCount = o.targetCount
+      self.__proportionSampleProcessedNumeric = o.proportionSampleProcessedNumeric
+      self.__resultStatusIdentifier = o.resultStatusIdentifier
+      self.__statisticalBaseCode = o.statisticalBaseCode
+      self.__statisticalNValueNumeric = o.statisticalNValueNumeric
+      self.__resultValueTypeName = o.resultValueTypeName
+      self.__resultWeightBasisText = o.resultWeightBasisText
+      self.__resultTimeBasisText = o.resultTimeBasisText
+      self.__resultTemperatureBasisText = o.resultTemperatureBasisText
+      self.__resultParticleSizeBasisText = o.resultParticleSizeBasisText
+      self.__dataQuality = o.dataQuality
+      self.__resultCommentText = o.resultCommentText
+      self.__resultDepthHeightMeasure = o.resultDepthHeightMeasure
+      self.__resultDepthAltitudeReferencePointText = o.resultDepthAltitudeReferencePointText
+      self.__resultSamplingPointName = o.resultSamplingPointName
+      self.__resultSamplingPointType = o.resultSamplingPointType
+      self.__resultSamplingPointPlaceInSeries = o.resultSamplingPointPlaceInSeries
+      self.__resultSamplingPointCommentText = o.resultSamplingPointCommentText
+      self.__recordIdentifierUserSupplied = o.recordIdentifierUserSupplied
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.dataLoggerLineName = o.get('dataLoggerLineName', default = None)
+      self.resultDetectionConditionText = o.get('resultDetectionConditionText', default = None)
+      self.characteristicName = o.get('characteristicName', default = None)
+      self.characteristicNameUserSupplied = o.get('characteristicNameUserSupplied', default = None)
+      self.methodSpeciationName = o.get('methodSpeciationName', default = None)
+      self.resultSampleFractionText = o.get('resultSampleFractionText', default = None)
+      self.resultMeasure = o.get('resultMeasure', default = None)
+      self.targetCount = o.get('targetCount', default = None)
+      self.proportionSampleProcessedNumeric = o.get('proportionSampleProcessedNumeric', default = None)
+      self.resultStatusIdentifier = o.get('resultStatusIdentifier', default = None)
+      self.statisticalBaseCode = o.get('statisticalBaseCode', default = None)
+      self.statisticalNValueNumeric = o.get('statisticalNValueNumeric', default = None)
+      self.resultValueTypeName = o.get('resultValueTypeName', default = None)
+      self.resultWeightBasisText = o.get('resultWeightBasisText', default = None)
+      self.resultTimeBasisText = o.get('resultTimeBasisText', default = None)
+      self.resultTemperatureBasisText = o.get('resultTemperatureBasisText', default = None)
+      self.resultParticleSizeBasisText = o.get('resultParticleSizeBasisText', default = None)
+      self.dataQuality = o.get('dataQuality', default = None)
+      self.resultCommentText = o.get('resultCommentText', default = None)
+      self.resultDepthHeightMeasure = o.get('resultDepthHeightMeasure', default = None)
+      self.resultDepthAltitudeReferencePointText = o.get('resultDepthAltitudeReferencePointText', default = None)
+      self.resultSamplingPointName = o.get('resultSamplingPointName', default = None)
+      self.resultSamplingPointType = o.get('resultSamplingPointType', default = None)
+      self.resultSamplingPointPlaceInSeries = o.get('resultSamplingPointPlaceInSeries', default = None)
+      self.resultSamplingPointCommentText = o.get('resultSamplingPointCommentText', default = None)
+      self.recordIdentifierUserSupplied = o.get('recordIdentifierUserSupplied', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.dataLoggerLineName = dataLoggerLineName
+      self.resultDetectionConditionText = resultDetectionConditionText
+      self.characteristicName = characteristicName
+      self.characteristicNameUserSupplied = characteristicNameUserSupplied
+      self.methodSpeciationName = methodSpeciationName
+      self.resultSampleFractionText = resultSampleFractionText
+      self.resultMeasure = resultMeasure
+      self.targetCount = targetCount
+      self.proportionSampleProcessedNumeric = proportionSampleProcessedNumeric
+      self.resultStatusIdentifier = resultStatusIdentifier
+      self.statisticalBaseCode = statisticalBaseCode
+      self.statisticalNValueNumeric = statisticalNValueNumeric
+      self.resultValueTypeName = resultValueTypeName
+      self.resultWeightBasisText = resultWeightBasisText
+      self.resultTimeBasisText = resultTimeBasisText
+      self.resultTemperatureBasisText = resultTemperatureBasisText
+      self.resultParticleSizeBasisText = resultParticleSizeBasisText
+      self.dataQuality = dataQuality
+      self.resultCommentText = resultCommentText
+      self.resultDepthHeightMeasure = resultDepthHeightMeasure
+      self.resultDepthAltitudeReferencePointText = resultDepthAltitudeReferencePointText
+      self.resultSamplingPointName = resultSamplingPointName
+      self.resultSamplingPointType = resultSamplingPointType
+      self.resultSamplingPointPlaceInSeries = resultSamplingPointPlaceInSeries
+      self.resultSamplingPointCommentText = resultSamplingPointCommentText
+      self.recordIdentifierUserSupplied = recordIdentifierUserSupplied
 
   @property
   def dataLoggerLineName(self) -> DataLoggerLineName:

@@ -18,17 +18,54 @@ class ProjectMonitoringLocationWeighting:
   __referenceLocationCitation: BibliographicReference
   __commentText: CommentText
 
-  def __init__(self):
-    self.__monitoringLocationIdentifier = None
-    self.__locationWeightingFactorMeasure = None
-    self.__statisticalStratumText = None
-    self.__locationCategoryName = None
-    self.__locationStatusName = None
-    self.__referenceLocationTypeCode = None
-    self.__referenceLocationStartDate = None
-    self.__referenceLocationEndDate = None
-    self.__referenceLocationCitation = None
-    self.__commentText = None
+  def __init__(self, o=None, *,
+    monitoringLocationIdentifier:MonitoringLocationIdentifier = None,
+    locationWeightingFactorMeasure:MeasureCompact = None,
+    statisticalStratumText:StatisticalStratumText = None,
+    locationCategoryName:LocationCategoryName = None,
+    locationStatusName:LocationStatusName = None,
+    referenceLocationTypeCode:ReferenceLocationTypeCode = None,
+    referenceLocationStartDate:ReferenceLocationStartDate = None,
+    referenceLocationEndDate:ReferenceLocationEndDate = None,
+    referenceLocationCitation:BibliographicReference = None,
+    commentText:CommentText = None
+  ):
+    if isinstance(o, ProjectMonitoringLocationWeighting):
+      # Assign attributes from object without typechecking
+      self.__monitoringLocationIdentifier = o.monitoringLocationIdentifier
+      self.__locationWeightingFactorMeasure = o.locationWeightingFactorMeasure
+      self.__statisticalStratumText = o.statisticalStratumText
+      self.__locationCategoryName = o.locationCategoryName
+      self.__locationStatusName = o.locationStatusName
+      self.__referenceLocationTypeCode = o.referenceLocationTypeCode
+      self.__referenceLocationStartDate = o.referenceLocationStartDate
+      self.__referenceLocationEndDate = o.referenceLocationEndDate
+      self.__referenceLocationCitation = o.referenceLocationCitation
+      self.__commentText = o.commentText
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.monitoringLocationIdentifier = o.get('monitoringLocationIdentifier', default = None)
+      self.locationWeightingFactorMeasure = o.get('locationWeightingFactorMeasure', default = None)
+      self.statisticalStratumText = o.get('statisticalStratumText', default = None)
+      self.locationCategoryName = o.get('locationCategoryName', default = None)
+      self.locationStatusName = o.get('locationStatusName', default = None)
+      self.referenceLocationTypeCode = o.get('referenceLocationTypeCode', default = None)
+      self.referenceLocationStartDate = o.get('referenceLocationStartDate', default = None)
+      self.referenceLocationEndDate = o.get('referenceLocationEndDate', default = None)
+      self.referenceLocationCitation = o.get('referenceLocationCitation', default = None)
+      self.commentText = o.get('commentText', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.monitoringLocationIdentifier = monitoringLocationIdentifier
+      self.locationWeightingFactorMeasure = locationWeightingFactorMeasure
+      self.statisticalStratumText = statisticalStratumText
+      self.locationCategoryName = locationCategoryName
+      self.locationStatusName = locationStatusName
+      self.referenceLocationTypeCode = referenceLocationTypeCode
+      self.referenceLocationStartDate = referenceLocationStartDate
+      self.referenceLocationEndDate = referenceLocationEndDate
+      self.referenceLocationCitation = referenceLocationCitation
+      self.commentText = commentText
 
   @property
   def monitoringLocationIdentifier(self) -> MonitoringLocationIdentifier:

@@ -20,30 +20,58 @@ class MonitoringLocationIdentity:
   __drainageAreaMeasure: MeasureCompact
   __contributingDrainageAreaMeasure: MeasureCompact
 
-  def __init__(self,
-    monitoringLocationIdentifier = None,
-    monitoringLocationName = None,
-    monitoringLocationTypeName = None,
-    monitoringLocationDescriptionText = None,
-    hucEightDigitCode = None,
-    hucTwelveDigitCode = None,
-    tribalLandIndicator = None,
-    tribalLandName = None,
-    alternateMonitoringLocationIdentity = [],
-    drainageAreaMeasure = None,
-    contributingDrainageAreaMeasure = None
+  def __init__(self, o=None, *,
+    monitoringLocationIdentifier:MonitoringLocationIdentifier = None,
+    monitoringLocationName:MonitoringLocationName = None,
+    monitoringLocationTypeName:MonitoringLocationTypeName = None,
+    monitoringLocationDescriptionText:MonitoringLocationDescriptionText = None,
+    hucEightDigitCode:HUCEightDigitCode = None,
+    hucTwelveDigitCode:HUCTwelveDigitCode = None,
+    tribalLandIndicator:TribalLandIndicator = None,
+    tribalLandName:TribalLandName = None,
+    alternateMonitoringLocationIdentity:List[AlternateMonitoringLocationIdentity] = None,
+    drainageAreaMeasure:MeasureCompact = None,
+    contributingDrainageAreaMeasure:MeasureCompact = None
   ):
-    self.__monitoringLocationIdentifier = monitoringLocationIdentifier
-    self.__monitoringLocationName = monitoringLocationName
-    self.__monitoringLocationTypeName = monitoringLocationTypeName
-    self.__monitoringLocationDescriptionText = monitoringLocationDescriptionText
-    self.__hucEightDigitCode = hucEightDigitCode
-    self.__hucTwelveDigitCode = hucTwelveDigitCode
-    self.__tribalLandIndicator = tribalLandIndicator
-    self.__tribalLandName = tribalLandName
-    self.__alternateMonitoringLocationIdentity = alternateMonitoringLocationIdentity
-    self.__drainageAreaMeasure = drainageAreaMeasure
-    self.__contributingDrainageAreaMeasure = contributingDrainageAreaMeasure
+    if isinstance(o, MonitoringLocationIdentity):
+      # Assign attributes from object without typechecking
+      self.__monitoringLocationIdentifier = o.monitoringLocationIdentifier
+      self.__monitoringLocationName = o.monitoringLocationName
+      self.__monitoringLocationTypeName = o.monitoringLocationTypeName
+      self.__monitoringLocationDescriptionText = o.monitoringLocationDescriptionText
+      self.__hucEightDigitCode = o.hucEightDigitCode
+      self.__hucTwelveDigitCode = o.hucTwelveDigitCode
+      self.__tribalLandIndicator = o.tribalLandIndicator
+      self.__tribalLandName = o.tribalLandName
+      self.__alternateMonitoringLocationIdentity = o.alternateMonitoringLocationIdentity
+      self.__drainageAreaMeasure = o.drainageAreaMeasure
+      self.__contributingDrainageAreaMeasure = o.contributingDrainageAreaMeasure
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.monitoringLocationIdentifier = o.get('monitoringLocationIdentifier', default = None)
+      self.monitoringLocationName = o.get('monitoringLocationName', default = None)
+      self.monitoringLocationTypeName = o.get('monitoringLocationTypeName', default = None)
+      self.monitoringLocationDescriptionText = o.get('monitoringLocationDescriptionText', default = None)
+      self.hucEightDigitCode = o.get('hucEightDigitCode', default = None)
+      self.hucTwelveDigitCode = o.get('hucTwelveDigitCode', default = None)
+      self.tribalLandIndicator = o.get('tribalLandIndicator', default = None)
+      self.tribalLandName = o.get('tribalLandName', default = None)
+      self.alternateMonitoringLocationIdentity = o.get('alternateMonitoringLocationIdentity', default = None)
+      self.drainageAreaMeasure = o.get('drainageAreaMeasure', default = None)
+      self.contributingDrainageAreaMeasure = o.get('contributingDrainageAreaMeasure', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.monitoringLocationIdentifier = monitoringLocationIdentifier
+      self.monitoringLocationName = monitoringLocationName
+      self.monitoringLocationTypeName = monitoringLocationTypeName
+      self.monitoringLocationDescriptionText = monitoringLocationDescriptionText
+      self.hucEightDigitCode = hucEightDigitCode
+      self.hucTwelveDigitCode = hucTwelveDigitCode
+      self.tribalLandIndicator = tribalLandIndicator
+      self.tribalLandName = tribalLandName
+      self.alternateMonitoringLocationIdentity = alternateMonitoringLocationIdentity
+      self.drainageAreaMeasure = drainageAreaMeasure
+      self.contributingDrainageAreaMeasure = contributingDrainageAreaMeasure
 
   @property
   def monitoringLocationIdentifier(self) -> MonitoringLocationIdentifier:
@@ -106,7 +134,15 @@ class MonitoringLocationIdentity:
     return self.__alternateMonitoringLocationIdentity
   @alternateMonitoringLocationIdentity.setter
   def alternateMonitoringLocationIdentity(self, val:List[AlternateMonitoringLocationIdentity]) -> None:
-    self.__alternateMonitoringLocationIdentity = val
+    if val is None:
+      self.__alternateMonitoringLocationIdentity = []
+    elif isinstance(val, list):
+      r:List[AlternateMonitoringLocationIdentity] = []
+      for x in val:
+        r.append(AlternateMonitoringLocationIdentity(x))
+      self.__alternateMonitoringLocationIdentity = r
+    else:
+      self.__alternateMonitoringLocationIdentity = [AlternateMonitoringLocationIdentity(val)]
 
   @property
   def drainageAreaMeasure(self) -> MeasureCompact:

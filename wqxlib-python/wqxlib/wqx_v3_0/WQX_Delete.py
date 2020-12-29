@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 from yattag import Doc, indent
 from .Organization_Delete import OrganizationDelete
 from ..common import WQXException
@@ -8,20 +8,33 @@ class WQXDelete:
 
   __organizationDelete: List[OrganizationDelete]
 
-  def __init__(self):
-    self.__organizationDelete = []
+  def __init__(self, o=None, *,
+    organizationDelete:List[OrganizationDelete] = None
+  ):
+    if isinstance(o, WQXDelete):
+      # Assign attributes from object without typechecking
+      self.__organizationDelete = o.organizationDelete
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.organizationDelete = o.get('organizationDelete', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.organizationDelete = organizationDelete
 
   @property
   def organizationDelete(self) -> List[OrganizationDelete]:
     return self.__organizationDelete
   @organizationDelete.setter
-  def organizationDelete(self, val: List[OrganizationDelete]) -> None:
-    if not isinstance(val, list) or len(val) < 1:
-      raise TypeError("Attribute 'organizationDelete' must be a list of 1 or more OrganizationDelete objects.")
-    for x in val:
-      if not isinstance(x, OrganizationDelete):
-        raise TypeError("Attribute 'organizationDelete' must be a list of 1 or more OrganizationDelete objects.")
-    self.__organizationDelete = val
+  def organizationDelete(self, val: Union[OrganizationDelete,List[OrganizationDelete]]) -> None:
+    if val is None:
+      self.__organizationDelete = []
+    elif isinstance(val, list):
+      r:List[OrganizationDelete] = []
+      for x in val:
+        r.append(OrganizationDelete(x))
+      self.__organizationDelete = r
+    else:
+      self.__organizationDelete = [OrganizationDelete(val)]
 
   def generateXML(self, name = 'WQXDelete'):
     if self.__organizationDelete is None:

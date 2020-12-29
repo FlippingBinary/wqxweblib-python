@@ -8,10 +8,26 @@ class Telephonic:
   __telephoneNumberTypeName: TelephoneNumberTypeName
   __telephoneExtensionNumberText: TelephoneExtensionNumberText
 
-  def __init__(self):
-    self.__telephoneNumberText = None
-    self.__telephoneNumberTypeName = None
-    self.__telephoneExtensionNumberText = None
+  def __init__(self, o=None, *,
+    telephoneNumberText:TelephoneNumberText = None,
+    telephoneNumberTypeName:TelephoneNumberTypeName = None,
+    telephoneExtensionNumberText:TelephoneExtensionNumberText = None
+  ):
+    if isinstance(o, Telephonic):
+      # Assign attributes from object without typechecking
+      self.__telephoneNumberText = o.telephoneNumberText
+      self.__telephoneNumberTypeName = o.telephoneNumberTypeName
+      self.__telephoneExtensionNumberText = o.telephoneExtensionNumberText
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.telephoneNumberText = o.get('telephoneNumberText', default = None)
+      self.telephoneNumberTypeName = o.get('telephoneNumberTypeName', default = None)
+      self.telephoneExtensionNumberText = o.get('telephoneExtensionNumberText', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.telephoneNumberText = telephoneNumberText
+      self.telephoneNumberTypeName = telephoneNumberTypeName
+      self.telephoneExtensionNumberText = telephoneExtensionNumberText
 
   @property
   def telephoneNumberText(self) -> TelephoneNumberText:

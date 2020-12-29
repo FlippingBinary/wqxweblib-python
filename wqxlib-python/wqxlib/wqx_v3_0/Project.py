@@ -17,15 +17,46 @@ class Project:
   __attachedBinaryObject: List[AttachedBinaryObject]
   __projectMonitoringLocationWeighting: List[ProjectMonitoringLocationWeighting]
 
-  def __init__(self):
-    self.__projectIdentifier = None
-    self.__projectName = None
-    self.__projectDescriptionText = None
-    self.__samplingDesignTypeCode = None
-    self.__qAPPApprovedIndicator = None
-    self.__qAPPApprovalAgencyName = None
-    self.__attachedBinaryObject = None
-    self.__projectMonitoringLocationWeighting = None
+  def __init__(self, o=None, *,
+    projectIdentifier:ProjectIdentifier = None,
+    projectName:ProjectName = None,
+    projectDescriptionText:ProjectDescriptionText = None,
+    samplingDesignTypeCode:SamplingDesignTypeCode = None,
+    qAPPApprovedIndicator:QAPPApprovedIndicator = None,
+    qAPPApprovalAgencyName:QAPPApprovalAgencyName = None,
+    attachedBinaryObject:List[AttachedBinaryObject] = None,
+    projectMonitoringLocationWeighting:List[ProjectMonitoringLocationWeighting] = None
+  ):
+    if isinstance(o, Project):
+      # Assign attributes from object without typechecking
+      self.__projectIdentifier = o.projectIdentifier
+      self.__projectName = o.projectName
+      self.__projectDescriptionText = o.projectDescriptionText
+      self.__samplingDesignTypeCode = o.samplingDesignTypeCode
+      self.__qAPPApprovedIndicator = o.qAPPApprovedIndicator
+      self.__qAPPApprovalAgencyName = o.qAPPApprovalAgencyName
+      self.__attachedBinaryObject = o.attachedBinaryObject
+      self.__projectMonitoringLocationWeighting = o.projectMonitoringLocationWeighting
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.projectIdentifier = o.get('projectIdentifier', default = None)
+      self.projectName = o.get('projectName', default = None)
+      self.projectDescriptionText = o.get('projectDescriptionText', default = None)
+      self.samplingDesignTypeCode = o.get('samplingDesignTypeCode', default = None)
+      self.qAPPApprovedIndicator = o.get('qAPPApprovedIndicator', default = None)
+      self.qAPPApprovalAgencyName = o.get('qAPPApprovalAgencyName', default = None)
+      self.attachedBinaryObject = o.get('attachedBinaryObject', default = None)
+      self.projectMonitoringLocationWeighting = o.get('projectMonitoringLocationWeighting', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.projectIdentifier = projectIdentifier
+      self.projectName = projectName
+      self.projectDescriptionText = projectDescriptionText
+      self.samplingDesignTypeCode = samplingDesignTypeCode
+      self.qAPPApprovedIndicator = qAPPApprovedIndicator
+      self.qAPPApprovalAgencyName = qAPPApprovalAgencyName
+      self.attachedBinaryObject = attachedBinaryObject
+      self.projectMonitoringLocationWeighting = projectMonitoringLocationWeighting
 
   @property
   def projectIdentifier(self) -> ProjectIdentifier:
@@ -81,7 +112,15 @@ class Project:
     return self.__projectMonitoringLocationWeighting
   @projectMonitoringLocationWeighting.setter
   def projectMonitoringLocationWeighting(self, val:List[ProjectMonitoringLocationWeighting]) -> None:
-    self.__projectMonitoringLocationWeighting = val
+    if val is None:
+      self.__projectMonitoringLocationWeighting = []
+    elif isinstance(val, list):
+      r:List[ProjectMonitoringLocationWeighting] = []
+      for x in val:
+        r.append(ProjectMonitoringLocationWeighting(x))
+      self.__projectMonitoringLocationWeighting = r
+    else:
+      self.__projectMonitoringLocationWeighting = [ProjectMonitoringLocationWeighting(val)]
 
   def generateXML(self):
     if self.__projectIdentifier is None:

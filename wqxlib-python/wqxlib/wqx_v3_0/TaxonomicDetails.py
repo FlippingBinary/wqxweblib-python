@@ -25,16 +25,50 @@ class TaxonomicDetails:
   __functionalFeedingGroupName: FunctionalFeedingGroupName
   __taxonomicDetailsCitation: BibliographicReference
 
-  def __init__(self):
-    self.__cellFormName = None
-    self.__cellShapeName = None
-    self.__habitName = None
-    self.__voltinismName = None
-    self.__taxonomicPollutionTolerance = None
-    self.__taxonomicPollutionToleranceScaleText = None
-    self.__trophicLevelName = None
-    self.__functionalFeedingGroupName = None
-    self.__taxonomicDetailsCitation = None
+  def __init__(self, o=None, *,
+    cellFormName:CellFormName = None,
+    cellShapeName:CellShapeName = None,
+    habitName:HabitName = None,
+    voltinismName:VoltinismName = None,
+    taxonomicPollutionTolerance:TaxonomicPollutionTolerance = None,
+    taxonomicPollutionToleranceScaleText:TaxonomicPollutionToleranceScaleText = None,
+    trophicLevelName:TrophicLevelName = None,
+    functionalFeedingGroupName:FunctionalFeedingGroupName = None,
+    taxonomicDetailsCitation:BibliographicReference = None
+  ):
+    if isinstance(o, TaxonomicDetails):
+      # Assign attributes from objects without typechecking
+      self.__cellFormName = o.cellFormName
+      self.__cellShapeName = o.cellShapeName
+      self.__habitName = o.habitName
+      self.__voltinismName = o.voltinismName
+      self.__taxonomicPollutionTolerance = o.taxonomicPollutionTolerance
+      self.__taxonomicPollutionToleranceScaleText = o.taxonomicPollutionToleranceScaleText
+      self.__trophicLevelName = o.trophicLevelName
+      self.__functionalFeedingGroupName = o.functionalFeedingGroupName
+      self.__taxonomicDetailsCitation = o.taxonomicDetailsCitation
+    elif isinstance(o, dict):
+      # Assign attributes from dictionary with typechecking
+      self.cellFormName = o.get('cellFormName', default = None)
+      self.cellShapeName = o.get('cellShapeName', default = None)
+      self.habitName = o.get('habitName', default = None)
+      self.voltinismName = o.get('voltinismName', default = None)
+      self.taxonomicPollutionTolerance = o.get('taxonomicPollutionTolerance', default = None)
+      self.taxonomicPollutionToleranceScaleText = o.get('taxonomicPollutionToleranceScaleText', default = None)
+      self.trophicLevelName = o.get('trophicLevelName', default = None)
+      self.functionalFeedingGroupName = o.get('functionalFeedingGroupName', default = None)
+      self.taxonomicDetailsCitation = o.get('taxonomicDetailsCitation', default = None)
+    else:
+      # Assign attributes from named keywords with typechecking
+      self.cellFormName = cellFormName
+      self.cellShapeName = cellShapeName
+      self.habitName = habitName
+      self.voltinismName = voltinismName
+      self.taxonomicPollutionTolerance = taxonomicPollutionTolerance
+      self.taxonomicPollutionToleranceScaleText = taxonomicPollutionToleranceScaleText
+      self.trophicLevelName = trophicLevelName
+      self.functionalFeedingGroupName = functionalFeedingGroupName
+      self.taxonomicDetailsCitation = taxonomicDetailsCitation
 
   @property
   def cellFormName(self) -> CellFormName:

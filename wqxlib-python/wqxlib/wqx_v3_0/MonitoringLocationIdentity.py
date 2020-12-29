@@ -129,7 +129,7 @@ class MonitoringLocationIdentity:
     return self.__tribalLandIndicator
   @tribalLandIndicator.setter
   def tribalLandIndicator(self, val:TribalLandIndicator) -> None:
-    self.__tribalLandIndicator = None if val is None else TribalLandIndicator(val)
+    self.__tribalLandIndicator = TribalLandIndicator(val)
 
   @property
   def tribalLandName(self) -> TribalLandName:
@@ -190,8 +190,7 @@ class MonitoringLocationIdentity:
         line('HUCEightDigitCode',self.__hucEightDigitCode)
       if self.__hucTwelveDigitCode is not None:
         line('HUCTwelveDigitCode',self.__hucTwelveDigitCode)
-      if self.__tribalLandIndicator is not None:
-        line('TribalLandIndicator',self.__tribalLandIndicator)
+      line('TribalLandIndicator',str(self.__tribalLandIndicator))
       if self.__tribalLandName is not None:
         line('TribalLandName',self.__tribalLandName)
       for x in self.__alternateMonitoringLocationIdentity:

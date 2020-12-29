@@ -115,7 +115,7 @@ class ActivityMetric:
         raise WQXException("Attribute 'metricScore' is required.")
       line('MetricScore', self.__metricScore)
       if self.__metricSamplingPointPlaceInSeries is not None:
-        doc.asis(self.__metricSamplingPointPlaceInSeries.generateXML('MetricSamplingPointPlaceInSeries'))
+        line('MetricSamplingPointPlaceInSeries',self.__metricSamplingPointPlaceInSeries)
       if self.__metricCommentText is not None:
         line('MetricCommentText', self.__metricCommentText)
       for x in self.__indexIdentifier:

@@ -102,11 +102,11 @@ class BibliographicReference:
         raise WQXException("Attribute 'ResourceTitleName' is required.")
       line('ResourceTitleName', self.__resourceTitleName)
       if self.__resourceCreatorName is not None:
-        doc.asis(self.__resourceCreatorName.generateXML('ResourceCreatorName'))
+        line('ResourceCreatorName',self.__resourceCreatorName)
       if self.__resourceSubjectText is not None:
-        doc.asis(self.__resourceSubjectText.generateXML('ResourceSubjectText'))
+        line('ResourceSubjectText',self.__resourceSubjectText)
       if self.__resourcePublisherName is not None:
-        doc.asis(self.__resourcePublisherName.generateXML('ResourcePublisherName'))
+        line('ResourcePublisherName',self.__resourcePublisherName)
       if self.__resourceDate is None:
         raise WQXException("Attribute 'ResourceDate' is required.")
       line('ResourceDate', self.__resourceDate)

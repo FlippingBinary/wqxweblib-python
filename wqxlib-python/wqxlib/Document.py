@@ -85,48 +85,71 @@ class Document:
       data_rule_1 = """
         Data Rule #1: When ElectronicAddressText or ElectronicAddressTypeName is reported, both must be reported.
         """
-      for electronic_address in payload.wqx.organization.electronicAddress:
-        if (
-          ( electronic_address.electronicAddressText is not None and electronic_address.electronicAddressTypeName is None ) or
-          ( electronic_address.electronicAddressText is None and electronic_address.electronicAddressTypeName is not None )
-        ):
-          violations.append(data_rule_1)
+      if (
+        ( payload.wqx is not None ) and
+        ( payload.wqx.organization is not None ) and
+        ( payload.wqx.organization.electronicAddress is not None )
+      ):
+        for electronic_address in payload.wqx.organization.electronicAddress:
+          if (
+            ( electronic_address.electronicAddressText is not None and electronic_address.electronicAddressTypeName is None ) or
+            ( electronic_address.electronicAddressText is None and electronic_address.electronicAddressTypeName is not None )
+          ):
+            violations.append(data_rule_1)
 
       data_rule_2 = """
         Data Rule #2: When TelephoneNumberText or TelephoneNumberTypeName is reported, both must be reported.
         """
-      for telephonic in payload.wqx.organization.telephonic:
-        if (
-          ( telephonic.telephoneNumberText is not None and telephonic.telephoneNumberTypeName is None ) or
-          ( telephonic.telephoneNumberText is None and telephonic.telephoneNumberTypeName is not None )
-        ):
-          violations.append(data_rule_2)
+      if (
+        ( payload.wqx is not None ) and
+        ( payload.wqx.organization is not None ) and
+        ( payload.wqx.organization.telephonic is not None )
+      ):
+        for telephonic in payload.wqx.organization.telephonic:
+          if (
+            ( telephonic.telephoneNumberText is not None and telephonic.telephoneNumberTypeName is None ) or
+            ( telephonic.telephoneNumberText is None and telephonic.telephoneNumberTypeName is not None )
+          ):
+            violations.append(data_rule_2)
 
       data_rule_3 = """
         Data Rule #3: When AddressText or AddressTypeName is reported, both must be reported.
         """
-      for organization_address in payload.wqx.organization.organizationAddress:
-        if (
-          ( organization_address.addressText is not None and organization_address.addressTypeName is None ) or
-          ( organization_address.addressText is None and organization_address.addressTypeName is not None )
-        ):
-          violations.append(data_rule_3)
+      if (
+        ( payload.wqx is not None ) and
+        ( payload.wqx.organization is not None ) and
+        ( payload.wqx.organization.organizationAddress is not None )
+      ):
+        for organization_address in payload.wqx.organization.organizationAddress:
+          if (
+            ( organization_address.addressText is not None and organization_address.addressTypeName is None ) or
+            ( organization_address.addressText is None and organization_address.addressTypeName is not None )
+          ):
+            violations.append(data_rule_3)
       
       data_rule_4 = """
         When HorizonitalCollectionMethodName is “Interpolation-Map”, SourceMapScaleNumeric must be reported.
         """
-      for activity in payload.wqx.organization.activity:
-        if (
-          ( activity.activityLocation.sourceMapScale is None ) and
-          ( activity.activityLocation.horizontalCollectionMethodName == 'Interpolation-Map' )
-        ):
-          violations.append(data_rule_4)
-      for monitoring_location in payload.wqx.organization.monitoringLocation:
-        if (
-          ( monitoring_location.monitoringLocationGeospatial.sourceMapScale is None ) and
-          ( monitoring_location.monitoringLocationGeospatial.horizontalCollectionMethodName == 'Interpolation-Map' )
-        ):
-          violations.append(data_rule_4)
+      if (
+        ( payload.wqx is not None ) and
+        ( payload.wqx.organization is not None )
+      ):
+        if payload.wqx.organization.activity is not None:
+          for activity in payload.wqx.organization.activity:
+            if (
+              ( activity.activityLocation is not None ) and
+              ( activity.activityLocation.sourceMapScale is None ) and
+              ( activity.activityLocation.horizontalCollectionMethodName == 'Interpolation-Map' )
+            ):
+              violations.append(data_rule_4)
+        if payload.wqx.organization.monitoringLocation is not None:
+          for monitoring_location in payload.wqx.organization.monitoringLocation:
+            if (
+              ( monitoring_location.monitoringLocationGeospatial is not None ) and
+              ( monitoring_location.monitoringLocationGeospatial.sourceMapScale is None ) and
+              ( monitoring_location.monitoringLocationGeospatial.horizontalCollectionMethodName == 'Interpolation-Map' )
+            ):
+              violations.append(data_rule_4)
 
       data_rule_5 = """
         When VerticalMeasure's MeasureValue is reported, the following also must be reported:

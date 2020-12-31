@@ -29,16 +29,6 @@ class Submission:
       raise TypeError("Attribute 'document' must be a Document object.")
     self.__document = None if val is None else Document(val)
 
-  def generateXML(self) -> str:
-    doc, tag, text, line = Doc().ttl()
-
-    doc.asis('<?xml version="1.0" encoding="UTF-8"?>')
-    if self.__document is None:
-      raise WQXException("Attribute 'document' is required.")
-    doc.asis(self.__document.generateXML('Document'))
-
-    return indent(doc.getvalue(), indentation=' '*2)
-
   def generateZIP(self, fileName:str=None):
     if not isinstance(fileName, str):
       raise TypeError("Parameter 'fileName' must be a string.")

@@ -61,7 +61,7 @@ def main(argv:list):
     )
   )
 
-  print(submission.generateXML())
+  print(submission.document.generateXML())
 
 if __name__ == "__main__":
   main(sys.argv[1:])

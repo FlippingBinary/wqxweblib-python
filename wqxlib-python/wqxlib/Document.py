@@ -879,6 +879,7 @@ class Document:
 
     if self.__id is None:
       raise WQXException("Attribute 'id' is required.")
+    doc.asis('<?xml version="1.0" encoding="UTF-8"?>')
     with tag(name,
       ('Id', self.__id),
       ('xmlns','http://www.exchangenetwork.net/schema/v1.0/ExchangeNetworkDocument.xsd'),
@@ -892,4 +893,4 @@ class Document:
       for x in self.__payload:
         doc.asis(x.generateXML('Payload'))
 
-    return doc.getvalue()
+    return indent(doc.getvalue(), indentation=' '*2)

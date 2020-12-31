@@ -36,7 +36,7 @@ class Submission:
     mem = BytesIO()
     zip = ZipFile(mem, mode='w')
 
-    results = self.generateXML()
+    results = self.__document.generateXML()
     zip.writestr('results.xml', results)
 
     # TODO: Add attachment files, if necessary. Example:

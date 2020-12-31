@@ -30,7 +30,6 @@ class Submission:
     self.__document = None if val is None else Document(val)
 
   def generateXML(self) -> str:
-
     doc, tag, text, line = Doc().ttl()
 
     doc.asis('<?xml version="1.0" encoding="UTF-8"?>')

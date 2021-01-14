@@ -88,7 +88,7 @@ class BiologicalResultDescription:
     return self.__biologicalIntentName
   @biologicalIntentName.setter
   def biologicalIntentName(self, val:BiologicalIntentName) -> None:
-    self.__biologicalIntentName = BiologicalIntentName(val)
+    self.__biologicalIntentName = None if val is None else BiologicalIntentName(val)
 
   @property
   def biologicalIndividualIdentifier(self) -> BiologicalIndividualIdentifier:
@@ -102,7 +102,7 @@ class BiologicalResultDescription:
     return self.__subjectTaxonomicName
   @subjectTaxonomicName.setter
   def subjectTaxonomicName(self, val:SubjectTaxonomicName) -> None:
-    self.__subjectTaxonomicName = SubjectTaxonomicName(val)
+    self.__subjectTaxonomicName = None if val is None else SubjectTaxonomicName(val)
 
   @property
   def subjectTaxonomicNameUserSupplied(self) -> SubjectTaxonomicNameUserSupplied:

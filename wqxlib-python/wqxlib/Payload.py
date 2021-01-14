@@ -50,7 +50,7 @@ class Payload:
     return self.__operation
   @operation.setter
   def operation(self, val:OperationType) -> None:
-    self.__operation = OperationType(val)
+    self.__operation = None if val is None else OperationType(val)
 
   @property
   def wqx(self) -> WQX:

@@ -17,7 +17,7 @@ class Measure:
   def __init__(self, o=None, *,
     resultMeasureValue:ResultMeasureValue = None,
     measureUnitCode:MeasureUnitCode = None,
-    measureQualifierCode:List[MeasureQualifierCode] = None
+    measureQualifierCode:List[MeasureQualifierCode] = []
   ):
     if isinstance(o, Measure):
       # Assign attributes from object without typechecking
@@ -28,7 +28,7 @@ class Measure:
       # Assign attributes from dictionary with typechecking
       self.__resultMeasureValue = o.get('resultMeasureValue', default = None)
       self.__measureUnitCode = o.get('measureUnitCode', default = None)
-      self.__measureQualifierCode = o.get('measureQualifierCode', default = None)
+      self.__measureQualifierCode = o.get('measureQualifierCode', default = [])
     else:
       # Assign attributes from named keywords with typechecking
       self.__resultMeasureValue = resultMeasureValue

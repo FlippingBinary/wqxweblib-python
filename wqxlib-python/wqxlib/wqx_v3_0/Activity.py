@@ -138,9 +138,12 @@ class Activity:
       if self.__activityDescription is None:
         raise WQXException("Attribute 'activityDescription' is required.")
       doc.asis(self.__activityDescription.generateXML('ActivityDescription'))
-      doc.asis(self.__activityLocation.generateXML('ActivityLocation'))
-      doc.asis(self.__biologicalActivityDescription.generateXML('BiologicalActivityDescription'))
-      doc.asis(self.__sampleDescription.generateXML('SampleDescription'))
+      if self.__activityLocation is not None:
+        doc.asis(self.__activityLocation.generateXML('ActivityLocation'))
+      if self.__biologicalActivityDescription is not None:
+        doc.asis(self.__biologicalActivityDescription.generateXML('BiologicalActivityDescription'))
+      if self.__sampleDescription is not None:
+        doc.asis(self.__sampleDescription.generateXML('SampleDescription'))
       for x in self.__activityMetric:
         doc.asis(x.generateXML('ActivityMetric'))
       for x in self.__attachedBinaryObject:

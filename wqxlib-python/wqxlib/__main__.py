@@ -2,11 +2,17 @@ from .Document import Document
 from .Header import Header
 from .Payload import Payload
 from .Submission import Submission
+from .wqx_v3_0.Activity import Activity
+from .wqx_v3_0.ActivityDescription import ActivityDescription
+from .wqx_v3_0.Measure import Measure
 from .wqx_v3_0.MonitoringLocation import MonitoringLocation
 from .wqx_v3_0.MonitoringLocationGeospatial import *
 from .wqx_v3_0.MonitoringLocationIdentity import MonitoringLocationIdentity
 from .wqx_v3_0.Organization import Organization
 from .wqx_v3_0.OrganizationDescription import OrganizationDescription
+from .wqx_v3_0.Result import Result
+from .wqx_v3_0.ResultDescription import ResultDescription
+from .wqx_v3_0.SimpleContent import ActivityStartDate
 from .wqx_v3_0.WQX import WQX
 import sys
 
@@ -60,6 +66,38 @@ def main(argv:list):
       )
     )
   )
+
+  submission.document.payload.append(Payload(
+    operation=Payload.UPDATE_INSERT,
+    wqx=WQX(
+      organization=Organization(
+        organizationDescription=OrganizationDescription(
+          organizationIdentifier = "WQXTEST",
+          organizationFormalName = "WQX Test Organization",
+          organizationDescriptionText = "Test organization"
+        ),
+        activity=Activity(
+          activityDescription=ActivityDescription(
+            activityIdentifier="Work",
+            activityTypeCode="Basic?",
+            activityMediaName="Water",
+            activityStartDate=ActivityStartDate(year=2021, month=1, day=1),
+            projectIdentifier="Something"
+          ),
+          result=Result(
+            resultDescription=ResultDescription(
+              characteristicName="Test",
+              resultStatusIdentifier="",
+              resultMeasure=Measure(
+                resultMeasureValue="15.4",
+                measureUnitCode="lbs"
+              )
+            )
+          )
+        )
+      )
+    )
+  ))
 
   print(submission.document.generateXML())
 

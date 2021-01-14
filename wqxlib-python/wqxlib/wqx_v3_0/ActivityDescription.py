@@ -17,6 +17,7 @@ from .SimpleContent import (
   SamplingComponentName
 )
 from .WQXTime import WQXTime
+from typing import List, Union
 from yattag import Doc
 
 class ActivityDescription:
@@ -37,7 +38,7 @@ class ActivityDescription:
   __activityBottomDepthHeightMeasure: MeasureCompact
   __activityDepthAltitudeReferencePointText: DepthAltitudeReferencePointText
   __projectIdentifier: ProjectIdentifier
-  __activityConductingOrganizationText: ActivityConductingOrganizationText
+  __activityConductingOrganizationText: List[ActivityConductingOrganizationText]
   __monitoringLocationIdentifier: MonitoringLocationIdentifier
   __samplingComponentName: SamplingComponentName
   __activityCommentText: CommentText
@@ -58,7 +59,7 @@ class ActivityDescription:
     activityBottomDepthHeightMeasure:MeasureCompact = None,
     activityDepthAltitudeReferencePointText:DepthAltitudeReferencePointText = None,
     projectIdentifier:ProjectIdentifier = None,
-    activityConductingOrganizationText:ActivityConductingOrganizationText = None,
+    activityConductingOrganizationText:List[ActivityConductingOrganizationText] = None,
     monitoringLocationIdentifier:MonitoringLocationIdentifier = None,
     samplingComponentName:SamplingComponentName = None,
     activityCommentText:CommentText = None
@@ -101,7 +102,7 @@ class ActivityDescription:
       self.activityBottomDepthHeightMeasure = o.get('activityBottomDepthHeightMeasure', default = None)
       self.activityDepthAltitudeReferencePointText = o.get('activityDepthAltitudeReferencePointText', default = None)
       self.projectIdentifier = o.get('projectIdentifier', default = None)
-      self.activityConductingOrganizationText = o.get('activityConductingOrganizationText', default = None)
+      self.activityConductingOrganizationText = o.get('activityConductingOrganizationText', default = [])
       self.monitoringLocationIdentifier = o.get('monitoringLocationIdentifier', default = None)
       self.samplingComponentName = o.get('samplingComponentName', default = None)
       self.activityCommentText = o.get('activityCommentText', default = None)
@@ -167,7 +168,7 @@ class ActivityDescription:
     return self.__activityStartDate
   @activityStartDate.setter
   def activityStartDate(self, val:ActivityStartDate) -> None:
-    self.__activityStartDate = None if val is None else ActivityStartDate(val)
+    self.__activityStartDate = None if val is None else ActivityStartDate(year=val.year,month=val.month,day=val.day)
 
   @property
   def activityStartTime(self) -> WQXTime:
@@ -183,7 +184,7 @@ class ActivityDescription:
     return self.__activityEndDate
   @activityEndDate.setter
   def activityEndDate(self, val:ActivityEndDate) -> None:
-    self.__activityEndDate = None if val is None else ActivityEndDate(val)
+    self.__activityEndDate = None if val is None else ActivityEndDate(year=val.year,month=val.month,day=val.day)
 
   @property
   def activityEndTime(self) -> WQXTime:
@@ -245,11 +246,19 @@ class ActivityDescription:
     self.__projectIdentifier = None if val is None else ProjectIdentifier(val)
 
   @property
-  def activityConductingOrganizationText(self) -> ActivityConductingOrganizationText:
+  def activityConductingOrganizationText(self) -> List[ActivityConductingOrganizationText]:
     return self.__activityConductingOrganizationText
   @activityConductingOrganizationText.setter
-  def activityConductingOrganizationText(self, val:ActivityConductingOrganizationText) -> None:
-    self.__activityConductingOrganizationText = None if val is None else ActivityConductingOrganizationText(val)
+  def activityConductingOrganizationText(self, val:Union[ActivityConductingOrganizationText,List[ActivityConductingOrganizationText]]) -> None:
+    if val is None:
+      self.__activityConductingOrganizationText = []
+    elif isinstance(val, list):
+      r:List[ActivityConductingOrganizationText] = []
+      for x in val:
+        r.append(ActivityConductingOrganizationText(x))
+      self.__activityConductingOrganizationText = r
+    else:
+      self.__activityConductingOrganizationText = [ActivityConductingOrganizationText(val)]
 
   @property
   def monitoringLocationIdentifier(self) -> MonitoringLocationIdentifier:
@@ -293,11 +302,11 @@ class ActivityDescription:
         line('ActivityMediaSubdivisionName', self.__activityMediaSubdivisionName)
       if self.__activityStartDate is None:
         raise WQXException("Attribute 'activityStartDate' is required.")
-      line('ActivityStartDate', self.__activityStartDate)
+      line('ActivityStartDate', str(self.__activityStartDate))
       if self.__activityStartTime is not None:
         doc.asis(self.__activityStartTime.generateXML('ActivityStartTime'))
       if self.__activityEndDate is not None:
-        line('ActivityEndDate', self.__activityEndDate)
+        line('ActivityEndDate', str(self.__activityEndDate))
       if self.__activityEndTime is not None:
         doc.asis(self.__activityEndTime.generateXML('ActivityEndTime'))
       if self.__activityRelativeDepthName is not None:
@@ -310,10 +319,9 @@ class ActivityDescription:
         doc.asis(self.__activityBottomDepthHeightMeasure.generateXML('ActivityBottomDepthHeightMeasure'))
       if self.__activityDepthAltitudeReferencePointText is not None:
         line('ActivityDepthAltitudeReferencePointText', self.__activityDepthAltitudeReferencePointText)
-      if len(self.__projectIdentifier) < 1:
+      if self.__projectIdentifier is None or len(self.__projectIdentifier) < 1:
         raise WQXException("Attribute 'projectIdentifier' must be a list of 1 or more ProjectIdentifier objects.")
-      for x in self.__projectIdentifier:
-        line('ProjectIdentifier', x)
+      line('ProjectIdentifier', self.__projectIdentifier)
       for x in self.__activityConductingOrganizationText:
         line('ActivityConductingOrganizationText', x)
       if self.__monitoringLocationIdentifier is not None:

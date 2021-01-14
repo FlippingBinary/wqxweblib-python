@@ -69,7 +69,7 @@ class Result:
     return self.__biologicalResultDescription
   @biologicalResultDescription.setter
   def biologicalResultDescription(self, val:BiologicalResultDescription) -> None:
-    self.__biologicalResultDescription = BiologicalResultDescription(val)
+    self.__biologicalResultDescription = None if val is None else BiologicalResultDescription(val)
 
   @property
   def attachedBinaryObject(self) -> List[AttachedBinaryObject]:
@@ -128,17 +128,17 @@ class Result:
     with tag(name):
       if self.__resultDescription is None:
         raise WQXException("Attribute 'resultDescription' is required.")
-      line('ResultDescription', self.__resultDescription)
+      doc.asis(self.__resultDescription.generateXML('ResultDescription'))
       if self.__biologicalResultDescription is not None:
-        line('BiologicalResultDescription', self.__biologicalResultDescription)
+        doc.asis(self.__biologicalResultDescription.generateXML('BiologicalResultDescription'))
       for x in self.__attachedBinaryObject:
         doc.asis(x.generateXML('AttachedBinaryObject'))
       if self.__resultAnalyticalMethod is not None:
-        line('ResultAnalyticalMethod', self.__resultAnalyticalMethod)
+        doc.asis(self.__resultAnalyticalMethod.generateXML('ResultAnalyticalMethod'))
       if self.__comparableAnalyticalMethod is not None:
-        line('ComparableAnalyticalMethod', self.__comparableAnalyticalMethod)
+        doc.asis(self.__comparableAnalyticalMethod.generateXML('ComparableAnalyticalMethod'))
       if self.__resultLabInformation is not None:
-        line('ResultLabInformation', self.__resultLabInformation)
+        doc.asis(self.__resultLabInformation.generateXML('ResultLabInformation'))
       for x in self.__labSamplePreparation:
         doc.asis(x.generateXML('LabSamplePreparation'))
 

@@ -436,7 +436,7 @@ Get the projects for an organization.
 
     projects = wqx.Projects( organizationIdentifiersCsv )
 
-    print( "The projects associated with {organizationIdentifiersCsv} are:" )
+    print( f"The projects associated with {organizationIdentifiersCsv} are:" )
     for project in projects:
         print( f" - {project}" )
 

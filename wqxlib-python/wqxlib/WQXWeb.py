@@ -529,7 +529,7 @@ class WQXWeb():
     # Test parameter values
     if ' ' in organizationIdentifiersCsv:
       raise ValueError( "Parameter 'organizationIdentifiersCsv' must not contain spaces." )
-    if ' ' in projectIdentifiersCsv:
+    if projectIdentifiersCsv is not None and ' ' in projectIdentifiersCsv:
       raise ValueError( "Parameter 'projectIdentifiersCsv' must not contain spaces." )
     if startRow < 0:
       raise ValueError( "Parameter 'startRow' must be a non-negative integer, if provided." )

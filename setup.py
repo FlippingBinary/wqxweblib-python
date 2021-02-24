@@ -14,11 +14,11 @@ def parse_requirements(filename):
         return [line for line in lineiter if line and not line.startswith("#")]
 
 setup(
-  name="wqxlib",
+  name="wqxweblib",
   version=VERSION,
   author="Jon Musselwhite",
   author_email="JMusselwhite@wvstateu.edu",
-  description="A package for interacting with the EPA's WQX service",
+  description="A package for interacting with the EPA's WQX Web service",
   long_description=long_description,
   long_description_content_type="text/markdown",
   url="https://github.com/FlippingBinary/wqxweblib-python",

@@ -2,7 +2,7 @@
 
 This is a simple Python library for interacting with the EPA's WQX Web data submission service. It aims to be mimick the [WQX Web API endpoints](https://www.epa.gov/sites/production/files/2018-09/documents/wqx_web_application_programming_interface_api.pdf) as much as possible within the `WQXWeb` class. If you find a bug, please submit a pull request on [Github](https://github.com/FlippingBinary/wqxweblib-python) or open an issue there and someone will look into it.
 
-_NOTE: This module is useless without EPA credentials for WQX submission._
+_NOTE: This module is useless without EPA credentials for use with WQX Web._
 
 ## Contents
 

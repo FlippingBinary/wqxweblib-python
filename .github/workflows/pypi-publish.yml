@@ -3,7 +3,7 @@ name: Upload Python Package
 on:
   push:
     paths: 
-    - 'wqxlib-python/version.py'
+    - 'version.py'
 
 jobs:
   deploy:
@@ -24,6 +24,5 @@ jobs:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
-        cd wqxlib-python
         python setup.py sdist bdist_wheel
         echo twine upload dist/*

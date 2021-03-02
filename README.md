@@ -49,7 +49,7 @@ It is a good practice to lock the first three digits of the version in your `req
 3. Start the import with auto export and auto submit using `StartImport`.
 4. Periodically check the status using `GetStatus`.
 
-**Cautious Method** - Use this if you want to check how WQX responds to your data before submitting.
+**Cautious Method** - Use this if you want to check how WQX Web responds to your data before submitting.
 
 1. Upload a file using `Upload`.
 2. (optional) Upload an attachment file using `UploadAttachment`.
@@ -76,7 +76,7 @@ This module must be imported and instantiated with your `userID` and `privateKey
 
     from wqxweblib import WQXWeb
 
-    wqx = WQXWeb("my username", "my private key")
+    wqxweb = WQXWeb("my username", "my private key")
 
 # WQXWeb API Reference
 
@@ -103,12 +103,12 @@ Upload a file to the web server (to be imported).
 
     from wqxweblib import WQXWeb
 
-    wqx = WQXWeb( 'username', 'private key in base64' )
+    wqxweb = WQXWeb( 'username', 'private key in base64' )
 
     data="""column1,column2
     value1,value2"""
 
-    fileId = wqx.Upload( filename="datafile.csv", content=bytes(data,'utf-8') )
+    fileId = wqxweb.Upload( filename="datafile.csv", content=bytes(data,'utf-8') )
 
     print( f"The uploaded file has been assigned fileId {fileId}." )
 
@@ -116,10 +116,10 @@ Upload a file to the web server (to be imported).
 
     from wqxweblib import WQXWeb
 
-    wqx = WQXWeb( 'username', 'private key in base64' )
+    wqxweb = WQXWeb( 'username', 'private key in base64' )
 
     with open( 'data.csv', 'rb' ) as f:
-        fileId = wqx.Upload( filename="datafile.csv", contents=f.read() )
+        fileId = wqxweb.Upload( filename="datafile.csv", contents=f.read() )
 
         print( f"The uploaded file has been assigned fileId {fileId}." )
 
@@ -139,10 +139,10 @@ Upload an attachment to the web server (to be imported).
 
     from wqxweblib import WQXWeb
 
-    wqx = WQXWeb( 'username', 'private key in base64' )
+    wqxweb = WQXWeb( 'username', 'private key in base64' )
 
     with open( 'attachment.zip', 'rb' ) as f:
-        attachmentFileId = wqx.UploadAttachment( filename="attach.zip", contents=f.read() )
+        attachmentFileId = wqxweb.UploadAttachment( filename="attach.zip", contents=f.read() )
 
         print( f"The uploaded file has been assigned attachmentFileID {attachmentFileID}." )
 
@@ -155,22 +155,22 @@ Start importing a file and attachment that was previously uploaded.
 - `importConfigurationId` (required string) - The Import Configuration ID of an existing Import Configuration which should be applied to the import.
 - `fileId` (required string) - The return value of `Upload`.
 - `attachmentFileId` (optional string) - The return value of `UploadAttachment`.
-- `fileType` (required enum or string) - The type of file you uploaded with `Upload`. This must be one of the following enum members provided by the `WQX` module or their corresponding strings:
+- `fileType` (required enum or string) - The type of file you uploaded with `Upload`. This must be one of the following enum members provided by the `WQXWeb` module or their corresponding strings:
   - `CSV`
   - `TAB`
   - `TILDE`
   - `PIPE`
   - `XLS`
   - `XLSX`
-- `newOrExistingData` (required enum or integer) - Declare whether the contents of your upload represents new data or replaces existing data. This must be one of the following enum members provided by the `WQX` module or their corresponding integers:
+- `newOrExistingData` (required enum or integer) - Declare whether the contents of your upload represents new data or replaces existing data. This must be one of the following enum members provided by the `WQXWeb` module or their corresponding integers:
   - `CONTAINS_NEW_OR_EXISTING` (0) - file may contain new and/or existing data.
   - `CONTAINS_NEW_ONLY` (1) - file contains new data only.
   - `CONTAINS_EXISTING_ONLY` (2) - file contains existing data only (to be replaced).
-- `uponCompletion` (required enum or integer) - Declare what to do after the upload finishes. This must be one of the following enum members provided by the `WQX` module or their corresponding integers:
+- `uponCompletion` (required enum or integer) - Declare what to do after the upload finishes. This must be one of the following enum members provided by the `WQXWeb` module or their corresponding integers:
   - `DO_NOT_EXPORT` (0) - do nothing.
   - `EXPORT_IMPORT` (1) - start export.
   - `SUBMIT_IMPORT` (2) - start export and submit to CDX.
-- `uponCompletionCondition` (optionally required enum or integer) - Declare what conditions permit auto export or auto submit. This must be one of the following enum members provided by the `WQX` module or their corresponding integers:
+- `uponCompletionCondition` (optionally required enum or integer) - Declare what conditions permit auto export or auto submit. This must be one of the following enum members provided by the `WQXWeb` module or their corresponding integers:
   - `NOT_APPLICABLE` (0) - not applicable (`uponCompletion` is `DO_NOTHING` or not provided).
   - `EXPORT_IF_NO_ERROR` (1) - start export only if no import errors.
   - `EXPORT_IF_NO_WARNING` (2) - start export only if no import errors and no warnings.
@@ -195,31 +195,31 @@ Start importing a file and attachment that was previously uploaded.
 
     from wqxweblib import WQXWeb
 
-    wqx = WQXWeb( 'username', 'private key in base64' )
+    wqxweb = WQXWeb( 'username', 'private key in base64' )
 
-    datasetId = wqx.StartImport( importConfigurationID, fileId, fileType=wqx.CSV, newOrExistingData=wqx.CONTAINS_NEW_OR_EXISTING, uponCompletion=wqx.DO_NOT_EXPORT, ignoreFirstRowOfFile=True )
+    datasetId = wqxweb.StartImport( importConfigurationID, fileId, fileType=wqxweb.CSV, newOrExistingData=wqxweb.CONTAINS_NEW_OR_EXISTING, uponCompletion=wqxweb.DO_NOT_EXPORT, ignoreFirstRowOfFile=True )
 
-    print( f"The import of dataset {datasetId} has begun. Check it's status with a call to wqx.GetStatus(datasetId)" )
+    print( f"The import of dataset {datasetId} has begun. Check it's status with a call to wqxweb.GetStatus(datasetId)" )
 
 **Example with auto export and without auto submit:**
 
     from wqxweblib import WQXWeb
 
-    wqx = WQXWeb( 'username', 'private key in base64' )
+    wqxweb = WQXWeb( 'username', 'private key in base64' )
 
-    datasetId = wqx.StartImport( importConfigurationID, fileId, fileType=wqx.CSV, newOrExistingData=wqx.CONTAINS_NEW_OR_EXISTING, uponCompletion=wqx.EXPORT_IMPORT, ignoreFirstRowOfFile=True )
+    datasetId = wqxweb.StartImport( importConfigurationID, fileId, fileType=wqxweb.CSV, newOrExistingData=wqxweb.CONTAINS_NEW_OR_EXISTING, uponCompletion=wqxweb.EXPORT_IMPORT, ignoreFirstRowOfFile=True )
 
-    print( f"The import of dataset {datasetId} has begun. Check it's status with a call to wqx.GetStatus(datasetId)" )
+    print( f"The import of dataset {datasetId} has begun. Check it's status with a call to wqxweb.GetStatus(datasetId)" )
 
 **Example with auto submit:**
 
     from wqxweblib import WQXWeb
 
-    wqx = WQXWeb( 'username', 'private key in base64' )
+    wqxweb = WQXWeb( 'username', 'private key in base64' )
 
-    datasetId = wqx.StartImport( importConfigurationID, fileId, fileType=wqx.CSV, newOrExistingData=wqx.CONTAINS_NEW_OR_EXISTING, uponCompletion=wqx.SUBMIT_IMPORT, ignoreFirstRowOfFile=True )
+    datasetId = wqxweb.StartImport( importConfigurationID, fileId, fileType=wqxweb.CSV, newOrExistingData=wqxweb.CONTAINS_NEW_OR_EXISTING, uponCompletion=wqxweb.SUBMIT_IMPORT, ignoreFirstRowOfFile=True )
 
-    print( f"The import of dataset {datasetId} has begun. Check it's status with a call to wqx.GetStatus(datasetId)" )
+    print( f"The import of dataset {datasetId} has begun. Check it's status with a call to wqxweb.GetStatus(datasetId)" )
 
 ## StartXmlExport
 
@@ -228,7 +228,7 @@ Start creating the XML submission file (for CDX).
 **Parameters:**
 
 - `datasetId` (required string) - The return value of `StartImport` or `SubmitFileToCdx`.
-- `uponCompletion` (required enum or integer) - Declare what to do after the export finishes. This must be one of the following enum members provided by the `WQX` module or their corresponding integers:
+- `uponCompletion` (required enum or integer) - Declare what to do after the export finishes. This must be one of the following enum members provided by the `WQXWeb` module or their corresponding integers:
   - `DO_NOT_SUBMIT` (0) - do nothing.
   - `SUBMIT_EXPORT` (1) - submit to CDX.
 
@@ -238,9 +238,9 @@ Start creating the XML submission file (for CDX).
 
     from wqxweblib import WQXWeb
 
-    wqx = WQXWeb( 'username', 'private key in base64' )
+    wqxweb = WQXWeb( 'username', 'private key in base64' )
 
-    status = wqx.StartXmlExport( datasetId, wqx.SUBMIT_EXPORT )
+    status = wqxweb.StartXmlExport( datasetId, wqxweb.SUBMIT_EXPORT )
 
     print( "The initial status of dataset {datasetId} is as follows:" )
     print( status )
@@ -249,9 +249,9 @@ Start creating the XML submission file (for CDX).
 
     from wqxweblib import WQXWeb
 
-    wqx = WQXWeb( 'username', 'private key in base64' )
+    wqxweb = WQXWeb( 'username', 'private key in base64' )
 
-    status = wqx.StartXmlExport( datasetId, 1 )
+    status = wqxweb.StartXmlExport( datasetId, 1 )
 
     print( "The initial status of dataset {datasetId} is as follows:" )
     print( status )
@@ -270,16 +270,16 @@ Submit a dataset to CDX.
 
     from wqxweblib import WQXWeb
 
-    wqx = WQXWeb( 'username', 'private key in base64' )
+    wqxweb = WQXWeb( 'username', 'private key in base64' )
 
-    status = wqx.SubmitDatasetToCdx( datasetId )
+    status = wqxweb.SubmitDatasetToCdx( datasetId )
 
     print( "The initial status of dataset {datasetId} is as follows:" )
     print( status )
 
 ## SubmitFileToCdx
 
-Submit a previously uploaded WQX XML file to CDX.
+Submit a previously uploaded/built WQX XML file to CDX.
 
 **Parameters:**
 
@@ -291,9 +291,9 @@ Submit a previously uploaded WQX XML file to CDX.
 
     from wqxweblib import WQXWeb
 
-    wqx = WQXWeb( 'username', 'private key in base64' )
+    wqxweb = WQXWeb( 'username', 'private key in base64' )
 
-    datasetId = wqx.SubmitFileToCdx( fileId )
+    datasetId = wqxweb.SubmitFileToCdx( fileId )
 
     print( f"The uploaded file has been assigned datasetId {datasetId}" )
 
@@ -331,9 +331,9 @@ Get the status for a dataset. To avoid undue burden on the server, it is recomme
 
     from wqxweblib import WQXWeb
 
-    wqx = WQXWeb( 'username', 'private key in base64' )
+    wqxweb = WQXWeb( 'username', 'private key in base64' )
 
-    statusMsg = wqx.GetStatus( datasetId )
+    statusMsg = wqxweb.GetStatus( datasetId )
 
     print( f"Current status of datasetId {datasetId} is {statusMsg}" )
 
@@ -356,9 +356,9 @@ Get the list of available documents for a dataset. Documents that are typically 
 
     from wqxweblib import WQXWeb
 
-    wqx = WQXWeb( 'username', 'private key in base64' )
+    wqxweb = WQXWeb( 'username', 'private key in base64' )
 
-    urls = wqx.GetDocumentList( datasetId )
+    urls = wqxweb.GetDocumentList( datasetId )
 
     print( "The documents associated with {datasetId} are:" )
     for url in urls:
@@ -384,9 +384,9 @@ Get the projects for an organization.
 
     from wqxweblib import WQXWeb
 
-    wqx = WQXWeb( 'username', 'private key in base64' )
+    wqxweb = WQXWeb( 'username', 'private key in base64' )
 
-    projects = wqx.Projects( organizationIdentifiersCsv )
+    projects = wqxweb.Projects( organizationIdentifiersCsv )
 
     print( f"The projects associated with {organizationIdentifiersCsv} are:" )
     for project in projects:
@@ -397,11 +397,11 @@ Get the projects for an organization.
     from wqxweblib import WQXWeb
     from datetime import date, timedelta
 
-    wqx = WQXWeb( 'username', 'private key in base64' )
+    wqxweb = WQXWeb( 'username', 'private key in base64' )
 
     today = date.today()
     lastWeek = today - timedelta(weeks=1)
-    projects = wqx.Projects( organizationIdentifiersCsv, lastChangeDateMin=lastWeek )
+    projects = wqxweb.Projects( organizationIdentifiersCsv, lastChangeDateMin=lastWeek )
 
     print( "The projects associated with {organizationIdentifiersCsv} and modified since {lastWeek.strftime( "%m/%d/%Y")} are:" )
     for project in projects:
@@ -525,9 +525,9 @@ Get the locations for an organization.
 
     from wqxweblib import WQXWeb
 
-    wqx = WQXWeb( 'username', 'private key in base64' )
+    wqxweb = WQXWeb( 'username', 'private key in base64' )
 
-    locations = wqx.MonitoringLocations( organizationIdentifiersCsv )
+    locations = wqxweb.MonitoringLocations( organizationIdentifiersCsv )
 
     print( "The locations associated with {organizationIdentifiersCsv} are: " )
     for location in locations:

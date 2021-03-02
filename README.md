@@ -9,6 +9,7 @@ _NOTE: This module is useless without EPA credentials for use with WQX Web._
 - [Python library for WQX Web (wqxweblib)](#python-library-for-wqx-web-wqxweblib)
   - [Contents](#contents)
   - [Getting Started](#getting-started)
+  - [Package Versioning](#package-versioning)
   - [WQXWeb Data Submission Patterns](#wqxweb-data-submission-patterns)
   - [Import WQXWeb Module](#import-wqxweb-module)
 - [WQXWeb API Reference](#wqxweb-api-reference)
@@ -37,7 +38,7 @@ The major version number increments when incompatible API changes are made. The 
 
 It is a good practice to lock the first three digits of the version in your `requirements.txt` file, if you are using one. That allow you to safely rebuild your environment without accidentally introducing breaking changes. For the current version, that would mean adding a line to your `requirements.txt` file like this:
 
-    wqxweblib<=2.2.0
+    wqxweblib<2.2.1
 
 ## WQXWeb Data Submission Patterns
 

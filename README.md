@@ -176,7 +176,7 @@ Start importing a file and attachment that was previously uploaded.
   - `EXPORT_IF_NO_WARNING` (2) - start export only if no import errors and no warnings.
   - `EXPORT_ALWAYS` (3) - start export even when there are import errors.
 - `worksheetsToImport` (optional string) - If provided, this must be a comma delimited list of values (1-based), e.g. "`1,3`". This parameter value will be ignored when the fileType is not `XLS` or `XLSX`. If no value is passed in (and it's applicable) then we'll use the value from the Import Configuration.
-- `ignoreFirstRowOfFile` (optional boolean) - Ignore the first row of the data file if this parameter is true. This parameter value will be ignored for Expert Mode Import Configurations.
+- `ignoreFirstRowOfFile` (optional boolean defaults to True) - Ignore the first row of the data file if this parameter is true. This parameter value will be ignored for Expert Mode Import Configurations.
 - `generatedElements` (optional dictionary) - Each key must match an existing generated element name from the import configuration. No more than five keys can be in the dictionary and this parameter cannot be used along with the `generatedElementName1`, `generatedElementName2`, `generatedElementName3`, `generatedElementName4`, or `generatedElementName5` parameters.
 - `generatedElementName1` (optional string) - Must match an existing generated element name from the import configuration.
 - `generatedElementValue1` (optionally required string) - Must provide a value if `generatedElementName1` is provided.

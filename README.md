@@ -44,29 +44,29 @@ It is a good practice to lock the first three digits of the version in your `req
 
 **Basic Method** - Use this if you trust the data you produce.
 
-1. Upload a file using `Upload`.
-2. (optional) Upload an attachment file using `UploadAttachment`.
-3. Start the import with auto export and auto submit using `StartImport`.
-4. Periodically check the status using `GetStatus`.
+1. Upload a file using [`Upload`](#upload).
+2. (optional) Upload an attachment file using [`UploadAttachment`](#uploadattachment).
+3. Start the import with auto export and auto submit using [`StartImport`](#startimport).
+4. Periodically check the status using [`GetStatus`](#getstatus).
 
 **Intermediate Method** - Use this if you want to check how WQX Web responds to your data before submitting.
 
-1. Upload a file using `Upload`.
-2. (optional) Upload an attachment file using `UploadAttachment`.
-3. Start the import with auto export and without auto submit using `StartImport`.
-4. Periodically check the status using `GetStatus`.
-5. Submit dataset to CDX using `SubmitDatasetToCdx`.
-6. Periodically check the status using `GetStatus`.
+1. Upload a file using [`Upload`](#upload).
+2. (optional) Upload an attachment file using [`UploadAttachment`](#uploadattachment).
+3. Start the import with auto export and without auto submit using [`StartImport`](#startimport).
+4. Periodically check the status using [`GetStatus`](#getstatus).
+5. Submit dataset to CDX using [`SubmitDatasetToCdx`](#submitdatasettocdx).
+6. Periodically check the status using [`GetStatus`](#getstatus).
 
 **Advanced Method** - Use this method if you want to manage each step of the process that you can.
-1. Upload a file using `Upload`.
-2. (optional) Upload an attachment file using `UploadAttachment`.
-3. Start the import without auto export and without auto submit using `StartImport`.
-4. Periodically check the status using `GetStatus`.
-5. Start the XML Export using `StartXmlExport`.
-6. Periodically check the status using `GetStatus`.
-7. Submit dataset to CDX using `SubmitDatasetToCdx`.
-8. Periodically check the status using `GetStatus`.
+1. Upload a file using [`Upload`](#upload).
+2. (optional) Upload an attachment file using [`UploadAttachment`](#uploadattachment).
+3. Start the import without auto export and without auto submit using [`StartImport`](#startimport).
+4. Periodically check the status using [`GetStatus`](#getstatus).
+5. Start the XML Export using [`StartXmlExport`](#startxmlexport).
+6. Periodically check the status using [`GetStatus`](#getstatus).
+7. Submit dataset to CDX using [`SubmitDatasetToCdx`](#submitdatasettocdx).
+8. Periodically check the status using [`GetStatus`](#getstatus).
 
 ## Import WQXWeb Module
 
@@ -151,9 +151,9 @@ Start importing a file and attachment that was previously uploaded.
 **Parameters:**
 
 - `importConfigurationId` (required string) - The Import Configuration ID of an existing Import Configuration which should be applied to the import.
-- `fileId` (required string) - The return value of `Upload`.
-- `attachmentFileId` (optional string) - The return value of `UploadAttachment`.
-- `fileType` (required enum or string) - The type of file you uploaded with `Upload`. This must be one of the following enum members provided by the `WQXWeb` module or their corresponding strings:
+- `fileId` (required string) - The return value of [`Upload`](#upload).
+- `attachmentFileId` (optional string) - The return value of [`UploadAttachment`](#uploadattachment).
+- `fileType` (required enum or string) - The type of file you uploaded with [`Upload`](#upload). This must be one of the following enum members provided by the `WQXWeb` module or their corresponding strings:
   - `CSV`
   - `TAB`
   - `TILDE`
@@ -169,7 +169,7 @@ Start importing a file and attachment that was previously uploaded.
   - `EXPORT_IMPORT` (1) - start export.
   - `SUBMIT_IMPORT` (2) - start export and submit to CDX.
 - `uponCompletionCondition` (optionally required enum or integer) - Declare what conditions permit auto export or auto submit. This must be one of the following enum members provided by the `WQXWeb` module or their corresponding integers:
-  - `NOT_APPLICABLE` (0) - not applicable (`uponCompletion` is `DO_NOTHING` or not provided).
+  - `NOT_APPLICABLE` (0) - not applicable (meaning `uponCompletion` is `DO_NOTHING` or not provided).
   - `EXPORT_IF_NO_ERROR` (1) - start export only if no import errors.
   - `EXPORT_IF_NO_WARNING` (2) - start export only if no import errors and no warnings.
   - `EXPORT_ALWAYS` (3) - start export even when there are import errors.
@@ -225,7 +225,7 @@ Start creating the XML submission file (for CDX).
 
 **Parameters:**
 
-- `datasetId` (required string) - The return value of `StartImport` or `SubmitFileToCdx`.
+- `datasetId` (required string) - The return value of [`StartImport`](#startimport) or [`SubmitFileToCdx`](#submitfiletocdx).
 - `uponCompletion` (required enum or integer) - Declare what to do after the export finishes. This must be one of the following enum members provided by the `WQXWeb` module or their corresponding integers:
   - `DO_NOT_SUBMIT` (0) - do nothing.
   - `SUBMIT_EXPORT` (1) - submit to CDX.
@@ -260,7 +260,7 @@ Submit a dataset to CDX.
 
 **Parameters:**
 
-- `datasetId` (required string) - The return value of `StartImport` or `SubmitFileToCdx`.
+- `datasetId` (required string) - The return value of [`StartImport`](#startimport) or [`SubmitFileToCdx`](#submitfiletocdx).
 
 **Returns:** `status` - The initial status for the dataset.
 
@@ -281,7 +281,7 @@ Submit a previously uploaded/built WQX XML file to CDX.
 
 **Parameters:**
 
-- `fileId` (required string) - The return value of `Upload`.
+- `fileId` (required string) - The return value of [`Upload`](#upload).
 
 **Returns:** `datasetId` - The new dataset ID.
 
@@ -301,7 +301,7 @@ Get the status for a dataset. To avoid undue burden on the server, it is recomme
 
 **Parameters:**
 
-- `datasetId` (required string) - The return value of `StartImport` or `SubmitFileToCdx`.
+- `datasetId` (required string) - The return value of [`StartImport`](#startimport) or [`SubmitFileToCdx`](#submitfiletocdx).
 
 **Returns:** `statusMsg` - The status, percent complete, and position in queue for the dataset. Possible statuses:
 
@@ -346,7 +346,7 @@ Get the list of available documents for a dataset. Documents that are typically 
 
 **Parameters:**
 
-- `datasetId` (required string) - The return value of `StartImport` or `SubmitFileToCdx`.
+- `datasetId` (required string) - The return value of [`StartImport`](#startimport) or [`SubmitFileToCdx`](#submitfiletocdx).
 
 **Returns:** `urls` - A list of document URLs which can be used to download the documents.
 

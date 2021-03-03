@@ -104,8 +104,8 @@ class WQXWeb():
     if not isinstance( endpoint, str ):
       raise TypeError( "Parameter 'endpoint' must be a string." )
     if data is not None or filename is not None:
-      if not isinstance( data, object ):
-        raise TypeError( "Parameter 'data' must be a set, if filename is provided." )
+      if not isinstance( data, bytes ):
+        raise TypeError( "Parameter 'data' must be a bytes-like object, if filename is provided." )
       if not isinstance( filename, str ):
         raise TypeError( "Parameter 'filename' must be a string, if data is provided." )
     if parameters is not None and not isinstance( parameters, object ):
@@ -139,7 +139,7 @@ class WQXWeb():
 
     req = requests.Request( method, addr, data=data, params=parameters )
 
-    print( f"Requesting {req.prepare().url}" )
+    # print( f"Requesting {req.prepare().url}" )
 
     signature = f"{self.userID}{timeStamp}{req.prepare().url}{method}"
     digest = hmac.digest( self.privateKey, bytes(signature,'utf-8'), sha256 )
@@ -216,7 +216,7 @@ class WQXWeb():
     uponCompletion:Union[int,UponImportCompletion] = None,
     uponCompletionCondition:Union[int,UponCompletionCondition] = UponCompletionCondition.NOT_APPLICABLE,
     worksheetsToImport:str = None,
-    ignoreFirstRowOfFile:bool = None,
+    ignoreFirstRowOfFile:bool = True,
     generatedElementName1:str = None,
     generatedElementValue1:str = None,
     generatedElementName2:str = None,
@@ -247,7 +247,7 @@ class WQXWeb():
       raise TypeError( "Parameter 'uponCompletionCondition' must be an enum member or integer, if provided." )
     if worksheetsToImport is not None and not isinstance( worksheetsToImport, str ):
       raise TypeError( "Parameter 'worksheetsToImport' must be a string, if provided." )
-    if ignoreFirstRowOfFile is not None and not isinstance( ignoreFirstRowOfFile, bool ):
+    if not isinstance( ignoreFirstRowOfFile, bool ):
       raise TypeError( "Parameter 'ignoreFirstRowOfFile' must be a boolean, if provided." )
     if generatedElementName1 is not None or generatedElementValue1 is not None:
       if not isinstance( generatedElementName1, str ):

@@ -42,14 +42,14 @@ It is a good practice to lock the first three digits of the version in your `req
 
 ## WQXWeb Data Submission Patterns
 
-**Aggressive Method** - Use this if you trust the data you produce.
+**Basic Method** - Use this if you trust the data you produce.
 
 1. Upload a file using `Upload`.
 2. (optional) Upload an attachment file using `UploadAttachment`.
 3. Start the import with auto export and auto submit using `StartImport`.
 4. Periodically check the status using `GetStatus`.
 
-**Cautious Method** - Use this if you want to check how WQX Web responds to your data before submitting.
+**Intermediate Method** - Use this if you want to check how WQX Web responds to your data before submitting.
 
 1. Upload a file using `Upload`.
 2. (optional) Upload an attachment file using `UploadAttachment`.
@@ -58,7 +58,7 @@ It is a good practice to lock the first three digits of the version in your `req
 5. Submit dataset to CDX using `SubmitDatasetToCdx`.
 6. Periodically check the status using `GetStatus`.
 
-**Micromanaging Method** - Use this method if you want to manage each step of the process that you can.
+**Advanced Method** - Use this method if you want to manage each step of the process that you can.
 1. Upload a file using `Upload`.
 2. (optional) Upload an attachment file using `UploadAttachment`.
 3. Start the import without auto export and without auto submit using `StartImport`.
@@ -67,8 +67,6 @@ It is a good practice to lock the first three digits of the version in your `req
 6. Periodically check the status using `GetStatus`.
 7. Submit dataset to CDX using `SubmitDatasetToCdx`.
 8. Periodically check the status using `GetStatus`.
-
-![Flowchart representing the methods described above](https://raw.githubusercontent.com/FlippingBinary/wqxweblib-python/main/flowchart.jpg)
 
 ## Import WQXWeb Module
 

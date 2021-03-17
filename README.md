@@ -4,6 +4,8 @@ This is a simple Python library for interacting with the EPA's WQX Web data subm
 
 _NOTE: This module is useless without EPA credentials for use with the CDX app "WQX Web"._
 
+This code is supported by the National Science Foundation under Award No. OIA-1458952. Any opinions, findings and conclusions, or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
+
 ## Contents
 
 - [Python library for WQX Web (wqxweblib)](#python-library-for-wqx-web-wqxweblib)

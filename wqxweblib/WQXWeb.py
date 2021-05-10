@@ -64,6 +64,19 @@ class WQXWeb():
   DO_NOT_IMPORT = UponExportCompletion.DO_NOT_SUBMIT
   SUBMIT_EXPORT = UponExportCompletion.SUBMIT_EXPORT
 
+  BusyStatusNames = (
+    'Waiting to Import',
+    'Importing',
+    'Waiting to Export',
+    'Waiting to Export and Submit',
+    'Exporting',
+    'Processing at CDX',
+    'Waiting to Delete',
+    'Deleting',
+    'Waiting to Update WQX',
+    'Updating WQX'
+  )
+
   def __init__(self,
     userID,
     privateKey

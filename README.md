@@ -14,6 +14,7 @@ This code is supported by the National Science Foundation under Award No. OIA-14
   - [Package Versioning](#package-versioning)
   - [WQXWeb Data Submission Patterns](#wqxweb-data-submission-patterns)
   - [Import WQXWeb Module](#import-wqxweb-module)
+  - [Presentations and Publications](#presentations-and-publications)
 - [WQXWeb API Reference](#wqxweb-api-reference)
   - [Upload](#upload)
   - [UploadAttachment](#uploadattachment)
@@ -77,6 +78,10 @@ This module must be imported and instantiated with your `userID` and `privateKey
     from wqxweblib import WQXWeb
 
     wqxweb = WQXWeb("my username", "my private key")
+
+## Presentations and Publications
+
+- Musselwhite, J and F Rojano. 2021. Development of a Python Library to Facilitate WQX Dataset Exchanges. IWSS Spring Workshop Series (Virtual). [PDF](https://researchrepository.wvu.edu/cgi/viewcontent.cgi?article=1006&context=iwss-presentations)
 
 # WQXWeb API Reference
 
